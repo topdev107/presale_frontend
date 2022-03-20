@@ -1,0 +1,211 @@
+// If you want to override variables do it here
+@import "variables";
+
+$enable-ltr: true;
+$enable-rtl: true;
+
+// Import CoreUI for React components library
+@import "@coreui/coreui/scss/coreui";
+
+// Import Chart.js custom tooltips styles
+@import "@coreui/chartjs/scss/coreui-chartjs";
+
+@import "layout";
+@import "example";
+
+// If you want to add custom CSS you can put it here.
+@import "custom";
+
+// custom css
+.danger {
+    color: $accent;
+}
+.small-text-sz {
+    font-size: small;
+}
+.label-color {
+    color: $label-color
+}
+.blue-color {
+    color: $blue
+}
+
+.my_csidebar {
+    background-color: $body-color;
+}
+
+.my_sidebar_brand {
+    background-color: $body-color;
+}
+
+.my_csidebarnav {
+    background-color: $body-color;
+}
+
+.connect_btn {
+    background-color: $accent;
+    width: 120px;
+    height: 36px;
+    border: 1px solid $accent;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.connect_btn:hover {
+    background-color: $accent_highlight;
+    width: 120px;
+    height: 36px;
+    border: 1px solid $accent_highlight;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #888;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.connected_btn {
+    background-color: $body-color;
+    width: 120px;
+    height: 36px;
+    border: 2px solid $accent;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.connected_btn:hover {
+    background-color: $body-color;
+    width: 120px;
+    height: 36px;
+    border: 2px solid $accent_highlight;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #888;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    white-space: nowrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.btn-black {
+    background-color: #000;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 5px 18px;
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.btn-black:hover {
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 5px 18px;
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.btn-disabled {
+    background-color: #333;
+    border: 0px;
+    border-radius: 4px;
+    padding: 5px 18px;
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    display: inline-block;
+    opacity: 0.95;
+    cursor: not-allowed;
+}
+
+.circle-30-active {
+    height: 30px;
+    width: 30px;
+    background-color: $accent;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    color: $label-color;
+    padding-top: 2px;
+}
+
+.circle-30 {
+    height: 30px;
+    width: 30px;
+    background-color: $body-bg;
+    border: 1px solid #333;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    color: $label-color;
+    padding-top: 2px;
+}
+
+p {
+    color: $label-color
+}
+
+span {
+    color: $label-color
+}
+
+.w-30 {
+    width: 30px;
+}
+
+.h-30 {
+    height: 30px;
+}
+
+.white-line {
+    border-top: 1px solid $label-color;
+    height: 1px;
+    width: 100%;
+}
+
+.c-mt-15 {
+    margin-top: 15px;
+}
+.c-ml-5 {
+    margin-left: 5px;
+}
+.white-space-nowrap {
+    white-space: nowrap;
+}
+
+.flex-remain-full-width {
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+@media only screen and (max-width: 1026px) {
+    .hide-less-than-1026 {
+        display: none;
+    }
+}
