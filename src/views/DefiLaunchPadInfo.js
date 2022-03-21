@@ -9,13 +9,12 @@ import {
 import { faInfoCircle, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from 'react';
-import { HashRouter, Route, Switch, Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner';
 import Web3 from 'web3';
 import RowBetween from './components/RowBetween';
 import WorkflowItem from "./components/WorkflowItem";
 
-const Home = () => {
+const DefiLaunchPadInfo = () => {
 
   const [NO_APPROVED, APPROVED] = ['no_approved', 'approved']
   const [tokenAddress, setTokenAddress] = useState("0x745348AA8f389795ee74c51977fF70Aa17D4c1e2")
@@ -64,14 +63,14 @@ const Home = () => {
           <CCol className="col-sm-3">
             <WorkflowItem
               stemNumber={1}
-              active={true}
+              active={false}
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
           <CCol className="col-sm-3">
             <WorkflowItem
               stemNumber={2}
-              active={false}
+              active={true}
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
@@ -146,19 +145,7 @@ const Home = () => {
                             tokenStatus === NO_APPROVED ? (
                               <div className="d-md-flex justify-content-md-center mt-4">
                                 <div className='loader'></div>
-                                {/* <button type="button" className="btn-accent">
-                                  <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                    variant="light"
-                                    style={{marginRight: '5px', marginTop: '2px'}}
-                                  />
-                                  Approve
-                                </button> */}
-                                <Link to="/defi_launch_pad_info" style={{textDecoration: 'none'}} className="btn-accent">
+                                <button type="button" className="btn-accent">
                                   {/* <Spinner
                                     as="span"
                                     animation="border"
@@ -166,10 +153,10 @@ const Home = () => {
                                     role="status"
                                     aria-hidden="true"
                                     variant="light"
-                                    style={{ marginRight: '5px', marginTop: '2px' }}
+                                    style={{marginRight: '5px', marginTop: '2px'}}
                                   /> */}
                                   Approve
-                                </Link>
+                                </button>
                               </div>
                             ) : (
                               <div className="d-md-flex justify-content-md-center mt-4">
@@ -201,4 +188,4 @@ const Home = () => {
   );
 }
 
-export default Home
+export default DefiLaunchPadInfo

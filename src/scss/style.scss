@@ -18,7 +18,7 @@ $enable-rtl: true;
 
 // custom css
 .danger {
-    color: $accent;
+    color: $warning-dark;
 }
 .small-text-sz {
     font-size: small;
@@ -136,7 +136,7 @@ $enable-rtl: true;
     border-radius: 4px;
     padding: 5px 18px;
     font-size: 13px;
-    color: $label-color;
+    color: #fff;
     text-align: center;
     display: inline-block;
     cursor: pointer;
@@ -148,7 +148,7 @@ $enable-rtl: true;
     border-radius: 4px;
     padding: 5px 18px;
     font-size: 13px;
-    color: $label-color;
+    color: #fff;
     text-align: center;
     display: inline-block;
     cursor: pointer;
@@ -241,3 +241,4 @@ span {
     padding-left: 10px;
     padding-right: 10px;
 }
+
