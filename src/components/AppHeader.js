@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logo } from 'src/assets/brand/logo'
 import { useWeb3Context } from 'web3-react'
+import { AppHeaderDropdown } from './header/index'
 
 
 const AppHeader = () => {
@@ -17,32 +18,50 @@ const AppHeader = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const context = useWeb3Context()
+  const [currentAccount, setCurrentAccount] = useState(null);
 
   useEffect(() => {
     context.setFirstValidConnector(['MetaMask'])
 
     const checkWalletConnect = () => {
       if (!context.active && !context.error) {
-        //loading...
-        setWalletConnectState('loading')
+        //loading...        
+        setCurrentAccount(null)
         console.log('=== Header Wallet Connect Loading ===')
       } else if (context.error) {
-        setWalletConnectState('error')
+        setCurrentAccount(null)
         console.log('=== Header Wallet Connect Error ===')
         console.log(console.error)
       } else {
-        // success
-        setWalletConnectState('success')
+        // success        
+        setCurrentAccount(context.account)
         console.log('=== Header Wallet Connect Success ===')
       }
     }
-    
+
     checkWalletConnect()
   }, [context])
 
-  const [walletConnectState, setWalletConnectState] = useState('')
+  const connectWalletHandler = async () => {
+    const { ethereum } = window;
 
-  
+    if (!ethereum) {
+      alert("Please install Metamask")
+    }
+
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+      console.log("Found an account! Address: ", accounts[0])
+      setCurrentAccount(accounts[0])
+    } catch (err) {
+      console.log(err)
+      setCurrentAccount(null)
+    }
+  }
+
+  const disconnectWalletHandler = () => {
+    setCurrentAccount(null)
+  }
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -57,13 +76,11 @@ const AppHeader = () => {
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
         <CHeaderNav className="ms-3">
-          {
-            walletConnectState !== 'success' ? (
-              <button className='connect_btn'>Connect</button>
-            ) : (
-              <button className='connected_btn'>{context.account}</button>
-            )
-          }
+          <AppHeaderDropdown
+            currentAccount={currentAccount}
+            amount={context}
+            onConnect={connectWalletHandler}
+            onLogout={disconnectWalletHandler} />
         </CHeaderNav>
       </CContainer>
     </CHeader>

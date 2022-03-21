@@ -130,6 +130,30 @@ $enable-rtl: true;
     cursor: pointer;
     transition-duration: 0.4s;
 }
+.btn-accent {
+    background-color: $accent;
+    border: 1px solid $accent;
+    border-radius: 4px;
+    padding: 5px 18px;
+    font-size: 13px;
+    color: $label-color;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+.btn-accent:hover {
+    background-color: $accent_highlight;
+    border: 1px solid $accent_highlight;
+    border-radius: 4px;
+    padding: 5px 18px;
+    font-size: 13px;
+    color: $label-color;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
 
 .btn-disabled {
     background-color: #333;
@@ -208,4 +232,12 @@ span {
     .hide-less-than-1026 {
         display: none;
     }
+}
+
+.warning-outline-box {
+    border: 1px solid $warning-dark;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
 }

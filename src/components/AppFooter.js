@@ -5,9 +5,9 @@ const AppFooter = () => {
   return (
     <CFooter>      
       <div className="ms-auto">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        {/* <a href="#" target="_blank" rel="noopener noreferrer">
           Presale
-        </a>
+        </a> */}
         <span className="ms-1">&copy; 2022 TopDev.</span>
       </div>
     </CFooter>
