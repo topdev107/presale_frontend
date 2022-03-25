@@ -6,6 +6,9 @@
 
 // scss-docs-start gray-color-variables
 $main_bg_color:                 #242525 !default;
+// $main_bg_color:                 #eef5f5 !default;
+$main_bg_disabled_color:        #3e3f3f !default;
+$main_bg_disabled_border_color: #2f3030 !default;
 $white:     #fff !default;
 $main_active_color:       #ffc107 !default;
 $accent:    $main_active_color;
@@ -23,6 +26,7 @@ $gray-900:  #4f5d73 !default;
 $black:     #000015 !default;
 
 $label-color: $gray-300;
+$control-outline-color: #393a3a;
 
 
 // scss-docs-end gray-color-variables
@@ -346,6 +350,9 @@ $warning-dark:  #da3b1f !default;
 
 $body-bg:                      #1e2122 !default;
 $body-color:                   $main_bg_color !default;
+$body-color-disabled:          $main_bg_disabled_color !default;
+$body-color-border-disabled:          $main_bg_disabled_border_color !default;
+
 // $body-bg:                   $white !default;
 // $body-color:                $high-emphasis !default;
 // $body-text-align:           null !default;
@@ -455,8 +462,8 @@ $border-color:                $body-color !default;
 // $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
 // scss-docs-end box-shadow-variables
 
-// $component-active-color:      $high-emphasis-inverse !default;
-// $component-active-bg:         $primary !default;
+$component-active-color:      $body-color !default;
+$component-active-bg:         $accent !default;
 
 // scss-docs-start caret-variables
 // $caret-width:                 .3em !default;
@@ -805,14 +812,18 @@ $form-label-color:                      $label-color !default;
 // $input-font-size-lg:                    $input-btn-font-size-lg !default;
 
 // $input-bg:                              $white !default;
-$input-bg:                              $body-color !default;
 // $input-disabled-bg:                     $gray-200 !default;
 // $input-disabled-border-color:           $gray-400 !default;
+$input-bg:                              $body-color !default;
+$input-disabled-bg:                     $body-color-disabled !default;
+$input-disabled-border-color:           $body-color-border-disabled !default;
+
 
 // $input-color:                           $body-color !default;
 // $input-border-color:                    $gray-400 !default;
+$input-border-color:                    $control-outline-color !default;
 $input-color:                           $label-color !default;
-$input-border-color:                    $accent !default;
+// $input-border-color:                    $accent !default;
 // $input-border-width:                    $input-btn-border-width !default;
 // $input-box-shadow:                      $box-shadow-inset !default;
 
@@ -849,21 +860,22 @@ $input-focus-border-color:                 $high-emphasis-inverse !default;
 // $form-check-padding-start:                $form-check-input-width + .5em !default;
 // $form-check-margin-bottom:                .125rem !default;
 // $form-check-label-color:                  unset !default;
+$form-check-label-color:                  $label-color !default;
 // $form-check-label-cursor:                 null !default;
 // $form-check-transition:                   null !default;
 
 // $form-check-input-active-filter:          brightness(90%) !default;
 
 // $form-check-input-bg:                     $input-bg !default;
-// $form-check-input-border:                 1px solid rgba($black, .25) !default;
+$form-check-input-border:                 1px solid rgba($white, .25) !default;
 // $form-check-input-border-radius:          .25em !default;
 // $form-check-radio-border-radius:          50% !default;
 // $form-check-input-focus-border:           $input-focus-border-color !default;
 // $form-check-input-focus-box-shadow:       $input-btn-focus-box-shadow !default;
 
-// $form-check-input-checked-color:          $component-active-color !default;
-// $form-check-input-checked-bg-color:       $component-active-bg !default;
-// $form-check-input-checked-border-color:   $form-check-input-checked-bg-color !default;
+$form-check-input-checked-color:          $component-active-color !default;
+$form-check-input-checked-bg-color:       $component-active-bg !default;
+$form-check-input-checked-border-color:   $form-check-input-checked-bg-color !default;
 // $form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>") !default;
 // $form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>") !default;
 

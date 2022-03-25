@@ -11,11 +11,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logo } from 'src/assets/brand/logo'
 import { useWeb3Context } from 'web3-react'
 import { AppHeaderDropdown } from './header/index'
+import { set } from '../state/SideBarState'
 
 
 const AppHeader = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  const sidebarShow = useSelector((state) => state.sideBarState.isSidebarShow)
 
   const context = useWeb3Context()
   const [currentAccount, setCurrentAccount] = useState(null);
@@ -34,8 +35,9 @@ const AppHeader = () => {
         console.log(console.error)
       } else {
         // success        
-        setCurrentAccount(context.account)
+        setCurrentAccount(context.account)        
         console.log('=== Header Wallet Connect Success ===')
+        console.log(context)
       }
     }
 
@@ -68,7 +70,10 @@ const AppHeader = () => {
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+          // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+          onClick={() => {
+            dispatch(set(!sidebarShow))
+          }}
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>

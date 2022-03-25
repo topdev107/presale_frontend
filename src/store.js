@@ -1,17 +1,27 @@
 import { createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import sideBarStateReducer from './state/SideBarState'
+import createLaunchPadStateReducer from './state/CreateLaunchPadState'
 
-const initialState = {
-  sidebarShow: true,
-}
+export default configureStore ({
+  reducer: {
+    sideBarState: sideBarStateReducer,
+    createLaunchPadState: createLaunchPadStateReducer
+  },
+})
 
-const changeState = (state = initialState, { type, ...rest }) => {
-  switch (type) {
-    case 'set':
-      return { ...state, ...rest }
-    default:
-      return state
-  }
-}
+// const initialState = {
+//   sidebarShow: true,
+// }
 
-const store = createStore(changeState)
-export default store
+// const changeState = (state = initialState, { type, ...rest }) => {
+//   switch (type) {
+//     case 'set':
+//       return { ...state, ...rest }
+//     default:
+//       return state
+//   }
+// }
+
+// const store = createStore(changeState)
+// export default store
