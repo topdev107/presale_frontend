@@ -15,7 +15,7 @@ import Web3 from 'web3';
 import RowBetween from './components/RowBetween';
 import WorkflowItem from "./components/WorkflowItem";
 import { useDispatch, useSelector } from 'react-redux'
-import { setToken, delToken, setTokenAddr } from '../state/CreateLaunchPadState'
+import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals } from '../state/CreateLaunchPadState'
 
 const Home = () => {
   const history = useHistory();
@@ -64,7 +64,10 @@ const Home = () => {
   }
 
   const handleApprove = () => {
-    dispatch(setTokenAddr(tokenAddress))
+    dispatch(saveTokenAddr(tokenAddress))
+    dispatch(saveTokenName('Flash token'))
+    dispatch(saveTokenSymbol('FLASH'))
+    dispatch(saveTokenDecimals(18))
     history.push("/defi_launch_pad_info");
   }
 
@@ -125,13 +128,13 @@ const Home = () => {
                       </div>
                     )
                   }
-                  <p className="small-text-sz mt-1 blue-color">Create pool fee: 0.01 BNB</p>
+                  <p className="small-text-sz mt-1 text-blue-color">Create pool fee: 0.01 BNB</p>
                   {
                     isTokenValid ? (
                       <div>
                         <RowBetween
                           childStart={<p>Name</p>}
-                          childEnd={<p className='blue-color'>Flash Token</p>}
+                          childEnd={<p className='text-blue-color'>Flash Token</p>}
                         />
                         <RowBetween
                           childStart={<p>Symbol</p>}

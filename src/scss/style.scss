@@ -23,11 +23,14 @@ $enable-rtl: true;
 .small-text-sz {
     font-size: small;
 }
-.label-color {
+.text-label-color {
     color: $label-color
 }
-.blue-color {
+.text-blue-color {
     color: $blue
+}
+.text-accent-color {
+    color: $accent;
 }
 
 .my_csidebar {
@@ -262,7 +265,16 @@ span {
     font-weight: bold;
 }
 
-.text-color-accent {
+.text-link-accent {
     color: $accent;
+    cursor: pointer;
+    transition-duration: 0.4s;
 }
+
+.text-link-accent:hover {
+    color: $accent_highlight;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
 

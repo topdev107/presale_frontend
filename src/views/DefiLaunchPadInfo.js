@@ -12,7 +12,30 @@ import NumberInputComponent from './components/NumberInputComponent';
 import WorkflowItem from "./components/WorkflowItem";
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setToken, delToken, setTokenAddr } from '../state/CreateLaunchPadState'
+import { 
+  saveNeedTokenAmount,
+  savePresaleRate,
+  saveIsWhitelist,
+  saveSoftcap,
+  saveHardcap,
+  saveMinBuy,
+  saveMaxBuy,
+  saveReturnType,
+  saveRouter,
+  saveLiquidity,
+  saveListingRate,
+  saveStart,
+  saveEnd,
+  saveLockup,
+  saveCFirstReleasePercent,
+  saveCVestingPeriod,
+  saveCEachReleasePercent,
+  saveTotalTeamVestingTokens,
+  saveTFirstReleaseTime,
+  saveTFirstReleasePercent,
+  saveTVestingPeriod,
+  saveTEachReleasePercent
+} from '../state/CreateLaunchPadState'
 
 const DefiLaunchPadInfo = () => {
 
@@ -38,6 +61,8 @@ const DefiLaunchPadInfo = () => {
   const [maxBuyBNB, setMaxBuyBNB] = useState(0)
   const [errMsgMaxBuyBNB, setErrMsgMaxBuyBNB] = useState('')
 
+  const [refundType, setRefundType] = useState('Burn') // Burn, Refund
+ 
   const [liquidity, setLiquidity] = useState(0)
   const [errMsgLiquidity, setErrMsgLiquidity] = useState('')
 
@@ -57,27 +82,27 @@ const DefiLaunchPadInfo = () => {
   const [cFirstReleasePercent, setCFirstReleasePercent] = useState(0)
   const [errMsgCFirstReleasePercent, setErrMsgCFirstReleasePercent] = useState('')
 
-  const [cPeriodCycle, setCPeriodCycle] = useState(0)
-  const [errMsgCPeriodCycle, setErrMsgCPeriodCycle] = useState('')
+  const [cVestingPeriod, setCVestingPeriod] = useState(0)
+  const [errMsgCVestingPeriod, setErrMsgCVestingPeriod] = useState('')
 
-  const [presaleTokenReleasePerCycle, setPresaleTokenReleasePerCycle] = useState(0)
-  const [errMsgPresaleTokenReleasePerCycle, setErrMsgPresaleTokenReleasePerCycle] = useState('')
+  const [cEachReleasePercent, setCEachReleasePercent] = useState(0)
+  const [errMsgCEachReleasePercent, setErrMsgCEachReleasePercent] = useState('')
 
   const [isCheckedTeamVesting, setIsCheckedTeamVesting] = useState(false)
 
   const [totalTeamVestingTokens, setTotalTeamVestingTokens] = useState(0)
   const [errMsgTotalTeamVestingTokens, setErrMsgTotalTeamVestingTokens] = useState('')
 
-  const [firstTokenReleaseAfterListing, setFirstTokenReleaseAfterListing] = useState(0)
+  const [tFirstReleaseTime, setTFirstReleaseTime] = useState(0)
 
   const [tFirstReleasePercent, setTFirstReleasePercent] = useState(0)
   const [errMsgTFirstReleasePercent, setErrMsgTFirstReleasePercent] = useState('')
 
-  const [tPeriodCycle, setTPeriodCycle] = useState(0)
-  const [errMsgTPeriodCycle, setErrMsgTPeriodCycle] = useState('')
+  const [tVestingPeriod, setTVestingPeriod] = useState(0)
+  const [errMsgTVestingPeriod, setErrMsgTVestingPeriod] = useState('')
 
-  const [teamTokenReleasePerCycle, setTeamTokenReleasePerCycle] = useState(0)
-  const [errMsgTeamTokenReleasePerCycle, setErrMsgTeamTokenReleasePerCycle] = useState('')
+  const [tEachReleasePercent, setTEachReleasePercent] = useState(0)
+  const [errMsgTEachReleasePercent, setErrMsgTEachReleasePercent] = useState('')
 
   const onChangePresaleRate = (e) => {
     setPresaleRate((v) => (e.target.validity.valid ? e.target.value : v))
@@ -97,6 +122,10 @@ const DefiLaunchPadInfo = () => {
 
   const onChangeMaxBuy = (e) => {
     setMaxBuyBNB((v) => (e.target.validity.valid ? e.target.value : v))
+  }
+
+  const onChangeRefundType = (e) => {
+    setRefundType(e.target.value)
   }
 
   const onChangeLiquidity = (e) => {
@@ -166,41 +195,64 @@ const DefiLaunchPadInfo = () => {
     setCFirstReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
-  const onChangeCPeriodCycle = (e) => {
-    setCPeriodCycle((v) => (e.target.validity.valid ? e.target.value : v))
+  const onChangeCVestingPeriod = (e) => {
+    setCVestingPeriod((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
-  const onChangePresaleTokenReleasePerCycle = (e) => {
-    setPresaleTokenReleasePerCycle((v) => (e.target.validity.valid ? e.target.value : v))
+  const onChangeCEachReleasePercent = (e) => {
+    setCEachReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
   const onChangeTeamVesting = (e) => {
     setIsCheckedTeamVesting(e.target.checked)
   }
 
-
   const onChangeTotalTeamVestingTokens = (e) => {
     setTotalTeamVestingTokens((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
-  const onChangeFirstTokenReleaseAfterListing = (e) => {
-    setFirstTokenReleaseAfterListing((v) => (e.target.validity.valid ? e.target.value : v))
+  const onChangeTFirstReleaseTime = (e) => {
+    setTFirstReleaseTime((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
   const onChangeTFirstReleasePercent = (e) => {
     setTFirstReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
-  const onChangeTPeriodCycle = (e) => {
-    setTPeriodCycle((v) => (e.target.validity.valid ? e.target.value : v))
+  const onChangeTVestingPeriod = (e) => {
+    setTVestingPeriod((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
-  const onChangeTeamTokenReleasePerCycle = (e) => {
-    setTeamTokenReleasePerCycle((v) => (e.target.validity.valid ? e.target.value : v))
+  const onChangeTEachReleasePercent = (e) => {
+    setTEachReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
   const handleNext = () => {
-    // dispatch(setTokenAddr(tokenAddress))
+    dispatch(saveNeedTokenAmount(200))
+    dispatch(savePresaleRate(presaleRate))    
+    dispatch(saveIsWhitelist(isWhitelistEnable))
+    dispatch(saveSoftcap(softCap))
+    dispatch(saveHardcap(hardCap))
+    dispatch(saveMinBuy(minBuyBNB))
+    dispatch(saveMaxBuy(maxBuyBNB))
+    dispatch(saveReturnType(refundType))
+    dispatch(saveRouter('PancakeSwap'))
+    dispatch(saveLiquidity(liquidity))
+    dispatch(saveListingRate(listingRate))
+    dispatch(saveStart(startDate.unix()))
+    dispatch(saveEnd(endDate.unix()))
+    console.log('Start Date Timestamp: ', startDate.unix())
+    console.log('Start Date From Moment: ', moment(new Date(startDate.unix())).format)
+    console.log('Start Date: ', startDate)
+    dispatch(saveLockup(lockupMinutes))
+    dispatch(saveCFirstReleasePercent(cFirstReleasePercent))
+    dispatch(saveCVestingPeriod(cVestingPeriod))
+    dispatch(saveCEachReleasePercent(cEachReleasePercent))
+    dispatch(saveTotalTeamVestingTokens(totalTeamVestingTokens))
+    dispatch(saveTFirstReleaseTime(tFirstReleaseTime))
+    dispatch(saveTFirstReleasePercent(tFirstReleasePercent))
+    dispatch(saveTVestingPeriod(tVestingPeriod))
+    dispatch(saveTEachReleasePercent(tEachReleasePercent))
     history.push("/add_additional_info");
   }
 
@@ -271,16 +323,16 @@ const DefiLaunchPadInfo = () => {
       setErrMsgCFirstReleasePercent('First release for presale must be 1 or more')
     }
 
-    if (+cPeriodCycle >= 1) {
-      setErrMsgCPeriodCycle('')
+    if (+cVestingPeriod >= 1) {
+      setErrMsgCVestingPeriod('')
     } else {
-      setErrMsgCPeriodCycle('Vesting period each cycle must be 1 or more')
+      setErrMsgCVestingPeriod('Vesting period each cycle must be 1 or more')
     }
 
-    if (+presaleTokenReleasePerCycle >= 1) {
-      setErrMsgPresaleTokenReleasePerCycle('')
+    if (+cEachReleasePercent >= 1) {
+      setErrMsgCEachReleasePercent('')
     } else {
-      setErrMsgPresaleTokenReleasePerCycle('Presale token release each cycle must be 1 or more')
+      setErrMsgCEachReleasePercent('Presale token release each cycle must be 1 or more')
     }
 
     if (+totalTeamVestingTokens >= 1) {
@@ -295,16 +347,16 @@ const DefiLaunchPadInfo = () => {
       setErrMsgTFirstReleasePercent('First token release must be 1 or more')
     }
 
-    if (+tPeriodCycle >= 1) {
-      setErrMsgTPeriodCycle('')
+    if (+tVestingPeriod >= 1) {
+      setErrMsgTVestingPeriod('')
     } else {
-      setErrMsgTPeriodCycle('Vesting period each cycle must be 1 or more')
+      setErrMsgTVestingPeriod('Vesting period each cycle must be 1 or more')
     }
 
-    if (+teamTokenReleasePerCycle >= 1) {
-      setErrMsgTeamTokenReleasePerCycle('')
+    if (+tEachReleasePercent >= 1) {
+      setErrMsgTEachReleasePercent('')
     } else {
-      setErrMsgTeamTokenReleasePerCycle('Team token release each cycle must be 1 or more')
+      setErrMsgTEachReleasePercent('Team token release each cycle must be 1 or more')
     }
 
   },
@@ -320,13 +372,13 @@ const DefiLaunchPadInfo = () => {
       endDate,
       lockupMinutes,
       cFirstReleasePercent,
-      cPeriodCycle,
-      presaleTokenReleasePerCycle,
+      cVestingPeriod,
+      cEachReleasePercent,
       totalTeamVestingTokens,
-      firstTokenReleaseAfterListing,
+      tFirstReleaseTime,
       tFirstReleasePercent,
-      tPeriodCycle,
-      teamTokenReleasePerCycle
+      tVestingPeriod,
+      tEachReleasePercent
     ])
 
   return (
@@ -416,7 +468,7 @@ const DefiLaunchPadInfo = () => {
                         </div>
                       )
                     }
-                    <p className="small-text-sz mt-1 blue-color">You can enable/disable whitelist anytime</p>
+                    <p className="small-text-sz mt-1 text-blue-color">You can enable/disable whitelist anytime</p>
                   </div>
                   <div className='mt-3'>
                     <CRow>
@@ -467,9 +519,9 @@ const DefiLaunchPadInfo = () => {
                       <CCol>
                         <p className='font-bold'>Refund type</p>
                         <div>
-                          <CFormSelect aria-label="Default select example">
-                            <option value="burn">Burn</option>
-                            <option value="refund">Refund</option>
+                          <CFormSelect onChange={onChangeRefundType} value={refundType}>
+                            <option value="Burn">Burn</option>
+                            <option value="Refund">Refund</option>
                           </CFormSelect>
                         </div>
                       </CCol>
@@ -503,8 +555,8 @@ const DefiLaunchPadInfo = () => {
                         />
                       </CCol>
                     </CRow>
-                    <p className="small-text-sz mt-1 mb-0 blue-color">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
-                    <p className="small-text-sz mt-0 blue-color">If I spend 1 BNB on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
+                    <p className="small-text-sz mt-1 mb-0 text-blue-color">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
+                    <p className="small-text-sz mt-0 text-blue-color">If I spend 1 BNB on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
                   </div>
                   <div className='mt-3'>
                     <p className='font-bold'>Select start time and end time (UTC)
@@ -570,9 +622,9 @@ const DefiLaunchPadInfo = () => {
                             <CCol>
                               <NumberInputComponent
                                 title='Vesting period each cycle (minutes)'
-                                value={cPeriodCycle}
-                                onChange={onChangeCPeriodCycle}
-                                errMsg={errMsgCPeriodCycle}
+                                value={cVestingPeriod}
+                                onChange={onChangeCVestingPeriod}
+                                errMsg={errMsgCVestingPeriod}
                                 desc=''
                                 needInt
                               />
@@ -580,9 +632,9 @@ const DefiLaunchPadInfo = () => {
                             <CCol>
                               <NumberInputComponent
                                 title='Presale token release each cycle (percent)'
-                                value={presaleTokenReleasePerCycle}
-                                onChange={onChangePresaleTokenReleasePerCycle}
-                                errMsg={errMsgPresaleTokenReleasePerCycle}
+                                value={cEachReleasePercent}
+                                onChange={onChangeCEachReleasePercent}
+                                errMsg={errMsgCEachReleasePercent}
                                 desc=''
                                 needInt
                               />
@@ -623,8 +675,8 @@ const DefiLaunchPadInfo = () => {
                             <CCol>
                               <NumberInputComponent
                                 title='First token release after listing (minutes)'
-                                value={firstTokenReleaseAfterListing}
-                                onChange={onChangeFirstTokenReleaseAfterListing}
+                                value={tFirstReleaseTime}
+                                onChange={onChangeTFirstReleaseTime}
                                 errMsg=''
                                 desc=''
                                 needInt
@@ -647,9 +699,9 @@ const DefiLaunchPadInfo = () => {
                             <CCol>
                               <NumberInputComponent
                                 title='Vesting period each cycle (minutes)'
-                                value={tPeriodCycle}
-                                onChange={onChangeTPeriodCycle}
-                                errMsg={errMsgTPeriodCycle}
+                                value={tVestingPeriod}
+                                onChange={onChangeTVestingPeriod}
+                                errMsg={errMsgTVestingPeriod}
                                 desc=''
                                 needInt
                               />
@@ -657,9 +709,9 @@ const DefiLaunchPadInfo = () => {
                             <CCol>
                               <NumberInputComponent
                                 title='Team token release each cycle (percent)'
-                                value={teamTokenReleasePerCycle}
-                                onChange={onChangeTeamTokenReleasePerCycle}
-                                errMsg={errMsgTeamTokenReleasePerCycle}
+                                value={tEachReleasePercent}
+                                onChange={onChangeTEachReleasePercent}
+                                errMsg={errMsgTEachReleasePercent}
                                 desc=''
                                 needInt
                               />
