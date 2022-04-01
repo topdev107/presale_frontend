@@ -9,12 +9,12 @@ import moment from "moment-timezone";
 import React, { useEffect, useState } from 'react';
 import DateTimeRangeContainer from "react-advanced-datetimerange-picker";
 import { FormControl } from "react-bootstrap";
-import NumberInputComponent from './components/NumberInputComponent';
-import UrlInputComponent from './components/UrlInputComponent';
-import WorkflowItem from "./components/WorkflowItem";
+import NumberInputComponent from '../components/NumberInputComponent';
+import UrlInputComponent from '../components/UrlInputComponent';
+import WorkflowItem from "../components/WorkflowItem";
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setToken, delToken, setTokenAddr } from '../state/CreateLaunchPadState'
+import { setToken, delToken, setTokenAddr } from '../../state/CreateLaunchPadState'
 import { faImage, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faGithub, faReddit, faTelegram, faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons"
 import { 
@@ -27,7 +27,7 @@ import {
   saveInstagram,
   saveDiscord,
   saveReddit,
-  saveDesc } from '../state/CreateLaunchPadState'
+  saveDesc } from '../../state/CreateLaunchPadState'
 
 const AddAdditionalInfo = () => {
 
@@ -234,7 +234,7 @@ const AddAdditionalInfo = () => {
     dispatch(saveDiscord(discord))
     dispatch(saveReddit(reddit))
     dispatch(saveDesc(desc))
-    history.push("/review");
+    history.push("/launchpad/review");
   }
 
   return (

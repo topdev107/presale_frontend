@@ -24,6 +24,7 @@ $gray-300:  #c4c9d0 !default;
 // $gray-800:  #636f83 !default;
 $gray-900:  #4f5d73 !default;
 $black:     #000015 !default;
+$dark-color: #24252f;
 
 $label-color: $gray-300;
 $control-outline-color: #393a3a;
@@ -1380,6 +1381,15 @@ $card-bg:                           $body-color !default;
 // $modal-content-color:               unset !default;
 // $modal-content-bg:                  $white !default;
 // $modal-content-border-color:        rgba($black, .2) !default;
+// $modal-content-border-width:        $border-width !default;
+// $modal-content-border-radius:       $border-radius-lg !default;
+// $modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
+// $modal-content-box-shadow-xs:       $box-shadow-sm !default;
+// $modal-content-box-shadow-sm-up:    $box-shadow !default;
+
+$modal-content-color:               $white !default;
+$modal-content-bg:                  $dark-color !default;
+$modal-content-border-color:        rgba($black, .2) !default;
 // $modal-content-border-width:        $border-width !default;
 // $modal-content-border-radius:       $border-radius-lg !default;
 // $modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;

@@ -26,6 +26,23 @@ const RowBetween = (props) => {
           {props.childEnd}
         </div>
       </CCol>
+      {
+        props.desc ?
+        (
+          <div align="end" className="text-label-color"> {props.desc} </div>
+        ) : (
+          <></>
+        )
+      }
+      {
+        props.underline ?
+        (
+          <div className='underline'>
+          </div>
+        ) : (
+          <></>
+        )
+      }
     </CRow>
   )
 }

@@ -6,20 +6,26 @@ import React from 'react';
 const NumberInputComponent = (props) => {
   return (
     <div>
-      <p className='font-bold'>{props.title}
-        <sup className="danger">*</sup>
-      </p>
+      <div className='font-bold text-yellow-color'>{props.title}
+        { 
+          props.notSup ? (
+            <></>
+          ) : (
+            <sup className="danger">*</sup>
+          )
+        }
+      </div>
       {
         props.errMsg !== '' ? (
           props.needInt ? (
             <div>
               <CFormInput type="number" min='0' id={props.title} className='input-highlighted' placeholder="0" value={props.value} onChange={props.onChange} />
-              <p className='danger small-text-sz mb-0'>{props.errMsg}</p>
+              <div className='danger small-text-sz mb-0'>{props.errMsg}</div>
             </div>
           ) : (
             <div>
               <CFormInput type="number" min='0' step='any' id={props.title} className='input-highlighted' placeholder="0" value={props.value} onChange={props.onChange} />
-              <p className='danger small-text-sz mb-0'>{props.errMsg}</p>
+              <div className='danger small-text-sz mb-0'>{props.errMsg}</div>
             </div>
           )
 
@@ -31,7 +37,7 @@ const NumberInputComponent = (props) => {
           )
         )
       }
-      <p className="small-text-sz mt-1 text-blue-color">{props.desc}</p>
+      <div className="small-text-sz mt-1 text-blue-color">{props.desc}</div>
     </div>
   )
 }

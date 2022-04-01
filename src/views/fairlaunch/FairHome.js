@@ -1,10 +1,10 @@
-
 import {
   CCard,
   CCardBody,
   CCol,
   CFormInput,
-  CRow
+  CRow,
+  CAlert,
 } from '@coreui/react';
 import { faInfoCircle, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,15 +12,18 @@ import React, { useEffect, useState } from 'react';
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner';
 import Web3 from 'web3';
-import RowBetween from './components/RowBetween';
-import WorkflowItem from "./components/WorkflowItem";
+import RowBetween from '../components/RowBetween';
+import WorkflowItem from "../components/WorkflowItem";
 import { useDispatch, useSelector } from 'react-redux'
-import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals } from '../state/CreateLaunchPadState'
+import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals } from '../../state/CreateFairLaunchState'
+import CIcon from '@coreui/icons-react';
+import { cilList, cilWarning, cilShieldAlt } from '@coreui/icons';
+import { CreateTokenModal } from '../components/CreateTokenModal'
 
-const Home = () => {
+const FairHome = () => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const tokenAddr = useSelector((state) => state.createLaunchPadState.tokenAddress)
+  const tokenAddr = useSelector((state) => state.createFairLaunchState.tokenAddress)
   const initialTokenAddr = tokenAddr ? tokenAddr : ""
 
   const [NO_APPROVED, APPROVED] = ['no_approved', 'approved']
@@ -68,7 +71,7 @@ const Home = () => {
     dispatch(saveTokenName('Flash token'))
     dispatch(saveTokenSymbol('FLASH'))
     dispatch(saveTokenDecimals(18))
-    history.push("/defi_launch_pad_info");
+    history.push("/fairlaunch/defi_fair_launch_info");
   }
 
   return (
@@ -85,8 +88,8 @@ const Home = () => {
           <CCol className="col-sm-3">
             <WorkflowItem
               stemNumber={2}
-              title='DeFi Launchpad Info'
-              desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
+              title='DeFi Fairlaunch Info'
+              desc='Enter the fairlaunch information that you want to raise, that should be enter all details about your pool' />
           </CCol>
           <CCol className="col-sm-3">
             <WorkflowItem
@@ -114,7 +117,7 @@ const Home = () => {
                   </CCol>
                   <CCol>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <button type="button" className="btn-black">Create Token</button>
+                      <CreateTokenModal />
                     </div>
                   </CCol>
                   {
@@ -144,22 +147,12 @@ const Home = () => {
                           childStart={<p>Decimals</p>}
                           childEnd={<p>18</p>}
                         />
-                        {
-                          isShowInfo ? (
-                            <div>
-                              <div className='warning-outline-box'>
-                                <RowBetween
-                                  isLong
-                                  childStart={<FontAwesomeIcon icon={faInfoCircle} className='danger' style={{ marginTop: '10px' }} />}
-                                  childMiddle={<p className='danger' style={{ fontSize: '13px', marginTop: '10px' }}>Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.</p>}
-                                  childEnd={<FontAwesomeIcon icon={faWindowClose} onClick={handleCloseInfo} style={{ color: 'black', marginTop: '10px' }} />}
-                                />
-                              </div>
-                            </div>
-                          ) : (
-                            <></>
-                          )
-                        }
+                        <CAlert color="dark" className="d-flex align-items-center" dismissible>
+                          <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
+                          <div>
+                            Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.
+                          </div>
+                        </CAlert>
                         {
                           !isExistPool ? (
                             tokenStatus === NO_APPROVED ? (
@@ -208,4 +201,4 @@ const Home = () => {
   );
 }
 
-export default Home
+export default FairHome

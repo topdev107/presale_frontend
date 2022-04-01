@@ -27,25 +27,25 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Create launchpad',
-    to: '/',
+    to: '/launchpad/home',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Create fair launch',
-    to: '/create_fair_launch',
+    to: '/fairlaunch/home',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Create token',
-    to: '/create_token',
+    to: '/createtoken/home',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Launchpad list',
-    to: '/launchpad_list',
+    to: '/launchpadlist',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
   // {

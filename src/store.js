@@ -2,11 +2,15 @@ import { createStore } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import sideBarStateReducer from './state/SideBarState'
 import createLaunchPadStateReducer from './state/CreateLaunchPadState'
+import createFairLaunchStateReducer from './state/CreateFairLaunchState'
+import createTokenStateReducer from './state/CreateTokenState'
 
 export default configureStore ({
   reducer: {
     sideBarState: sideBarStateReducer,
-    createLaunchPadState: createLaunchPadStateReducer
+    createLaunchPadState: createLaunchPadStateReducer,
+    createFairLaunchState: createFairLaunchStateReducer,
+    createTokenState: createTokenStateReducer,
   },
 })
 

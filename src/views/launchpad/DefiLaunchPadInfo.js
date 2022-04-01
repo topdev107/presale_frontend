@@ -1,15 +1,19 @@
-
 import {
   CCard,
   CCardBody,
-  CCol, CFormCheck, CFormInput, CFormSelect, CRow
+  CCol, CFormCheck, CFormInput, CFormSelect, CRow,
+  CAlert,
 } from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { cilList, cilShieldAlt } from '@coreui/icons';
+
+
 import moment from "moment-timezone";
 import React, { useEffect, useState } from 'react';
 import DateTimeRangeContainer from "react-advanced-datetimerange-picker";
 import { FormControl } from "react-bootstrap";
-import NumberInputComponent from './components/NumberInputComponent';
-import WorkflowItem from "./components/WorkflowItem";
+import NumberInputComponent from '../components/NumberInputComponent';
+import WorkflowItem from "../components/WorkflowItem";
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { 
@@ -35,7 +39,7 @@ import {
   saveTFirstReleasePercent,
   saveTVestingPeriod,
   saveTEachReleasePercent
-} from '../state/CreateLaunchPadState'
+} from '../../state/CreateLaunchPadState'
 
 const DefiLaunchPadInfo = () => {
 
@@ -253,7 +257,7 @@ const DefiLaunchPadInfo = () => {
     dispatch(saveTFirstReleasePercent(tFirstReleasePercent))
     dispatch(saveTVestingPeriod(tVestingPeriod))
     dispatch(saveTEachReleasePercent(tEachReleasePercent))
-    history.push("/add_additional_info");
+    history.push("/launchpad/add_additional_info");
   }
 
   useEffect(() => {
@@ -604,9 +608,9 @@ const DefiLaunchPadInfo = () => {
                   {
                     isCheckedVestingContributor ? (
                       <div>
-                        <div className='warning-outline-box mt-3'>
-                          <p className='danger' style={{ fontSize: '14px', marginTop: '7px' }}>Vesting Contributor does not support rebase tokens.</p>
-                        </div>
+                        <CAlert color="dark">
+                          Vesting Contributor does not support rebase tokens.
+                        </CAlert>
                         <div className='mt-3'>
                           <NumberInputComponent
                             title='First release for presale (percent)'
@@ -657,9 +661,9 @@ const DefiLaunchPadInfo = () => {
                   {
                     isCheckedTeamVesting ? (
                       <div>
-                        <div className='warning-outline-box mt-3'>
-                          <p className='danger' style={{ fontSize: '14px', marginTop: '7px' }}>Team Vesting does not support rebase tokens.</p>
-                        </div>
+                        <CAlert color="dark">
+                          Team Vesting does not support rebase tokens.
+                        </CAlert>
                         <div className='mt-3'>
                           <CRow>
                             <CCol>
