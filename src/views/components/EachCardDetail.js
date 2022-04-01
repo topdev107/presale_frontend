@@ -22,9 +22,12 @@ export const FairCardDetail = (props) => {
           <CCardBody>
             <CRow>
               <CCol>
-                <CCardImage orientation="top" src={props.img} />
+                <div>
+                <CCardImage orientation="top" src={props.img} width={50} height={50}/>
+                </div>
               </CCol>
               <CCol className="d-md-flex justify-content-md-end text-white-color">
+                <div>
                 {
                   props.badgestate === 'Canceled' || props.badgestate === 'Sale Ended' ?
                     <CBadge color='danger'>{props.badgestate}</CBadge>
@@ -34,6 +37,7 @@ export const FairCardDetail = (props) => {
                     <CBadge color='success'>Sale Live</CBadge>
                     : <CBadge color='light'>Canceled</CBadge>
                 }
+                </div>
               </CCol>
             </CRow>
             <CCardTitle>TestToken</CCardTitle>
@@ -98,9 +102,12 @@ export const NormalCardDetail = (props) => {
           <CCardBody>
             <CRow>
               <CCol>
-                <CCardImage orientation="top" src={props.img} />
+                <div>
+                <CCardImage align="start" rounded src={props.img} width={50} height={50} />
+                </div>
               </CCol>
               <CCol className="d-md-flex justify-content-md-end text-white-color">
+                <div>
                 {
                   props.badgestate === 'Canceled' || props.badgestate === 'Sale Ended' ?
                     <CBadge color='danger'>{props.badgestate}</CBadge>
@@ -110,6 +117,7 @@ export const NormalCardDetail = (props) => {
                     <CBadge color='success'>Sale Live</CBadge>
                     : <CBadge color='light'>Canceled</CBadge>
                 }
+                </div>
               </CCol>
             </CRow>
             <CCardTitle>TestToken</CCardTitle>
@@ -132,7 +140,7 @@ export const NormalCardDetail = (props) => {
               </CRow>
               <CRow>
                 <CCol>
-                  <div className='font-bold text-white-color'>
+                  <p className='font-bold text-white-color'>
                     Progress ({props.progress}%)
                     <CProgress className="mb-3">
                       <CProgressBar color="warning" value={+props.progress}/>
@@ -141,7 +149,7 @@ export const NormalCardDetail = (props) => {
                     <CCol className='xs-2 text_align_left'>{props.softCap} BNB </CCol>
                     <CCol className='xs-2 text_align_right'>{props.hardCap} BNB </CCol>
                     </CRow>
-                  </div>
+                  </p>
                 </CCol>
               </CRow>
               <RowBetween

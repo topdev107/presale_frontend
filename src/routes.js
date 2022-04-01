@@ -12,6 +12,7 @@ const TokenHome = React.lazy(() => import('./views/token/Home'))
 const TokenSuccess = React.lazy(() => import('./views/token/Success'))
 const LaunchpadList = React.lazy(() => import('./views/launchpadlist/Home'))
 const FairPoolView = React.lazy(() => import('./views/FairPoolView'))
+const NormalPoolView = React.lazy(() => import('./views/NormalPoolView'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home', component: Home },
@@ -27,6 +28,7 @@ const routes = [
   { path: '/createToken/success', name: 'SuccessTokenCreation', component: TokenSuccess},
   { path: '/launchpadlist', name: 'LaunchPadList', component: LaunchpadList },
   { path: '/fairlaunchview', name: 'FairPoolView', component: FairPoolView},
+  { path: '/normallaunchview', name: 'NormalPoolView', component: NormalPoolView},
 ]
 
 export default routes

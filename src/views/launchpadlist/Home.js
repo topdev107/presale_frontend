@@ -27,7 +27,7 @@ const LaunchpadList = () => {
                   href="javascript:void(0);"
                   active={activeKey === 1}
                   onClick={() => setActiveKey(1)}
-                  className="text-yellow-color"
+                  className="text-grey-color"
                 >
                   All launchpads
                 </CNavLink>
@@ -37,7 +37,7 @@ const LaunchpadList = () => {
                   href="javascript:void(0);"
                   active={activeKey === 2}
                   onClick={() => setActiveKey(2)}
-                  className="text-yellow-color"
+                  className="text-grey-color"
                 >
                   My Contributions
                 </CNavLink>
@@ -48,7 +48,7 @@ const LaunchpadList = () => {
                 <br/>
                 <CRow >
                   <FairCardDetail
-                    img='/assets/presale_logo.png'
+                    img='/assets/avatar.jpg'
                     name='Guess'
                     badgestate='Canceled'
                     softCap='1'
@@ -59,7 +59,7 @@ const LaunchpadList = () => {
                     goto = '../fairlaunchview'
                   />
                   <FairCardDetail
-                    img='src/assets/images/avatar.jpg'
+                    img='/assets/avatar.jpg'
                     name='Guess'
                     badgestate='Upcoming'
                     softCap='1'
@@ -70,7 +70,7 @@ const LaunchpadList = () => {
                     goto = '../fairlaunchview'
                   />
                   <NormalCardDetail
-                    img='src/assets/images/avatar.jpg'
+                    img='/assets/avatar.jpg'
                     name='WWWWAQ'
                     perrate='560000'
                     badgestate='Sale Live'

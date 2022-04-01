@@ -1060,18 +1060,18 @@ $form-check-input-checked-border-color:   $form-check-input-checked-bg-color !de
 // $nav-link-padding-x:                1rem !default;
 // $nav-link-font-size:                null !default;
 // $nav-link-font-weight:              null !default;
-// $nav-link-color:                    $link-color !default;
-// $nav-link-hover-color:              $link-hover-color !default;
+ $nav-link-color:                    $gray-300 !default;
+ $nav-link-hover-color:              $gray-300 !default;
 // $nav-link-transition:               color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out !default;
 // $nav-link-disabled-color:           $gray-600 !default;
 
-// $nav-tabs-border-color:             $gray-300 !default;
+ $nav-tabs-border-color:             $dark-color !default;
 // $nav-tabs-border-width:             $border-width !default;
 // $nav-tabs-border-radius:            $border-radius !default;
-// $nav-tabs-link-hover-border-color:  $gray-200 $gray-200 $nav-tabs-border-color !default;
-// $nav-tabs-link-active-color:        $gray-700 !default;
+ $nav-tabs-link-hover-border-color:  $dark-color $nav-tabs-border-color !default;
+ $nav-tabs-link-active-color:        $accent !default;
 // $nav-tabs-link-active-bg:           $body-bg !default;
-// $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
+ $nav-tabs-link-active-border-color: $body-bg !default;
 
 // $nav-pills-border-radius:           $border-radius !default;
 // $nav-pills-link-active-color:       $component-active-color !default;
@@ -1720,15 +1720,15 @@ $sidebar-nav-link-icon-color:              $medium-emphasis-inverse !default;
 // $sidebar-nav-link-hover-bg:                rgba($black, .09) !default;
 // $sidebar-nav-link-hover-icon-color:        $high-emphasis-inverse !default;
 
-// $sidebar-nav-link-active-color:            $high-emphasis-inverse !default;
+ $sidebar-nav-link-active-color:            $dark-color !default;
 // $sidebar-nav-link-active-bg:               rgba($black, .09) !default;
 // $sidebar-nav-link-active-icon-color:       $high-emphasis-inverse !default;
 
-$sidebar-nav-link-hover-color:             $high-emphasis-inverse !default;
+$sidebar-nav-link-hover-color:             $accent !default;
 $sidebar-nav-link-hover-bg:                rgba($black, .09) !default;
 $sidebar-nav-link-hover-icon-color:        $high-emphasis-inverse !default;
 
-$sidebar-nav-link-active-color:            $white !default;
+$sidebar-nav-link-active-color:            $dark-color !default;
 $sidebar-nav-link-active-bg:               $high-emphasis-inverse !default;
 $sidebar-nav-link-active-icon-color:       $white !default;
 

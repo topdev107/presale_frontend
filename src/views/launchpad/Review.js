@@ -76,7 +76,7 @@ const Review = () => {
   }
 
   const handleSubmit = () => {
-    
+    history.push('/normallaunchview');
   }
 
   return (
@@ -120,89 +120,72 @@ const Review = () => {
                   <RowBetween
                     childStart={<p>Total token</p>}
                     childEnd={<p className='text-accent-color'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Token name</p>}
                     childEnd={<p className='text-blue-color'>{tokenName}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Token symbol</p>}
                     childEnd={<p className='text-blue-color'>{tokenSymbol}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Token decimals</p>}
                     childEnd={<p className='text-blue-color'>{tokenDecimals}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Presale rate</p>}
                     childEnd={<p className='text-blue-color'>{presaleRate}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Listing rate</p>}
                     childEnd={<p className='text-blue-color'>{listingRate}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Sale method</p>}
                     childEnd={<p className='text-blue-color'>{saleMode}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Softcap</p>}
                     childEnd={<p className='text-blue-color'>{softCap}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Hardcap</p>}
                     childEnd={<p className='text-blue-color'>{hardCap}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Minimum buy</p>}
                     childEnd={<p className='text-blue-color'>{minBuy}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Maximum buy</p>}
                     childEnd={<p className='text-blue-color'>{maxBuy}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Liquidity</p>}
                     childEnd={<p className='text-blue-color'>{liquidity}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Start time</p>}
                     childEnd={<p className='text-blue-color'>{startDate}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>End time</p>}
                     childEnd={<p className='text-blue-color'>{endDate}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Liquidity lockup time</p>}
                     childEnd={<p className='text-blue-color'>{lockTime}</p>}
-                    underline
                   />
                   <RowBetween
                     childStart={<p>Website</p>}
                     childEnd={<p className='text-blue-color'>{website}</p>}
-                    underline
                   />
                   {
                     facebook ? (
                       <RowBetween
                         childStart={<p>Facebook</p>}
                         childEnd={<p className='text-blue-color'>{facebook}</p>}
-                        underline
                       />
                     ) : (
                       <></>
@@ -213,7 +196,6 @@ const Review = () => {
                       <RowBetween
                         childStart={<p>Twitter</p>}
                         childEnd={<p className='text-blue-color'>{twitter}</p>}
-                        underline
                       />
                     ) : (
                       <></>
@@ -224,7 +206,6 @@ const Review = () => {
                       <RowBetween
                         childStart={<p>Github</p>}
                         childEnd={<p className='text-blue-color'>{github}</p>}
-                        underline
                       />
                     ) : (
                       <></>
@@ -235,7 +216,6 @@ const Review = () => {
                       <RowBetween
                         childStart={<p>Telegram</p>}
                         childEnd={<p className='text-blue-color'>{telegram}</p>}
-                        underline
                       />
                     ) : (
                       <></>
@@ -246,7 +226,6 @@ const Review = () => {
                       <RowBetween
                         childStart={<p>Instagram</p>}
                         childEnd={<p className='text-blue-color'>{instagram}</p>}
-                        underline
                       />
                     ) : (
                       <></>
@@ -257,7 +236,6 @@ const Review = () => {
                       <RowBetween
                         childStart={<p>Discord</p>}
                         childEnd={<p className='text-blue-color'>{discord}</p>}
-                        underline
                       />
                     ) : (
                       <></>
@@ -268,7 +246,7 @@ const Review = () => {
                       <RowBetween
                         childStart={<p>Reddit</p>}
                         childEnd={<p className='text-blue-color'>{reddit}</p>}
-                        underline
+                        
                       />
                     ) : (
                       <></>
@@ -278,7 +256,6 @@ const Review = () => {
                   <RowBetween
                     childStart={<p>Using Team Vesting?</p>}
                     childEnd={<p className='text-blue-color'>{tokenSymbol}</p>}
-                    underline
                   />
                   <CAlert color="warning" className="d-flex align-items-center" dismissible>
                     <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />

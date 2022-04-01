@@ -71,94 +71,76 @@ const TotalView = () => {
             <br/><br/>
             <RowBetween
               childStart = 'Presale Address'
-              childEnd = '0xA3EE27D6AbF931a584d51a433f15e6eAA5b0C964'
-              underline
+              childEnd = {<p className='text-yellow-color'>0xA3EE27D6AbF931a584d51a433f15e6eAA5b0C964</p>}
             />
             <RowBetween
               childStart = 'Token Name'
-              childEnd = 'TestToken'
-              underline
+              childEnd = {<p>TestToken</p>}
             />
             <RowBetween
               childStart = 'Token Symbol'
-              childEnd = 'TT'
-              underline
+              childEnd = {<p>TT</p>}
             />
             <RowBetween
               childStart = 'Token Decimals'
-              childEnd = '18'
-              underline
+              childEnd = {<p>18</p>}
             />
             <RowBetween
               childStart = 'TokenAddress'
-              childEnd = '0xA3EE27D6AbF931a584d51a433f15e6eAA5b0C964'
+              childEnd = {<p className='text-yellow-color'>0xA3EE27D6AbF931a584d51a433f15e6eAA5b0C964</p>}
               desc = 'Do not send BNB to the token address!'
-              underline
             />
             <RowBetween
               childStart = 'Total Supply'
-              childEnd = '1,000,000,000 TT'
-              underline
+              childEnd = {<p>1,000,000,000 TT</p>}
             />
             <RowBetween
               childStart = 'Tokens For Presale'
-              childEnd = '100 TT'
-              underline
+              childEnd = {<p>100 TT</p>}
             />
             <RowBetween
               childStart = 'Tokens For Liquidity'
-              childEnd = '57 TT'
-              underline
+              childEnd = {<p>57 TT</p>}
             />
             <RowBetween
               childStart = 'Soft Cap'
-              childEnd = '0.1 BNB'
-              underline
+              childEnd = {<p>0.1 BNB</p>}
             />
             <RowBetween
               childStart = 'Presale Start Time'
-              childEnd = '2022.03.30 00:00(UTC)'
-              underline
+              childEnd = {<p>2022.03.30 00:00(UTC)</p>}
             />
             <RowBetween
               childStart = 'Presale End Time'
-              childEnd = '2022.03.31 23:59(UTC)'
-              underline
+              childEnd = {<p>2022.03.31 23:59(UTC)</p>}
             />
             <RowBetween
               childStart = 'Listing On'
-              childEnd = 'Pancakeswap'
-              underline
+              childEnd = {<p className='text-yellow-color'>Pancakeswap</p>}
             />
             <RowBetween
               childStart = 'Liquidity Percent'
-              childEnd = '57%'
-              underline
+              childEnd = {<p>57%</p>}
             />
             <RowBetween
               childStart = 'Liquidity Lockup Time'
-              childEnd = '10 minutes after pool ends'
-              underline
+              childEnd = {<p>10 minutes after pool ends</p>}
             />
             <RowBetween
               childStart = 'Total Team Vesting Tokens'
-              childEnd = '10,000 TT'
-              underline
+              childEnd = {<p>10,000 TT</p>}
             />
             <RowBetween
               childStart = 'First Release After Listing(minutes)'
-              childEnd = '10 minutes'
-              underline
+              childEnd = {<p>10 minutes</p>}
             />
             <RowBetween
               childStart = 'First Release For Team'
-              childEnd = '40%'
-              underline
+              childEnd = {<p>40%</p>}
             />
             <RowBetween
               childStart = 'Tokens release each cycle'
-              childEnd = '20% each 5 minutes'
-              underline
+              childEnd = {<p>20% each 5 minutes</p>}
             />
             <CRow className='mr-0 pr-0' >
               <CAccordion >
@@ -280,23 +262,19 @@ const TotalView = () => {
           <CCardBody>
             <RowBetween
               childStart = "Status"
-              childEnd = "in progress"
-              underline
+              childEnd = {<p className="text-yellow-color">in progress</p>}
             />
             <RowBetween
               childStart = "Sale type"
-              childEnd = "Public"
-              underline
+              childEnd = {<p className='text-yellow-color'>Public</p>}
             />
             <RowBetween
               childStart = "Minimum Buy"
-              childEnd = "0.01 BNB"
-              underline
+              childEnd = {<p className='text-yellow-color'>0.01 BNB</p>}
             />
             <RowBetween 
               childStart = "Maximum Buy"
-              childEnd = "0.05 BNB"
-              underline
+              childEnd = {<p className='text-yellow-color'>0.05 BNB</p>}
             />
           </CCardBody>
         </CCard>
