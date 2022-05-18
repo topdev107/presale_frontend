@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const createFairLaunchSlice = createSlice({
     name: 'createFairLaunchState',
     initialState: {
+        currentAddr: '',
         tokenAddress: '',
         needTokenAmount: 0,
         tokenName: '',
         tokenSymbol: '',
         tokenDecimals: '',
+        tokenTotalSupply: 0,
         total_selling_amount: 0,
         softcap: 0,
         router: 'PancakeSwap',
@@ -33,6 +35,9 @@ export const createFairLaunchSlice = createSlice({
         desc: ''
     },
     reducers: {
+        saveCurrentAddr: (state, action) => {
+            state.currentAddr = action.payload
+        },
         saveTokenAddr: (state, action) => {
             state.tokenAddress = action.payload
         },
@@ -44,6 +49,9 @@ export const createFairLaunchSlice = createSlice({
         },
         saveTokenDecimals: (state, action) => {
             state.tokenDecimals = action.payload
+        },
+        saveTokenTotalSupply: (state, action) => {
+            state.tokenTotalSupply = action.payload
         },
         saveNeedTokenAmount: (state, action) => {
             state.needTokenAmount = action.payload
@@ -121,10 +129,12 @@ export const createFairLaunchSlice = createSlice({
 })
 
 export const {
+    saveCurrentAddr,
     saveTokenAddr,
     saveTokenName,
     saveTokenSymbol,
     saveTokenDecimals,
+    saveTokenTotalSupply,
     saveNeedTokenAmount,
     saveTotalSellingAmount,
     saveSoftcap,

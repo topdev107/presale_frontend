@@ -21,7 +21,7 @@ export const AppSidebarNav = ({ items }) => {
   }
 
   const navItem = (item, index) => {
-    const { component, name, badge, icon, ...rest } = item
+    const { component, name, badge, icon, similar, def, ...rest } = item
     const Component = component
     return (
       <Component
@@ -30,7 +30,13 @@ export const AppSidebarNav = ({ items }) => {
             component: NavLink,
             activeClassName: 'active',
           })}
-        key={index}
+          active = {
+            location.pathname.startsWith(similar) ? 
+              true :
+            location.pathname === '/' ? 
+              def : false
+          }
+          key={index}
         {...rest}
       >
         {navLink(name, icon, badge)}
@@ -38,14 +44,14 @@ export const AppSidebarNav = ({ items }) => {
     )
   }
   const navGroup = (item, index) => {
-    const { component, name, icon, to, ...rest } = item
+    const { component, name, icon, to, similar, ...rest } = item
     const Component = component
     return (
       <Component
         idx={String(index)}
         key={index}
         toggler={navLink(name, icon)}
-        visible={location.pathname.startsWith(to)}
+        visible={location.pathname.startsWith(similar)}
         {...rest}
       >
         {item.items?.map((item, index) =>

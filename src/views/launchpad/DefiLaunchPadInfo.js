@@ -38,13 +38,17 @@ import {
   saveTFirstReleaseTime,
   saveTFirstReleasePercent,
   saveTVestingPeriod,
-  saveTEachReleasePercent
+  saveTEachReleasePercent,
+  saveCVest,
+  saveTVest
 } from '../../state/CreateLaunchPadState'
 
 const DefiLaunchPadInfo = () => {
 
   const dispatch = useDispatch()
-  const tokenAddr = useSelector((state) => state.createLaunchPadState.tokenAddress)  
+  const tokenAddr = useSelector((state) => state.createLaunchPadState.tokenAddress)
+  // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
+  const tokenSymbol = useSelector((state) => state.createLaunchPadState.tokenSymbol)
 
   const history = useHistory();
 
@@ -77,6 +81,8 @@ const DefiLaunchPadInfo = () => {
   const [startDate, setStartDate] = useState(moment(new Date()))
   const [endDate, setEndDate] = useState(moment(new Date()).add(7, "days").subtract(1, "seconds"))
   const [dateTimeRange, setDateTimeRange] = useState(`${startDate.format("YYYY-MM-DD HH:mm")} - ${endDate.format("YYYY-MM-DD HH:mm")}`)
+  const [isValidDate, setValidDate] = useState(false)
+  const [errMsgDate, setErrMsgDate] = useState('')
 
   const [lockupMinutes, setLockupMinutes] = useState(0)
   const [errMsgLockupMinutes, setErrMsgLockupMinutes] = useState('')
@@ -98,6 +104,7 @@ const DefiLaunchPadInfo = () => {
   const [errMsgTotalTeamVestingTokens, setErrMsgTotalTeamVestingTokens] = useState('')
 
   const [tFirstReleaseTime, setTFirstReleaseTime] = useState(0)
+  const [errMsgtFirstReleaseTime, setErrMsgtFirstReleaseTime] = useState('')
 
   const [tFirstReleasePercent, setTFirstReleasePercent] = useState(0)
   const [errMsgTFirstReleasePercent, setErrMsgTFirstReleasePercent] = useState('')
@@ -108,12 +115,16 @@ const DefiLaunchPadInfo = () => {
   const [tEachReleasePercent, setTEachReleasePercent] = useState(0)
   const [errMsgTEachReleasePercent, setErrMsgTEachReleasePercent] = useState('')
 
+  const [needToken, setNeedToken] = useState(0)
+  const [isValid, setIsValid] = useState(false)
+
   const onChangePresaleRate = (e) => {
     setPresaleRate((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
   const onChangeSoftCap = (e) => {
-    setSoftCap((v) => (e.target.validity.valid ? e.target.value : v))
+    setSoftCap(e.target.value)
+    // setSoftCap((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
   const onChangeHardCap = (e) => {
@@ -126,7 +137,7 @@ const DefiLaunchPadInfo = () => {
 
   const onChangeMaxBuy = (e) => {
     setMaxBuyBNB((v) => (e.target.validity.valid ? e.target.value : v))
-  }
+  } 
 
   const onChangeRefundType = (e) => {
     setRefundType(e.target.value)
@@ -176,6 +187,20 @@ const DefiLaunchPadInfo = () => {
 
   const handleDateTimeRangeApply = (startdate, enddate) => {
     setStartDate(startdate)
+    console.log("startDateMoment", moment(startdate).utc())
+    console.log("endDateMoment", moment(enddate).utc())
+
+    console.log('startDate ===============>',moment(startdate).utc().format())
+    console.log('NowDate moment ==============> ',moment.utc().format())
+    // var ms = moment(now, "DD/MM/YYYY HH:mm:ss").diff(moment(then, "DD/MM/YYYY HH:mm:ss"));
+    var ms = moment(startdate, "DD/MM/YYYY HH:mm:ss").diff(moment(now, "DD/MM/YYYY HH:mm:ss"))
+    if(moment.duration(ms) < 0) {
+      setErrMsgDate('Start time needs to be after now')
+    }
+    ms = moment(enddate, "DD/MM/YYYY HH:mm:ss").diff(moment(startdate, "DD/MM/YYYY HH:mm:ss"))
+    if(moment.duration(ms) < 0) {
+      setErrMsgDate('Start time needs to be before End time')
+    }
     setEndDate(enddate)
   }
 
@@ -185,6 +210,11 @@ const DefiLaunchPadInfo = () => {
 
   const handleDateTimeRangeChanged = (rng) => {
     console.log(rng)
+  }
+
+  const calcNeedToken = (hardcap, presale, listing, liquidity) => {
+    const value = hardcap * presale * 1.02 + 0.98 * hardcap * listing * liquidity / 100
+    setNeedToken(value)
   }
 
   const onChangeLockupMinutes = (e) => {
@@ -232,7 +262,7 @@ const DefiLaunchPadInfo = () => {
   }
 
   const handleNext = () => {
-    dispatch(saveNeedTokenAmount(200))
+    dispatch(saveNeedTokenAmount(needToken))
     dispatch(savePresaleRate(presaleRate))    
     dispatch(saveIsWhitelist(isWhitelistEnable))
     dispatch(saveSoftcap(softCap))
@@ -243,11 +273,13 @@ const DefiLaunchPadInfo = () => {
     dispatch(saveRouter('PancakeSwap'))
     dispatch(saveLiquidity(liquidity))
     dispatch(saveListingRate(listingRate))
-    dispatch(saveStart(startDate.unix()))
-    dispatch(saveEnd(endDate.unix()))
-    console.log('Start Date Timestamp: ', startDate.unix())
-    console.log('Start Date From Moment: ', moment(new Date(startDate.unix())).format)
-    console.log('Start Date: ', startDate)
+    dispatch(saveStart(startDate.unix() * 1000))
+    dispatch(saveEnd(endDate.unix() * 1000))
+    // console.log('Start Date Timestamp: ', startDate.unix())
+    // console.log('Start Date From Moment: ', moment(new Date(startDate.unix())).format)
+    // console.log('Start Date: ', startDate)
+    dispatch(saveCVest(isCheckedVestingContributor))
+    dispatch(saveTVest(isCheckedTeamVesting))
     dispatch(saveLockup(lockupMinutes))
     dispatch(saveCFirstReleasePercent(cFirstReleasePercent))
     dispatch(saveCVestingPeriod(cVestingPeriod))
@@ -261,6 +293,7 @@ const DefiLaunchPadInfo = () => {
   }
 
   useEffect(() => {
+    calcNeedToken(hardCap, presaleRate, listingRate, liquidity)
     if (+presaleRate <= 0) {
       setErrMsgPresaleRate('Presale rate must be positive number')
     } else {
@@ -311,7 +344,7 @@ const DefiLaunchPadInfo = () => {
       setErrMsgListingRate('')
     }
 
-    setDescListingRate('1 BNB = ' + +listingRate + ' FLASH')
+    setDescListingRate('1 BNB = ' + +listingRate + ' ' +  tokenSymbol )
 
     setDateTimeRange(`${startDate.format("YYYY-MM-DD HH:mm")} - ${endDate.format("YYYY-MM-DD HH:mm")}`)
 
@@ -363,6 +396,22 @@ const DefiLaunchPadInfo = () => {
       setErrMsgTEachReleasePercent('Team token release each cycle must be 1 or more')
     }
 
+    if ( +tFirstReleaseTime >= 1 ) {
+      setErrMsgtFirstReleaseTime('')
+    } else {
+      setErrMsgtFirstReleaseTime('First token release after listing must be 1 or more')
+    }
+
+    (
+      errMsgPresaleRate === '' &&
+      errMsgSoftCap === '' &&
+      errMsgHardCap === '' &&
+      errMsgMinBuyBNB === '' &&
+      errMsgMaxBuyBNB === '' &&
+      errMsgLiquidity === '' &&
+      errMsgLockupMinutes === '' &&
+      errMsgListingRate === ''
+    ) ? setIsValid(true) : setIsValid(false)
   },
     [
       presaleRate,
@@ -599,12 +648,12 @@ const DefiLaunchPadInfo = () => {
                       desc=''
                     />
                   </div>
-                  <div className='mt-3'>
+                  {/* <div className='mt-3'>
                     <CFormCheck
                       id="contributorCheckbox"
                       label="Using Vesting Contributor?"
                       onChange={onChangeVestingContributor} />
-                  </div>
+                  </div> */}
                   {
                     isCheckedVestingContributor ? (
                       <div>
@@ -651,12 +700,12 @@ const DefiLaunchPadInfo = () => {
                     )
                   }
 
-                  <div className='mt-3'>
+                  {/* <div className='mt-3'>
                     <CFormCheck
                       id="teamCheckbox"
                       label="Using Team Vesting?"
                       onChange={onChangeTeamVesting} />
-                  </div>
+                  </div> */}
 
                   {
                     isCheckedTeamVesting ? (
@@ -681,7 +730,7 @@ const DefiLaunchPadInfo = () => {
                                 title='First token release after listing (minutes)'
                                 value={tFirstReleaseTime}
                                 onChange={onChangeTFirstReleaseTime}
-                                errMsg=''
+                                errMsg={errMsgtFirstReleaseTime}
                                 desc=''
                                 needInt
                               />
@@ -729,13 +778,13 @@ const DefiLaunchPadInfo = () => {
                   }
 
                   <div className='mt-5'>
-                    <p className='danger' style={{ textAlign: 'center' }}>Not enough balance in your wallet. Need 31.396 FLASH to create launchpad. (Your balance: 0 FLASH)</p>
+                    <p className='danger' style={{ textAlign: 'center' }}>Need {needToken} {tokenSymbol} to create launchpad.</p>
                   </div>
 
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
                     <button type="button" className="btn-black" onClick={history.goBack}>Back</button>
                     {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-black">Back</Link> */}
-                    <button type="button" className="btn-disabled" onClick={handleNext}>Next</button>
+                    <button type="button" className="btn-accent" onClick={handleNext} disabled={!isValid}>Next</button>
                     {/* <button type="button" className="btn-accent">Next</button> */}
                   </div>
                 </CRow>

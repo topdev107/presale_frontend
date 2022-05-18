@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
+import { saveTokenAddr } from 'src/state/CreateLaunchPadState';
 
 const TokenSuccess = () => {
   const history = useHistory()
@@ -18,11 +19,13 @@ const TokenSuccess = () => {
   const tokenSymbol = useSelector((state) => state.createTokenState.tokenSymbol)
   const tokenDecimal = useSelector((state) => state.createTokenState.tokenDecimals)
   const tokenTotalSupply = useSelector((state) => state.createTokenState.tokenTotalSupply)
+  const tokenAddress = useSelector((state) => state.createTokenState.tokenAddress)
 
   const handleNext = () => {
 
   }
   const handleLaunchPad = () => {
+    dispatch(saveTokenAddr(tokenAddress))
     history.push("/launchpad/home")
   }
 
@@ -53,7 +56,7 @@ const TokenSuccess = () => {
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell >Address</CTableHeaderCell>
-                  <CTableDataCell>0xd83b1D292B9D059AEB6854737468bf7b2410b417</CTableDataCell>
+                  <CTableDataCell>{tokenAddress}</CTableDataCell>
                 </CTableRow>
               </CTableBody>
             </CTable>

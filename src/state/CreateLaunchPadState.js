@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const createLaunchPadSlice = createSlice({
     name: 'createLaunchPadState',
     initialState: {
+        currentAddr: '',
         tokenAddress: '',
         needTokenAmount: 0,
         tokenName: '',
         tokenSymbol: '',
-        tokenDecimals: '',
+        tokenDecimals: 0,
+        tokenTotalSupply: 0,
         presaleRate: 0,
         isWhitelist: false,
         softcap: 0,
@@ -21,6 +23,8 @@ export const createLaunchPadSlice = createSlice({
         start: 0,
         end: 0,
         lockup: 0,
+        cvest: false,
+        tvest: false,
         cFirstReleasePercent: 0,
         cVestingPeriod: 0,
         cEachReleasePercent: 0,
@@ -40,7 +44,10 @@ export const createLaunchPadSlice = createSlice({
         reddit: '',
         desc: ''
     },
-    reducers: {        
+    reducers: {
+        saveCurrentAddr: (state, action) => {
+            state.currentAddr = action.payload
+        },
         saveTokenAddr: (state, action) => {
             state.tokenAddress = action.payload
         },
@@ -52,6 +59,9 @@ export const createLaunchPadSlice = createSlice({
         },
         saveTokenDecimals: (state, action) => {
             state.tokenDecimals = action.payload
+        },
+        saveTokenTotalSupply: (state, action) => {
+            state.tokenTotalSupply = action.payload
         },
         saveNeedTokenAmount: (state, action) => {
             state.needTokenAmount = action.payload
@@ -76,6 +86,12 @@ export const createLaunchPadSlice = createSlice({
         },
         saveReturnType: (state, action) => {
             state.returnType = action.payload
+        },
+        saveCVest: (state, action) => {
+            state.cvest = action.payload
+        },
+        saveTVest: (state, action) => {
+            state.tvest = action.payload
         },
         saveRouter: (state, action) => {
             state.router = action.payload
@@ -153,10 +169,12 @@ export const createLaunchPadSlice = createSlice({
 })
 
 export const {
+    saveCurrentAddr,
     saveTokenAddr,
     saveTokenName,
     saveTokenSymbol,
     saveTokenDecimals,
+    saveTokenTotalSupply,
     saveNeedTokenAmount,
     savePresaleRate,
     saveIsWhitelist,
@@ -170,6 +188,8 @@ export const {
     saveListingRate,
     saveStart,
     saveEnd,
+    saveCVest,
+    saveTVest,
     saveLockup,
     saveCFirstReleasePercent,
     saveCVestingPeriod,

@@ -36,9 +36,12 @@ import {
 const DefiFairLaunchInfo = () => {
 
   const dispatch = useDispatch()
-  const tokenAddr = useSelector((state) => state.createLaunchPadState.tokenAddress)  
+  const tokenAddr = useSelector((state) => state.createFairLaunchState.tokenAddress)  
+  const tokenSymbol = useSelector((state) => state.createFairLaunchState.tokenSymbol)
+
 
   const history = useHistory()
+  const [needAmount, setNeedAmount] = useState(0)
 
   const [total_selling_amount, setTotalSellingAmount] = useState(0)
   const [errMsgTotalSellingAmount, setErrMsgTotalSellingAmount] = useState('')
@@ -153,12 +156,12 @@ const DefiFairLaunchInfo = () => {
   }
 
   const handleNext = () => {
-    dispatch(saveNeedTokenAmount(200))
+    dispatch(saveNeedTokenAmount(needAmount))
     dispatch(saveTotalSellingAmount(total_selling_amount))
     dispatch(saveSoftcap(softcap))
     dispatch(saveRouter('Pancakeswap'))
-    dispatch(saveStart(startDate.unix()))
-    dispatch(saveEnd(endDate.unix()))
+    dispatch(saveStart(startDate.unix() * 1000))
+    dispatch(saveEnd(endDate.unix() * 1000))
     dispatch(saveLockup(lockupMinutes))
     dispatch(saveLiquidity(liquidity))
     dispatch(saveTotalTeamVestingTokens(total_team_vesting))
@@ -169,6 +172,15 @@ const DefiFairLaunchInfo = () => {
     dispatch(saveUsingTeamVesting(isCheckedTeamVesting))
     history.push("/fairlaunch/add_additional_info");
   }
+
+  const calcNeedToken = (selling, liquidity) => {
+    const value = selling * 1.02 + liquidity / 100 * 0.98 * selling
+    setNeedAmount(value)
+  }
+
+  useEffect(() => {
+    calcNeedToken(total_selling_amount, liquidity)
+  },[total_selling_amount, liquidity])
 
   useEffect(() => {
     if( +total_selling_amount <= 0 ) {
@@ -436,8 +448,11 @@ const DefiFairLaunchInfo = () => {
                     )
                   }
 
-                  <div className='mt-5'>
+                  {/* <div className='mt-5'>
                     <p className='danger' style={{ textAlign: 'center' }}>Not enough balance in your wallet. Need 31.396 FLASH to create launchpad. (Your balance: 0 FLASH)</p>
+                  </div> */}
+                  <div className='mt-5'>
+                    <p className='danger' style={{ textAlign: 'center' }}>Need {needAmount} {tokenSymbol} to create launchpad.</p>
                   </div>
 
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
