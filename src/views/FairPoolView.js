@@ -29,7 +29,7 @@ import {
   faInfoCircle, faWindowClose, faKey, faEdit, faEarth, faLink,
   faGlobe,
  } from "@fortawesome/free-solid-svg-icons";
- import { faTwitter, faFacebookSquare, faTelegram, faGithub, faInstagram, faDiscord, faRedditAlien } from '@fortawesome/free-brands-svg-icons'
+import { faTwitter, faFacebookSquare, faTelegram, faGithub, faInstagram, faDiscord, faRedditAlien } from '@fortawesome/free-brands-svg-icons'
 import RowBetween from './components/RowBetween'
 import NumberInputComponent from './components/NumberInputComponent';
 import { useDispatch, useSelector } from 'react-redux'
