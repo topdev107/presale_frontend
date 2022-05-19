@@ -99,6 +99,15 @@ const TotalView = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [isValidBuy, setIsValidBuy] = useState(false)
 
+  const [siteUrl, setSiteUrl] = useState('')
+  const [twitterUrl, setTwitterUrl] = useState('')
+  const [facebookUrl, setFacebookUrl] = useState('')
+  const [telegramUrl, setTelegramUrl] = useState('')
+  const [githubUrl, setGithubUrl] = useState('')
+  const [instagramUrl, setInstagramUrl] = useState('')
+  const [discordUrl, setDiscordUrl] = useState('')
+  const [redditUrl, setRedditUrl] = useState('')
+
   const chartOption = {
     tooltip: {
       trigger: 'none'
@@ -323,6 +332,15 @@ const TotalView = () => {
         } else {
           setSaleType('Public')
         }
+
+        setSiteUrl(data.websiteURL)
+        setFacebookUrl(data.facebookURL)
+        setTwitterUrl(data.twitterURL)
+        setGithubUrl(data.githubURL)
+        setTelegramUrl(data.telegramURL)
+        setInstagramUrl(data.instagramURL)
+        setDiscordUrl(data.discordURL)
+        setRedditUrl(data.redditURL)
     
         if(data.useVestingCont) {
           setUseVesting(true)
@@ -535,9 +553,33 @@ const TotalView = () => {
                 </div>
               </CCol>
               <CCol >
-                <div>{tokenName}&nbsp;Presale &nbsp;
+                <div style={{fontSize: '25px'}}>{tokenName}&nbsp;Presale &nbsp;
                   <FontAwesomeIcon icon={faKey} /> &nbsp;
                   <FontAwesomeIcon icon={faEdit} /> 
+                </div>
+                <div style={{marginTop: '7px'}}>
+                  <a href={siteUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faGlobe} /></a>&nbsp;&nbsp;
+                  {
+                    twitterUrl !== '' ? <><a href={twitterUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faTwitter} /></a>&nbsp;&nbsp;</> : <></>
+                  }
+                  {
+                    facebookUrl !== '' ? <><a href={facebookUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faFacebookSquare} /></a>&nbsp;&nbsp;</> : <></>
+                  }
+                  {
+                    telegramUrl === '' ? <></> : <><a href={telegramUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faTelegram} /></a>&nbsp;&nbsp;</>
+                  }
+                  {
+                    githubUrl === '' ? <></> : <><a href={githubUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faGithub} /></a>&nbsp;&nbsp;</>
+                  }
+                  {
+                    instagramUrl === '' ? <></> : <><a href={instagramUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faInstagram} /></a>&nbsp;&nbsp;</>
+                  }
+                  {
+                    discordUrl === '' ? <></> : <><a href={discordUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faDiscord} /></a>&nbsp;&nbsp;</>
+                  }
+                  {
+                    redditUrl === '' ? <></> : <><a href={redditUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faRedditAlien} /></a></>
+                  }
                 </div>
               </CCol>
               <CCol className="d-md-flex justify-content-md-end">

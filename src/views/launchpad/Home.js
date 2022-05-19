@@ -126,7 +126,7 @@ const Home = () => {
     dispatch(saveTokenName(tokenName))
     dispatch(saveTokenSymbol(tokenSymbol))
     dispatch(saveTokenDecimals(tokenDecimal))
-    dispatch(saveTokenTotalSupply(tokenTotalSupply))
+    dispatch(saveTokenTotalSupply(tokenTotalSupply / (10 ** tokenDecimal)))
     history.push("/launchpad/defi_launch_pad_info");
 
   }

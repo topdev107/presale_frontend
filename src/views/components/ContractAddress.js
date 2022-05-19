@@ -8,7 +8,7 @@ export const presaleFactory = '0x02ef67819FE072f1637fE48Ffd3B4164F9416B23'
 export const presaleTestFactory = '0xE7a429496F1E401665eCFF4d672d4D51F2538562'
 export const presale = '0x41707409792979ba543751B4395995fa94745BD2'
 
-export const fairlaunchFactory = '0xC2ce0DfBE914838b30c9619edAa1A807F34Ce835'
+export const fairlaunchFactory = '0x64F3af201704492A3020CAbe17345dcB67C5662D'
 
 export const testRouter = '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3'
 export const testFactory = '0x7CAC9037f6ff0A1C73F62aDBa81Fe177Ea530828'
