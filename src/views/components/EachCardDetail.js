@@ -60,7 +60,7 @@ export const FairCardDetail = (props) => {
   
   const handleClick = () => {
     dispatch(saveCurrentAddr2(props.id))
-    history.push('/fairlaunchview');
+    history.push('/launchviewfair');
   }
 
   useEffect(() => {
@@ -146,7 +146,7 @@ export const FairCardDetail = (props) => {
               <RowBetween
                 childStart={<p>{/*Presale: {badgestate}*/}</p>}
                 childMiddle={<p></p>}
-                // childEnd={<Link to='../fairlaunchview'  className="btn btn-accent">View Pool</Link>}
+                // childEnd={<Link to='../launchviewfair'  className="btn btn-accent">View Pool</Link>}
                 childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
               />
               
@@ -185,7 +185,7 @@ export const NormalCardDetail = (props) => {
   
   const handleClick = () => {
     dispatch(saveCurrentAddr1(props.id))
-    history.push('/normallaunchview');
+    history.push('/launchviewnormal');
   }
 
   useEffect(() => {

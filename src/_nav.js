@@ -26,7 +26,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Create launchpad1',
+    name: 'Create launchpad',
     to: '/launchpad/home',
     similar: '/launchpad/',
     def: true,
@@ -52,6 +52,7 @@ const _nav = [
     component: CNavItem,
     name: 'Launchpad list',
     to: '/launchpadlist',
+    similar: '/launchview',
     def: false,
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },

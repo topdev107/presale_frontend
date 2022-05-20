@@ -103,6 +103,7 @@ const TotalView = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [isValidBuy, setIsValidBuy] = useState(false)
 
+  const [logoUrl, setLogoUrl] = useState('')
   const [siteUrl, setSiteUrl] = useState('')
   const [twitterUrl, setTwitterUrl] = useState('')
   const [facebookUrl, setFacebookUrl] = useState('')
@@ -337,6 +338,7 @@ const TotalView = () => {
           setSaleType('Public')
         }
 
+        setLogoUrl(data.logoURL)
         setSiteUrl(data.websiteURL)
         setFacebookUrl(data.facebookURL)
         setTwitterUrl(data.twitterURL)
@@ -553,7 +555,7 @@ const TotalView = () => {
             <CRow>
               <CCol xs={1}>
                 <div className="clearfix"> 
-                  <CImage align="start" rounded src="/assets/avatar.jpg" width={50} height={50} />
+                  <CImage align="start" rounded src={logoUrl} width={50} height={50} />
                 </div>
               </CCol>
               <CCol >

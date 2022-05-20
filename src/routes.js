@@ -27,8 +27,8 @@ const routes = [
   { path: '/createtoken/home', name: 'CreateToken', component: TokenHome },
   { path: '/createToken/success', name: 'SuccessTokenCreation', component: TokenSuccess},
   { path: '/launchpadlist', name: 'LaunchPadList', component: LaunchpadList },
-  { path: '/fairlaunchview', name: 'FairPoolView', component: FairPoolView},
-  { path: '/normallaunchview', name: 'NormalPoolView', component: NormalPoolView},
+  { path: '/launchviewfair', name: 'FairPoolView', component: FairPoolView},
+  { path: '/launchviewnormal', name: 'NormalPoolView', component: NormalPoolView},
 ]
 
 export default routes
