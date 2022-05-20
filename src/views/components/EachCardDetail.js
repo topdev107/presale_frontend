@@ -8,12 +8,78 @@ import {
 
 import React, { useEffect, useState } from 'react'
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import RowBetween from '../components/RowBetween'
+import {
+  saveCurrentAddr as saveCurrentAddr1
+} from '../../state/CreateLaunchPadState'
+import {
+  saveCurrentAddr as saveCurrentAddr2
+} from '../../state/CreateFairLaunchState'
+
+import Web3 from 'web3';
+import fairabi from '../../contracts/fairlaunchAbi'
+import normalabi from '../../contracts/presaleAbi'
+
+const provider = () => {
+  // 1. Try getting newest provider
+  const { ethereum } = window
+  if (ethereum) return ethereum
+
+  // 2. Try getting legacy provider
+  const { web3 } = window
+  if (web3 && web3.currentProvider) return web3.currentProvider
+}
 
 export const FairCardDetail = (props) => {
+
+  const dispatch = useDispatch()
+  const history = useHistory();
+  
+  const [badgestate, setBadgeState] = useState('')
+  const [progress, setProgress] = useState(0)
+  const [currentState, setCurrentState] = useState(0)
+
+  async function getPresaleStatus(address) {
+    try {
+      const web3 = new Web3(provider())
+
+      const presaleContract = new web3.eth.Contract(fairabi, address)
+      const txResult = await presaleContract.methods.presaleStatus().call()
+      const balance = await web3.eth.getBalance(address)
+      console.log(balance)
+      const value = +balance / (10 ** 18)
+      setCurrentState(value)
+      setProgress(value / props.softCap * 100)
+      return +txResult+1;
+      
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+  
+  const handleClick = () => {
+    dispatch(saveCurrentAddr2(props.id))
+    history.push('/fairlaunchview');
+  }
+
+  useEffect(() => {
+    const presaleState = getPresaleStatus(props.address)
+    if(presaleState == 1) {
+      setBadgeState('Upcoming')
+    } else if(presaleState == 2) {
+      setBadgeState('In progress')
+    } else if(presaleState == 3) {
+      setBadgeState('Ended')
+    } else if(presaleState == 4) {
+      setBadgeState('Failed')
+    } else if(presaleState == 5) {
+      setBadgeState('Canceled')
+    }
+  }, [])
     
   return (
-      <CCol className="col-lg-4">
+      <CCol className="col-lg-4" style={{marginBottom: '7px'}}>
         <CCard 
           color='#242525'
           textColor='white'
@@ -29,18 +95,18 @@ export const FairCardDetail = (props) => {
               <CCol className="d-md-flex justify-content-md-end text-white-color">
                 <div>
                 {
-                  props.badgestate === 'Canceled' || props.badgestate === 'Sale Ended' ?
-                    <CBadge color='danger'>{props.badgestate}</CBadge>
-                    : props.badgestate === 'Upcoming' ?
+                  badgestate === 'Canceled' || badgestate === 'Ended' ?
+                    <CBadge color='danger'>{badgestate}</CBadge>
+                    : badgestate === 'Upcoming' ?
                     <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
-                    : props.badgestate === 'Sale Live' ?
+                    : badgestate === 'In progress' ?
                     <CBadge color='success'>Sale Live</CBadge>
                     : <CBadge color='light'>Canceled</CBadge>
                 }
                 </div>
               </CCol>
             </CRow>
-            <CCardTitle>TestToken</CCardTitle>
+            {/* <CCardTitle>{props.tokenName}</CCardTitle> */}
             <CCardText>
               <CRow>
                 <CCol>
@@ -61,26 +127,27 @@ export const FairCardDetail = (props) => {
               <CRow>
                 <CCol>
                   <div className='font-bold text-white-color'>
-                    Progress ({props.progress}%)
+                    Progress ({progress}%)
                     <CProgress className="mb-3">
-                      <CProgressBar color="warning" value={+props.progress}/>
+                      <CProgressBar color="warning" value={+progress}/>
                     </CProgress>
-                    <p>{+props.softCap * +props.progress / 100} BNB raised</p>
+                    <p>{currentState} BNB raised</p>
                   </div>
                 </CCol>
               </CRow>
               <RowBetween
                 childStart={<p>Liquidity %:</p>}
-                childEnd={<p className='text-yellow-color'>{props.liquidity}</p>}
+                childEnd={<p className='text-yellow-color'>{props.liquidity}%</p>}
               />
               <RowBetween
                 childStart={<p>Lockup Time:</p>}
                 childEnd={<p className='text-yellow-color'>{props.lockup} minutes</p>}
               />
               <RowBetween
-                childStart={<p>Presale: {props.state}</p>}
+                childStart={<p>{/*Presale: {badgestate}*/}</p>}
                 childMiddle={<p></p>}
-                childEnd={<Link to={props.goto} className="btn btn-accent">View Pool</Link>}
+                // childEnd={<Link to='../fairlaunchview'  className="btn btn-accent">View Pool</Link>}
+                childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
               />
               
             </CCardText>
@@ -91,9 +158,53 @@ export const FairCardDetail = (props) => {
 }
 
 export const NormalCardDetail = (props) => {
+  const [badgestate, setBadgeState] = useState('')
+  const [progress, setProgress] = useState(0)
+  const [currentState, setCurrentState] = useState(0)
+
+  const dispatch = useDispatch()
+  const history = useHistory();
+
+  async function getPresaleStatus(address) {
+    try {
+      const web3 = new Web3(provider())
+
+      const presaleContract = new web3.eth.Contract(normalabi, address)
+      const txResult = await presaleContract.methods.presaleStatus().call()
+      const balance = await web3.eth.getBalance(address)
+      console.log(balance)
+      const value = +balance / (10 ** 18)
+      setCurrentState(value)
+      setProgress(value / props.hardCap * 100)
+      return +txResult+1;
+      
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+  
+  const handleClick = () => {
+    dispatch(saveCurrentAddr1(props.id))
+    history.push('/normallaunchview');
+  }
+
+  useEffect(() => {
+    const presaleState = getPresaleStatus(props.address)
+    if(+presaleState == 1) {
+      setBadgeState('Upcoming')
+    } else if(+presaleState == 2) {
+      setBadgeState('In progress')
+    } else if(+presaleState == 3) {
+      setBadgeState('Ended')
+    } else if(+presaleState == 4) {
+      setBadgeState('Failed')
+    } else if(+presaleState == 5) {
+      setBadgeState('Canceled')
+    }
+  }, [])
 
   return (
-      <CCol className="col-lg-4">
+      <CCol className="col-lg-4" style={{marginBottom: '7px'}}>
         <CCard
           color='#242525'
           textColor='white'
@@ -109,24 +220,24 @@ export const NormalCardDetail = (props) => {
               <CCol className="d-md-flex justify-content-md-end text-white-color">
                 <div>
                 {
-                  props.badgestate === 'Canceled' || props.badgestate === 'Sale Ended' ?
-                    <CBadge color='danger'>{props.badgestate}</CBadge>
-                    : props.badgestate === 'Upcoming' ?
+                  badgestate === 'Canceled' || badgestate === 'Ended' ?
+                    <CBadge color='danger'>{badgestate}</CBadge>
+                    : badgestate === 'Upcoming' ?
                     <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
-                    : props.badgestate === 'Sale Live' ?
+                    : badgestate === 'In progress' ?
                     <CBadge color='success'>Sale Live</CBadge>
                     : <CBadge color='light'>Canceled</CBadge>
                 }
                 </div>
               </CCol>
             </CRow>
-            <CCardTitle>TestToken</CCardTitle>
+            {/* <CCardTitle>TestToken</CCardTitle> */}
             <CCardText>
               <CRow>
                 <CCol>
                   <p className='font-bold text-white-color'>
                     {props.name}
-                    <p>1 BNB = {props.perrate} {props.name}</p>
+                    <p>1 BNB = {props.perrate} {props.symbol}</p>
                   </p>
                 </CCol>
               </CRow>
@@ -141,9 +252,9 @@ export const NormalCardDetail = (props) => {
               <CRow>
                 <CCol>
                   <p className='font-bold text-white-color'>
-                    Progress ({props.progress}%)
+                    Progress ({progress}%)
                     <CProgress className="mb-3">
-                      <CProgressBar color="warning" value={+props.progress}/>
+                      <CProgressBar color="warning" value={+progress}/>
                     </CProgress>
                     <CRow>
                     <CCol className='xs-2 text_align_left'>{props.softCap} BNB </CCol>
@@ -154,15 +265,15 @@ export const NormalCardDetail = (props) => {
               </CRow>
               <RowBetween
                 childStart={<p>Liquidity %:</p>}
-                childEnd={<p className='text-yellow-color'>{props.liquidity}</p>}
+                childEnd={<p className='text-yellow-color'>{props.liquidity}%</p>}
               />
               <RowBetween
                 childStart={<p>Lockup Time:</p>}
                 childEnd={<p className='text-yellow-color'>{props.lockup} minutes</p>}
               />
               <RowBetween
-                childStart={<p><p>Sales Starts In: {props.remain}</p></p>}
-                childEnd={<Link to={props.goto} className="btn btn-accent">View Pool</Link>}
+                childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
+                childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
               />
             </CCardText>
           </CCardBody>

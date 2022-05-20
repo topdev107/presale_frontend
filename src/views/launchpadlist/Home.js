@@ -15,13 +15,34 @@ import { FairCardDetail, NormalCardDetail } from '../components/EachCardDetail'
 const LaunchpadList = () => {
 
   const [activeKey, setActiveKey] = useState(1)
+  const [currentPage, setCurrentPage] = useState(5)
+  const [pageCount, setPageCount] = useState(9)
+  const [tabledata, setTableData] = useState([])
+  
+  const database_url = 'http://127.0.0.1:5000/presale/launchpad'
+  // const database_url = 'http://134.209.22.166:5000/presale/launchpad/'
+
+
+  const loadData = async (currentPage_, pageCount_) => {
+    // const res = await fetch(database_url.concat('/').concat('page'), requestOptions)
+    const res = await fetch(`${database_url}/page?pageCount=${pageCount}&currentPage=${currentPage}`)
+    await res.json()
+    .then(data => {
+      console.log(data)
+      setTableData(data)
+    })
+  }
+
+  useEffect(() => {
+    loadData(currentPage, pageCount)
+  },[currentPage, pageCount])
 
   return (
     <CRow>
       <CCol xs={12}>
         <CCard>
           <CCardBody>
-            <CNav variant="tabs" role="tablist" >
+            <CNav variant="tabs" role="tablist">
               <CNavItem >
                 <CNavLink
                   href="javascript:void(0);"
@@ -43,48 +64,40 @@ const LaunchpadList = () => {
                 </CNavLink>
               </CNavItem>
             </CNav>
+            <br/>
             <CTabContent>
-              <CTabPane role="tabpanel" visible={activeKey === 1}>
-                <br/>
-                <CRow >
-                  <FairCardDetail
-                    img='/assets/avatar.jpg'
-                    name='Guess'
-                    badgestate='Canceled'
-                    softCap='1'
-                    progress='50'
-                    liquidity = '60'
-                    lockup = '5454'
-                    state = 'Canceled'
-                    goto = '../fairlaunchview'
-                  />
-                  <FairCardDetail
-                    img='/assets/avatar.jpg'
-                    name='Guess'
-                    badgestate='Upcoming'
-                    softCap='1'
-                    progress='50'
-                    liquidity = '60'
-                    lockup = '5454'
-                    state = 'Upcoming'
-                    goto = '../fairlaunchview'
-                  />
-                  <NormalCardDetail
-                    img='/assets/avatar.jpg'
-                    name='WWWWAQ'
-                    perrate='560000'
-                    badgestate='Sale Live'
-                    softCap='40'
-                    hardCap='80'
-                    progress='20'
-                    liquidity='70'
-                    lockup='5256000'
-                    remain='00:01:02:56'
-                    goto='../fairlaunchview'
-                  />
+              <CTabPane role="tabpanel" aria-labelledby="all-tab" visible={activeKey === 1}>  
+                <CRow>
+                {
+                  tabledata.map((data) => {
+                    return (data.presaletype === true ?
+                    <FairCardDetail
+                      xs={4}
+                      id = {data._id}
+                      address = {data.presale_addr}
+                      img = {data.logoURL}
+                      name = {data.token_name}
+                      softCap = {data.softcap}
+                      liquidity = {data.liquidityPercent}
+                      lockup = {data.lockupTime}
+                    /> : 
+                    <NormalCardDetail 
+                      xs={4}
+                      id = {data._id}
+                      address = {data.presale_addr}
+                      img = {data.logoURL}
+                      name = {data.token_name}
+                      symbol = {data.token_symbol}
+                      softCap = {data.softcap}
+                      hardCap = {data.hardcap}
+                      liquidity = {data.liquidityPercent}
+                      lockup = {data.lockupTime}
+                    />)
+                  })
+                }
                 </CRow>
               </CTabPane>
-              <CTabPane role="tabpanel" visible={activeKey === 2}>
+              <CTabPane role="tabpanel" aria-labelledby="mine-tab" visible={activeKey === 2}>
                 Hello Tabpanel                
               </CTabPane>
             </CTabContent>

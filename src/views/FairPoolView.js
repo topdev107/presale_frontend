@@ -257,10 +257,10 @@ const TotalView = () => {
   }
 
   async function loadWholeData() {
-    // const res = await fetch(database_url.concat('/').concat(currentAddr))
+    const res = await fetch(database_url.concat('/').concat(currentAddr))
     let presaleAddr;
     let currentime, startime, endtime;
-    const res = await fetch(database_url.concat('/').concat('62857e9c68be6cb6c8e55628'))
+    // const res = await fetch(database_url.concat('/').concat('62857e9c68be6cb6c8e55628'))
     await res.json()
       .then(data => {
         console.log(data)

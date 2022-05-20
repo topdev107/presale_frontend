@@ -302,10 +302,10 @@ const TotalView = () => {
   }
 
   async function loadWholeData() {
-    // const res = await fetch(database_url.concat('/').concat(currentAddr))
+    const res = await fetch(database_url.concat('/').concat(currentAddr))
     let presaleAddr;
     let currentime, startime, endtime;
-    const res = await fetch(database_url.concat('/').concat('62712c89c917ef8bdb27f264'))
+    // const res = await fetch(database_url.concat('/').concat('62712c89c917ef8bdb27f264'))
     await res.json()
       .then(data => {
         setPresaleAddress(data.presale_addr)
@@ -551,8 +551,8 @@ const TotalView = () => {
         >
           <CCardBody >
             <CRow>
-              <CCol className="col-md-1">
-                <div className="clearfix">
+              <CCol xs={1}>
+                <div className="clearfix"> 
                   <CImage align="start" rounded src="/assets/avatar.jpg" width={50} height={50} />
                 </div>
               </CCol>

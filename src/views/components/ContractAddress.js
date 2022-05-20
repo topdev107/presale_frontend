@@ -5,7 +5,7 @@ export const babytokenFactory = '0xB28D05b67709e57021da231bF0D14cA678c40787'
 export const buybackbabyFactory = '0x168C47a34a634E3AEd649fE651f21D5003C01CD7'
 
 export const presaleFactory = '0x02ef67819FE072f1637fE48Ffd3B4164F9416B23'
-export const presaleTestFactory = '0xE7a429496F1E401665eCFF4d672d4D51F2538562'
+export const presaleTestFactory = '0x601f4794d73FF6f298C6a7cF9257E4AD23b6C557'
 export const presale = '0x41707409792979ba543751B4395995fa94745BD2'
 
 export const fairlaunchFactory = '0x64F3af201704492A3020CAbe17345dcB67C5662D'

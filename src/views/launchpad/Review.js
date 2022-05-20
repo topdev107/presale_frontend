@@ -129,10 +129,8 @@ const Review = () => {
 
       const txResult = await presaleFactoryContract.methods.create(
         tokenAddr,
-        presaleRate,
-        listingRate,
-        minBuyGwei,
-        maxBuyGwei,
+        [presaleRate, listingRate],
+        [minBuyGwei, maxBuyGwei],
         softCapGwei,
         hardCapGwei,
         liquidity,
