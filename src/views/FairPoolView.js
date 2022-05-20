@@ -764,7 +764,9 @@ const TotalView = () => {
         <CCard 
           color='#242525'
           textColor='white'
-          className='border-dark'>
+          className='border-dark'
+          style={{marginBottom: '20px'}}
+        >
           <CCardHeader>Owner Zone</CCardHeader>
           <CCardBody>
             <CAlert color="dark">

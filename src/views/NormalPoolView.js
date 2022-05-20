@@ -760,6 +760,7 @@ const TotalView = () => {
             color='#242525'
             textColor='white'
             className='border-dark'
+            style={{marginBottom: '20px'}}
           >
             <CCardBody>
               <CRow>
