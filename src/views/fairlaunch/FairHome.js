@@ -15,10 +15,22 @@ import Web3 from 'web3';
 import RowBetween from '../components/RowBetween';
 import WorkflowItem from "../components/WorkflowItem";
 import { useDispatch, useSelector } from 'react-redux'
-import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals } from '../../state/CreateFairLaunchState'
+import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals,saveTokenTotalSupply } from '../../state/CreateFairLaunchState'
 import CIcon from '@coreui/icons-react';
 import { cilList, cilWarning, cilShieldAlt } from '@coreui/icons';
 import { CreateTokenModal } from '../components/CreateTokenModal'
+import TokenAbi from '../../contracts/tokenAbi'
+import { fairlaunchFactory } from '../components/ContractAddress'
+
+const provider = () => {
+  // 1. Try getting newest provider
+  const { ethereum } = window
+  if (ethereum) return ethereum
+
+  // 2. Try getting legacy provider
+  const { web3 } = window
+  if (web3 && web3.currentProvider) return web3.currentProvider
+}
 
 const FairHome = () => {
   const history = useHistory();
@@ -34,13 +46,40 @@ const FairHome = () => {
   const [tokenStatus, setTokenStatus] = useState(NO_APPROVED) // NO_APPROVED, APPROVED
   const [isShowInfo, setIsShowInfo] = useState(true)
 
+  const [tokenName, setTokenName] = useState('')
+  const [tokenSymbol, setTokenSymbol] = useState('')
+  const [tokenDecimal, setTokenDecimal] = useState(0)
+  const [tokenTotalSupply, setTotalSupply] = useState(0)
+
+  const [approveState, setApproveState] = useState(false)
+
+  const [tokenContract, setTokenContract] = useState('')
+
   const onChange = (event) => {
     setTokenAddress(event.currentTarget.value);    
   }
+  async function getData(address) {
+    const web3 = new Web3(provider())
+    const TokenContract = new web3.eth.Contract(TokenAbi, address)
+    setTokenContract(TokenContract)
+    await TokenContract.methods.decimals().call().then(function(result) {
+      setTokenDecimal(result)
+    })
+    await TokenContract.methods.name().call().then(function(result) {
+      setTokenName(result)
+    })    
+    await TokenContract.methods.symbol().call().then(function(result) {
+      setTokenSymbol(result)
+    })
+    await TokenContract.methods.totalSupply().call().then(function(result) {
+      setTotalSupply(result)
+    })
+  }
 
   useEffect(() => {
-    const checkTokenValidation = (address) => {
+    const checkTokenValidation = async (address) => {
       const web3 = new Web3()
+      console.log(web3)
       if (address.length === 0) {
         setIsTokenValid(false)
         setValidMessage("Token address can not be blank")
@@ -50,10 +89,11 @@ const FairHome = () => {
       } else if (address.length !== 42) {
         setIsTokenValid(false)
         setValidMessage("Invalid Token Address")
-      } else if (!web3.isAddress(address)) {
+      } else if (!web3.utils.isAddress(address)) {
         setIsTokenValid(false)
         setValidMessage("Invalid Token Address")
       } else {
+        await getData(address)
         setIsTokenValid(true)
         setValidMessage("")
       }
@@ -66,11 +106,24 @@ const FairHome = () => {
     setIsShowInfo(false)
   }
 
-  const handleApprove = () => {
+  async function handleApprove() {
+    setApproveState(true)
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    await tokenContract.methods.approve(fairlaunchFactory, tokenTotalSupply).send({ 'from': account })
+      .then(function(result) {
+        console.log(result)
+      })
+    setTokenStatus(APPROVED)
+    setApproveState(false)
+  }
+
+  const handleNext = () => {
     dispatch(saveTokenAddr(tokenAddress))
-    dispatch(saveTokenName('Flash token'))
-    dispatch(saveTokenSymbol('FLASH'))
-    dispatch(saveTokenDecimals(18))
+    dispatch(saveTokenName(tokenName))
+    dispatch(saveTokenSymbol(tokenSymbol))
+    dispatch(saveTokenDecimals(tokenDecimal))
+    dispatch(saveTokenTotalSupply(tokenTotalSupply / (10 ** tokenDecimal)))
     history.push("/fairlaunch/defi_fair_launch_info");
   }
 
@@ -137,17 +190,17 @@ const FairHome = () => {
                       <div>
                         <RowBetween
                           childStart={<p>Name</p>}
-                          childEnd={<p className='text-blue-color'>Flash Token</p>}
+                          childEnd={<p className='text-blue-color'>{tokenName}</p>}
                         />
                         <RowBetween
                           childStart={<p>Symbol</p>}
-                          childEnd={<p>FLASH</p>}
+                          childEnd={<p>{tokenSymbol}</p>}
                         />
                         <RowBetween
                           childStart={<p>Decimals</p>}
-                          childEnd={<p>18</p>}
+                          childEnd={<p>{tokenDecimal}</p>}
                         />
-                        <CAlert color="dark" className="d-flex align-items-center" dismissible>
+                        <CAlert color="warning" className="d-flex align-items-center" dismissible>
                           <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
                           <div>
                             Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.
@@ -158,22 +211,25 @@ const FairHome = () => {
                             tokenStatus === NO_APPROVED ? (
                               <div className="d-md-flex justify-content-md-center mt-4">
                                 <div className='loader'></div>
-                                <button type="button" className="btn-accent" onClick={handleApprove}>
-                                  {/* <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                    variant="light"
-                                    style={{marginRight: '5px', marginTop: '2px'}}
-                                  /> */}
+                                <button type="button" className="btn-accent" disabled={approveState} onClick={() => handleApprove()} >
+                                  {
+                                    approveState == true ? (
+                                    <Spinner
+                                      as="span"
+                                      animation="border"
+                                      size="sm"
+                                      role="status"
+                                      aria-hidden="true"
+                                      variant="light"
+                                      style={{marginRight: '5px', marginTop: '2px'}}
+                                    /> ) : (<></>)
+                                  }
                                   Approve
-                                </button>                                
+                                </button>             
                               </div>
                             ) : (
                               <div className="d-md-flex justify-content-md-center mt-4">
-                                <button type="button" className="btn-accent">Next</button>
+                                <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
                               </div>
                             )
                           ) : (

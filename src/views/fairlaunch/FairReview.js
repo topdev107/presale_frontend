@@ -23,6 +23,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { faImage, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faGithub, faReddit, faTelegram, faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons"
 import RowBetween from '../components/RowBetween';
+import Spinner from 'react-bootstrap/Spinner';
+import {
+  saveCurrentAddr
+} from '../../state/CreateFairLaunchState'
+
+import Web3 from 'web3';
+import abi from '../../contracts/fairlaunchFactoryAbi'
+import { presaleFactory, fairlaunchFactory } from '../components/ContractAddress'
+import { toWei, fromWei } from "web3-utils";
 
 const FairReview = () => {
 
@@ -32,13 +41,14 @@ const FairReview = () => {
   const tokenName = useSelector((state) => state.createFairLaunchState.tokenName)
   const tokenSymbol = useSelector((state) => state.createFairLaunchState.tokenSymbol)
   const tokenDecimals = useSelector((state) => state.createFairLaunchState.tokenDecimals)
+  const tokenTotalSupply = useSelector((state) => state.createFairLaunchState.tokenTotalSupply)
 
   const total_selling_amount = useSelector((state) => state.createFairLaunchState.total_selling_amount)
   const softcap = useSelector((state) => state.createFairLaunchState.softcap)
 
   const liquidity = useSelector((state) => state.createFairLaunchState.liquidity)
-  const startDate = useSelector((state) => state.createFairLaunchState.start)
-  const endDate = useSelector((state) => state.createFairLaunchState.end)
+  const startDate = useSelector((state) => state.createFairLaunchState.startDate)
+  const endDate = useSelector((state) => state.createFairLaunchState.endDate)
   const lockTime = useSelector((state) => state.createFairLaunchState.lockup)
 
   const cFirstReleasePercent = useSelector((state) => state.createFairLaunchState.cFirstReleasePercent)
@@ -62,12 +72,101 @@ const FairReview = () => {
   const desc = useSelector((state) => state.createFairLaunchState.website)
   const usingTeamVesting = useSelector((state) => state.createFairLaunchState.usingTeamVesting)
 
+  const database_url = 'https://presale-backend.vercel.app/presale/launchpad/'
+  // const database_url = 'http://127.0.0.1:5000/presale/launchpad/'
+  const [submitStatus, setSubmitStatus] = useState(false)
 
   const history = useHistory();
 
-  const handleSubmit = () => {
-    
-    history.push('/fairlaunchview');
+  const provider = () => {
+    // 1. Try getting newest provider
+    const { ethereum } = window
+    if (ethereum) return ethereum
+
+    // 2. Try getting legacy provider
+    const { web3 } = window
+    if (web3 && web3.currentProvider) return web3.currentProvider
+  }
+
+  async function createStandardToken() {
+    try {
+      const web3 = new Web3(provider())
+
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+
+      const presaleFactoryContract = new web3.eth.Contract(abi, fairlaunchFactory)
+      console.log("presaleFactoryContract starts here.......")
+      console.log(presaleFactoryContract)
+
+      const softCapGwei = web3.utils.toWei(softcap, 'ether');
+
+      const txResult = await presaleFactoryContract.methods.create(
+        tokenAddr,
+        tokenDecimals,
+        total_selling_amount,
+        softCapGwei,
+        liquidity,
+        moment(startDate).utc().valueOf()/1000,
+        moment(endDate).utc().valueOf()/1000
+      ).send({ 'from': account, 'value': 100000000000000000 })
+
+      console.log(txResult)
+
+      // const address = txResult.events.PresaleCreated.returnValues.token
+      const address = txResult.events[0].address
+      console.log(address)
+      return address
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  const handleSubmit = async () => {
+    setSubmitStatus(true)
+    const presaleAddr = await createStandardToken();
+    const web3 = new Web3(provider())
+
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+
+    console.log("save database here =========================")
+    console.log(" the result =======================>")
+    console.log(presaleAddr, account)
+    if(presaleAddr != '') {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // body: JSON.stringify({ token_address: tkn.address, amount: (+amount / (10 ** tkn.decimals)).toString(), timestamp: Date.now() })
+        body: JSON.stringify({
+          token_owner: account,
+          presale_addr: presaleAddr,
+          token_name: tokenName, token_symbol: tokenSymbol, token_decimal: tokenDecimals, token_supply: tokenTotalSupply, token_addr: tokenAddr, iswhitelist: 0,
+          token_presale_rate: total_selling_amount, token_listing_rate: 0, 
+          softcap: softcap, hardcap: 0, unsold: false, 
+          starttime: moment(startDate).utc().valueOf(), endtime: moment(endDate).utc().valueOf(), 
+          liquidityPercent: liquidity, lockupTime: lockTime, maxBuy: 0, minBuy: 0, 
+          useVestingCont: false, ves_firstReleasePresale: 0, ves_vestingPeriod: 0, ves_presaleTokenRelease: 0,
+          useTeamVest: false, team_totalTeamVest: 0, team_firstTokenReleaseMinute: 0, team_firstTokenReleasePercent: 0, team_vestingPeriod: 0, team_teamTokenRelease: 0,
+          logoURL: logoURL, websiteURL: website, facebookURL: facebook, twitterURL: twitter, githubURL: github, telegramURL: telegram, instagramURL: instagram, discordURL: discord, redditURL: reddit, description: desc,
+          presaletype: true
+        })
+      };
+      let _idAddr = '';
+      const data = await fetch(database_url.concat('addpad/'), requestOptions)
+      console.log(data)
+      await data.json()
+        .then(data1 => {
+          _idAddr = data1._id
+        })
+      console.log("id ===========>")
+      console.log(_idAddr)
+      dispatch(saveCurrentAddr(_idAddr))
+      setSubmitStatus(false)
+      history.push('/fairlaunchview');
+    }
   }
 
   return (
@@ -230,7 +329,7 @@ const FairReview = () => {
                       /> :
                       <RowBetween
                         childStart={<p>Using Team Vesting?</p>}
-                        childEnd={<p className='text-blue-color'>{tokenSymbol}</p>}
+                        childEnd={<p className='text-blue-color'>Yes</p>}
                       />
                   }
                   <CAlert color="warning" className="d-flex align-items-center" dismissible>
@@ -242,8 +341,20 @@ const FairReview = () => {
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
                     <button type="button" className="btn-black" onClick={history.goBack}>Back</button>
                     {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-black">Back</Link> */}
-                    <button type="button" className="btn-accent" onClick={handleSubmit}>Submit</button>
-                    {/* <button type="button" className="btn-accent">Next</button> */}
+                    <button type="button" className="btn-accent" onClick={handleSubmit} disabled={submitStatus}>
+                      {
+                        submitStatus == true ? (
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                          variant="light"
+                          style={{marginRight: '5px', marginTop: '2px'}}
+                        /> ) : (<></>)
+                      }
+                      Submit</button>
                   </div>
                 </div>
               </CCardBody>

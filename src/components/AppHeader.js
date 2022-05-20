@@ -21,48 +21,113 @@ const AppHeader = () => {
   const context = useWeb3Context()
   const [currentAccount, setCurrentAccount] = useState(null);
 
-  useEffect(() => {
-    context.setFirstValidConnector(['MetaMask'])
+  // useEffect(() => {
+  //   context.setFirstValidConnector(['MetaMask'])
 
-    const checkWalletConnect = () => {
-      if (!context.active && !context.error) {
-        //loading...        
-        setCurrentAccount(null)
-        console.log('=== Header Wallet Connect Loading ===')
-      } else if (context.error) {
-        setCurrentAccount(null)
-        console.log('=== Header Wallet Connect Error ===')
-        console.log(console.error)
-      } else {
-        // success        
-        setCurrentAccount(context.account)        
-        console.log('=== Header Wallet Connect Success ===')
-        console.log(context)
-      }
-    }
+  //   const checkWalletConnect = () => {
+  //     if (!context.active && !context.error) {
+  //       //loading...        
+  //       setCurrentAccount(null)
+  //       console.log('=== Header Wallet Connect Loading ===')
+  //     } else if (context.error) {
+  //       setCurrentAccount(null)
+  //       console.log('=== Header Wallet Connect Error ===')
+  //       console.log(console.error)
+  //     } else {
+  //       // success        
+  //       setCurrentAccount(context.account)        
+  //       console.log('=== Header Wallet Connect Success ===')
+  //       console.log(context)
+  //     }
+  //   }
 
-    checkWalletConnect()
-  }, [context])
+  //   checkWalletConnect()
+  // }, [context])
 
-  const connectWalletHandler = async () => {
-    const { ethereum } = window;
+  // const connectWalletHandler = async () => {
+  //   const { ethereum } = window;
 
-    if (!ethereum) {
-      alert("Please install Metamask")
-    }
+  //   if (!ethereum) {
+  //     alert("Please install Metamask")
+  //   }
 
+  //   try {
+  //     const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+  //     console.log("Found an account! Address: ", accounts[0])
+  //     setCurrentAccount(accounts[0])
+  //   } catch (err) {
+  //     console.log(err)
+  //     setCurrentAccount(null)
+  //   }
+  // }
+
+  // const disconnectWalletHandler = () => {
+  //   setCurrentAccount(null)
+  // }
+  async function loadWallet() {
     try {
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+      const provider = window.ethereum;
+      if (!provider) {
+          alert("Metamask is not installed, please install!");
+      }
+
+      const chainId = await provider.request({ method: 'eth_chainId' });
+      const binanceTestChainId = '0x61'
+      if (chainId === binanceTestChainId) {
+          console.log("Bravo!, you are on the correct network");
+      } else {
+          try {
+              await provider.request({
+                  method: 'wallet_switchEthereumChain',
+                  params: [{ chainId: '0x38' }],
+              });
+              console.log("You have succefully switched to Binance Test network")
+          } catch (switchError) {
+              // This error code indicates that the chain has not been added to MetaMask.
+              if (switchError.code === 4902) {
+                  try {
+                      await provider.request({
+                          method: 'wallet_addEthereumChain',
+                          params: [
+                              {
+                                  chainId: '0x38',
+                                  chainName: 'Binance Smart Chain',
+                                  rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                                  blockExplorerUrls: ['https://bscscan.com/'],
+                                  nativeCurrency: {
+                                      symbol: 'BNB',
+                                      decimals: 18,
+                                  }
+                              }
+                          ]
+                      });
+                  } catch (addError) {
+                      console.log(addError);
+                      // alert(addError);
+                  }
+              }
+              // alert("Failed to switch to the network")
+              return;
+          }
+      }
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
       console.log("Found an account! Address: ", accounts[0])
       setCurrentAccount(accounts[0])
-    } catch (err) {
-      console.log(err)
-      setCurrentAccount(null)
+    } catch (error) {
+      console.log(error)
     }
   }
 
-  const disconnectWalletHandler = () => {
-    setCurrentAccount(null)
+  useEffect(() => {
+    loadWallet();
+  }, [])
+
+  const connectWalletHandler = async () => {
+    try {
+      loadWallet();
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -83,9 +148,9 @@ const AppHeader = () => {
         <CHeaderNav className="ms-3">
           <AppHeaderDropdown
             currentAccount={currentAccount}
-            amount={context}
             onConnect={connectWalletHandler}
-            onLogout={disconnectWalletHandler} />
+//            onLogout={disconnectWalletHandler}
+          />
         </CHeaderNav>
       </CContainer>
     </CHeader>
