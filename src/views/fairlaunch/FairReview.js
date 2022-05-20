@@ -72,8 +72,8 @@ const FairReview = () => {
   const desc = useSelector((state) => state.createFairLaunchState.website)
   const usingTeamVesting = useSelector((state) => state.createFairLaunchState.usingTeamVesting)
 
-  // const database_url = 'http://134.209.22.166:5000/presale/launchpad/'
-  const database_url = 'http://127.0.0.1:5000/presale/launchpad/'
+  const database_url = 'https://presale-backend.vercel.app/presale/launchpad/'
+  // const database_url = 'http://127.0.0.1:5000/presale/launchpad/'
   const [submitStatus, setSubmitStatus] = useState(false)
 
   const history = useHistory();

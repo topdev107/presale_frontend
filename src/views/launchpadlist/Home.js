@@ -19,9 +19,8 @@ const LaunchpadList = () => {
   const [pageCount, setPageCount] = useState(9)
   const [tabledata, setTableData] = useState([])
   
-  const database_url = 'http://127.0.0.1:5000/presale/launchpad'
-  // const database_url = 'http://134.209.22.166:5000/presale/launchpad/'
-
+  // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
+  const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
   const loadData = async (currentPage_, pageCount_) => {
     // const res = await fetch(database_url.concat('/').concat('page'), requestOptions)

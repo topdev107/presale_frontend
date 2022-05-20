@@ -49,8 +49,8 @@ const TotalView = () => {
   const [currentState, setCurrentState] = useState(0)
   // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
   const currentAddr = useSelector((state) => state.createLaunchPadState.currentAddr)
-  const database_url = 'http://127.0.0.1:5000/presale/launchpad'
-  // const database_url = 'http://134.209.22.166:5000/presale/launchpad/'
+  // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
+  const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
   /// simple
   const [presaleAddress, setPresaleAddress] = useState('')

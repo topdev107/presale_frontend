@@ -88,10 +88,9 @@ const Review = () => {
   const [presaleAddr, setPresaleAddr] = useState('')
   const [submitStatus, setSubmitStatus] = useState(false)
 
-//  const volume24_url = 'https://fathomless-savannah-95001.herokuapp.com/api/v1/tnxs/'
-  const database_url = 'http://127.0.0.1:5000/presale/launchpad/'
-  // const database_url = 'http://134.209.22.166:5000/presale/launchpad/'
-
+  // const database_url = 'http://127.0.0.1:5000/presale/launchpad/'
+  const database_url = 'https://presale-backend.vercel.app/presale/launchpad/'
+  
   const history = useHistory();
 
   const handleCloseInfo = () => {
