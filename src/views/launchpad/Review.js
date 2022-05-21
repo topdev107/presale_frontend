@@ -136,7 +136,7 @@ const Review = () => {
         isWhitelist,
         moment(startDate).utc().valueOf()/1000,
         moment(endDate).utc().valueOf()/1000
-      ).send({ 'from': account, 'value': 100000000000000000 })
+      ).send({ 'from': account, 'value': 10000000000000000 })
 
       console.log(txResult)
 
