@@ -30,7 +30,7 @@ const UrlInputComponent = (props) => {
           </div>
         ) : (
           <div>
-            <CFormInput type="text" id={props.title} style={{ paddingLeft: '40px' }} placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
+            <CFormInput type="text" id={props.title} autoFocus style={{ paddingLeft: '40px' }} placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
             <FontAwesomeIcon icon={props.icon} className='text-label-color' style={{ position: 'relative', top: '-31px', left: '14px' }}></FontAwesomeIcon>
             <p className="small-text-sz mt-1 mb-0 text-blue-color">{props.desc}</p>
             {props.extra}

@@ -32,6 +32,10 @@ const LaunchpadList = () => {
     })
   }
 
+  const handlePage = (e) => {
+    setCurrentPage(e.target.value)
+  }
+
   useEffect(() => {
     loadData(currentPage, pageCount)
   },[currentPage, pageCount])
@@ -67,6 +71,12 @@ const LaunchpadList = () => {
             <CTabContent>
               <CTabPane role="tabpanel" aria-labelledby="all-tab" visible={activeKey === 1}>  
                 <CRow>
+                  <CCol xs={10}></CCol>
+                  <CCol xs={2} >
+                    <CFormInput type="number" size="sm" placeholder="page input" aria-label="sm input example" onChange={handlePage}/>
+                  </CCol>
+                </CRow>
+                <CRow>
                 {
                   tabledata.map((data) => {
                     return (data.presaletype === true ?
@@ -87,6 +97,7 @@ const LaunchpadList = () => {
                       img = {data.logoURL}
                       name = {data.token_name}
                       symbol = {data.token_symbol}
+                      perrate = {data.token_presale_rate}
                       softCap = {data.softcap}
                       hardCap = {data.hardcap}
                       liquidity = {data.liquidityPercent}
