@@ -56,6 +56,10 @@ const Home = () => {
   const [approveState, setApproveState] = useState(false)
 
   const [tokenContract, setTokenContract] = useState('')
+
+  useEffect(() => {
+    setTokenAddress(tokenAddr)
+  }, [tokenAddr])
   const onChange = (event) => {
     setTokenAddress(event.currentTarget.value);    
   }
@@ -173,7 +177,7 @@ const Home = () => {
                   </CCol>
                   <CCol>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <CreateTokenModal pad='launchpad'/>
+                      <CreateTokenModal parent='Normal'/>
                     </div>
                   </CCol>
                   {

@@ -55,6 +55,10 @@ const FairHome = () => {
 
   const [tokenContract, setTokenContract] = useState('')
 
+  useEffect(() => {
+    setTokenAddress(tokenAddr)
+  }, [tokenAddr])
+
   const onChange = (event) => {
     setTokenAddress(event.currentTarget.value);    
   }
@@ -170,7 +174,7 @@ const FairHome = () => {
                   </CCol>
                   <CCol>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <CreateTokenModal />
+                      <CreateTokenModal parent='Fair'/>
                     </div>
                   </CCol>
                   {

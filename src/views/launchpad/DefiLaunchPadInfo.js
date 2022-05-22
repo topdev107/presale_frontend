@@ -401,17 +401,7 @@ const DefiLaunchPadInfo = () => {
     } else {
       setErrMsgtFirstReleaseTime('First token release after listing must be 1 or more')
     }
-
-    (
-      errMsgPresaleRate === '' &&
-      errMsgSoftCap === '' &&
-      errMsgHardCap === '' &&
-      errMsgMinBuyBNB === '' &&
-      errMsgMaxBuyBNB === '' &&
-      errMsgLiquidity === '' &&
-      errMsgLockupMinutes === '' &&
-      errMsgListingRate === ''
-    ) ? setIsValid(true) : setIsValid(false)
+    
   },
     [
       presaleRate,
@@ -433,6 +423,28 @@ const DefiLaunchPadInfo = () => {
       tVestingPeriod,
       tEachReleasePercent
     ])
+
+  useEffect(() => {
+    (
+      errMsgPresaleRate === '' &&
+      errMsgSoftCap === '' &&
+      errMsgHardCap === '' &&
+      errMsgMinBuyBNB === '' &&
+      errMsgMaxBuyBNB === '' &&
+      errMsgLiquidity === '' &&
+      errMsgLockupMinutes === '' &&
+      errMsgListingRate === ''
+    ) ? setIsValid(true) : setIsValid(false)
+  },[
+    errMsgPresaleRate, 
+    errMsgSoftCap,
+    errMsgHardCap,
+    errMsgMinBuyBNB,
+    errMsgMaxBuyBNB,
+    errMsgLiquidity,
+    errMsgLockupMinutes,
+    errMsgListingRate,
+  ])
 
   return (
     <CRow>
@@ -784,7 +796,11 @@ const DefiLaunchPadInfo = () => {
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
                     <button type="button" className="btn-black" onClick={history.goBack}>Back</button>
                     {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-black">Back</Link> */}
-                    <button type="button" className="btn-accent" onClick={handleNext} disabled={!isValid}>Next</button>
+                    {
+                      isValid === true ? 
+                      <button type="button" className="btn-accent" onClick={handleNext}>Next</button> :
+                      <button type="button" className="btn-black" disabled>Next</button>
+                    }
                     {/* <button type="button" className="btn-accent">Next</button> */}
                   </div>
                 </CRow>

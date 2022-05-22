@@ -23,34 +23,32 @@ import { saveTokenAddr } from '../../state/CreateLaunchPadState'
 import Web3 from 'web3';
 import { getWeb3 } from '../web3/getWeb3'
 import abi from '../../contracts/abi.js'
-
+import liquidityAbi from '../../contracts/liquidityFactoryAbi'
+import babyAbi from '../../contracts/babytokenFactoryAbi'
+import buybackAbi from '../../contracts/buybackbabyFactoryAbi'
+import testToken from '../../contracts/testAbi'
 import { 
-  saveTokenType,
-  saveTokenName,
-  saveTokenSymbol,
-  saveTokenDecimal,
-  saveTokenTotalSupply,
-  saveUseAntiBot,
-  saveRouter,
-  saveTransfeeYield,
-  saveTransfeeLiquidity,
-  saveCharityAddress,
-  saveCharityPercent,
-  saveRewardToken,
-  saveMinimumTokenBalance,
-  saveTokenRewardFee,
-  saveAutoAddLiquidity,
-  saveMarketingFee,
-  saveMarketingWallet,
-  saveBuyBackFee,
-  saveRefelctionFee,
-  saveLiquidityFee,
-} from '../../state/CreateTokenState'
+  standardTokenFactory,
+  liquidityTokenFactory,
+  babytokenFactory,
+  buybackbabyFactory,
+  testRouter,
+  dividends,
+  testFactory,
+  standardToken
+} from '../components/ContractAddress'
+import TokenAbi from '../../contracts/tokenAbi'
+import FactoryAbi from '../../contracts/factoryAbi'
+import {saveTokenAddr as saveTokenAddr1} from '../../state/CreateLaunchPadState'
+import {saveTokenAddr as saveTokenAddr2} from '../../state/CreateFairLaunchState'
 
 export const CreateTokenModal = (props) => {
 
 	const history = useHistory()
 	const dispatch = useDispatch()
+  const [visible, setVisible] = useState(false)
+
+  const [isTokenValid, setIsTokenValid] = useState(false)
 
 	const [tokenType, setTokenType] = useState('Standard Token')
   const [router, setRouter] = useState('Pancakeswap')
@@ -108,7 +106,13 @@ export const CreateTokenModal = (props) => {
 
   const [isCheckedAntiBot, setIsCheckedAntiBot] = useState(false)
 
-  const [visible, setVisible] = useState(false)
+  const [rewardTokenName, setRewardTokenName] = useState('')
+  const [rewardTokenSymbol, setRewardTokenSymbol] = useState('')
+  const [rewardTokenDecimal, setRewardTokenDecimal] = useState(0)
+  
+  const [availableToken, setAvailableToken] = useState(false)
+
+  const [isCreateValid, setCreateValid] = useState(false)
   
   const provider = () => {
     // 1. Try getting newest provider
@@ -120,15 +124,40 @@ export const CreateTokenModal = (props) => {
     if (web3 && web3.currentProvider) return web3.currentProvider
   }
 
+  const clearData = () => {
+    setTokenName('')
+    setTokenSymbol('')
+    setTokenDecimal(0)
+    setTokenTotalSupply(0)
+    setTransFeeYield(1)
+    setTransFeeLiquidity(1)
+    setCharityAddress('')
+    setCharityPercent(0)
+    setRewardToken('')
+    setLiquidityFee(0)
+    setMinimumTokenBalance(0)
+    setTokenRewardFee(0)
+    setAutoAddLiquidity(0)
+    setMarketingFee(0)
+    setMarketingWallet('')
+    setBuyBackFee(0)
+    setReflectionFee(0)
+    setRewardTokenName('')
+    setRewardTokenSymbol('')
+    setRewardTokenDecimal(0)
+    setAvailableToken(false)
+    setIsCheckedAntiBot(false)
+    setCreateValid(false)
+  }
+
   async function createStandardToken() {
     try {
       const web3 = new Web3(provider())
-      const standardTokenFactoryAddr = '0x8e84595af063DBAD9E2aB1Cf6ddE26b176E5A8b1'
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
 
-      const standardTokenFactoryContract = new web3.eth.Contract(abi, standardTokenFactoryAddr)
+      const standardTokenFactoryContract = new web3.eth.Contract(abi, standardTokenFactory)
       console.log("standardTokenFactoryContract starts here.......")
       console.log(standardTokenFactoryContract)
 
@@ -136,49 +165,211 @@ export const CreateTokenModal = (props) => {
 
       console.log(txResult)
 
-      const address = txResult.events.TokenCreated.returnValues.token
-      dispatch(saveTokenAddr(address))
+      const address = txResult.events.OwnershipTransferred[0].address
 
       console.log(address)
+      
+      // dispatch(saveTokenName(tokenName))
+      // dispatch(saveTokenSymbol(tokenSymbol))
+      // dispatch(saveTokenTotalSupply(tokenTotalSupply))
+      // dispatch(saveTokenAddress(address))
+      // history.push("/createToken/success")
+      console.log(props.parent)
+      if(props.parent === 'Normal') {
+        dispatch(saveTokenAddr1(address))
+        clearData()
+        setVisible(false)
+      } else if(props.parent === 'Fair') {
+        dispatch(saveTokenAddr2(address))
+        clearData()
+        setVisible(false)
+      }
+        
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function createLiquidityToken() {
+    try {
+      const web3 = new Web3(provider())
+
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+
+      const liquidityFactoryContract = new web3.eth.Contract(liquidityAbi, liquidityTokenFactory)
+      console.log("standardTokenFactoryContract starts here.......")
+      console.log(liquidityFactoryContract)
+
+      const txResult = await liquidityFactoryContract.methods.create(
+        tokenName, 
+        tokenSymbol, 
+        +tokenTotalSupply, 
+        testRouter, 
+        charityAddress, 
+        transfeeYield, 
+        transfeeLiquidity, 
+        charityPercent
+      ).send({ 'from': account, 'value': 10000000000000000 })
+
+      console.log(txResult)
+
+      const address = txResult.events.OwnershipTransferred[0].address
+
+      console.log(address)
+      
+      // dispatch(saveTokenName(tokenName))
+      // dispatch(saveTokenSymbol(tokenSymbol))
+      // dispatch(saveTokenTotalSupply(tokenTotalSupply))
+      // dispatch(saveTokenAddress(address))
+      // history.push("/createToken/success")
+      if(props.parent === 'Normal') {
+        dispatch(saveTokenAddr1(address))
+        clearData()
+        setVisible(false)
+      } else if(props.parent === 'Fair') {
+        dispatch(saveTokenAddr2(address))
+        clearData()
+        setVisible(false)
+      }
       
     } catch (error) {
       console.log(error)
     }
   }
 
-	const handleNext = async () => {
-    await createStandardToken()
-    dispatch(saveTokenType(tokenType))
-    dispatch(saveTokenName(tokenName))
-    dispatch(saveTokenSymbol(tokenSymbol))
-    dispatch(saveTokenTotalSupply(tokenTotalSupply))
-    if(tokenType === 'Standard Token') {
-      dispatch(saveTokenDecimal(tokenDecimal))
-    } else if(tokenType === 'Liquidity Generator Token') {
-      dispatch(saveTransfeeYield(transfeeYield))
-      dispatch(saveTransfeeLiquidity(transfeeLiquidity))
-      dispatch(saveCharityAddress(charityAddress))
-      dispatch(saveCharityPercent(charityPercent))
-    } else if(tokenType === 'Baby Token') {
-      dispatch(saveRewardToken(rewardToken))
-      dispatch(saveMinimumTokenBalance(minimumTokenBalance))
-      dispatch(saveTokenRewardFee(tokenRewardFee))
-      dispatch(saveAutoAddLiquidity(autoAddLiquidity))
-      dispatch(saveMarketingFee(marketingFee))
-      dispatch(saveMarketingWallet(marketingWallet))
-    } else if(tokenType === 'Buyback Baby Token') {
-      dispatch(saveRewardToken(rewardToken))
-      dispatch(saveLiquidityFee(liquidityFee))
-      dispatch(saveBuyBackFee(buyBackFee))
-      dispatch(saveRefelctionFee(reflectionFee))
-      dispatch(saveMarketingFee(marketingFee))
-    }
+  async function createBabyToken() {
+    try {
+      const web3 = new Web3(provider())
 
-    dispatch(saveUseAntiBot(isCheckedAntiBot))
-    history.push("/launchpad/home")
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+
+      const standardTokenFactoryContract = new web3.eth.Contract(babyAbi, babytokenFactory)
+      console.log("standardTokenFactoryContract starts here.......")
+      console.log(standardTokenFactoryContract)
+
+      const txResult = await standardTokenFactoryContract.methods.create(
+        tokenName, 
+        tokenSymbol, 
+        +tokenTotalSupply,
+        [rewardToken, testRouter, marketingWallet, dividends],
+        [tokenRewardFee, autoAddLiquidity, marketingFee],
+        minimumTokenBalance
+      ).send({ 'from': account, 'value': 10000000000000000 })
+
+      console.log(txResult)
+
+      const address = txResult.events.OwnershipTransferred[0].address
+
+      console.log(address)
+      
+      // dispatch(saveTokenName(tokenName))
+      // dispatch(saveTokenSymbol(tokenSymbol))
+      // dispatch(saveTokenTotalSupply(tokenTotalSupply))
+      // dispatch(saveTokenAddress(address))
+      // history.push("/createToken/success")
+      if(props.parent === 'Normal') {
+        dispatch(saveTokenAddr1(address))
+        clearData()
+        setVisible(false)
+      } else if(props.parent === 'Fair') {
+        dispatch(saveTokenAddr2(address))
+        clearData()
+        setVisible(false)
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function createBuybackBabyToken() {
+    try {
+      const web3 = new Web3(provider())
+
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+
+      const standardTokenFactoryContract = new web3.eth.Contract(buybackAbi, buybackbabyFactory)
+      console.log("standardTokenFactoryContract starts here.......")
+      console.log(standardTokenFactoryContract)
+
+      const txResult = await standardTokenFactoryContract.methods.create(
+        tokenName, 
+        tokenSymbol, 
+        +tokenTotalSupply,
+        rewardToken,
+        testRouter,
+        [liquidityFee*100, buyBackFee*100, reflectionFee*100, marketingFee*100, 10000]
+      ).send({ 'from': account, 'value': 10000000000000000 })
+
+      console.log(txResult)
+
+      const address = txResult.events[1].address
+
+      console.log(address)
+      
+      // dispatch(saveTokenName(tokenName))
+      // dispatch(saveTokenSymbol(tokenSymbol))
+      // dispatch(saveTokenTotalSupply(tokenTotalSupply))
+      // dispatch(saveTokenAddress(address))
+      // history.push("/createToken/success")
+      if(props.parent === 'Normal') {
+        dispatch(saveTokenAddr1(address))
+        clearData()
+        setVisible(false)
+      } else if(props.parent === 'Fair') {
+        dispatch(saveTokenAddr2(address))
+        clearData()
+        setVisible(false)
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+	const handleNext = () => {
+    if(tokenType == 'Standard Token') {
+     createStandardToken()
+    } else if(tokenType == 'Liquidity Generator Token') {
+      createLiquidityToken()
+    } else if(tokenType == 'Baby Token') {
+      createBabyToken()
+    } else if(tokenType == 'Buyback Baby Token') {
+      createBuybackBabyToken()
+    }
 	}
 
+  async function getData(address) {
+    const web3 = new Web3(provider())
+    const TokenContract = new web3.eth.Contract(TokenAbi, address)
+    await TokenContract.methods.decimals().call().then(function(result) {
+      setRewardTokenDecimal(result)
+    })
+    await TokenContract.methods.name().call().then(function(result) {
+      setRewardTokenName(result)
+    })    
+    await TokenContract.methods.symbol().call().then(function(result) {
+      setRewardTokenSymbol(result)
+    })
+  }
+
+  async function isAvailable(address) {
+    const web3 = new Web3(provider())
+    const TokenContract = new web3.eth.Contract(FactoryAbi, testFactory)
+    await TokenContract.methods.getPair(address, '0xae13d989dac2f0debff460ac112a837c89baa7cd').call().then(function(result) {
+      if(result == '0x0000000000000000000000000000000000000000'){
+        setAvailableToken(false)
+      } else {
+        setAvailableToken(true)
+      }
+    })
+  }
+
   const onChangeTokenType = (e) => {
+    clearData()
     setTokenType((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
@@ -259,7 +450,31 @@ export const CreateTokenModal = (props) => {
     setReflectionFee((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
+  useEffect(() => {
+    async function checkTokenValidation(address) {
+      const web3 = new Web3()
+      if (address.length === 0) {
+        setIsTokenValid(false)
+        setErrMsgRewardToken("Token address can not be blank")
+      } else if (address.substring(0, 2) !== "0x") {
+        setIsTokenValid(false)
+        setErrMsgRewardToken("Invalid Token Address")
+      } else if (address.length !== 42) {
+        setIsTokenValid(false)
+        setErrMsgRewardToken("Invalid Token Address")
+      } else if (!web3.utils.isAddress(address)) {
+        setIsTokenValid(false)
+        setErrMsgRewardToken("Invalid Token Address")
+      } else {
+        await getData(address)
+        await isAvailable(address)
+        setIsTokenValid(true)
+        setErrMsgRewardToken("")
+      }
+    }
 
+    checkTokenValidation(rewardToken)
+  },[rewardToken])
 
   useEffect(() => {
     if(tokenName == '') {
@@ -382,16 +597,75 @@ export const CreateTokenModal = (props) => {
     buyBackFee,
     reflectionFee,
   ])
+
+  useEffect(() => {
+    if(tokenType == 'Standard Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenDecimal === '' &&
+      errMsgTokenTotalSupply === '' ?
+      setCreateValid(true) : setCreateValid(false)
+     } else if(tokenType == 'Liquidity Generator Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenTotalSupply === '' &&
+      errMsgTransfeeYield === '' &&
+      errMsgTransfeeLiquidity === '' &&
+      errMsgCharityAddress === '' &&
+      errMsgCharityPercent === '' ?
+      setCreateValid(true) : setCreateValid(false)
+     } else if(tokenType == 'Baby Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenTotalSupply === '' &&
+      errMsgRewardToken === '' &&
+      errMsgMinTokenBalance === '' &&
+      errMsgTokenRewardFee === '' &&
+      errMsgAutoAddLiquidity === '' &&
+      errMsgMarketingFee === '' &&
+      errMsgMarketingWallet === ''
+      ?
+      setCreateValid(true) : setCreateValid(false)
+     } else if(tokenType == 'Buyback Baby Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenTotalSupply === '' &&
+      errMsgRewardToken === '' &&
+      errMsgLiquidityFee === '' &&
+      errMsgBuyBackFee === '' &&
+      errMsgReflectionFee === '' &&
+      errMsgMarketingFee === '' ?
+      setCreateValid(true) : setCreateValid(false)
+     }
+  }, [
+    errMsgTokenName,
+    errMsgTokenSymbol,
+    errMsgTokenDecimal,
+    errMsgTokenTotalSupply,
+    errMsgTransfeeYield,
+    errMsgTransfeeLiquidity,
+    errMsgCharityAddress,
+    errMsgCharityPercent,
+    errMsgRewardToken,
+    errMsgMinTokenBalance,
+    errMsgTokenRewardFee,
+    errMsgAutoAddLiquidity,
+    errMsgMarketingFee,
+    errMsgMarketingWallet,
+    errMsgLiquidityFee,
+    errMsgBuyBackFee,
+    errMsgReflectionFee,
+  ])
   
   return (
   <>
       <CButton style={{backgroundColor: '#333', borderColor: '#333', height: '30px', paddingTop: '3px'}} onClick={() => setVisible(!visible)}>Create Token</CButton>
-      <CModal style={{backgroundColor: '#333'}} scrollable visible={visible} onClose={() => setVisible(false)}>
+      <CModal style={{backgroundColor: '#333'}} visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
             <CModalTitle>Create Token</CModalTitle>
         </CModalHeader>
         <CModalBody>
-        <CRow>
+            <CRow>
               <div className="danger small-text-sz mb-0 text-white-color">(*) is required field.</div>
               <CCol>
                 <div className='font-bold text-white-color'>Token Type
@@ -535,6 +809,33 @@ export const CreateTokenModal = (props) => {
                         placeholder='Ex: 0x...'
                         desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
                       />
+                      {
+                        availableToken == true ?
+                        (
+                          <></>
+                        ) : (<div className='danger small-text-sz mb-0'>Address is invalid</div>)
+                      }
+                      {
+                        isTokenValid == true ?
+                        (
+                          <div>
+                            <div style={{display: 'flex'}}>
+                              <div className='col-md-6 text_align_left text-yellow-color'>TokenName</div>
+                              <div className='col-md-6 text_align_right  text-yellow-color'>{rewardTokenName}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                              <div className='col-md-6 text_align_left text-yellow-color'>TokenSymbol</div>
+                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenSymbol}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                              <div className='col-md-6 text_align_left text-yellow-color'>TokenDecimal</div>
+                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenDecimal}</div>
+                            </div>
+                          </div>
+                        ) : (
+                          <></>
+                        )
+                      }
                     </CCol>
                     <CCol className='col-md-6'>
                       <NumberInputComponent 
@@ -679,7 +980,11 @@ export const CreateTokenModal = (props) => {
           <CButton color="secondary" onClick={() => setVisible(false)}>
           Close
           </CButton>
-          <CButton color="dark" onClick={handleNext}>Create</CButton>
+          {
+            isCreateValid === true ? 
+            <CButton color="warning" onClick={handleNext}>Create</CButton> :
+            <CButton color="dark" disabled >Create</CButton>
+          }
         </CModalFooter>
       </CModal>
   </>

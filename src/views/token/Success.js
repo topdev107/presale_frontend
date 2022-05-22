@@ -10,7 +10,8 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
-import { saveTokenAddr } from 'src/state/CreateLaunchPadState';
+import { saveTokenAddr as saveTokenAddr1 } from 'src/state/CreateLaunchPadState';
+import { saveTokenAddr as saveTokenAddr2 } from 'src/state/CreateFairLaunchState';
 
 const TokenSuccess = () => {
   const history = useHistory()
@@ -25,11 +26,12 @@ const TokenSuccess = () => {
 
   }
   const handleLaunchPad = () => {
-    dispatch(saveTokenAddr(tokenAddress))
+    dispatch(saveTokenAddr1(tokenAddress))
     history.push("/launchpad/home")
   }
 
   const handleFairLaunch = () => {
+    dispatch(saveTokenAddr2(tokenAddress))
     history.push("/fairlaunch/home")
   }
 

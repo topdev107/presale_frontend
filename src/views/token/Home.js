@@ -124,6 +124,7 @@ const TokenHome = () => {
   const [rewardTokenDecimal, setRewardTokenDecimal] = useState(0)
   
   const [availableToken, setAvailableToken] = useState(false)
+  const [isCreateValid, setCreateValid] = useState(false)
 
   // const createStandardToken = async (e) => {
   //   e.preventDefault()
@@ -148,6 +149,32 @@ const TokenHome = () => {
     // 2. Try getting legacy provider
     const { web3 } = window
     if (web3 && web3.currentProvider) return web3.currentProvider
+  }
+
+  const clearData = () => {
+    setTokenName('')
+    setTokenSymbol('')
+    setTokenDecimal(0)
+    setTokenTotalSupply(0)
+    setTransFeeYield(1)
+    setTransFeeLiquidity(1)
+    setCharityAddress('')
+    setCharityPercent(0)
+    setRewardToken('')
+    setLiquidityFee(0)
+    setMinimumTokenBalance(0)
+    setTokenRewardFee(0)
+    setAutoAddLiquidity(0)
+    setMarketingFee(0)
+    setMarketingWallet('')
+    setBuyBackFee(0)
+    setReflectionFee(0)
+    setRewardTokenName('')
+    setRewardTokenSymbol('')
+    setRewardTokenDecimal(0)
+    setAvailableToken(false)
+    setIsCheckedAntiBot(false)
+    setCreateValid(false)
   }
 
   async function createStandardToken() {
@@ -331,7 +358,67 @@ const TokenHome = () => {
     })
   }
 
+  useEffect(() => {
+    if(tokenType == 'Standard Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenDecimal === '' &&
+      errMsgTokenTotalSupply === '' ?
+      setCreateValid(true) : setCreateValid(false)
+     } else if(tokenType == 'Liquidity Generator Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenTotalSupply === '' &&
+      errMsgTransfeeYield === '' &&
+      errMsgTransfeeLiquidity === '' &&
+      errMsgCharityAddress === '' &&
+      errMsgCharityPercent === '' ?
+      setCreateValid(true) : setCreateValid(false)
+     } else if(tokenType == 'Baby Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenTotalSupply === '' &&
+      errMsgRewardToken === '' &&
+      errMsgMinTokenBalance === '' &&
+      errMsgTokenRewardFee === '' &&
+      errMsgAutoAddLiquidity === '' &&
+      errMsgMarketingFee === '' &&
+      errMsgMarketingWallet === ''
+      ?
+      setCreateValid(true) : setCreateValid(false)
+     } else if(tokenType == 'Buyback Baby Token') {
+      errMsgTokenName === '' &&
+      errMsgTokenSymbol === '' &&
+      errMsgTokenTotalSupply === '' &&
+      errMsgRewardToken === '' &&
+      errMsgLiquidityFee === '' &&
+      errMsgBuyBackFee === '' &&
+      errMsgReflectionFee === '' &&
+      errMsgMarketingFee === '' ?
+      setCreateValid(true) : setCreateValid(false)
+     }
+  }, [
+    errMsgTokenName,
+    errMsgTokenSymbol,
+    errMsgTokenDecimal,
+    errMsgTokenTotalSupply,
+    errMsgTransfeeYield,
+    errMsgTransfeeLiquidity,
+    errMsgCharityAddress,
+    errMsgCharityPercent,
+    errMsgRewardToken,
+    errMsgMinTokenBalance,
+    errMsgTokenRewardFee,
+    errMsgAutoAddLiquidity,
+    errMsgMarketingFee,
+    errMsgMarketingWallet,
+    errMsgLiquidityFee,
+    errMsgBuyBackFee,
+    errMsgReflectionFee,
+  ])
+
   const onChangeTokenType = (e) => {
+    clearData()
     setTokenType((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
@@ -877,8 +964,12 @@ const TokenHome = () => {
               </>
             }
             <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-              <button type="button" className="btn-accent" onClick={handleNext}>Create Token</button>
-            </div>
+              {
+                isCreateValid === true ? 
+                  <button type="button" className="btn-accent" onClick={handleNext}>Create Token</button> :
+                  <button type="button" className="btn-black" disabled>Create Token</button>
+              }
+              </div>
           </CCardBody>
         </CCard>
       </CCol>
