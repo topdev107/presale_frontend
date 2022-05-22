@@ -15,7 +15,7 @@ import { FairCardDetail, NormalCardDetail } from '../components/EachCardDetail'
 const LaunchpadList = () => {
 
   const [activeKey, setActiveKey] = useState(1)
-  const [currentPage, setCurrentPage] = useState(5)
+  const [currentPage, setCurrentPage] = useState(1)
   const [pageCount, setPageCount] = useState(9)
   const [tabledata, setTableData] = useState([])
   
@@ -24,7 +24,7 @@ const LaunchpadList = () => {
 
   const loadData = async (currentPage_, pageCount_) => {
     // const res = await fetch(database_url.concat('/').concat('page'), requestOptions)
-    const res = await fetch(`${database_url}/page?pageCount=${pageCount}&currentPage=${currentPage}`)
+    const res = await fetch(`${database_url}/page?pageCount=${pageCount_}&currentPage=${currentPage_}`)
     await res.json()
     .then(data => {
       console.log(data)
@@ -33,7 +33,9 @@ const LaunchpadList = () => {
   }
 
   const handlePage = (e) => {
-    setCurrentPage(e.target.value)
+    if(e.target.value !== '') {
+      setCurrentPage(e.target.value)
+    }
   }
 
   useEffect(() => {
@@ -73,7 +75,7 @@ const LaunchpadList = () => {
                 <CRow>
                   <CCol xs={10}></CCol>
                   <CCol xs={2} >
-                    <CFormInput type="number" size="sm" placeholder="page input" aria-label="sm input example" onChange={handlePage}/>
+                    <CFormInput type="number" size="sm" placeholder="page input" value={currentPage} aria-label="sm input example" onChange={handlePage}/>
                   </CCol>
                 </CRow>
                 <CRow>

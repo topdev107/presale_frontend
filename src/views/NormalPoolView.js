@@ -157,7 +157,7 @@ const TotalView = () => {
   const onChangeAmount = (e) => {
     // setBuyAmount((v) => (e.target.validity.valid ? e.target.value : v))
     setBuyAmount(e.target.value)
-    setIsValidBuy(e.target.value < maxBuy && e.target.value > 0)
+    setIsValidBuy(e.target.value <= maxBuy && e.target.value > 0)
 //    console.log(e.target.value, maxBuy, (e.target.value < maxBuy))
 
   }
@@ -331,7 +331,7 @@ const TotalView = () => {
         setLockTime(data.lockupTime)
         setMinBuy(data.minBuy)
         setMaxBuy(data.maxBuy)
-        setDescription(data.desc)
+        setDescription(data.description)
         if(data.iswhitelist == true) {
           setSaleType('Whitelist')
         } else {
@@ -895,7 +895,13 @@ const TotalView = () => {
                 <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}}>List of contributors</CButton>
                 ): (<></>)
               }
-              <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
+              {
+                presaleState === 3 ? (
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleFinalize}>Finalize</CButton>
+                ) : (
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
+                )
+              }
               {
                 isCancel ? (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleWithdraw}>Withdraw canceled tokens</CButton>

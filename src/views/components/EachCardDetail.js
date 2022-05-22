@@ -47,7 +47,7 @@ export const FairCardDetail = (props) => {
       const presaleContract = new web3.eth.Contract(fairabi, address)
       const txResult = await presaleContract.methods.presaleStatus().call()
       const balance = await web3.eth.getBalance(address)
-      console.log(balance)
+      console.log('Fairlaunch=======>', props.name, balance)
       const value = +balance / (10 ** 18)
       setCurrentState(value)
       setProgress(value / props.softCap * 100)
@@ -63,8 +63,8 @@ export const FairCardDetail = (props) => {
     history.push('/launchviewfair');
   }
 
-  useEffect(() => {
-    const presaleState = getPresaleStatus(props.address)
+  useEffect(async () => {
+    const presaleState = await getPresaleStatus(props.address)
     if(presaleState == 1) {
       setBadgeState('Upcoming')
     } else if(presaleState == 2) {
@@ -172,7 +172,7 @@ export const NormalCardDetail = (props) => {
       const presaleContract = new web3.eth.Contract(normalabi, address)
       const txResult = await presaleContract.methods.presaleStatus().call()
       const balance = await web3.eth.getBalance(address)
-      console.log(balance)
+      console.log('Launchpad=======>', props.name, balance)
       const value = +balance / (10 ** 18)
       setCurrentState(value)
       setProgress(value / props.hardCap * 100)
@@ -188,8 +188,8 @@ export const NormalCardDetail = (props) => {
     history.push('/launchviewnormal');
   }
 
-  useEffect(() => {
-    const presaleState = getPresaleStatus(props.address)
+  useEffect(async () => {
+    const presaleState = await getPresaleStatus(props.address)
     if(+presaleState == 1) {
       setBadgeState('Upcoming')
     } else if(+presaleState == 2) {

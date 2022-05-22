@@ -12,7 +12,7 @@ const TextInputComponent = (props) => {
       {
         props.errMsg !== '' ? (
           <div>
-            <CFormInput type="text" id={props.title} autoFocus className='input-highlighted' placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
+            <CFormInput type="text" id={props.title} className='input-highlighted' placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
             <div className='danger small-text-sz mb-0'>{props.errMsg}</div>
           </div>
           ) : (

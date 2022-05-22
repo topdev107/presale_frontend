@@ -44,7 +44,7 @@ const TotalView = () => {
   const [whitelistcap, setWhitelistCap] = useState('Whitelist')
   const [currentState, setCurrentState] = useState(0)
   // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
-  const currentAddr = useSelector((state) => state.createLaunchPadState.currentAddr)
+  const currentAddr = useSelector((state) => state.createFairLaunchState.currentAddr)
   // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
   const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
@@ -286,7 +286,7 @@ const TotalView = () => {
         setLockTime(data.lockupTime)
         setMinBuy(data.minBuy)
         setMaxBuy(data.maxBuy)
-        setDescription(data.desc)
+        setDescription(data.description)
         if(data.iswhitelist == true) {
           setSaleType('Whitelist')
         } else {
