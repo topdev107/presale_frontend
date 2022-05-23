@@ -42,6 +42,9 @@ import { DisableWhitelist } from './components/whitelist/disableWhitelist'
 import Web3 from 'web3';
 import abi from '../contracts/presaleAbi'
 
+import { pancakeswapRouter } from './components/ContractAddress'
+import tokenAbi from '../contracts/tokenAbi'
+
 const TotalView = () => {
   const [buyAmount, setBuyAmount] = useState(0)
   const [saleType, setSaleType] = useState('Public')
@@ -277,6 +280,10 @@ const TotalView = () => {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
+      const value = hardcap * listingRate * liquidityPercent / 100
+      const tokenContract = new web3.eth.Contract(tokenAbi, tokenAddress)
+      const tx = await tokenContract.methods.approve(pancakeswapRouter, value * 10 ** tokenDecimal).send({'from': account})
+      console.log(tx)
       const presaleContract = new web3.eth.Contract(abi, presaleAddress)
       const txResult = await presaleContract.methods.purchaseICOCoin().send({'from': account})
 

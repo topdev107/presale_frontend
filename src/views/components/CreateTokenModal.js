@@ -41,6 +41,7 @@ import TokenAbi from '../../contracts/tokenAbi'
 import FactoryAbi from '../../contracts/factoryAbi'
 import {saveTokenAddr as saveTokenAddr1} from '../../state/CreateLaunchPadState'
 import {saveTokenAddr as saveTokenAddr2} from '../../state/CreateFairLaunchState'
+import { Spinner } from 'react-bootstrap';
 
 export const CreateTokenModal = (props) => {
 
@@ -113,6 +114,7 @@ export const CreateTokenModal = (props) => {
   const [availableToken, setAvailableToken] = useState(false)
 
   const [isCreateValid, setCreateValid] = useState(false)
+  const [isCreateLoad, setCreateLoad] = useState(false)
   
   const provider = () => {
     // 1. Try getting newest provider
@@ -330,16 +332,18 @@ export const CreateTokenModal = (props) => {
     }
   }
 
-	const handleNext = () => {
+	const handleNext = async () => {
+    setCreateLoad(true)
     if(tokenType == 'Standard Token') {
-     createStandardToken()
+      await createStandardToken()
     } else if(tokenType == 'Liquidity Generator Token') {
-      createLiquidityToken()
+      await createLiquidityToken()
     } else if(tokenType == 'Baby Token') {
-      createBabyToken()
+      await createBabyToken()
     } else if(tokenType == 'Buyback Baby Token') {
-      createBuybackBabyToken()
+      await createBuybackBabyToken()
     }
+    setCreateLoad(false)
 	}
 
   async function getData(address) {
@@ -977,13 +981,32 @@ export const CreateTokenModal = (props) => {
             }
         </CModalBody>
         <CModalFooter>
-          <CButton color="secondary" onClick={() => setVisible(false)}>
+          {/* <CButton color="secondary" onClick={() => setVisible(false)}>
           Close
-          </CButton>
+          </CButton> */}
+          <button type="button" className='btn-black' onClick={() => setVisible(false)}>
+            Close
+          </button>
           {
             isCreateValid === true ? 
-            <CButton color="warning" onClick={handleNext}>Create</CButton> :
-            <CButton color="dark" disabled >Create</CButton>
+            <>
+              <button type="button" className='btn-accent' disabled={isCreateLoad} onClick={handleNext} >
+                {
+                  isCreateLoad === true ? (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    variant="light"
+                    style={{marginRight: '5px', marginTop: '2px'}}
+                  /> ) : (<></>)
+                }
+                Create
+              </button>
+            </> :
+            <button type="button" className='btn-black' disabled >Create</button>
           }
         </CModalFooter>
       </CModal>

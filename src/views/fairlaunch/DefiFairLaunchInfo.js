@@ -75,6 +75,7 @@ const DefiFairLaunchInfo = () => {
   const [errMsgEachReleasePercent, setErrMsgEachReleasePercent] = useState('')
 
   const [isCheckedTeamVesting, setIsCheckedTeamVesting] = useState(false)
+  const [isValid, setIsValid] = useState(false)
 
   const onChangeTotalSellingAmount = (e) => {  
     setTotalSellingAmount((v) => (e.target.validity.valid ? e.target.value : v))
@@ -258,6 +259,20 @@ const DefiFairLaunchInfo = () => {
       vesting_period,
       each_release_percent,
     ])
+
+  useEffect(() => {
+    (
+      errMsgTotalSellingAmount === '' &&
+      errMsgSoftCap === '' &&
+      errMsgLiquidity === '' &&
+      errMsgLockupMinutes === ''
+    ) ? setIsValid(true) : setIsValid(false)
+  },[
+    errMsgTotalSellingAmount,
+    errMsgSoftCap,
+    errMsgLiquidity,
+    errMsgLockupMinutes
+  ])
 
   return (
     <CRow>
@@ -458,7 +473,11 @@ const DefiFairLaunchInfo = () => {
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
                     <button type="button" className="btn-black" onClick={history.goBack}>Back</button>
                     {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-black">Back</Link> */}
-                    <button type="button" className="btn-disabled" onClick={handleNext}>Next</button>
+                    {
+                      isValid === true ? 
+                      <button type="button" className="btn-accent" onClick={handleNext}>Next</button> :
+                      <button type="button" className="btn-black" disabled>Next</button>
+                    }
                     {/* <button type="button" className="btn-accent">Next</button> */}
                   </div>
               </CCardBody>
