@@ -1,11 +1,11 @@
 export const tokenFactoryManager = '0xaA72Fdba587Ac11d21F1AF91dd8AA1BB9c84df41'
 export const standardTokenFactory = '0xf58dbf251182Fc9235C932108c300F2E4559e000'
-export const liquidityTokenFactory = '0xD41184b81A54C28D4B864Adcc50f36791709d8de'
-export const babytokenFactory = '0xB28D05b67709e57021da231bF0D14cA678c40787'
-export const buybackbabyFactory = '0x168C47a34a634E3AEd649fE651f21D5003C01CD7'
+export const liquidityTokenFactory = '0x53D460C76a5a142591804B755EBCA7176f6d305A'
+export const babytokenFactory = '0x523E270341e8CA8C6876c823889611c6ffCC4e46'
+export const buybackbabyFactory = '0xfc963E44e72687ED8fAC9E4C467115DCdeCa09ef'
 
-export const presaleFactory = '0x01b2ebeF1E786Df66Ac83Ee07Fc0BDb2393E8DbD'
-export const presaleTestFactory = '0x01b2ebeF1E786Df66Ac83Ee07Fc0BDb2393E8DbD'
+export const presaleFactory = '0x90BC5e09CD818230CD72Af39f921c6000bA94e94'
+export const presaleTestFactory = '0x90BC5e09CD818230CD72Af39f921c6000bA94e94'
 export const presale = '0x41707409792979ba543751B4395995fa94745BD2'
 
 export const fairlaunchFactory = '0xaD4dB1b7B67395C990dC152409a3e8E36b4F71fb'

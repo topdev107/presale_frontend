@@ -38,6 +38,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Web3 from 'web3';
 import abi from '../contracts/fairlaunchAbi'
 
+import { pancakeswapRouter } from './components/ContractAddress'
+import tokenAbi from '../contracts/tokenAbi'
+
 const TotalView = () => {
   const [buyAmount, setBuyAmount] = useState(0)
   const [saleType, setSaleType] = useState('Public')
@@ -232,6 +235,10 @@ const TotalView = () => {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
+      const value = presaleRate * liquidityPercent / 100
+      const tokenContract = new web3.eth.Contract(tokenAbi, tokenAddress)
+      const tx = await tokenContract.methods.approve(pancakeswapRouter, value * 10 ** tokenDecimal).send({'from': account, })
+      console.log(tx)
       const presaleContract = new web3.eth.Contract(abi, presaleAddress)
       const txResult = await presaleContract.methods.purchaseICOCoin().send({'from': account})
 
@@ -545,7 +552,15 @@ const TotalView = () => {
               </CCol>
               <CCol className="d-md-flex justify-content-md-end">
                 <div>
-                  <CBadge color='light'>Canceled</CBadge>
+                  {
+                    presaleState === 3 ?
+                    <CBadge color='danger'>Ended</CBadge>
+                    : presaleState === 1 ?
+                    <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
+                    : presaleState === 2 ?
+                    <CBadge color='success'>Sale Live</CBadge>
+                    : <CBadge color='light'>Canceled</CBadge>
+                  }
                 </div>
               </CCol>
             </CRow>
@@ -783,7 +798,7 @@ const TotalView = () => {
                 <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}}>List of contributors</CButton>
                 ): (<></>)
               }
-              <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
+              <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleFinalize}>Finalize</CButton>
               {
                 isCancel ? (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleWithdraw}>Withdraw canceled tokens</CButton>

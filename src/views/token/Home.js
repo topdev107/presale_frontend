@@ -19,6 +19,7 @@ import abi from '../../contracts/abi.js'
 import liquidityAbi from '../../contracts/liquidityFactoryAbi'
 import babyAbi from '../../contracts/babytokenFactoryAbi'
 import buybackAbi from '../../contracts/buybackbabyFactoryAbi'
+import Spinner from 'react-bootstrap/Spinner'
 import testToken from '../../contracts/testAbi'
 import { 
   standardTokenFactory,
@@ -125,6 +126,7 @@ const TokenHome = () => {
   
   const [availableToken, setAvailableToken] = useState(false)
   const [isCreateValid, setCreateValid] = useState(false)
+  const [isCreateLoad, setCreateLoad] = useState(false)
 
   // const createStandardToken = async (e) => {
   //   e.preventDefault()
@@ -320,16 +322,18 @@ const TokenHome = () => {
     }
   }
 
-	const handleNext = () => {
+	const handleNext = async () => {
+    setCreateLoad(true)
     if(tokenType == 'Standard Token') {
-     createStandardToken()
+      await createStandardToken()
     } else if(tokenType == 'Liquidity Generator Token') {
-      createLiquidityToken()
+      await createLiquidityToken()
     } else if(tokenType == 'Baby Token') {
-      createBabyToken()
+      await createBabyToken()
     } else if(tokenType == 'Buyback Baby Token') {
-      createBuybackBabyToken()
+      await createBuybackBabyToken()
     }
+    setCreateLoad(false)
 	}
 
   async function getData(address) {
@@ -966,7 +970,21 @@ const TokenHome = () => {
             <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
               {
                 isCreateValid === true ? 
-                  <button type="button" className="btn-accent" onClick={handleNext}>Create Token</button> :
+                  <button type="button" className="btn-accent" disabled={isCreateLoad} onClick={handleNext}>
+                    {
+                      isCreateLoad === true ? (
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                          variant="light"
+                          style={{marginRight: '5px', marginTop: '2px'}}
+                        /> ) : (<></>)
+                    }
+                    Create Token
+                  </button> :
                   <button type="button" className="btn-black" disabled>Create Token</button>
               }
               </div>

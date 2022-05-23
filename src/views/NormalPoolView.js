@@ -24,6 +24,7 @@ import ReactEcharts from "echarts-for-react";
 import CIcon from '@coreui/icons-react';
 import { cilList, cilKey, cilShieldAlt, AiOutlineGlobal } from '@coreui/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Spinner from 'react-bootstrap/Spinner'
 
 import { faInfoCircle, faWindowClose, faKey, faEdit, faEarth, faLink,
   faGlobe,
@@ -115,6 +116,11 @@ const TotalView = () => {
   const [instagramUrl, setInstagramUrl] = useState('')
   const [discordUrl, setDiscordUrl] = useState('')
   const [redditUrl, setRedditUrl] = useState('')
+  const [isOwner, setOwner] = useState('')
+  const [showOwnerZone, setShowOwnerZone] = useState(false)
+
+  const [isFinalizeLoad, setFinalizeLoad] = useState(false)
+  const [isBuying, setBuying] = useState(false)
 
   const chartOption = {
     tooltip: {
@@ -196,6 +202,7 @@ const TotalView = () => {
   }
 
   async function handleBuy(valueBid) {
+    setBuying(true)
     try {
       const web3 = new Web3(provider())
 
@@ -210,9 +217,11 @@ const TotalView = () => {
       const txResult = await presaleContract.methods.userDeposit().send({'from': account, 'value': valueBid * 10 ** 18})
 
      console.log('success', txResult)
+     setBuying(false)
      return 1;
       
     } catch (error) {
+      setBuying(false)
       return -1
       console.log('error', error)
     }
@@ -275,23 +284,22 @@ const TotalView = () => {
   }
 
   async function handleFinalize() {
+    setFinalizeLoad(true)
     try {
       const web3 = new Web3(provider())
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-      const value = hardcap * listingRate * liquidityPercent / 100
-      const tokenContract = new web3.eth.Contract(tokenAbi, tokenAddress)
-      const tx = await tokenContract.methods.approve(pancakeswapRouter, value * 10 ** tokenDecimal).send({'from': account})
-      console.log(tx)
       const presaleContract = new web3.eth.Contract(abi, presaleAddress)
+      const own = await presaleContract.methods.getOwner().call()
+      console.log(own)
       const txResult = await presaleContract.methods.purchaseICOCoin().send({'from': account})
 
-      console.log('success', txResult)
-      
+      console.log('success', txResult)      
     } catch (error) {
       console.log('error', error)
     }
+    setFinalizeLoad(false)
   }
 
   async function handleClaim() {
@@ -318,6 +326,7 @@ const TotalView = () => {
       .then(data => {
         setPresaleAddress(data.presale_addr)
         presaleAddr = data.presale_addr
+        setOwner(data.token_owner)
         setTokenName(data.token_name)
         setTokenSymbol(data.token_symbol)
         setTokenDecimal(data.token_decimal)
@@ -500,9 +509,23 @@ const TotalView = () => {
                 <div className='mt-3 d-grid gap-3 d-md-flex'>
                   {
                     (isValidBuy == true) ? (
-                    <button type="button" className="btn-accent" onClick={() => handleBuy(buyAmount)}>Buy</button>
+                    <button type="button" className="btn-accent" onClick={() => handleBuy(buyAmount)}>
+                      {
+                        isBuying === true ?(
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            variant="light"
+                            style={{marginRight: '5px', marginTop: '2px'}}
+                          /> ) : (<></>)
+                      }
+                      Buy
+                    </button>
                     ) : (
-                      <button type="button" className="btn-disabled ">Buy</button>
+                      <button type="button" className="btn-black" disabled >Buy</button>
                     )
                   }
                 </div>
@@ -515,6 +538,16 @@ const TotalView = () => {
       </>
     )
   }
+
+  useEffect( async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0]
+    if(isOwner === account) {
+      setShowOwnerZone(true)
+    } else {
+      setShowOwnerZone(false)
+    }
+  }, [isOwner])
 
   useEffect(() => {
     loadWholeData()
@@ -565,10 +598,15 @@ const TotalView = () => {
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
                 </div>
               </CCol>
-              <CCol >
+              <CCol className='justify-content-md-end'>
                 <div style={{fontSize: '25px'}}>{tokenName}&nbsp;Presale &nbsp;
-                  <FontAwesomeIcon icon={faKey} /> &nbsp;
-                  <FontAwesomeIcon icon={faEdit} /> 
+                  {
+                    showOwnerZone === true ? (
+                    <>
+                      <FontAwesomeIcon icon={faKey} /> &nbsp;
+                      <FontAwesomeIcon icon={faEdit} /> 
+                    </> ) : (<></>)
+                  }
                 </div>
                 <div style={{marginTop: '7px'}}>
                   <a href={siteUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faGlobe} /></a>&nbsp;&nbsp;
@@ -597,7 +635,16 @@ const TotalView = () => {
               </CCol>
               <CCol className="d-md-flex justify-content-md-end">
                 <div>
-                  <CBadge color='light'>Canceled</CBadge>
+                  {/* <CBadge color='light'>Canceled</CBadge> */}
+                  {
+                      presaleState === 3 ?
+                      <CBadge color='danger'>Ended</CBadge>
+                      : presaleState === 1 ?
+                      <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
+                      : presaleState === 2 ?
+                      <CBadge color='success'>Sale Live</CBadge>
+                      : <CBadge color='light'>Canceled</CBadge>
+                  }
                 </div>
               </CCol>
             </CRow>
@@ -838,6 +885,8 @@ const TotalView = () => {
           </CCardBody>
         </CCard>
         <br/>
+        {
+          showOwnerZone === true ? (
         <CCard 
           color='#242525'
           textColor='white'
@@ -904,14 +953,30 @@ const TotalView = () => {
               }
               {
                 presaleState === 3 ? (
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleFinalize}>Finalize</CButton>
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleFinalize}>
+                    {
+                    isFinalizeLoad == true ? (
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                      variant="light"
+                      style={{marginRight: '5px', marginTop: '2px'}}
+                    /> ) : (<></>)
+                    }
+                    Finalize
+                  </CButton>
                 ) : (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
                 )
               }
               {
                 isCancel ? (
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleWithdraw}>Withdraw canceled tokens</CButton>
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleWithdraw}>
+                    Withdraw canceled tokens
+                  </CButton>
                 ) : (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleCancel}>Cancel Pool</CButton>
                 )
@@ -919,7 +984,8 @@ const TotalView = () => {
             </div>
             <p className="small-text-sz mt-1 text-blue-color">To Finalize presale, you have to exclude token transfer fee for presale contract.</p>
           </CCardBody>
-        </CCard>
+        </CCard>) : (<></>)
+        }
       </CCol>
     </CRow>
   )

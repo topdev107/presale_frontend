@@ -18,7 +18,9 @@ const LaunchpadList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageCount, setPageCount] = useState(9)
   const [tabledata, setTableData] = useState([])
-  
+  const [myCurrentPage, setMyCurrentPage] = useState(1)
+  const [myTableData, setMyTableData] = useState([])
+ 
   // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
   const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
@@ -27,9 +29,25 @@ const LaunchpadList = () => {
     const res = await fetch(`${database_url}/page?pageCount=${pageCount_}&currentPage=${currentPage_}`)
     await res.json()
     .then(data => {
-      console.log(data)
+      console.log('fetch whole Data=========>', data)
       setTableData(data)
     })
+  }
+
+  const loadMyData = async (currentPage_, pageCount_, owner_) => {
+    const res = await fetch(`${database_url}/myzone?pageCount=${pageCount_}&currentPage=${currentPage_}&owner=${owner_}`)
+    await res.json()
+      .then(data => {
+        console.log('fetch my Data==========>', data)
+        setMyTableData(data)
+      })
+  }
+
+  const loadWalletAddress = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    console.log('Account=============',account)
+    return account
   }
 
   const handlePage = (e) => {
@@ -38,9 +56,21 @@ const LaunchpadList = () => {
     }
   }
 
+  const handleMyPage = (e) => {
+    if(e.target.value !== '') {
+      setMyCurrentPage(e.target.value)
+    }
+  }
+
   useEffect(() => {
     loadData(currentPage, pageCount)
   },[currentPage, pageCount])
+
+  useEffect(async () => {
+    const ownerAddr = await loadWalletAddress()
+    console.log('ownerAddr=============>',ownerAddr)
+    loadMyData(myCurrentPage, pageCount, ownerAddr)
+  },[myCurrentPage, pageCount])
 
   return (
     <CRow>
@@ -110,7 +140,42 @@ const LaunchpadList = () => {
                 </CRow>
               </CTabPane>
               <CTabPane role="tabpanel" aria-labelledby="mine-tab" visible={activeKey === 2}>
-                Hello Tabpanel                
+              <CRow>
+                <CCol xs={10}></CCol>
+                  <CCol xs={2} >
+                    <CFormInput type="number" size="sm" placeholder="page input" value={myCurrentPage} aria-label="sm input example" onChange={handleMyPage}/>
+                  </CCol>
+                </CRow>
+                <CRow>
+                {
+                  myTableData.map((data) => {
+                    return (data.presaletype === true ?
+                    <FairCardDetail
+                      xs={4}
+                      id = {data._id}
+                      address = {data.presale_addr}
+                      img = {data.logoURL}
+                      name = {data.token_name}
+                      softCap = {data.softcap}
+                      liquidity = {data.liquidityPercent}
+                      lockup = {data.lockupTime}
+                    /> : 
+                    <NormalCardDetail 
+                      xs={4}
+                      id = {data._id}
+                      address = {data.presale_addr}
+                      img = {data.logoURL}
+                      name = {data.token_name}
+                      symbol = {data.token_symbol}
+                      perrate = {data.token_presale_rate}
+                      softCap = {data.softcap}
+                      hardCap = {data.hardcap}
+                      liquidity = {data.liquidityPercent}
+                      lockup = {data.lockupTime}
+                    />)
+                  })
+                }
+                </CRow>                
               </CTabPane>
             </CTabContent>
           </CCardBody>
