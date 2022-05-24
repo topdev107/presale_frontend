@@ -197,7 +197,7 @@ const Review = () => {
       console.log(_idAddr)
       dispatch(saveCurrentAddr(_idAddr))
       setSubmitStatus(false)
-      history.push('/launchviewnormal');
+      history.push(`/launchviewnormal?id=${_idAddr}`);
     }
   }
 

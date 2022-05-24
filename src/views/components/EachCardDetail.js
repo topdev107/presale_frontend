@@ -60,7 +60,7 @@ export const FairCardDetail = (props) => {
   
   const handleClick = () => {
     dispatch(saveCurrentAddr2(props.id))
-    history.push('/launchviewfair');
+    history.push(`/launchviewfair?id=${props.id}`);
   }
 
   useEffect(async () => {
@@ -185,7 +185,7 @@ export const NormalCardDetail = (props) => {
   
   const handleClick = () => {
     dispatch(saveCurrentAddr1(props.id))
-    history.push('/launchviewnormal');
+    history.push(`/launchviewnormal?id=${props.id}`);
   }
 
   useEffect(async () => {

@@ -165,7 +165,7 @@ const FairReview = () => {
       console.log(_idAddr)
       dispatch(saveCurrentAddr(_idAddr))
       setSubmitStatus(false)
-      history.push('/launchviewfair');
+      history.push(`/launchviewfair?id=${_idAddr}`);
     }
   }
 

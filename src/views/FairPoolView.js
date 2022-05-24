@@ -38,6 +38,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Web3 from 'web3';
 import abi from '../contracts/fairlaunchAbi'
 
+import { useLocation } from 'react-router-dom';
+
 import { pancakeswapRouter } from './components/ContractAddress'
 import tokenAbi from '../contracts/tokenAbi'
 
@@ -47,7 +49,8 @@ const TotalView = () => {
   const [whitelistcap, setWhitelistCap] = useState('Whitelist')
   const [currentState, setCurrentState] = useState(0)
   // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
-  const currentAddr = useSelector((state) => state.createFairLaunchState.currentAddr)
+  // const currentAddr = useSelector((state) => state.createFairLaunchState.currentAddr)
+  const currentAddr = new URLSearchParams(useLocation().search).get('id');
   // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
   const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
@@ -235,10 +238,10 @@ const TotalView = () => {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-      const value = presaleRate * liquidityPercent / 100
-      const tokenContract = new web3.eth.Contract(tokenAbi, tokenAddress)
-      const tx = await tokenContract.methods.approve(pancakeswapRouter, value * 10 ** tokenDecimal).send({'from': account, })
-      console.log(tx)
+      // const value = presaleRate * liquidityPercent / 100
+      // const tokenContract = new web3.eth.Contract(tokenAbi, tokenAddress)
+      // const tx = await tokenContract.methods.approve(pancakeswapRouter, value * 10 ** tokenDecimal).send({'from': account, })
+      // console.log(tx)
       const presaleContract = new web3.eth.Contract(abi, presaleAddress)
       const txResult = await presaleContract.methods.purchaseICOCoin().send({'from': account})
 

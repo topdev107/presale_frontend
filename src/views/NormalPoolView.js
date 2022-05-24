@@ -40,6 +40,8 @@ import { RemoveUser } from './components/whitelist/removeUser'
 import { SettingPublic } from './components/whitelist/settingPublic'
 import { DisableWhitelist } from './components/whitelist/disableWhitelist'
 
+import { useLocation } from 'react-router-dom';
+
 import Web3 from 'web3';
 import abi from '../contracts/presaleAbi'
 
@@ -52,7 +54,8 @@ const TotalView = () => {
   const [whitelistcap, setWhitelistCap] = useState('Whitelist')
   const [currentState, setCurrentState] = useState(0)
   // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
-  const currentAddr = useSelector((state) => state.createLaunchPadState.currentAddr)
+  // const currentAddr = useSelector((state) => state.createLaunchPadState.currentAddr)
+  const currentAddr = new URLSearchParams(useLocation().search).get('id');
   // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
   const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
