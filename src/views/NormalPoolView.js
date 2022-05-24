@@ -160,7 +160,6 @@ const TotalView = () => {
           show: false
         },
         data: [
-          { value: 0, name: 'Unlocked' },
           { value: (hardcap * listingRate * liquidityPercent / 100) , name: 'Liquidity' },
           { value: (hardcap * presaleRate) , name: 'Presale' },
         ]
