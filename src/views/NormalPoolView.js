@@ -53,6 +53,7 @@ const TotalView = () => {
   const [saleType, setSaleType] = useState('Public')
   const [whitelistcap, setWhitelistCap] = useState('Whitelist')
   const [currentState, setCurrentState] = useState(0)
+  const metaInfo = useSelector((state) => state.metamaskState.metaAddress)
   // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
   // const currentAddr = useSelector((state) => state.createLaunchPadState.currentAddr)
   const currentAddr = new URLSearchParams(useLocation().search).get('id');
@@ -124,6 +125,7 @@ const TotalView = () => {
 
   const [isFinalizeLoad, setFinalizeLoad] = useState(false)
   const [isBuying, setBuying] = useState(false)
+  const [isFinalized, setFinalized] = useState(true)
 
   const chartOption = {
     tooltip: {
@@ -442,7 +444,6 @@ const TotalView = () => {
       const presaleContract = new web3.eth.Contract(abi, address)
       const txResult = await presaleContract.methods.presaleStatus().call()
       const balance = await web3.eth.getBalance(address)
-      console.log(balance)
       setCurrentState(+balance / (10 ** 18))
       return +txResult+1;
       
@@ -542,15 +543,15 @@ const TotalView = () => {
     )
   }
 
-  useEffect( async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const account = accounts[0]
-    if(isOwner === account) {
+  useEffect( () => {
+    if(metaInfo.toLowerCase() == isOwner) {
+      console.log('setOwnerzone ========> true', metaInfo, isOwner)
       setShowOwnerZone(true)
     } else {
+      console.log('setOwnerzone ========> false', metaInfo, isOwner)
       setShowOwnerZone(false)
     }
-  }, [isOwner])
+  }, [metaInfo, isOwner])
 
   useEffect(() => {
     loadWholeData()
@@ -567,6 +568,9 @@ const TotalView = () => {
   useEffect(async () => {
     const status = await getPresaleStatus(presaleAddress)
     setPresaleState(status)
+    if(status == 5) {
+      setFinalized(false)
+    }
     if(status == 2) {
       const currentime = parseInt((new Date()).getTime() / 1000)
       const endtime = new Date(endTime).getTime() / 1000
@@ -955,7 +959,7 @@ const TotalView = () => {
                 ): (<></>)
               }
               {
-                presaleState === 3 ? (
+                presaleState === 3 && isFinalized === true? (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleFinalize}>
                     {
                     isFinalizeLoad == true ? (
@@ -981,7 +985,9 @@ const TotalView = () => {
                     Withdraw canceled tokens
                   </CButton>
                 ) : (
+                  isFinalized === true ? (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleCancel}>Cancel Pool</CButton>
+                  ) : (<></>)
                 )
               }
             </div>

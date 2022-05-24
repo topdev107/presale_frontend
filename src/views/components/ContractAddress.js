@@ -4,8 +4,8 @@ export const liquidityTokenFactory = '0x53D460C76a5a142591804B755EBCA7176f6d305A
 export const babytokenFactory = '0x523E270341e8CA8C6876c823889611c6ffCC4e46'
 export const buybackbabyFactory = '0xfc963E44e72687ED8fAC9E4C467115DCdeCa09ef'
 
-export const presaleFactory = '0x79eCf3Ec273E420b7Ef7Ae841E92E406c502f8F4'
-export const presaleTestFactory = '0x79eCf3Ec273E420b7Ef7Ae841E92E406c502f8F4'
+export const presaleFactory = '0x7284A74c4aA4FCB71Da73309a5FFBBdeb019FB8D'
+export const presaleTestFactory = '0x7284A74c4aA4FCB71Da73309a5FFBBdeb019FB8D'
 export const presale = '0x41707409792979ba543751B4395995fa94745BD2'
 
 export const fairlaunchFactory = '0xe549fEA4E1F6b9bAc751Bf822a877431A51DA7E3'

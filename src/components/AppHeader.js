@@ -173,6 +173,7 @@ import { logo } from 'src/assets/brand/logo'
 import { useWeb3Context } from 'web3-react'
 import { AppHeaderDropdown } from './header/index'
 import { set } from '../state/SideBarState'
+import { setMetamask } from '../state/MetamaskState'
 
 
 const AppHeader = () => {
@@ -196,9 +197,10 @@ const AppHeader = () => {
         console.log(console.error)
       } else {
         // success        
-        setCurrentAccount(context.account)        
+        setCurrentAccount(context.account)
+        dispatch(setMetamask(context.account))
         console.log('=== Header Wallet Connect Success ===')
-        console.log(context)
+        console.log(context.account)
       }
     }
 
@@ -216,6 +218,7 @@ const AppHeader = () => {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       console.log("Found an account! Address: ", accounts[0])
       setCurrentAccount(accounts[0])
+      setMetamask(accounts[0])
     } catch (err) {
       console.log(err)
       setCurrentAccount(null)
