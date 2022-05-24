@@ -423,7 +423,7 @@ const TotalView = () => {
   
       const status = await getPresaleStatus(presaleAddr)
       setPresaleState(status)
-      if(status == 5) {
+      if(status == 6) {
         setFinalized(false)
       } else if(status == 1) {
         setPresaleTime(startime - currentime)
@@ -568,7 +568,7 @@ const TotalView = () => {
   useEffect(async () => {
     const status = await getPresaleStatus(presaleAddress)
     setPresaleState(status)
-    if(status == 5) {
+    if(status == 6) {
       setFinalized(false)
     }
     if(status == 2) {
