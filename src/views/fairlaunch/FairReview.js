@@ -103,7 +103,6 @@ const FairReview = () => {
 
       const txResult = await presaleFactoryContract.methods.create(
         tokenAddr,
-        tokenDecimals,
         total_selling_amount,
         softCapGwei,
         liquidity,

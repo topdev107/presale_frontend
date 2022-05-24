@@ -24,6 +24,7 @@ import ReactEcharts from "echarts-for-react";
 import CIcon from '@coreui/icons-react';
 import { cilList, cilKey, cilShieldAlt, AiOutlineGlobal } from '@coreui/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Spinner from 'react-bootstrap/Spinner'
 
 import { 
   faInfoCircle, faWindowClose, faKey, faEdit, faEarth, faLink,
@@ -40,9 +41,6 @@ import abi from '../contracts/fairlaunchAbi'
 
 import { useLocation } from 'react-router-dom';
 
-import { pancakeswapRouter } from './components/ContractAddress'
-import tokenAbi from '../contracts/tokenAbi'
-
 const TotalView = () => {
   const [buyAmount, setBuyAmount] = useState(0)
   const [saleType, setSaleType] = useState('Public')
@@ -50,7 +48,8 @@ const TotalView = () => {
   const [currentState, setCurrentState] = useState(0)
   // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
   // const currentAddr = useSelector((state) => state.createFairLaunchState.currentAddr)
-  const currentAddr = new URLSearchParams(useLocation().search).get('id');
+  const currentAddr = new URLSearchParams(useLocation().search).get('id')
+  const metaInfo = useSelector((state) => state.metamaskState.metaAddress)
   // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
   const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
@@ -114,6 +113,12 @@ const TotalView = () => {
   const [instagramUrl, setInstagramUrl] = useState('')
   const [discordUrl, setDiscordUrl] = useState('')
   const [redditUrl, setRedditUrl] = useState('')
+  const [isOwner, setOwner] = useState('')
+  const [showOwnerZone, setShowOwnerZone] = useState(false)
+
+  const [isFinalizeLoad, setFinalizeLoad] = useState(false)
+  const [isBuying, setBuying] = useState(false)
+  const [isFinalized, setFinalized] = useState(true)
 
   const chartOption = {
     tooltip: {
@@ -148,9 +153,9 @@ const TotalView = () => {
           show: false
         },
         data: [
-          { value: 1000, name: 'Unlocked' },
-          { value: 0, name: 'Liquidity' },
-          { value: 0, name: 'Presale' },
+          { value: 0, name: 'Unlocked' },
+          { value: (presaleRate * liquidityPercent / 100), name: 'Liquidity' },
+          { value: (presaleRate), name: 'Presale' },
         ]
       }
     ]
@@ -175,6 +180,7 @@ const TotalView = () => {
   }
 
   async function handleBuy(valueBid) {
+    setBuying(true)
     try {
       const web3 = new Web3(provider())
 
@@ -189,9 +195,11 @@ const TotalView = () => {
       const txResult = await presaleContract.methods.userDeposit().send({'from': account, 'value': valueBid * 10 ** 18})
 
      console.log('success', txResult)
+     setBuying(false)
      return 1;
       
     } catch (error) {
+      setBuying(false)
       return -1
       console.log('error', error)
     }
@@ -233,23 +241,20 @@ const TotalView = () => {
   }
 
   async function handleFinalize() {
+    setFinalizeLoad(true)
     try {
       const web3 = new Web3(provider())
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-      // const value = presaleRate * liquidityPercent / 100
-      // const tokenContract = new web3.eth.Contract(tokenAbi, tokenAddress)
-      // const tx = await tokenContract.methods.approve(pancakeswapRouter, value * 10 ** tokenDecimal).send({'from': account, })
-      // console.log(tx)
       const presaleContract = new web3.eth.Contract(abi, presaleAddress)
       const txResult = await presaleContract.methods.purchaseICOCoin().send({'from': account})
 
-      console.log('success', txResult)
-      
+      console.log('success', txResult)      
     } catch (error) {
       console.log('error', error)
     }
+    setFinalizeLoad(false)
   }
 
   async function handleClaim() {
@@ -274,9 +279,9 @@ const TotalView = () => {
     // const res = await fetch(database_url.concat('/').concat('62857e9c68be6cb6c8e55628'))
     await res.json()
       .then(data => {
-        console.log(data)
         setPresaleAddress(data.presale_addr)
         presaleAddr = data.presale_addr
+        setOwner(data.token_owner)
         setTokenName(data.token_name)
         setTokenSymbol(data.token_symbol)
         setTokenDecimal(data.token_decimal)
@@ -369,7 +374,9 @@ const TotalView = () => {
   
       const status = await getPresaleStatus(presaleAddr)
       setPresaleState(status)
-      if(status == 1) {
+      if(status == 5) {
+        setFinalized(false)
+      } else if(status == 1) {
         setPresaleTime(startime - currentime)
       } else if(status == 2) { 
         setPresaleTime(endtime - currentime)
@@ -388,7 +395,6 @@ const TotalView = () => {
       const presaleContract = new web3.eth.Contract(abi, address)
       const txResult = await presaleContract.methods.presaleStatus().call()
       const balance = await web3.eth.getBalance(address)
-      console.log(balance)
       setCurrentState(+balance / (10 ** 18))
       return +txResult+1;
       
@@ -458,9 +464,23 @@ const TotalView = () => {
                 <div className='mt-3 d-grid gap-3 d-md-flex'>
                   {
                     (isValidBuy == true) ? (
-                    <button type="button" className="btn-accent" onClick={() => handleBuy(buyAmount)}>Buy</button>
+                      <button type="button" className="btn-accent" onClick={() => handleBuy(buyAmount)}>
+                        {
+                          isBuying === true ?(
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                              variant="light"
+                              style={{marginRight: '5px', marginTop: '2px'}}
+                            /> ) : (<></>)
+                        }
+                        Buy
+                      </button>
                     ) : (
-                      <button type="button" className="btn-disabled ">Buy</button>
+                      <button type="button" className="btn-black" disabled >Buy</button>
                     )
                   }
                 </div>
@@ -473,6 +493,16 @@ const TotalView = () => {
       </>
     )
   }
+
+  useEffect( () => {
+    if(metaInfo.toLowerCase() == isOwner) {
+      console.log('setOwnerzone ========> true', metaInfo, isOwner)
+      setShowOwnerZone(true)
+    } else {
+      console.log('setOwnerzone ========> false', metaInfo, isOwner)
+      setShowOwnerZone(false)
+    }
+  }, [metaInfo, isOwner])
 
   useEffect(() => {
     loadWholeData()
@@ -489,6 +519,9 @@ const TotalView = () => {
   useEffect(async () => {
     const status = await getPresaleStatus(presaleAddress)
     setPresaleState(status)
+    if(status == 5) {
+      setFinalized(false)
+    }
     if(status == 2) {
       const currentime = parseInt((new Date()).getTime() / 1000)
       const endtime = new Date(endTime).getTime() / 1000
@@ -518,15 +551,20 @@ const TotalView = () => {
         >
           <CCardBody >
             <CRow>
-              <CCol className="col-md-1">
+              <CCol xs={1}>
                 <div className="clearfix">
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
                 </div>
               </CCol>
-              <CCol >
+              <CCol className='justify-content-md-end'>
                 <div style={{fontSize: '25px'}}>{tokenName}&nbsp;Fair Launch &nbsp;
-                  <FontAwesomeIcon icon={faKey} /> &nbsp;
-                  <FontAwesomeIcon icon={faEdit} /> 
+                  {
+                    showOwnerZone === true ? (
+                    <>
+                      <FontAwesomeIcon icon={faKey} /> &nbsp;
+                      <FontAwesomeIcon icon={faEdit} /> 
+                    </> ) : (<></>)
+                  }
                 </div>
                 <div style={{marginTop: '7px'}}>
                   <a href={siteUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faGlobe} /></a>&nbsp;&nbsp;
@@ -717,6 +755,7 @@ const TotalView = () => {
             color='#242525'
             textColor='white'
             className='border-dark'
+            style={{marginBottom: '20px'}}
           >
             <CCardBody>
               <CRow>
@@ -752,7 +791,7 @@ const TotalView = () => {
         >
           <CCardBody>
             <CAlert color="dark">
-              Make sure the website is pinksale.finance!
+              Make sure the website
             </CAlert>
             {
               showStatus()
@@ -779,12 +818,12 @@ const TotalView = () => {
           </CCardBody>
         </CCard>
         <br/>
+        {
+          showOwnerZone === true ? (
         <CCard 
           color='#242525'
           textColor='white'
-          className='border-dark'
-          style={{marginBottom: '20px'}}
-        >
+          className='border-dark'>
           <CCardHeader>Owner Zone</CCardHeader>
           <CCardBody>
             <CAlert color="dark">
@@ -801,18 +840,43 @@ const TotalView = () => {
                 <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}}>List of contributors</CButton>
                 ): (<></>)
               }
-              <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleFinalize}>Finalize</CButton>
+              {
+                presaleState === 3 && isFinalized === true? (
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleFinalize}>
+                    {
+                    isFinalizeLoad == true ? (
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                      variant="light"
+                      style={{marginRight: '5px', marginTop: '2px'}}
+                    /> ) : (<></>)
+                    }
+                    Finalize
+                  </CButton>
+                ) : (
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
+                )
+              }
               {
                 isCancel ? (
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleWithdraw}>Withdraw canceled tokens</CButton>
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleWithdraw}>
+                    Withdraw canceled tokens
+                  </CButton>
                 ) : (
+                  isFinalized === true ? (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleCancel}>Cancel Pool</CButton>
+                  ) : (<></>)
                 )
               }
             </div>
             <p className="small-text-sz mt-1 text-blue-color">To Finalize presale, you have to exclude token transfer fee for presale contract.</p>
           </CCardBody>
-        </CCard>
+        </CCard> ) : (<></>)
+        }
       </CCol>
     </CRow>
   )

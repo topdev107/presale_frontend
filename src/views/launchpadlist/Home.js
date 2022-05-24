@@ -26,7 +26,8 @@ const LaunchpadList = () => {
 
   const loadData = async (currentPage_, pageCount_) => {
     // const res = await fetch(database_url.concat('/').concat('page'), requestOptions)
-    const res = await fetch(`${database_url}/page?pageCount=${pageCount_}&currentPage=${currentPage_}`)
+    // const res = await fetch(`${database_url}/page?pageCount=${pageCount_}&currentPage=${currentPage_}`)
+    const res = await fetch(`${database_url}/all`)
     await res.json()
     .then(data => {
       console.log('fetch whole Data=========>', data)
@@ -102,12 +103,12 @@ const LaunchpadList = () => {
             <br/>
             <CTabContent>
               <CTabPane role="tabpanel" aria-labelledby="all-tab" visible={activeKey === 1}>  
-                <CRow>
+                {/* <CRow>
                   <CCol xs={10}></CCol>
                   <CCol xs={2} >
                     <CFormInput type="number" size="sm" placeholder="page input" value={currentPage} aria-label="sm input example" onChange={handlePage}/>
                   </CCol>
-                </CRow>
+                </CRow> */}
                 <CRow>
                 {
                   tabledata.map((data) => {
@@ -140,12 +141,12 @@ const LaunchpadList = () => {
                 </CRow>
               </CTabPane>
               <CTabPane role="tabpanel" aria-labelledby="mine-tab" visible={activeKey === 2}>
-              <CRow>
+                {/* <CRow>
                 <CCol xs={10}></CCol>
                   <CCol xs={2} >
                     <CFormInput type="number" size="sm" placeholder="page input" value={myCurrentPage} aria-label="sm input example" onChange={handleMyPage}/>
                   </CCol>
-                </CRow>
+                </CRow> */}
                 <CRow>
                 {
                   myTableData.map((data) => {

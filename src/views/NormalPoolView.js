@@ -160,9 +160,9 @@ const TotalView = () => {
           show: false
         },
         data: [
-          { value: 1000, name: 'Unlocked' },
-          { value: 0, name: 'Liquidity' },
-          { value: 0, name: 'Presale' },
+          { value: 0, name: 'Unlocked' },
+          { value: (hardcap * listingRate * liquidityPercent / 100) , name: 'Liquidity' },
+          { value: (hardcap * presaleRate) , name: 'Presale' },
         ]
       }
     ]
@@ -296,8 +296,6 @@ const TotalView = () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
       const presaleContract = new web3.eth.Contract(abi, presaleAddress)
-      const own = await presaleContract.methods.getOwner().call()
-      console.log(own)
       const txResult = await presaleContract.methods.purchaseICOCoin().send({'from': account})
 
       console.log('success', txResult)      
@@ -425,13 +423,15 @@ const TotalView = () => {
   
       const status = await getPresaleStatus(presaleAddr)
       setPresaleState(status)
-      if(status == 1) {
+      if(status == 5) {
+        setFinalized(false)
+      } else if(status == 1) {
         setPresaleTime(startime - currentime)
       } else if(status == 2) { 
         setPresaleTime(endtime - currentime)
       } else {
         setPresaleTime(0)
-      }
+      }  
 //      loadTotalSupply()
   }
 
@@ -857,7 +857,7 @@ const TotalView = () => {
         >
           <CCardBody>
             <CAlert color="dark">
-              Make sure the website is pinksale.finance!
+              Make sure the website
             </CAlert>
             {
               showStatus()
@@ -993,7 +993,7 @@ const TotalView = () => {
             </div>
             <p className="small-text-sz mt-1 text-blue-color">To Finalize presale, you have to exclude token transfer fee for presale contract.</p>
           </CCardBody>
-        </CCard>) : (<></>)
+        </CCard> ) : (<></>)
         }
       </CCol>
     </CRow>
