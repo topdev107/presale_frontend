@@ -660,6 +660,7 @@ export const CreateTokenModal = (props) => {
     errMsgLiquidityFee,
     errMsgBuyBackFee,
     errMsgReflectionFee,
+    availableToken
   ])
   
   return (

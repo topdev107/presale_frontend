@@ -387,7 +387,7 @@ const TokenHome = () => {
       errMsgTokenRewardFee === '' &&
       errMsgAutoAddLiquidity === '' &&
       errMsgMarketingFee === '' &&
-      errMsgMarketingWallet === ''
+      errMsgMarketingWallet === '' &&
       availableToken == true
       ?
       setCreateValid(true) : setCreateValid(false)
@@ -420,6 +420,7 @@ const TokenHome = () => {
     errMsgLiquidityFee,
     errMsgBuyBackFee,
     errMsgReflectionFee,
+    availableToken
   ])
 
   const onChangeTokenType = (e) => {
