@@ -639,7 +639,8 @@ export const CreateTokenModal = (props) => {
       errMsgLiquidityFee === '' &&
       errMsgBuyBackFee === '' &&
       errMsgReflectionFee === '' &&
-      errMsgMarketingFee === '' ?
+      errMsgMarketingFee === '' &&
+      availableToken == true ?
       setCreateValid(true) : setCreateValid(false)
      }
   }, [
@@ -922,6 +923,33 @@ export const CreateTokenModal = (props) => {
                         placeholder='Ex: 0x...'
                         desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
                       />
+                      {
+                        availableToken == true ?
+                        (
+                          <></>
+                        ) : (<div className='danger small-text-sz mb-0'>Address is invalid</div>)
+                      }
+                      {
+                        isTokenValid == true ?
+                        (
+                          <div>
+                            <div style={{display: 'flex'}}>
+                              <div className='col-md-6 text_align_left text-yellow-color'>TokenName</div>
+                              <div className='col-md-6 text_align_right  text-yellow-color'>{rewardTokenName}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                              <div className='col-md-6 text_align_left text-yellow-color'>TokenSymbol</div>
+                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenSymbol}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                              <div className='col-md-6 text_align_left text-yellow-color'>TokenDecimal</div>
+                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenDecimal}</div>
+                            </div>
+                          </div>
+                        ) : (
+                          <></>
+                        )
+                      }
                     </CCol>
                     <CCol className='col-md-6'>
                       <NumberInputComponent 
@@ -975,10 +1003,10 @@ export const CreateTokenModal = (props) => {
                   )
                 )
               }
-              <CFormCheck
+              {/* <CFormCheck
                 id="useAntiBot"
                 label="Implement Pink Anti-Bot System?"
-                onChange={onChangeAntiBot} />
+                onChange={onChangeAntiBot} /> */}
               </>
             }
         </CModalBody>
@@ -986,7 +1014,9 @@ export const CreateTokenModal = (props) => {
           {/* <CButton color="secondary" onClick={() => setVisible(false)}>
           Close
           </CButton> */}
-          <button type="button" className='btn-black' onClick={() => setVisible(false)}>
+          <button type="button" className='btn-black' onClick={() => {
+            clearData() 
+            setVisible(false)}}>
             Close
           </button>
           {

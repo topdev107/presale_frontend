@@ -4,11 +4,11 @@ export const liquidityTokenFactory = '0x53D460C76a5a142591804B755EBCA7176f6d305A
 export const babytokenFactory = '0x523E270341e8CA8C6876c823889611c6ffCC4e46'
 export const buybackbabyFactory = '0xfc963E44e72687ED8fAC9E4C467115DCdeCa09ef'
 
-export const presaleFactory = '0xbE9b7bE2A06CDa2A3858b8b9D5c36A900C4af93a'
-export const presaleTestFactory = '0xbE9b7bE2A06CDa2A3858b8b9D5c36A900C4af93a'
-export const presale = '0x41707409792979ba543751B4395995fa94745BD2'
+export const presaleFactory = '0xFD8D81417597Ca0fFaaEA63F8dd8b33EBA6a3FDB'
+export const presaleTestFactory = '0xFD8D81417597Ca0fFaaEA63F8dd8b33EBA6a3FDB'
+export const presale = '0x495aA5a286890040F9FF1999eB393a8f2f6d0789'
 
-export const fairlaunchFactory = '0xa4424502214328A32861327142EcD75bD223d9f2'
+export const fairlaunchFactory = '0x934F335796e35A00900595CDd7F4FD86484098D1'
 
 export const testRouter = '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3' // TestPancakeswap Router
 export const testFactory = '0xb7926c0430afb07aa7defde6da862ae0bde767bc' // TestPancakeswap Factory

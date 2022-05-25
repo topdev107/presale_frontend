@@ -399,7 +399,8 @@ const TokenHome = () => {
       errMsgLiquidityFee === '' &&
       errMsgBuyBackFee === '' &&
       errMsgReflectionFee === '' &&
-      errMsgMarketingFee === '' ?
+      errMsgMarketingFee === '' &&
+      availableToken == true ?
       setCreateValid(true) : setCreateValid(false)
      }
   }, [
@@ -963,10 +964,10 @@ const TokenHome = () => {
                   )
                 )
               }
-              <CFormCheck
+              {/* <CFormCheck
                 id="useAntiBot"
                 label="Implement Pink Anti-Bot System?"
-                onChange={onChangeAntiBot} />
+                onChange={onChangeAntiBot} /> */}
               </>
             }
             <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">

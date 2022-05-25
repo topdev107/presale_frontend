@@ -120,6 +120,8 @@ const TotalView = () => {
   const [isBuying, setBuying] = useState(false)
   const [isFinalized, setFinalized] = useState(true)
 
+  const [progress, setProgress] = useState(0)
+
   const chartOption = {
     tooltip: {
       trigger: 'none'
@@ -393,8 +395,10 @@ const TotalView = () => {
       const account = accounts[0];
       const presaleContract = new web3.eth.Contract(abi, address)
       const txResult = await presaleContract.methods.presaleStatus().call()
-      const balance = await web3.eth.getBalance(address)
+      let balance = await web3.eth.getBalance(address)
       setCurrentState(+balance / (10 ** 18))
+      balance = await presaleContract.methods.getProgress().call()
+      setProgress(balance)
       return +txResult+1;
       
     } catch (error) {
@@ -445,7 +449,7 @@ const TotalView = () => {
               </CRow>
               <br/>
               <CProgress className="mb-1">
-                <CProgressBar color="warning" value={currentState / softcap * 100}/>
+                <CProgressBar color="warning" value={+progress}/>
               </CProgress>
               <div style={{display: 'flex'}}>
                 <div className='col-md-6 text_align_left'>{currentState} BNB </div>

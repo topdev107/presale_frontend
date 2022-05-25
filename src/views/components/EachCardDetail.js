@@ -46,11 +46,13 @@ export const FairCardDetail = (props) => {
 
       const presaleContract = new web3.eth.Contract(fairabi, address)
       const txResult = await presaleContract.methods.presaleStatus().call()
-      const balance = await web3.eth.getBalance(address)
+      let balance = await web3.eth.getBalance(address)
       console.log('Fairlaunch=======>', props.name, balance)
       const value = +balance / (10 ** 18)
       setCurrentState(value)
-      setProgress(value / props.softCap * 100)
+      balance = await presaleContract.methods.getProgress().call()
+      console.log(balance)
+      setProgress(balance)
       return +txResult+1;
       
     } catch (error) {
@@ -171,11 +173,12 @@ export const NormalCardDetail = (props) => {
 
       const presaleContract = new web3.eth.Contract(normalabi, address)
       const txResult = await presaleContract.methods.presaleStatus().call()
-      const balance = await web3.eth.getBalance(address)
+      let balance = await web3.eth.getBalance(address)
       console.log('Launchpad=======>', props.name, balance)
       const value = +balance / (10 ** 18)
       setCurrentState(value)
-      setProgress(value / props.hardCap * 100)
+      balance = await presaleContract.methods.getProgress().call()
+      setProgress(+balance)
       return +txResult+1;
       
     } catch (error) {
