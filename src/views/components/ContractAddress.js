@@ -10,8 +10,8 @@ export const presale = '0x41707409792979ba543751B4395995fa94745BD2'
 
 export const fairlaunchFactory = '0xa4424502214328A32861327142EcD75bD223d9f2'
 
-export const testRouter = '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3'
-export const testFactory = '0x7CAC9037f6ff0A1C73F62aDBa81Fe177Ea530828'
+export const testRouter = '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3' // TestPancakeswap Router
+export const testFactory = '0xb7926c0430afb07aa7defde6da862ae0bde767bc' // TestPancakeswap Factory
 export const dividends = '0x6eeb420e175f24820d5097bcf2a68363da544bcc'
 
 export const standardToken = '0x5c752e0588fAC559557Ac9fc32663BD923E52024'

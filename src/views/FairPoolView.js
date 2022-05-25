@@ -555,7 +555,7 @@ const TotalView = () => {
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
                 </div>
               </CCol>
-              <CCol className='justify-content-md-end'>
+              <CCol className='justify-content-md'>
                 <div style={{fontSize: '25px'}}>{tokenName}&nbsp;Fair Launch &nbsp;
                   {
                     showOwnerZone === true ? (
@@ -590,10 +590,10 @@ const TotalView = () => {
                   }
                 </div>
               </CCol>
-              <CCol className="d-md-flex justify-content-md-end">
+              <CCol className="d-md-flex ms-auto" xs={2}>
                 <div>
                   {
-                    presaleState === 3 ?
+                    presaleState === 3 || presaleState === 6 ?
                     <CBadge color='danger'>Ended</CBadge>
                     : presaleState === 1 ?
                     <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>

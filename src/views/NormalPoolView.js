@@ -639,11 +639,11 @@ const TotalView = () => {
                   }
                 </div>
               </CCol>
-              <CCol className="d-md-flex justify-content-md-end">
+              <CCol xs={2} className="d-md-flex justify-content-md-end">
                 <div>
                   {/* <CBadge color='light'>Canceled</CBadge> */}
                   {
-                      presaleState === 3 ?
+                      presaleState === 3 || presaleState === 6  ?
                       <CBadge color='danger'>Ended</CBadge>
                       : presaleState === 1 ?
                       <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>

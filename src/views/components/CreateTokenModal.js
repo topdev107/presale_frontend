@@ -627,7 +627,8 @@ export const CreateTokenModal = (props) => {
       errMsgTokenRewardFee === '' &&
       errMsgAutoAddLiquidity === '' &&
       errMsgMarketingFee === '' &&
-      errMsgMarketingWallet === ''
+      errMsgMarketingWallet === '' && 
+      availableToken == true
       ?
       setCreateValid(true) : setCreateValid(false)
      } else if(tokenType == 'Buyback Baby Token') {

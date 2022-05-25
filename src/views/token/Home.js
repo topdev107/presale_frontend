@@ -388,6 +388,7 @@ const TokenHome = () => {
       errMsgAutoAddLiquidity === '' &&
       errMsgMarketingFee === '' &&
       errMsgMarketingWallet === ''
+      availableToken == true
       ?
       setCreateValid(true) : setCreateValid(false)
      } else if(tokenType == 'Buyback Baby Token') {
