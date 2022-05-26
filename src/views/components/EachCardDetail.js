@@ -51,7 +51,6 @@ export const FairCardDetail = (props) => {
       const value = +balance / (10 ** 18)
       setCurrentState(value)
       balance = await presaleContract.methods.getProgress().call()
-      console.log(balance)
       setProgress(balance)
       return +txResult+1;
       
@@ -67,11 +66,12 @@ export const FairCardDetail = (props) => {
 
   useEffect(async () => {
     const presaleState = await getPresaleStatus(props.address)
+    console.log('FairLaunch ========>', presaleState)
     if(presaleState == 1) {
       setBadgeState('Upcoming')
     } else if(presaleState == 2) {
       setBadgeState('In progress')
-    } else if(presaleState == 3) {
+    } else if(presaleState == 3 || presaleState == 6) {
       setBadgeState('Ended')
     } else if(presaleState == 4) {
       setBadgeState('Failed')
@@ -97,7 +97,7 @@ export const FairCardDetail = (props) => {
               <CCol className="d-md-flex justify-content-md-end text-white-color">
                 <div>
                 {
-                  badgestate === 'Canceled' || badgestate === 'Ended' ?
+                  badgestate === 'Ended' ?
                     <CBadge color='danger'>{badgestate}</CBadge>
                     : badgestate === 'Upcoming' ?
                     <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
@@ -193,11 +193,12 @@ export const NormalCardDetail = (props) => {
 
   useEffect(async () => {
     const presaleState = await getPresaleStatus(props.address)
+    console.log('presale=======>', presaleState)
     if(+presaleState == 1) {
       setBadgeState('Upcoming')
     } else if(+presaleState == 2) {
       setBadgeState('In progress')
-    } else if(+presaleState == 3) {
+    } else if(+presaleState == 3 || +presaleState == 6) {
       setBadgeState('Ended')
     } else if(+presaleState == 4) {
       setBadgeState('Failed')
@@ -223,7 +224,7 @@ export const NormalCardDetail = (props) => {
               <CCol className="d-md-flex justify-content-md-end text-white-color">
                 <div>
                 {
-                  badgestate === 'Canceled' || badgestate === 'Ended' ?
+                  badgestate === 'Ended' ?
                     <CBadge color='danger'>{badgestate}</CBadge>
                     : badgestate === 'Upcoming' ?
                     <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>

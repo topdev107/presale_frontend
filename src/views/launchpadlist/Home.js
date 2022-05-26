@@ -7,10 +7,12 @@ import {
   CCardImage, CCardTitle, CCardText, CButton, CBadge,
   CProgressBar, CProgress,
 } from '@coreui/react'
+import { CSpinner } from '@coreui/react'
 
 import React, { useEffect, useState } from 'react'
 import { FormControl } from "react-bootstrap"
 import { FairCardDetail, NormalCardDetail } from '../components/EachCardDetail'
+import Spinner from 'react-bootstrap/Spinner'
 
 const LaunchpadList = () => {
 
@@ -20,6 +22,8 @@ const LaunchpadList = () => {
   const [tabledata, setTableData] = useState([])
   const [myCurrentPage, setMyCurrentPage] = useState(1)
   const [myTableData, setMyTableData] = useState([])
+
+  const [wholeLoading, setWholeLoading] = useState(true)
  
   // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
   const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
@@ -63,18 +67,27 @@ const LaunchpadList = () => {
     }
   }
 
-  useEffect(() => {
-    loadData(currentPage, pageCount)
+  useEffect(async () => {
+    setWholeLoading(true)
+    await loadData(currentPage, pageCount)
+    setWholeLoading(false)
   },[currentPage, pageCount])
 
   useEffect(async () => {
+    setWholeLoading(true)
     const ownerAddr = await loadWalletAddress()
     console.log('ownerAddr=============>',ownerAddr)
-    loadMyData(myCurrentPage, pageCount, ownerAddr)
+    await loadMyData(myCurrentPage, pageCount, ownerAddr)
+    setWholeLoading(false)
   },[myCurrentPage, pageCount])
 
   return (
     <CRow>
+      {
+        wholeLoading === true ? 
+        (
+          <CSpinner color="primary" />
+        ) : (
       <CCol xs={12}>
         <CCard>
           <CCardBody>
@@ -111,6 +124,10 @@ const LaunchpadList = () => {
                 </CRow> */}
                 <CRow>
                 {
+                  tabledata.length === 0 ? 
+                  (
+                    <div className='text-white-color'>There are no launchpad or fairlaunchpad</div>
+                  ) : (
                   tabledata.map((data) => {
                     return (data.presaletype === true ?
                     <FairCardDetail
@@ -137,6 +154,7 @@ const LaunchpadList = () => {
                       lockup = {data.lockupTime}
                     />)
                   })
+                  )
                 }
                 </CRow>
               </CTabPane>
@@ -149,6 +167,10 @@ const LaunchpadList = () => {
                 </CRow> */}
                 <CRow>
                 {
+                  tabledata.length === 0 ? 
+                  (
+                    <div className='text-white-color'>There are no your launchpad or fairlaunchpad</div>
+                  ) : (
                   myTableData.map((data) => {
                     return (data.presaletype === true ?
                     <FairCardDetail
@@ -175,6 +197,7 @@ const LaunchpadList = () => {
                       lockup = {data.lockupTime}
                     />)
                   })
+                  )
                 }
                 </CRow>                
               </CTabPane>
@@ -182,6 +205,7 @@ const LaunchpadList = () => {
           </CCardBody>
         </CCard>
       </CCol>
+    )}
     </CRow>
   );
 }

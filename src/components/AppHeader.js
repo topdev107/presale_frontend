@@ -165,7 +165,9 @@ import {
   CContainer,
   CHeader,
   CHeaderBrand, CHeaderNav,
-  CHeaderToggler
+  CHeaderToggler,
+  CButton,
+  CModal, CModalHeader, CModalBody, CModalTitle
 } from '@coreui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -182,6 +184,7 @@ const AppHeader = () => {
 
   const context = useWeb3Context()
   const [currentAccount, setCurrentAccount] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     context.setFirstValidConnector(['MetaMask'])
@@ -245,6 +248,15 @@ const AppHeader = () => {
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
         <CHeaderNav className="ms-3">
+          <CButton color="warning" variant="outline" shape="rounded-pill" style={{color: 'white', fontWeight: 'bold'}} onClick={() => setModalVisible(!modalVisible)}>BSC TESTNET</CButton>
+          <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
+            <CModalHeader onClose={() => setModalVisible(false)}>
+              <CModalTitle>Choose network</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              
+            </CModalBody>
+          </CModal>
           <AppHeaderDropdown
             currentAccount={currentAccount}
             amount={context}

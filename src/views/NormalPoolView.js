@@ -20,6 +20,7 @@ import {
 } from '@coreui/react-chartjs'
 import React, { useEffect, useState } from 'react';
 import ReactEcharts from "echarts-for-react"; 
+import { CSpinner } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react';
 import { cilList, cilKey, cilShieldAlt, AiOutlineGlobal } from '@coreui/icons';
@@ -128,6 +129,8 @@ const TotalView = () => {
   const [isFinalized, setFinalized] = useState(true)
 
   const [progress, setProgress] = useState(0)
+
+  const [wholeLoading, setWholeLoading] = useState(true)
 
   const chartOption = {
     tooltip: {
@@ -322,6 +325,7 @@ const TotalView = () => {
   }
 
   async function loadWholeData() {
+    setWholeLoading(true)
     const res = await fetch(database_url.concat('/').concat(currentAddr))
     let presaleAddr;
     let currentime, startime, endtime;
@@ -420,6 +424,7 @@ const TotalView = () => {
         // } else {
         //   setPresaleState(3)
         // }
+        setWholeLoading(false)
       })
   
       const status = await getPresaleStatus(presaleAddr)
@@ -467,6 +472,8 @@ const TotalView = () => {
       return 'failed'
     } else if(presaleState == 5) {
       return 'canceled'
+    } else {
+      return ''
     }
   }
 
@@ -476,7 +483,7 @@ const TotalView = () => {
       message = 'Presale Starts In'
     } else if(presaleState == 2) {
       message = 'Presale Ends In'
-    } else if(presaleState == 3) {
+    } else if(presaleState == 3 || presaleState == 6) {
       message = 'Presale Ended'
     } else if(presaleState == 4) {
       message = 'Presale Failed'
@@ -595,6 +602,12 @@ const TotalView = () => {
 
   return (
     <CRow xs={12}>
+      {
+        wholeLoading == true ?
+        (
+          <CSpinner color="primary" />
+        ) : (
+          <>
       <CCol xs={8}>
         <CCard
           color='#242525'
@@ -653,7 +666,9 @@ const TotalView = () => {
                       <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
                       : presaleState === 2 ?
                       <CBadge color='success'>Sale Live</CBadge>
-                      : <CBadge color='light'>Canceled</CBadge>
+                      : presaleState === 5 ?
+                        <CBadge color='light'>Canceled</CBadge>
+                      : <></>
                   }
                 </div>
               </CCol>
@@ -999,6 +1014,8 @@ const TotalView = () => {
         </CCard> ) : (<></>)
         }
       </CCol>
+      </>
+      )}
     </CRow>
   )
 }
