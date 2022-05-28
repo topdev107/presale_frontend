@@ -277,6 +277,7 @@ export const NormalCardDetail = (props) => {
               />
               <RowBetween
                 childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
+                childMiddle={<p></p>}
                 childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
               />
             </CCardText>
