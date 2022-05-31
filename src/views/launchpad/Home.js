@@ -59,7 +59,7 @@ const Home = () => {
     if (currentChain == 97 || currentChain == 56) return "BNB"
     if (currentChain == 25 || currentChain == 338 ) return "CRO"
   }, [currentChain])
-  
+
   const history = useHistory();
   const dispatch = useDispatch()
   const tokenAddr = useSelector((state) => state.createLaunchPadState.tokenAddress)
@@ -156,7 +156,7 @@ const Home = () => {
     dispatch(saveTokenSymbol(tokenSymbol))
     dispatch(saveTokenDecimals(tokenDecimal))
     dispatch(saveTokenTotalSupply(tokenTotalSupply / (10 ** tokenDecimal)))
-    dispatch(saveBasicSymbol({unit}))
+    dispatch(saveBasicSymbol(unit))
     history.push("/launchpad/defi_launch_pad_info");
   }
 

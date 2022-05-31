@@ -154,7 +154,7 @@ const FairHome = () => {
     dispatch(saveTokenSymbol(tokenSymbol))
     dispatch(saveTokenDecimals(tokenDecimal))
     dispatch(saveTokenTotalSupply(tokenTotalSupply / (10 ** tokenDecimal)))
-    dispatch(saveBasicSymbol({unit}))
+    dispatch(saveBasicSymbol(unit))
     history.push("/fairlaunch/defi_fair_launch_info");
   }
 
