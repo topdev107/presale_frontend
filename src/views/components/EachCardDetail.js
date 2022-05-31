@@ -103,7 +103,9 @@ export const FairCardDetail = (props) => {
                     <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
                     : badgestate === 'In progress' ?
                     <CBadge color='success'>Sale Live</CBadge>
-                    : <CBadge color='light'>Canceled</CBadge>
+                    : badgestate === 'Canceled' ?
+                      <CBadge color='light'>Canceled</CBadge>
+                    : <></>
                 }
                 </div>
               </CCol>
@@ -230,7 +232,9 @@ export const NormalCardDetail = (props) => {
                     <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
                     : badgestate === 'In progress' ?
                     <CBadge color='success'>Sale Live</CBadge>
-                    : <CBadge color='light'>Canceled</CBadge>
+                    : badgestate === 'Canceled' ? 
+                      <CBadge color='light'>Canceled</CBadge>
+                    : <></>
                 }
                 </div>
               </CCol>
