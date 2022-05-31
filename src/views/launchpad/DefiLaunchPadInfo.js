@@ -49,6 +49,7 @@ const DefiLaunchPadInfo = () => {
   const tokenAddr = useSelector((state) => state.createLaunchPadState.tokenAddress)
   // const tokenName = useSelector((state) => state.createLaunchPadState.tokenName)
   const tokenSymbol = useSelector((state) => state.createLaunchPadState.tokenSymbol)
+  const basicSymbol = useSelector((state) => state.createLaunchPadState.basicSymbol)
 
   const history = useHistory();
 
@@ -344,7 +345,7 @@ const DefiLaunchPadInfo = () => {
       setErrMsgListingRate('')
     }
 
-    setDescListingRate('1 BNB = ' + +listingRate + ' ' +  tokenSymbol )
+    setDescListingRate(`1 ${basicSymbol} = ${+listingRate} ${tokenSymbol} `)
 
     setDateTimeRange(`${startDate.format("YYYY-MM-DD HH:mm")} - ${endDate.format("YYYY-MM-DD HH:mm")}`)
 
@@ -488,7 +489,7 @@ const DefiLaunchPadInfo = () => {
                     value={presaleRate}
                     onChange={onChangePresaleRate}
                     errMsg={errMsgPresaleRate}
-                    desc='If I spend 1 BNB how many tokens will I receive?'
+                    desc={`If I spend 1 ${basicSymbol} how many tokens will I receive?`}
                   />
                   <div>
                     <p className='font-bold'>Whitelist</p>
@@ -539,7 +540,7 @@ const DefiLaunchPadInfo = () => {
                     <CRow>
                       <CCol className='col-md-6'>
                         <NumberInputComponent
-                          title='SoftCap(BNB)'
+                          title={`SoftCap(${basicSymbol})`}
                           value={softCap}
                           onChange={onChangeSoftCap}
                           errMsg={errMsgSoftCap}
@@ -548,7 +549,7 @@ const DefiLaunchPadInfo = () => {
                       </CCol>
                       <CCol className='col-md-6'>
                         <NumberInputComponent
-                          title='HardCap(BNB)'
+                          title={`HardCap(${basicSymbol})`}
                           value={hardCap}
                           onChange={onChangeHardCap}
                           errMsg={errMsgHardCap}
@@ -561,7 +562,7 @@ const DefiLaunchPadInfo = () => {
                     <CRow>
                       <CCol className='col-md-6'>
                         <NumberInputComponent
-                          title='Minimum buy (BNB)'
+                          title={`Minimum buy (${basicSymbol})`}
                           value={minBuyBNB}
                           onChange={onChangeMinBuy}
                           errMsg={errMsgMinBuyBNB}
@@ -570,7 +571,7 @@ const DefiLaunchPadInfo = () => {
                       </CCol>
                       <CCol className='col-md-6'>
                         <NumberInputComponent
-                          title='Maximum buy (BNB)'
+                          title={`Maximum buy (${basicSymbol})`}
                           value={maxBuyBNB}
                           onChange={onChangeMaxBuy}
                           errMsg={errMsgMaxBuyBNB}
@@ -621,7 +622,7 @@ const DefiLaunchPadInfo = () => {
                       </CCol>
                     </CRow>
                     <p className="small-text-sz mt-1 mb-0 text-blue-color">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
-                    <p className="small-text-sz mt-0 text-blue-color">If I spend 1 BNB on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
+                    <p className="small-text-sz mt-0 text-blue-color">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
                   </div>
                   <div className='mt-3'>
                     <p className='font-bold'>Select start time and end time (UTC)

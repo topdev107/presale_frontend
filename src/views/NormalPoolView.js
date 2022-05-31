@@ -18,7 +18,7 @@ import {
   CChart,
   CChartPie,
 } from '@coreui/react-chartjs'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import ReactEcharts from "echarts-for-react"; 
 import { CSpinner } from '@coreui/react'
 
@@ -134,6 +134,12 @@ const TotalView = () => {
   window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
   })
+
+  const unit = useMemo (() => {
+    if (currentChain == 97 || currentChain == 56) return "BNB"
+    if (currentChain == 25 || currentChain == 338 ) return "CRO"
+}, [currentChain])
+
 
   const chartOption = {
     tooltip: {
@@ -508,13 +514,12 @@ const TotalView = () => {
                 <CProgressBar color="warning" value={+progress}/>
               </CProgress>
               <div style={{display: 'flex'}}>
-                <div className='col-md-6 text_align_left'>{currentState} BNB </div>
-                <div className='col-md-6 text_align_right'>{hardcap} BNB </div>
+                <div className='col-md-6 text_align_left'>{currentState} {unit} </div>
+                <div className='col-md-6 text_align_right'>{hardcap} {unit} </div>
               </div>
               <CRow>
                 <NumberInputComponent
-                  // title= {'Amount: (max: ' + maxBuy + 'BNB)'}
-                  title = {`Amount : (max: ${+maxBuy - +userCurrent})BNB`}
+                  title = {`Amount : (max: ${+maxBuy - +userCurrent})${unit}`}
                   value={buyAmount}
                   onChange={onChangeAmount}
                   errMsg=''
@@ -711,7 +716,7 @@ const TotalView = () => {
             <RowBetween
               childStart = 'TokenAddress'
               childEnd = {<div className='text-yellow-color'>{tokenAddress}</div>}
-              desc = 'Do not send BNB to the token address!'
+              desc = {`Do not send ${unit} to the token address!`}
             />
             <RowBetween
               childStart = 'Total Supply'
@@ -727,11 +732,11 @@ const TotalView = () => {
             />
             <RowBetween
               childStart = 'Presale Rate'
-              childEnd = {<p>1 BNB = {presaleRate} {tokenSymbol}</p>}
+              childEnd = {<p>1 {unit} = {presaleRate} {tokenSymbol}</p>}
             />
             <RowBetween
               childStart = 'Listing Rate'
-              childEnd = {<p>1 BNB = {listingRate} {tokenSymbol}</p>}
+              childEnd = {<p>1 {unit} = {listingRate} {tokenSymbol}</p>}
             />
             {
               useVesting === true ? (
@@ -748,11 +753,11 @@ const TotalView = () => {
             }
             <RowBetween
               childStart = 'Soft Cap'
-              childEnd = {<p>{softcap} BNB</p>}
+              childEnd = {<p>{softcap} {unit}</p>}
             />
             <RowBetween
               childStart = 'Hard Cap'
-              childEnd = {<p>{hardcap} BNB</p>}
+              childEnd = {<p>{hardcap} {unit}</p>}
             /> 
             <RowBetween
               childStart = 'Unsold'
@@ -916,11 +921,11 @@ const TotalView = () => {
             />
             <RowBetween
               childStart = "Minimum Buy"
-              childEnd = {<p className='text-yellow-color'>{minBuy} BNB</p>}
+              childEnd = {<p className='text-yellow-color'>{minBuy} {unit}</p>}
             />
             <RowBetween 
               childStart = "Maximum Buy"
-              childEnd = {<p className='text-yellow-color'>{maxBuy} BNB</p>}
+              childEnd = {<p className='text-yellow-color'>{maxBuy} {unit}</p>}
             />
           </CCardBody>
         </CCard>

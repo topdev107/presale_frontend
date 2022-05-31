@@ -8,14 +8,14 @@ import {
 } from '@coreui/react';
 import { faInfoCircle, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner';
 import Web3 from 'web3';
 import RowBetween from '../components/RowBetween';
 import WorkflowItem from "../components/WorkflowItem";
 import { useDispatch, useSelector } from 'react-redux'
-import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals,saveTokenTotalSupply } from '../../state/CreateFairLaunchState'
+import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals,saveTokenTotalSupply, saveBasicSymbol } from '../../state/CreateFairLaunchState'
 import CIcon from '@coreui/icons-react';
 import { cilList, cilWarning, cilShieldAlt } from '@coreui/icons';
 import { CreateTokenModal } from '../components/CreateTokenModal'
@@ -34,20 +34,31 @@ const provider = () => {
 
 const FairHome = () => {
   const [fairlaunchFactoryAddr, setfairlaunchFactoryAddr] = useState('')
-  useEffect(() => {
+  const [currentChain, setCurrentChain] = useState(0)
+  useEffect(async () => {
     fairlaunchFactory()
     .then((result) => {
       setfairlaunchFactoryAddr(result)
       console.log(result)
     })  
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setCurrentChain(parseInt(id, 16))
   }, [])
+
   window.ethereum.on('networkChanged', function (networkid) {
     fairlaunchFactory()
     .then((result) => {
       setfairlaunchFactoryAddr(result)
       console.log(result)
     })
+    setCurrentChain(networkid)
   })
+
+  const unit = useMemo (() => {
+    if (currentChain == 97 || currentChain == 56) return "BNB"
+    if (currentChain == 25 || currentChain == 338 ) return "CRO"
+  }, [currentChain])
+
   const history = useHistory();
   const dispatch = useDispatch()
   const tokenAddr = useSelector((state) => state.createFairLaunchState.tokenAddress)
@@ -143,6 +154,7 @@ const FairHome = () => {
     dispatch(saveTokenSymbol(tokenSymbol))
     dispatch(saveTokenDecimals(tokenDecimal))
     dispatch(saveTokenTotalSupply(tokenTotalSupply / (10 ** tokenDecimal)))
+    dispatch(saveBasicSymbol({unit}))
     history.push("/fairlaunch/defi_fair_launch_info");
   }
 
@@ -203,7 +215,7 @@ const FairHome = () => {
                       </div>
                     )
                   }
-                  <p className="small-text-sz mt-1 text-blue-color">Create pool fee: 0.01 BNB</p>
+                  <p className="small-text-sz mt-1 text-blue-color">Create pool fee: 0.01 {unit}</p>
                   {
                     isTokenValid ? (
                       <div>

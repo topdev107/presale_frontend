@@ -18,7 +18,7 @@ import {
   CChart,
   CChartPie,
 } from '@coreui/react-chartjs'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import ReactEcharts from "echarts-for-react"; 
 
 import CIcon from '@coreui/icons-react';
@@ -129,6 +129,11 @@ const TotalView = () => {
   window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
   })
+
+  const unit = useMemo (() => {
+    if (currentChain == 97 || currentChain == 56) return "BNB"
+    if (currentChain == 25 || currentChain == 338 ) return "CRO"
+  }, [currentChain])
 
   const chartOption = {
     tooltip: {
@@ -471,8 +476,8 @@ const TotalView = () => {
                 <CProgressBar color="warning" value={+progress}/>
               </CProgress>
               <div style={{display: 'flex'}}>
-                <div className='col-md-6 text_align_left'>{currentState} BNB </div>
-                <div className='col-md-6 text_align_right'>{softcap} BNB </div>
+                <div className='col-md-6 text_align_left'>{currentState} {unit} </div>
+                <div className='col-md-6 text_align_right'>{softcap} {unit} </div>
               </div>
               <CRow>
                 <NumberInputComponent
@@ -674,7 +679,7 @@ const TotalView = () => {
             <RowBetween
               childStart = 'TokenAddress'
               childEnd = {<div className='text-yellow-color'>{tokenAddress}</div>}
-              desc = 'Do not send BNB to the token address!'
+              desc = {`Do not send ${unit} to the token address!`}
             />
             <RowBetween
               childStart = 'Total Supply'
@@ -703,7 +708,7 @@ const TotalView = () => {
             } */}
             <RowBetween
               childStart = 'Soft Cap'
-              childEnd = {<p>{softcap} BNB</p>}
+              childEnd = {<p>{softcap} {unit}</p>}
             />
             <RowBetween
               childStart = 'Presale Start Time'
@@ -859,7 +864,7 @@ const TotalView = () => {
             />
             <RowBetween
               childStart = "Current Rate"
-              childEnd = {<p className='text-yellow-color'>1 BNB = {presaleRate / currentState} {tokenSymbol}</p>}
+              childEnd = {<p className='text-yellow-color'>1 {unit} = {presaleRate / currentState} {tokenSymbol}</p>}
             />
           </CCardBody>
         </CCard>

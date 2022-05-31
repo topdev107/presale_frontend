@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const createLaunchPadSlice = createSlice({
     name: 'createLaunchPadState',
     initialState: {
+        basicSymbol: '',
         currentAddr: '',
         tokenAddress: '',
         needTokenAmount: 0,
@@ -45,6 +46,9 @@ export const createLaunchPadSlice = createSlice({
         desc: ''
     },
     reducers: {
+        saveBasicSymbol: (state, action) => {
+            state.basicSymbol = action.payload
+        },
         saveCurrentAddr: (state, action) => {
             state.currentAddr = action.payload
         },
@@ -169,6 +173,7 @@ export const createLaunchPadSlice = createSlice({
 })
 
 export const {
+    saveBasicSymbol,
     saveCurrentAddr,
     saveTokenAddr,
     saveTokenName,

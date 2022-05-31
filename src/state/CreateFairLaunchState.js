@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const createFairLaunchSlice = createSlice({
     name: 'createFairLaunchState',
     initialState: {
+        basicSymbol: '',
         currentAddr: '',
         tokenAddress: '',
         needTokenAmount: 0,
@@ -35,6 +36,9 @@ export const createFairLaunchSlice = createSlice({
         desc: ''
     },
     reducers: {
+        saveBasicSymbol: (state, action) => {
+            state.basicSymbol = action.payload
+        },
         saveCurrentAddr: (state, action) => {
             state.currentAddr = action.payload
         },
@@ -129,6 +133,7 @@ export const createFairLaunchSlice = createSlice({
 })
 
 export const {
+    saveBasicSymbol,
     saveCurrentAddr,
     saveTokenAddr,
     saveTokenName,

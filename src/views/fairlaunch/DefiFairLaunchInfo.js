@@ -38,7 +38,7 @@ const DefiFairLaunchInfo = () => {
   const dispatch = useDispatch()
   const tokenAddr = useSelector((state) => state.createFairLaunchState.tokenAddress)  
   const tokenSymbol = useSelector((state) => state.createFairLaunchState.tokenSymbol)
-
+  const basicSymbol = useSelector((state) => state.createFairLaunchState.basicSymbol)
 
   const history = useHistory()
   const [needAmount, setNeedAmount] = useState(0)
@@ -321,7 +321,7 @@ const DefiFairLaunchInfo = () => {
                 <div className="mt-3">
                   <CRow>
                     <NumberInputComponent
-                      title='SoftCap(BNB)'
+                      title={`SoftCap(${basicSymbol})`}
                       value={softcap}
                       onChange={onChangeSoftCap}
                       errMsg={errMsgSoftCap}
@@ -347,7 +347,7 @@ const DefiFairLaunchInfo = () => {
                       needInt
                     />
                     <p className="small-text-sz mt-1 mb-0 text-blue-color">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
-                    <p className="small-text-sz mt-0 text-blue-color">If I spend 1 BNB on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
+                    <p className="small-text-sz mt-0 text-blue-color">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
                   </CRow>
                 </div>
                 <div className='mt-3'>

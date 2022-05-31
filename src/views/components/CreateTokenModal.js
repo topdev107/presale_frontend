@@ -13,7 +13,7 @@ import {
   Modal, Button
 } from 'antd'
   
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NumberInputComponent from '../components/NumberInputComponent';
 import TextInputComponent from '../components/TextInputComponent';
@@ -52,6 +52,7 @@ export const CreateTokenModal = (props) => {
   const [dividendsAddr, setdividendsAddr] = useState('')
   const [testFactoryAddr, settestFactoryAddr] = useState('')
   const [swapPairsAddr, setswapPairsAddr] = useState('')
+  const [currentChain, setCurrentChain] = useState(0)
   const setAddresses = () => {
     standardTokenFactory()
     .then((result) => {
@@ -95,13 +96,21 @@ export const CreateTokenModal = (props) => {
     })  
   }
   
-  useEffect(() => {
+  useEffect(async () => {
     setAddresses()
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setCurrentChain(parseInt(id, 16))
   }, [])
   window.ethereum.on('networkChanged', function (networkid) {
     setAddresses()
+    setCurrentChain(networkid)
     clearData()
   })
+
+  const unit = useMemo (() => {
+    if (currentChain == 97 || currentChain == 56) return "BNB"
+    if (currentChain == 25 || currentChain == 338 ) return "CRO"
+  }, [currentChain])
 
 	const history = useHistory()
 	const dispatch = useDispatch()
@@ -183,6 +192,7 @@ export const CreateTokenModal = (props) => {
     const { web3 } = window
     if (web3 && web3.currentProvider) return web3.currentProvider
   }
+
 
   const clearData = () => {
     setTokenName('')
@@ -746,7 +756,7 @@ export const CreateTokenModal = (props) => {
                   <option value="Baby Token">Baby Token</option>
                   <option value="Buyback Baby Token">Buyback Baby Token</option>
                 </CFormSelect>
-                <div className="small-text-sz mt-1 text-blue-color">Fee: 0.01 BNB</div>
+                <div className="small-text-sz mt-1 text-blue-color">Fee: 0.01 {unit}</div>
               </div>
             </CRow>
             {

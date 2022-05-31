@@ -122,7 +122,7 @@ export const FairCardDetail = (props) => {
                 <CCol>
                   <p className='font-bold text-white-color'>
                     Soft Cap:
-                    <p>{props.softCap} BNB</p>
+                    <p>{props.softCap} {props.basicSymbol}</p>
                   </p>            
                 </CCol>
               </CRow>
@@ -133,7 +133,7 @@ export const FairCardDetail = (props) => {
                     <CProgress className="mb-3">
                       <CProgressBar color="warning" value={+progress}/>
                     </CProgress>
-                    <p>{currentState} BNB raised</p>
+                    <p>{currentState} {props.basicSymbol} raised</p>
                   </div>
                 </CCol>
               </CRow>
@@ -241,7 +241,7 @@ export const NormalCardDetail = (props) => {
                 <CCol>
                   <p className='font-bold text-white-color'>
                     {props.name}
-                    <p>1 BNB = {props.perrate} {props.symbol}</p>
+                    <p>1 {props.basicSymbol} = {props.perrate} {props.symbol}</p>
                   </p>
                 </CCol>
               </CRow>
@@ -249,7 +249,7 @@ export const NormalCardDetail = (props) => {
                 <CCol>
                   <p className='font-bold text-white-color'>
                     Soft/Hard Cap:
-                    <p className='font-bold text-accent-color'>{props.softCap} BNB - {props.hardCap} BNB</p>
+                    <p className='font-bold text-accent-color'>{props.softCap} {props.basicSymbol} - {props.hardCap} {props.basicSymbol}</p>
                   </p>
                 </CCol>
               </CRow>
@@ -261,8 +261,8 @@ export const NormalCardDetail = (props) => {
                       <CProgressBar color="warning" value={+progress}/>
                     </CProgress>
                     <CRow>
-                    <CCol className='xs-2 text_align_left'>{props.softCap} BNB </CCol>
-                    <CCol className='xs-2 text_align_right'>{props.hardCap} BNB </CCol>
+                    <CCol className='xs-2 text_align_left'>{props.softCap} {props.basicSymbol} </CCol>
+                    <CCol className='xs-2 text_align_right'>{props.hardCap} {props.basicSymbol} </CCol>
                     </CRow>
                   </p>
                 </CCol>

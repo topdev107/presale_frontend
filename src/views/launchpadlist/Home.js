@@ -9,7 +9,7 @@ import {
 } from '@coreui/react'
 import { CSpinner } from '@coreui/react'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { FormControl } from "react-bootstrap"
 import { FairCardDetail, NormalCardDetail } from '../components/EachCardDetail'
 import Spinner from 'react-bootstrap/Spinner'
@@ -32,6 +32,11 @@ const LaunchpadList = () => {
   window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
   })
+
+  const unit = useMemo (() => {
+    if (currentChain == 97 || currentChain == 56) return "BNB"
+    if (currentChain == 25 || currentChain == 338 ) return "CRO"
+  }, [currentChain])
 
   useEffect( async () => {
     const netId = await window.ethereum.request({ method: 'eth_chainId' })
@@ -149,6 +154,7 @@ const LaunchpadList = () => {
                       softCap = {data.softcap}
                       liquidity = {data.liquidityPercent}
                       lockup = {data.lockupTime}
+                      basicSymbol = {`${unit}`}
                     /> : 
                     <NormalCardDetail 
                       xs={4}
@@ -162,6 +168,7 @@ const LaunchpadList = () => {
                       hardCap = {data.hardcap}
                       liquidity = {data.liquidityPercent}
                       lockup = {data.lockupTime}
+                      basicSymbol = {`${unit}`}
                     />)
                   })
                   )
