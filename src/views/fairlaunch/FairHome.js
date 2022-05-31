@@ -33,6 +33,21 @@ const provider = () => {
 }
 
 const FairHome = () => {
+  const [fairlaunchFactoryAddr, setfairlaunchFactoryAddr] = useState('')
+  useEffect(() => {
+    fairlaunchFactory()
+    .then((result) => {
+      setfairlaunchFactoryAddr(result)
+      console.log(result)
+    })  
+  }, [])
+  window.ethereum.on('networkChanged', function (networkid) {
+    fairlaunchFactory()
+    .then((result) => {
+      setfairlaunchFactoryAddr(result)
+      console.log(result)
+    })
+  })
   const history = useHistory();
   const dispatch = useDispatch()
   const tokenAddr = useSelector((state) => state.createFairLaunchState.tokenAddress)
@@ -114,7 +129,7 @@ const FairHome = () => {
     setApproveState(true)
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
-    await tokenContract.methods.approve(fairlaunchFactory, tokenTotalSupply).send({ 'from': account })
+    await tokenContract.methods.approve(fairlaunchFactoryAddr, tokenTotalSupply).send({ 'from': account })
       .then(function(result) {
         console.log(result)
       })

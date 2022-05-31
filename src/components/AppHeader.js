@@ -43,14 +43,16 @@ const AppHeader = () => {
       }
 
       const chainId = await provider.request({ method: 'eth_chainId' });
-      const binanceTestChainId = '0x61'
-      if (chainId === binanceTestChainId) {
+      if (chainId === '0x61' ||
+          chainId === '0x38' ||
+          chainId === '0x19' || 
+          chainId === '0x152') {
           console.log("Bravo!, you are on the correct network");
       } else {
           try {
               await provider.request({
                   method: 'wallet_switchEthereumChain',
-                  params: [{ chainId: '0x38' }],
+                  params: [{ chainId: '0x61' }],
               });
               console.log("You have succefully switched to Binance Test network")
           } catch (switchError) {
@@ -61,7 +63,7 @@ const AppHeader = () => {
                           method: 'wallet_addEthereumChain',
                           params: [
                               {
-                                  chainId: '0x38',
+                                  chainId: '0x61',
                                   chainName: 'Binance Smart Chain',
                                   rpcUrls: ['https://bsc-dataseed.binance.org/'],
                                   blockExplorerUrls: ['https://bscscan.com/'],
@@ -84,7 +86,16 @@ const AppHeader = () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
       console.log("Found an account! Address: ", accounts[0])
       dispatch(setMetamask(accounts[0]))
-      setNetworkId('BSC TESTNET')
+      if (chainId === '0x61'){
+        setNetworkId('BSC TESTNET')
+      } else if (chainId === '0x38') {
+        setNetworkId('BSC MAINNET')
+      } else if (chainId === '0x19') {
+        setNetworkId('Cronos MAINNET')
+      } else if (chainId === '0x152') {
+        setNetworkId('Cronos TESTNET')
+      }
+      
       setCurrentAccount(accounts[0])
     } catch (error) {
       console.log(error)
@@ -93,7 +104,7 @@ const AppHeader = () => {
 
   useEffect(() => {
     loadWallet();
-  }, [currentAccount])
+  }, [])
 
   const connectWalletHandler = async () => {
     try {

@@ -33,7 +33,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Web3 from 'web3';
 import { getWeb3 } from '../web3/getWeb3'
 import abi from '../../contracts/presaleFactoryAbi.js'
-import { presaleFactory, presaleTestFactory } from '../components/ContractAddress'
+import { presaleFactory } from '../components/ContractAddress'
 import { toWei, fromWei } from "web3-utils";
 
 import {
@@ -41,6 +41,19 @@ import {
 } from '../../state/CreateLaunchPadState'
 
 const Review = () => {
+  const [presaleFactoryAddr, setPresaleFactoryAddr] = useState('')
+  useEffect(() => {
+    presaleFactory()
+    .then((result) => {
+      setPresaleFactoryAddr(result)
+    })
+  }, [])
+  window.ethereum.on('networkChanged', function (networkid) {
+    presaleFactory()
+    .then((result) => {
+      setPresaleFactoryAddr(result)
+    })
+  })
 
   const dispatch = useDispatch()
   const needTokenAmount = useSelector((state) => state.createLaunchPadState.needTokenAmount)
@@ -113,8 +126,8 @@ const Review = () => {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-
-      const presaleFactoryContract = new web3.eth.Contract(abi, presaleTestFactory)
+      console.log('review===========>', presaleFactoryAddr)
+      const presaleFactoryContract = new web3.eth.Contract(abi, presaleFactoryAddr)
       console.log("presaleFactoryContract starts here.......")
       console.log(presaleFactoryContract)
 
@@ -156,6 +169,8 @@ const Review = () => {
     const web3 = new Web3(provider())
 
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    let netId = await window.ethereum.request({ method: 'eth_chainId' })
+    netId = parseInt(netId, 16)
     const account = accounts[0];
 
     console.log("save database here =========================")
@@ -183,7 +198,7 @@ const Review = () => {
           useVestingCont: cVest, ves_firstReleasePresale: cFirstReleasePercent, ves_vestingPeriod: cVestingPeriod, ves_presaleTokenRelease: cEachReleasePercent,
           useTeamVest: tVest, team_totalTeamVest: totalTeamVestingTokens, team_firstTokenReleaseMinute: tFirstReleaseTime, team_firstTokenReleasePercent: tFirstReleasePercent, team_vestingPeriod: tVestingPeriod, team_teamTokenRelease: tEachReleasePercent,
           logoURL: logoURL, websiteURL: website, facebookURL: facebook, twitterURL: twitter, githubURL: github, telegramURL: telegram, instagramURL: instagram, discordURL: discord, redditURL: reddit, description: desc,
-          presaletype: false
+          presaletype: false, network: netId
         })
       };
       let _idAddr = '';

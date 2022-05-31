@@ -30,6 +30,7 @@ export const DisableWhitelist = (props) => {
   const handleDisableWhitelist = async () => {
     try {
       const publicDateInUnixTimestamp = parseInt((new Date).now().getTime() / 1000);
+      console.log(publicDateInUnixTimestamp)
       const web3 = new Web3(provider())
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });

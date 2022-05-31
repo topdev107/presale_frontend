@@ -35,7 +35,7 @@ import {
   testRouter,
   dividends,
   testFactory,
-  standardToken
+  swapPairs
 } from '../components/ContractAddress'
 import TokenAbi from '../../contracts/tokenAbi'
 import FactoryAbi from '../../contracts/factoryAbi'
@@ -44,6 +44,64 @@ import {saveTokenAddr as saveTokenAddr2} from '../../state/CreateFairLaunchState
 import { Spinner } from 'react-bootstrap';
 
 export const CreateTokenModal = (props) => {
+  const [standardTokenFactoryAddr, setstandardTokenFactoryAddr] = useState('')
+  const [liquidityTokenFactoryAddr, setliquidityTokenFactoryAddr] = useState('')
+  const [babytokenFactoryAddr, setbabytokenFactoryAddr] = useState('')
+  const [buybackbabyFactoryAddr, setbuybackbabyFactoryAddr] = useState('')
+  const [testRouterAddr, settestRouterAddr] = useState('')
+  const [dividendsAddr, setdividendsAddr] = useState('')
+  const [testFactoryAddr, settestFactoryAddr] = useState('')
+  const [swapPairsAddr, setswapPairsAddr] = useState('')
+  const setAddresses = () => {
+    standardTokenFactory()
+    .then((result) => {
+      setstandardTokenFactoryAddr(result)
+      console.log(result)
+    })  
+    liquidityTokenFactory()
+    .then((result) => {
+      setliquidityTokenFactoryAddr(result)
+      console.log(result)
+    })  
+    babytokenFactory()
+    .then((result) => {
+      setbabytokenFactoryAddr(result)
+      console.log(result)
+    })  
+    buybackbabyFactory()
+    .then((result) => {
+      setbuybackbabyFactoryAddr(result)
+      console.log(result)
+    })  
+    dividends()
+    .then((result) => {
+      setdividendsAddr(result)
+      console.log(result)
+    })  
+    testRouter()
+    .then((result) => {
+      settestRouterAddr(result)
+      console.log(result)
+    })  
+    testFactory()
+    .then((result) => {
+      settestFactoryAddr(result)
+      console.log(result)
+    })  
+    swapPairs()
+    .then((result) => {
+      setswapPairsAddr(result)
+      console.log(result)
+    })  
+  }
+  
+  useEffect(() => {
+    setAddresses()
+  }, [])
+  window.ethereum.on('networkChanged', function (networkid) {
+    setAddresses()
+    clearData()
+  })
 
 	const history = useHistory()
 	const dispatch = useDispatch()
@@ -159,7 +217,7 @@ export const CreateTokenModal = (props) => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
 
-      const standardTokenFactoryContract = new web3.eth.Contract(abi, standardTokenFactory)
+      const standardTokenFactoryContract = new web3.eth.Contract(abi, standardTokenFactoryAddr)
       console.log("standardTokenFactoryContract starts here.......")
       console.log(standardTokenFactoryContract)
 
@@ -199,7 +257,7 @@ export const CreateTokenModal = (props) => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
 
-      const liquidityFactoryContract = new web3.eth.Contract(liquidityAbi, liquidityTokenFactory)
+      const liquidityFactoryContract = new web3.eth.Contract(liquidityAbi, liquidityTokenFactoryAddr)
       console.log("standardTokenFactoryContract starts here.......")
       console.log(liquidityFactoryContract)
 
@@ -207,7 +265,7 @@ export const CreateTokenModal = (props) => {
         tokenName, 
         tokenSymbol, 
         +tokenTotalSupply, 
-        testRouter, 
+        testRouterAddr, 
         charityAddress, 
         transfeeYield, 
         transfeeLiquidity, 
@@ -247,7 +305,7 @@ export const CreateTokenModal = (props) => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
 
-      const standardTokenFactoryContract = new web3.eth.Contract(babyAbi, babytokenFactory)
+      const standardTokenFactoryContract = new web3.eth.Contract(babyAbi, babytokenFactoryAddr)
       console.log("standardTokenFactoryContract starts here.......")
       console.log(standardTokenFactoryContract)
 
@@ -255,7 +313,7 @@ export const CreateTokenModal = (props) => {
         tokenName, 
         tokenSymbol, 
         +tokenTotalSupply,
-        [rewardToken, testRouter, marketingWallet, dividends],
+        [rewardToken, testRouterAddr, marketingWallet, dividendsAddr],
         [tokenRewardFee, autoAddLiquidity, marketingFee],
         minimumTokenBalance
       ).send({ 'from': account, 'value': 10000000000000000 })
@@ -293,7 +351,7 @@ export const CreateTokenModal = (props) => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
 
-      const standardTokenFactoryContract = new web3.eth.Contract(buybackAbi, buybackbabyFactory)
+      const standardTokenFactoryContract = new web3.eth.Contract(buybackAbi, buybackbabyFactoryAddr)
       console.log("standardTokenFactoryContract starts here.......")
       console.log(standardTokenFactoryContract)
 
@@ -302,7 +360,7 @@ export const CreateTokenModal = (props) => {
         tokenSymbol, 
         +tokenTotalSupply,
         rewardToken,
-        testRouter,
+        testRouterAddr,
         [liquidityFee*100, buyBackFee*100, reflectionFee*100, marketingFee*100, 10000]
       ).send({ 'from': account, 'value': 10000000000000000 })
 
@@ -362,8 +420,8 @@ export const CreateTokenModal = (props) => {
 
   async function isAvailable(address) {
     const web3 = new Web3(provider())
-    const TokenContract = new web3.eth.Contract(FactoryAbi, testFactory)
-    await TokenContract.methods.getPair(address, '0xae13d989dac2f0debff460ac112a837c89baa7cd').call().then(function(result) {
+    const TokenContract = new web3.eth.Contract(FactoryAbi, testFactoryAddr)
+    await TokenContract.methods.getPair(address, swapPairsAddr).call().then(function(result) {
       if(result == '0x0000000000000000000000000000000000000000'){
         setAvailableToken(false)
       } else {

@@ -123,6 +123,12 @@ const TotalView = () => {
 
   const [progress, setProgress] = useState(0)
   const [wholeLoading, setWholeLoading] = useState(true)
+  const [userCurrent, setUserCurrent] = useState(0)
+  const [currentChain, setCurrentChain] = useState(0)
+
+  window.ethereum.on('networkChanged', function (networkid) {
+    setCurrentChain(networkid)
+  })
 
   const chartOption = {
     tooltip: {
@@ -251,7 +257,7 @@ const TotalView = () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
       const presaleContract = new web3.eth.Contract(abi, presaleAddress)
-      const txResult = await presaleContract.methods.purchaseICOCoin().send({'from': account})
+      const txResult = await presaleContract.methods.purchaseICOCoin(account).send({'from': account})
 
       console.log('success', txResult)      
     } catch (error) {
@@ -277,93 +283,96 @@ const TotalView = () => {
 
   async function loadWholeData() {
     setWholeLoading(true)
-    const res = await fetch(database_url.concat('/').concat(currentAddr))
+    // const res = await fetch(database_url.concat('/').concat(currentAddr))
+    const res = await fetch(`${database_url}/${currentAddr}?chainId=${currentChain}`)
     let presaleAddr;
     let currentime, startime, endtime;
     // const res = await fetch(database_url.concat('/').concat('62857e9c68be6cb6c8e55628'))
     await res.json()
-      .then(data => {
-        setPresaleAddress(data.presale_addr)
-        presaleAddr = data.presale_addr
-        setOwner(data.token_owner)
-        setTokenName(data.token_name)
-        setTokenSymbol(data.token_symbol)
-        setTokenDecimal(data.token_decimal)
-        setTokenAddress(data.token_addr)
-        setTokenSupply(data.token_supply)
-        setPresaleRate(data.token_presale_rate)
-        setListingRate(data.token_listing_rate)
-        setSoftcap(data.softcap)
-        if(data.unsold == false) {
-          setUnsold('Burn')
-        } else {
-          setUnsold('Refund')
-        }
-        setStartTime(data.starttime)
-        setEndTime(data.endtime)
-        setLiquidityPercent(data.liquidityPercent)
-        setLockTime(data.lockupTime)
-        setMinBuy(data.minBuy)
-        setMaxBuy(data.maxBuy)
-        setDescription(data.description)
-        if(data.iswhitelist == true) {
-          setSaleType('Whitelist')
-        } else {
-          setSaleType('Public')
-        }
-
-        setLogoUrl(data.logoURL)
-        setSiteUrl(data.websiteURL)
-        setFacebookUrl(data.facebookURL)
-        setTwitterUrl(data.twitterURL)
-        setGithubUrl(data.githubURL)
-        setTelegramUrl(data.telegramURL)
-        setInstagramUrl(data.instagramURL)
-        setDiscordUrl(data.discordURL)
-        setRedditUrl(data.redditURL)
-    
-        if(data.useVestingCont) {
-          setUseVesting(true)
-          setFirstReleasePresale(data.ves_firstReleasePresale)
-          setVestingPresaleTime(data.ves_vestingPeriod)
-          setVestingPresaleTime(data.ves_presaleTokenRelease)
-        }
-    
-        if(data.useTeamVest) {
-          setUseTeamVesting(true)
-          setTotalTeamVesting(data.team_totalTeamVest)
-          setFirstReleaseListing(data.team_firstTokenReleaseMinute)
-          setFirstReleaseTeam(data.team_firstTokenReleasePercent)
-          setCycleTime(data.team_vestingPeriod)
-          setTeamReleaseEach(data.team_teamTokenRelease)
-          const ltotal = data.team_totalTeamVest
-          const lfirstReleaseTeam = data.team_firstTokenReleasePercent
-          const lfirstlisting = data.team_firstTokenReleaseMinute
-          const lcycletime = data.team_vestingPeriod
-          const lteameach = data.team_teamTokenRelease
-          const lstarttime = data.starttime
-          var ltabledata = []
-          ltabledata.push([1, lstarttime + lfirstlisting, ltotal * lfirstReleaseTeam / 100, lfirstReleaseTeam])
-          var count = 2;
-          var temp = 100 - +lfirstReleaseTeam
-          var temptime = lstarttime
-          while( temp > 0 ) {
-            if(temp < +lteameach){
-              ltabledata.push([count, temptime, ltotal * temp / 100, temp ])
-              // console.log([count, temptime, ltotal * temp / 100, temp])
-            } else {
-              ltabledata.push([count, temptime, ltotal * lteameach / 100, lteameach])
-              // console.log([count, temptime, ltotal * lteameach / 100, lteameach])
-            }
-            count ++;
-            temp -= +lteameach
-            temptime += +lcycletime
+      .then(data1 => {
+        if(data1.length > 0) {
+          var data = data1[0]
+          setPresaleAddress(data.presale_addr)
+          presaleAddr = data.presale_addr
+          setOwner(data.token_owner)
+          setTokenName(data.token_name)
+          setTokenSymbol(data.token_symbol)
+          setTokenDecimal(data.token_decimal)
+          setTokenAddress(data.token_addr)
+          setTokenSupply(data.token_supply)
+          setPresaleRate(data.token_presale_rate)
+          setListingRate(data.token_listing_rate)
+          setSoftcap(data.softcap)
+          if(data.unsold == false) {
+            setUnsold('Burn')
+          } else {
+            setUnsold('Refund')
           }
-        }
-        setTableData(ltabledata)
-        currentime = parseInt((new Date()).getTime() / 1000)
-        startime = new Date(data.starttime).getTime() / 1000
-        endtime = new Date(data.endtime).getTime() / 1000
+          setStartTime(data.starttime)
+          setEndTime(data.endtime)
+          setLiquidityPercent(data.liquidityPercent)
+          setLockTime(data.lockupTime)
+          setMinBuy(data.minBuy)
+          setMaxBuy(data.maxBuy)
+          setDescription(data.description)
+          if(data.iswhitelist == true) {
+            setSaleType('Whitelist')
+          } else {
+            setSaleType('Public')
+          }
+
+          setLogoUrl(data.logoURL)
+          setSiteUrl(data.websiteURL)
+          setFacebookUrl(data.facebookURL)
+          setTwitterUrl(data.twitterURL)
+          setGithubUrl(data.githubURL)
+          setTelegramUrl(data.telegramURL)
+          setInstagramUrl(data.instagramURL)
+          setDiscordUrl(data.discordURL)
+          setRedditUrl(data.redditURL)
+      
+          if(data.useVestingCont) {
+            setUseVesting(true)
+            setFirstReleasePresale(data.ves_firstReleasePresale)
+            setVestingPresaleTime(data.ves_vestingPeriod)
+            setVestingPresaleTime(data.ves_presaleTokenRelease)
+          }
+      
+          if(data.useTeamVest) {
+            setUseTeamVesting(true)
+            setTotalTeamVesting(data.team_totalTeamVest)
+            setFirstReleaseListing(data.team_firstTokenReleaseMinute)
+            setFirstReleaseTeam(data.team_firstTokenReleasePercent)
+            setCycleTime(data.team_vestingPeriod)
+            setTeamReleaseEach(data.team_teamTokenRelease)
+            const ltotal = data.team_totalTeamVest
+            const lfirstReleaseTeam = data.team_firstTokenReleasePercent
+            const lfirstlisting = data.team_firstTokenReleaseMinute
+            const lcycletime = data.team_vestingPeriod
+            const lteameach = data.team_teamTokenRelease
+            const lstarttime = data.starttime
+            var ltabledata = []
+            ltabledata.push([1, lstarttime + lfirstlisting, ltotal * lfirstReleaseTeam / 100, lfirstReleaseTeam])
+            var count = 2;
+            var temp = 100 - +lfirstReleaseTeam
+            var temptime = lstarttime
+            while( temp > 0 ) {
+              if(temp < +lteameach){
+                ltabledata.push([count, temptime, ltotal * temp / 100, temp ])
+                // console.log([count, temptime, ltotal * temp / 100, temp])
+              } else {
+                ltabledata.push([count, temptime, ltotal * lteameach / 100, lteameach])
+                // console.log([count, temptime, ltotal * lteameach / 100, lteameach])
+              }
+              count ++;
+              temp -= +lteameach
+              temptime += +lcycletime
+            }
+          }
+          setTableData(ltabledata)
+          currentime = parseInt((new Date()).getTime() / 1000)
+          startime = new Date(data.starttime).getTime() / 1000
+          endtime = new Date(data.endtime).getTime() / 1000
         // console.log(startime, endtime, currentime)
         // if(currentime < startime) {
         //   setPresaleState(1)
@@ -374,6 +383,7 @@ const TotalView = () => {
         // } else {
         //   setPresaleState(3)
         // }
+        }
       })
   
       const status = await getPresaleStatus(presaleAddr)
@@ -403,6 +413,9 @@ const TotalView = () => {
       setCurrentState(+balance / (10 ** 18))
       balance = await presaleContract.methods.getProgress().call()
       setProgress(balance)
+      const current = await presaleContract.methods.getUserStatus().call()
+      console.log(current)
+      setUserCurrent(current)
       return +txResult+1;
       
     } catch (error) {
@@ -495,9 +508,16 @@ const TotalView = () => {
                 </div>
               </CRow>
             </>
-          ) : (<>
+          ) : (
+            userCurrent === 0 ?
+            (
+              <></>
+            ) : (
+            <>
               <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaim}>Claim tokens</CButton>
-          </>)
+            </> 
+            )
+          )
         }
       </>
     )
@@ -513,9 +533,14 @@ const TotalView = () => {
     }
   }, [metaInfo, isOwner])
 
+  useEffect(async () => {
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setCurrentChain(parseInt(id, 16))
+  }, [])
+
   useEffect(() => {
     loadWholeData()
-   }, [])
+   }, [currentChain])
  
   useEffect(() => {
     const interval = setInterval(() => {
@@ -556,7 +581,11 @@ const TotalView = () => {
         wholeLoading == true ?
         (
           <CSpinner color="primary" />
-        ) : (
+        ) : 
+          tokenName === '' ? (
+            <p className='white-color-text' style={{textAlign: 'center'}}>Error: please check the correct network or reload this page</p>
+          ) :
+        (
           <>
       <CCol xs={8}>
         <CCard

@@ -35,6 +35,20 @@ const provider = () => {
 }
 
 const Home = () => {
+  const [presaleFactoryAddr, setPresaleFactoryAddr] = useState('')
+  useEffect(() => {
+    presaleFactory()
+    .then((result) => {
+      setPresaleFactoryAddr(result)
+      console.log(result)
+    })  
+  }, [])
+  window.ethereum.on('networkChanged', function (networkid) {
+    presaleFactory()
+    .then((result) => {
+      setPresaleFactoryAddr(result)
+    })
+  })
   const history = useHistory();
   const dispatch = useDispatch()
   const tokenAddr = useSelector((state) => state.createLaunchPadState.tokenAddress)
@@ -116,8 +130,8 @@ const Home = () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
     console.log(tokenContract)
-    console.log({presaleFactory, tokenTotalSupply, account})
-    await tokenContract.methods.approve(presaleFactory, tokenTotalSupply).send({ 'from': account })
+    console.log({presaleFactoryAddr, tokenTotalSupply, account})
+    await tokenContract.methods.approve(presaleFactoryAddr, tokenTotalSupply).send({ 'from': account })
       .then(function(result) {
         console.log(result)
       })

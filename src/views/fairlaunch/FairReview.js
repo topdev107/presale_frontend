@@ -34,6 +34,21 @@ import { presaleFactory, fairlaunchFactory } from '../components/ContractAddress
 import { toWei, fromWei } from "web3-utils";
 
 const FairReview = () => {
+  const [fairlaunchFactoryAddr, setfairlaunchFactoryAddr] = useState('')
+  useEffect(() => {
+    fairlaunchFactory()
+    .then((result) => {
+      setfairlaunchFactoryAddr(result)
+      console.log(result)
+    })  
+  }, [])
+  window.ethereum.on('networkChanged', function (networkid) {
+    fairlaunchFactory()
+    .then((result) => {
+      setfairlaunchFactoryAddr(result)
+      console.log(result)
+    })
+  })
 
   const dispatch = useDispatch()
   const needTokenAmount = useSelector((state) => state.createFairLaunchState.needTokenAmount)
@@ -95,7 +110,7 @@ const FairReview = () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
 
-      const presaleFactoryContract = new web3.eth.Contract(abi, fairlaunchFactory)
+      const presaleFactoryContract = new web3.eth.Contract(abi, fairlaunchFactoryAddr)
       console.log("presaleFactoryContract starts here.......")
       console.log(presaleFactoryContract)
 
@@ -129,6 +144,8 @@ const FairReview = () => {
     const web3 = new Web3(provider())
 
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    let netId = await window.ethereum.request({ method: 'eth_chainId' })
+    netId = parseInt(netId, 16)
     const account = accounts[0];
 
     console.log("save database here =========================")
@@ -150,7 +167,7 @@ const FairReview = () => {
           useVestingCont: false, ves_firstReleasePresale: 0, ves_vestingPeriod: 0, ves_presaleTokenRelease: 0,
           useTeamVest: false, team_totalTeamVest: 0, team_firstTokenReleaseMinute: 0, team_firstTokenReleasePercent: 0, team_vestingPeriod: 0, team_teamTokenRelease: 0,
           logoURL: logoURL, websiteURL: website, facebookURL: facebook, twitterURL: twitter, githubURL: github, telegramURL: telegram, instagramURL: instagram, discordURL: discord, redditURL: reddit, description: desc,
-          presaletype: true
+          presaletype: true, network: netId
         })
       };
       let _idAddr = '';
