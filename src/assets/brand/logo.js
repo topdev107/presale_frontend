@@ -1,12 +1,9 @@
 export const logo = [
-  '608 134',
+  '250 50',
   `
   <title>Presale pro</title>
   <g>
-    <g style="fill:#00a1ff">
-    </g>
-    <g style="fill:#3c4b64">
-    </g>
+    <image width="200" height="48" href="./assets/presale_logo.png" />
   </g>
 `,
 ]

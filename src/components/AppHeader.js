@@ -192,6 +192,7 @@ const AppHeader = () => {
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
+          style={{color: 'white'}}
           // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
           onClick={() => {
             dispatch(set(!sidebarShow))
@@ -202,7 +203,7 @@ const AppHeader = () => {
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
-        <CHeaderNav className="ms-3">
+        <CHeaderNav className="ms-3" style={{width: '100%', justifyContent: 'flex-end'}}>
           <CButton color="warning" variant="outline" shape="rounded-pill" style={{color: 'white', fontWeight: 'bold'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
               <CModalHeader onClose={() => setModalVisible(false)}>
