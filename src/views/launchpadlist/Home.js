@@ -114,7 +114,7 @@ const LaunchpadList = () => {
                   onClick={() => setActiveKey(1)}
                   className="text-grey-color"
                 >
-                  All launchpads
+                  All Pads
                 </CNavLink>
               </CNavItem>
               <CNavItem >
@@ -124,7 +124,7 @@ const LaunchpadList = () => {
                   onClick={() => setActiveKey(2)}
                   className="text-grey-color"
                 >
-                  My Contributions
+                  My Pads
                 </CNavLink>
               </CNavItem>
             </CNav>
