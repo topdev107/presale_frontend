@@ -210,9 +210,9 @@ const AppHeader = () => {
                 <CModalTitle>Choose network</CModalTitle>
               </CModalHeader>
               <CModalBody>
-                <p className='text-white-color'> MAINNET</p>
+                <div className='text-white-color'> MAINNET</div>
                 <CRow xs={12} className="display-block">
-                  <CCol xs={6} className="d-grid width-100">
+                  <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="dark" onClick={() => changeNetwork(0)}>  
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
@@ -226,9 +226,9 @@ const AppHeader = () => {
                   </CCol>
                 </CRow>
                 <br/>
-                <p className='text-white-color'>TESTNET</p>
+                <div className='text-white-color'>TESTNET</div>
                 <CRow xs={12} className="display-block">
-                  <CCol xs={6} className="d-grid width-100">
+                  <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="dark" onClick={() => changeNetwork(2)}>
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
