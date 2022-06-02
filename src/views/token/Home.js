@@ -807,7 +807,7 @@ const TokenHome = () => {
                         </CFormSelect>
                       </div>
                     </CRow>
-                    <CRow className='mt-3'>
+                    <CRow className='mt-3 display-block'>
                       <CCol className='col-md-6'>
                         <NumberInputComponent 
                           title='Transaction fee to generate yield (%)'
@@ -913,7 +913,7 @@ const TokenHome = () => {
                       />
                     </CCol>
                   </CRow>
-                  <CRow className='mt-3'>
+                  <CRow className='mt-3 display-block'>
                     <CCol className='col-md-6'>
                       <NumberInputComponent 
                         title= 'Token reward fee (%)'
@@ -933,7 +933,7 @@ const TokenHome = () => {
                       />
                     </CCol>
                   </CRow>
-                  <CRow className='mt-3'>
+                  <CRow className='mt-3 display-block'>
                     <CCol className='col-md-6'>
                       <NumberInputComponent 
                         title='Marketing fee (%)'
@@ -991,7 +991,7 @@ const TokenHome = () => {
                       />
                     </CCol>
                   </CRow>
-                  <CRow className='mt-3'>
+                  <CRow className='mt-3 display-block'>
                     <CCol className='col-md-6'>
                       <NumberInputComponent 
                         title= 'Buyback Fee (%)'

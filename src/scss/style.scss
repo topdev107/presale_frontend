@@ -372,3 +372,59 @@ span {
 .card-img, .card-img-top, .card-img-bottom {
     width: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .dispaly-line-table {
+        display: inline-table;
+    }
+
+    .flex-0 {
+        flex: 0;
+    }
+
+    .position-right {
+        display: flex;
+        justify-content: end;
+    }
+
+    .display-block {
+        display: block!important;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .width-100 {
+        width: 100%;
+    }
+
+    .flex-none {
+        flex: none;
+    }
+
+    .mt-3 {
+        margin-top: 10px
+    }
+
+    .word-break {
+        word-break: break-all;
+    }
+
+    .flex-1 {
+        flex: 1 0;
+        flex-wrap: nowrap;
+    }
+
+    .flex-column {
+        flex-direction: column;
+        position: relative;
+    }
+
+    .position-right-absolute {
+        position: absolute;
+        right: 40px;
+        top: 20px;
+        display: block;
+    }
+}

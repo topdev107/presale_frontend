@@ -225,53 +225,53 @@ const FairReview = () => {
                 <div>
                   <RowBetween
                     childStart={<p>Total token</p>}
-                    childEnd={<p className='text-accent-color'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
+                    childEnd={<p className='text-accent-color text-right'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
                   />
                   <RowBetween
                     childStart={<p>Token name</p>}
-                    childEnd={<p className='text-blue-color'>{tokenName}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{tokenName}</p>}
                   />
                   <RowBetween
                     childStart={<p>Token symbol</p>}
-                    childEnd={<p className='text-blue-color'>{tokenSymbol}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{tokenSymbol}</p>}
                   />
                   <RowBetween
                     childStart={<p>Token decimals</p>}
-                    childEnd={<p className='text-blue-color'>{tokenDecimals}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{tokenDecimals}</p>}
                   />
                   <RowBetween
                     childStart={<p>Total selling amount</p>}
-                    childEnd={<p className='text-blue-color'>{total_selling_amount}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{total_selling_amount}</p>}
                   />
                   <RowBetween
                     childStart={<p>Softcap</p>}
-                    childEnd={<p className='text-blue-color'>{softcap}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{softcap}</p>}
                   />
                   <RowBetween
                     childStart={<p>Liquidity</p>}
-                    childEnd={<p className='text-blue-color'>{liquidity}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{liquidity}</p>}
                   />
                   <RowBetween
                     childStart={<p>Start time</p>}
-                    childEnd={<p className='text-blue-color'>{startDate}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{startDate}</p>}
                   />
                   <RowBetween
                     childStart={<p>End time</p>}
-                    childEnd={<p className='text-blue-color'>{endDate}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{endDate}</p>}
                   />
                   <RowBetween
                     childStart={<p>Liquidity lockup time</p>}
-                    childEnd={<p className='text-blue-color'>{lockTime}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{lockTime}</p>}
                   />
                   <RowBetween
                     childStart={<p>Website</p>}
-                    childEnd={<p className='text-blue-color'>{website}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{website}</p>}
                   />
                   {
                     facebook ? (
                       <RowBetween
                         childStart={<p>Facebook</p>}
-                        childEnd={<p className='text-blue-color'>{facebook}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{facebook}</p>}
                       />
                     ) : (
                       <></>
@@ -281,7 +281,7 @@ const FairReview = () => {
                     twitter ? (
                       <RowBetween
                         childStart={<p>Twitter</p>}
-                        childEnd={<p className='text-blue-color'>{twitter}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{twitter}</p>}
                       />
                     ) : (
                       <></>
@@ -291,7 +291,7 @@ const FairReview = () => {
                     github ? (
                       <RowBetween
                         childStart={<p>Github</p>}
-                        childEnd={<p className='text-blue-color'>{github}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{github}</p>}
                       />
                     ) : (
                       <></>
@@ -301,7 +301,7 @@ const FairReview = () => {
                     telegram ? (
                       <RowBetween
                         childStart={<p>Telegram</p>}
-                        childEnd={<p className='text-blue-color'>{telegram}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{telegram}</p>}
                       />
                     ) : (
                       <></>
@@ -311,7 +311,7 @@ const FairReview = () => {
                     instagram ? (
                       <RowBetween
                         childStart={<p>Instagram</p>}
-                        childEnd={<p className='text-blue-color'>{instagram}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{instagram}</p>}
                       />
                     ) : (
                       <></>
@@ -321,7 +321,7 @@ const FairReview = () => {
                     discord ? (
                       <RowBetween
                         childStart={<p>Discord</p>}
-                        childEnd={<p className='text-blue-color'>{discord}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{discord}</p>}
                       />
                     ) : (
                       <></>
@@ -331,7 +331,7 @@ const FairReview = () => {
                     reddit ? (
                       <RowBetween
                         childStart={<p>Reddit</p>}
-                        childEnd={<p className='text-blue-color'>{reddit}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{reddit}</p>}
                       />
                     ) : (
                       <></>
@@ -341,11 +341,11 @@ const FairReview = () => {
                     !usingTeamVesting ?
                       <RowBetween
                         childStart={<p>Using Team Vesting?</p>}
-                        childEnd={<p className='text-blue-color'>No</p>}
+                        childEnd={<p className='text-blue-color text-right'>No</p>}
                       /> :
                       <RowBetween
                         childStart={<p>Using Team Vesting?</p>}
-                        childEnd={<p className='text-blue-color'>Yes</p>}
+                        childEnd={<p className='text-blue-color text-right'>Yes</p>}
                       />
                   }
                   <CAlert color="warning" className="d-flex align-items-center" dismissible>

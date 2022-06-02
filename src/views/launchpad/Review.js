@@ -256,76 +256,76 @@ const Review = () => {
                 <div>
                   <RowBetween
                     childStart={<p>Total token</p>}
-                    childEnd={<p className='text-accent-color'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
+                    childEnd={<p className='text-accent-color text-right'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
                   />
                   <RowBetween
                     childStart={<p>Token name</p>}
-                    childEnd={<p className='text-blue-color'>{tokenName}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{tokenName}</p>}
                   />
                   <RowBetween
                     childStart={<p>Token symbol</p>}
-                    childEnd={<p className='text-blue-color'>{tokenSymbol}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{tokenSymbol}</p>}
                   />
                   <RowBetween
                     childStart={<p>Token decimals</p>}
-                    childEnd={<p className='text-blue-color'>{tokenDecimals}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{tokenDecimals}</p>}
                   />
                   <RowBetween
                     childStart={<p>Presale rate</p>}
-                    childEnd={<p className='text-blue-color'>{presaleRate}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{presaleRate}</p>}
                   />
                   <RowBetween
                     childStart={<p>Listing rate</p>}
-                    childEnd={<p className='text-blue-color'>{listingRate}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{listingRate}</p>}
                   />
                   <RowBetween
                     childStart={<p>Sale method</p>}
-                    childEnd={<p className='text-blue-color'>{
+                    childEnd={<p className='text-blue-color text-right'>{
                       isWhitelist == true ? 
                         'Whitelist' : 'Public'
                     }</p>}
                   />
                   <RowBetween
                     childStart={<p>Softcap</p>}
-                    childEnd={<p className='text-blue-color'>{softCap}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{softCap}</p>}
                   />
                   <RowBetween
                     childStart={<p>Hardcap</p>}
-                    childEnd={<p className='text-blue-color'>{hardCap}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{hardCap}</p>}
                   />
                   <RowBetween
                     childStart={<p>Minimum buy</p>}
-                    childEnd={<p className='text-blue-color'>{minBuy}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{minBuy}</p>}
                   />
                   <RowBetween
                     childStart={<p>Maximum buy</p>}
-                    childEnd={<p className='text-blue-color'>{maxBuy}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{maxBuy}</p>}
                   />
                   <RowBetween
                     childStart={<p>Liquidity</p>}
-                    childEnd={<p className='text-blue-color'>{liquidity}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{liquidity}</p>}
                   />
                   <RowBetween
                     childStart={<p>Start time</p>}
-                    childEnd={<p className='text-blue-color'>{moment(startDate).utc().format('DD/MM/YYYY HH:mm')}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{moment(startDate).utc().format('DD/MM/YYYY HH:mm')}</p>}
                   />
                   <RowBetween
                     childStart={<p>End time</p>}
-                    childEnd={<p className='text-blue-color'>{moment(endDate).utc().format('DD/MM/YYYY HH:mm')}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{moment(endDate).utc().format('DD/MM/YYYY HH:mm')}</p>}
                   />
                   <RowBetween
                     childStart={<p>Liquidity lockup time</p>}
-                    childEnd={<p className='text-blue-color'>{lockTime}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{lockTime}</p>}
                   />
                   <RowBetween
                     childStart={<p>Website</p>}
-                    childEnd={<p className='text-blue-color'>{website}</p>}
+                    childEnd={<p className='text-blue-color text-right'>{website}</p>}
                   />
                   {
                     facebook ? (
                       <RowBetween
                         childStart={<p>Facebook</p>}
-                        childEnd={<p className='text-blue-color'>{facebook}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{facebook}</p>}
                       />
                     ) : (
                       <></>
@@ -335,7 +335,7 @@ const Review = () => {
                     twitter ? (
                       <RowBetween
                         childStart={<p>Twitter</p>}
-                        childEnd={<p className='text-blue-color'>{twitter}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{twitter}</p>}
                       />
                     ) : (
                       <></>
@@ -345,7 +345,7 @@ const Review = () => {
                     github ? (
                       <RowBetween
                         childStart={<p>Github</p>}
-                        childEnd={<p className='text-blue-color'>{github}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{github}</p>}
                       />
                     ) : (
                       <></>
@@ -355,7 +355,7 @@ const Review = () => {
                     telegram ? (
                       <RowBetween
                         childStart={<p>Telegram</p>}
-                        childEnd={<p className='text-blue-color'>{telegram}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{telegram}</p>}
                       />
                     ) : (
                       <></>
@@ -365,7 +365,7 @@ const Review = () => {
                     instagram ? (
                       <RowBetween
                         childStart={<p>Instagram</p>}
-                        childEnd={<p className='text-blue-color'>{instagram}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{instagram}</p>}
                       />
                     ) : (
                       <></>
@@ -375,7 +375,7 @@ const Review = () => {
                     discord ? (
                       <RowBetween
                         childStart={<p>Discord</p>}
-                        childEnd={<p className='text-blue-color'>{discord}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{discord}</p>}
                       />
                     ) : (
                       <></>
@@ -385,7 +385,7 @@ const Review = () => {
                     reddit ? (
                       <RowBetween
                         childStart={<p>Reddit</p>}
-                        childEnd={<p className='text-blue-color'>{reddit}</p>}
+                        childEnd={<p className='text-blue-color text-right'>{reddit}</p>}
                         
                       />
                     ) : (
@@ -395,7 +395,7 @@ const Review = () => {
 
                   <RowBetween
                     childStart={<p>Using Team Vesting?</p>}
-                    childEnd={<p className='text-blue-color'>{
+                    childEnd={<p className='text-blue-color text-right'>{
                       tVest ? 'Yes' : 'No'
                     }</p>}
                   />
@@ -404,23 +404,23 @@ const Review = () => {
                       <>
                         <RowBetween
                           childStart={<p>Total vesting tokens</p>}
-                          childEnd={<p className='text-blue-color'> {totalTeamVestingTokens} </p>}
+                          childEnd={<p className='text-blue-color text-right'> {totalTeamVestingTokens} </p>}
                         />
                         <RowBetween
                           childStart={<p>First token release after listing($minutes)</p>}
-                          childEnd={<p className='text-blue-color'> {tFirstReleaseTime} </p>}
+                          childEnd={<p className='text-blue-color text-right'> {tFirstReleaseTime} </p>}
                         />
                         <RowBetween
                           childStart={<p>Vesting period each cycle($minutes)</p>}
-                          childEnd={<p className='text-blue-color'> {tVestingPeriod} </p>}
+                          childEnd={<p className='text-blue-color text-right'> {tVestingPeriod} </p>}
                         />
                         <RowBetween
                           childStart={<p>Token release each cycle</p>}
-                          childEnd={<p className='text-blue-color'> {tEachReleasePercent} </p>}
+                          childEnd={<p className='text-blue-color text-right'> {tEachReleasePercent} </p>}
                         />
                         <RowBetween
                           childStart={<p>First batch token release amount</p>}
-                          childEnd={<p className='text-blue-color'> {tFirstReleasePercent} </p>}
+                          childEnd={<p className='text-blue-color text-right'> {tFirstReleasePercent} </p>}
                         />
                         
                         <CRow className='mr-0 pr-0' >

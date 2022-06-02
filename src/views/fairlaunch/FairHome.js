@@ -221,15 +221,15 @@ const FairHome = () => {
                       <div>
                         <RowBetween
                           childStart={<p>Name</p>}
-                          childEnd={<p className='text-blue-color'>{tokenName}</p>}
+                          childEnd={<p className='text-blue-color text-right'>{tokenName}</p>}
                         />
                         <RowBetween
                           childStart={<p>Symbol</p>}
-                          childEnd={<p>{tokenSymbol}</p>}
+                          childEnd={<p className="text-right">{tokenSymbol}</p>}
                         />
                         <RowBetween
                           childStart={<p>Decimals</p>}
-                          childEnd={<p>{tokenDecimal}</p>}
+                          childEnd={<p className="text-right">{tokenDecimal}</p>}
                         />
                         <CAlert color="warning" className="d-flex align-items-center" dismissible>
                           <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
@@ -240,7 +240,7 @@ const FairHome = () => {
                         {
                           !isExistPool ? (
                             tokenStatus === NO_APPROVED ? (
-                              <div className="d-md-flex justify-content-md-center mt-4">
+                              <div className="d-md-flex justify-content-md-center mt-4 position-right">
                                 <div className='loader'></div>
                                 <button type="button" className="btn-accent" disabled={approveState} onClick={() => handleApprove()} >
                                   {
@@ -259,7 +259,7 @@ const FairHome = () => {
                                 </button>             
                               </div>
                             ) : (
-                              <div className="d-md-flex justify-content-md-center mt-4">
+                              <div className="d-md-flex justify-content-md-center mt-4 position-right">
                                 <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
                               </div>
                             )

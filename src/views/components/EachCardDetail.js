@@ -94,7 +94,7 @@ export const FairCardDetail = (props) => {
                 <CCardImage orientation="top" src={props.img} width={50} height={50}/>
                 </div>
               </CCol>
-              <CCol className="d-md-flex justify-content-md-end text-white-color">
+              <CCol className="d-md-flex justify-content-md-end text-white-color text-right">
                 <div>
                 {
                   badgestate === 'Ended' ?
@@ -147,12 +147,21 @@ export const FairCardDetail = (props) => {
                 childStart={<p>Lockup Time:</p>}
                 childEnd={<p className='text-yellow-color'>{props.lockup} minutes</p>}
               />
-              <RowBetween
-                childStart={<p>{/*Presale: {badgestate}*/}</p>}
-                childMiddle={<p></p>}
-                // childEnd={<Link to='../launchviewfair'  className="btn btn-accent">View Pool</Link>}
-                childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
-              />
+              {
+                props.list == 1 ?
+                  <RowBetween
+                    lanchpadList
+                    childStart={<p></p>}
+                    childMiddle={<p></p>}
+                    childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                  /> :
+                  <RowBetween
+                    childStart={<p></p>}
+                    childMiddle={<p></p>}
+                    childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                  />
+              }
+              
               
             </CCardText>
           </CCardBody>
@@ -223,7 +232,7 @@ export const NormalCardDetail = (props) => {
                 <CCardImage align="start" rounded src={props.img} width={50} height={50} />
                 </div>
               </CCol>
-              <CCol className="d-md-flex justify-content-md-end text-white-color">
+              <CCol className="d-md-flex justify-content-md-end text-white-color text-right">
                 <div>
                 {
                   badgestate === 'Ended' ?
@@ -279,11 +288,20 @@ export const NormalCardDetail = (props) => {
                 childStart={<p>Lockup Time:</p>}
                 childEnd={<p className='text-yellow-color'>{props.lockup} minutes</p>}
               />
-              <RowBetween
-                childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
-                childMiddle={<p></p>}
-                childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
-              />
+              {
+                props.list == 1 ?
+                  <RowBetween
+                    lanchpadList
+                    childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
+                    childMiddle={<p></p>}
+                    childEnd={<CButton className="width-100" color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                  /> :
+                  <RowBetween
+                    childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
+                    childMiddle={<p></p>}
+                    childEnd={<CButton color='dark' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                  />
+              }
             </CCardText>
           </CCardBody>
         </CCard>

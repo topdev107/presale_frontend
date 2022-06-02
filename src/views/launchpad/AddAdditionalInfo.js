@@ -276,7 +276,7 @@ const AddAdditionalInfo = () => {
                 <CRow>
                   <p className="danger small-text-sz mb-0">(*) is required field.</p>
                   <div className='mt-3'>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol className='col-md-6'>
                         <UrlInputComponent
                           title='LogoURL'
@@ -305,7 +305,7 @@ const AddAdditionalInfo = () => {
                   </div>
 
                   <div className='mt-3'>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol className='col-md-6'>
                         <UrlInputComponent
                           title='Facebook'
@@ -330,7 +330,7 @@ const AddAdditionalInfo = () => {
                   </div>
 
                   <div className='mt-3'>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol className='col-md-6'>
                         <UrlInputComponent
                           title='Github'
@@ -355,7 +355,7 @@ const AddAdditionalInfo = () => {
                   </div>
 
                   <div className='mt-3'>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol className='col-md-6'>
                         <UrlInputComponent
                           title='Instagram'

@@ -210,14 +210,14 @@ const AppHeader = () => {
               </CModalHeader>
               <CModalBody>
                 <p className='text-white-color'> MAINNET</p>
-                <CRow xs={12}>
-                  <CCol xs={6} className="d-grid">
+                <CRow xs={12} className="display-block">
+                  <CCol xs={6} className="d-grid width-100">
                     <CButton color="dark" onClick={() => changeNetwork(0)}>  
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
-                  <CCol xs={6} className="d-grid">
+                  <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="dark" onClick={() => changeNetwork(1)}>
                       <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
@@ -226,14 +226,14 @@ const AppHeader = () => {
                 </CRow>
                 <br/>
                 <p className='text-white-color'>TESTNET</p>
-                <CRow xs={12}>
-                  <CCol xs={6} className="d-grid">
+                <CRow xs={12} className="display-block">
+                  <CCol xs={6} className="d-grid width-100">
                     <CButton color="dark" onClick={() => changeNetwork(2)}>
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
-                  <CCol xs={6} className="d-grid">
+                  <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="dark" onClick={() => changeNetwork(3)}>
                       <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos

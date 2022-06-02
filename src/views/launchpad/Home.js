@@ -223,15 +223,15 @@ const Home = () => {
                       <div>
                         <RowBetween
                           childStart={<p>Name</p>}
-                          childEnd={<p className='text-blue-color'>{tokenName}</p>}
+                          childEnd={<p className='text-blue-color text-right'>{tokenName}</p>}
                         />
                         <RowBetween
                           childStart={<p>Symbol</p>}
-                          childEnd={<p>{tokenSymbol}</p>}
+                          childEnd={<p className="text-right">{tokenSymbol}</p>}
                         />
                         <RowBetween
                           childStart={<p>Decimals</p>}
-                          childEnd={<p>{tokenDecimal}</p>}
+                          childEnd={<p className="text-right">{tokenDecimal}</p>}
                         />
                         {/* <CAlert color="dark" className="d-flex align-items-center" dismissible>
                           <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
@@ -240,9 +240,10 @@ const Home = () => {
                           </div>
                         </CAlert> */}
                         <div>
-                              <div className='warning-outline-box-accent'>
+                              <div className='warning-outline-box-accent dispaly-line-table'>
                                 <RowBetween
                                   isLong
+                                  createLanchpad
                                   childStart={<FontAwesomeIcon icon={faInfoCircle} className='text-accent-color' style={{ marginTop: '10px' }} />}
                                   childMiddle={<p className='text-accent-color' style={{ fontSize: '13px', marginTop: '10px' }}>Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.</p>}
                                   childEnd={<FontAwesomeIcon icon={faWindowClose} onClick={handleCloseInfo} style={{ color: 'black', marginTop: '10px' }} />}
@@ -252,7 +253,7 @@ const Home = () => {
                         {
                           !isExistPool ? (
                             tokenStatus === NO_APPROVED ? (
-                              <div className="d-md-flex justify-content-md-center mt-4">
+                              <div className="d-md-flex justify-content-md-center mt-4 position-right">
                                 <div className='loader'></div>
                                 <button type="button" className="btn-accent" disabled={approveState} onClick={() => handleApprove()} >
                                   {
@@ -271,7 +272,7 @@ const Home = () => {
                                 </button>             
                               </div>
                             ) : (
-                              <div className="d-md-flex justify-content-md-center mt-4">
+                              <div className="d-md-flex justify-content-md-center mt-4 position-right">
                                 <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
                               </div>
                             )

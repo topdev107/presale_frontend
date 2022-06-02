@@ -581,7 +581,7 @@ const TotalView = () => {
   }, [presaleTime])
 
   return (
-    <CRow xs={12}>
+    <CRow xs={12} className="display-block">
       {
         wholeLoading == true ?
         (
@@ -592,14 +592,14 @@ const TotalView = () => {
           ) :
         (
           <>
-      <CCol xs={8}>
+      <CCol xs={8} className="width-100">
         <CCard
           color='#242525'
           textColor='white'
           className='border-dark'
         >
           <CCardBody >
-            <CRow>
+            <CRow className="flex-column">
               <CCol xs={1}>
                 <div className="clearfix">
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
@@ -640,7 +640,7 @@ const TotalView = () => {
                   }
                 </div>
               </CCol>
-              <CCol xs={2} className="d-md-flex justify-content-md-end">
+              <CCol xs={2} className="d-md-flex justify-content-md-end position-right-absolute">
                 <div>
                   {
                     presaleState === 3 || presaleState === 6 ?
@@ -661,104 +661,106 @@ const TotalView = () => {
             </CRow>
             <br/><br/>
             <RowBetween
+              token
               childStart = 'Presale Address'
-              childEnd = {<p className='text-yellow-color'>{presaleAddress}</p>}
+              childEnd = {<p className='text-yellow-color word-break text-right'>{presaleAddress}</p>}
             />
             <RowBetween
               childStart = 'Token Name'
-              childEnd = {<p>{tokenName}</p>}
+              childEnd = {<p className="text-right">{tokenName}</p>}
             />
             <RowBetween
               childStart = 'Token Symbol'
-              childEnd = {<p>{tokenSymbol}</p>}
+              childEnd = {<p className="text-right">{tokenSymbol}</p>}
             />
             <RowBetween
               childStart = 'Token Decimals'
-              childEnd = {<p>{tokenDecimal}</p>}
+              childEnd = {<p className="text-right">{tokenDecimal}</p>}
             />
             <RowBetween
+              token
               childStart = 'TokenAddress'
-              childEnd = {<div className='text-yellow-color'>{tokenAddress}</div>}
+              childEnd = {<div className='text-yellow-color word-break text-right'>{tokenAddress}</div>}
               desc = {`Do not send ${unit} to the token address!`}
             />
             <RowBetween
               childStart = 'Total Supply'
-              childEnd = {<p>{tokenSupply} {tokenSymbol}</p>}
+              childEnd = {<p className="text-right">{tokenSupply} {tokenSymbol}</p>}
             />
             <RowBetween
               childStart = 'Tokens For Presale'
-              childEnd = {<p>{presaleRate} {tokenSymbol}</p>}
+              childEnd = {<p className="text-right">{presaleRate} {tokenSymbol}</p>}
             />
             <RowBetween
               childStart = 'Tokens For Liquidity'
-              childEnd = {<p>{presaleRate * liquidityPercent / 100} {tokenSymbol}</p>}
+              childEnd = {<p className="text-right">{presaleRate * liquidityPercent / 100} {tokenSymbol}</p>}
             />
             {/* {
               useVesting === true ? (
               <>
                 <RowBetween
                   childStart = 'First Release For Presale'
-                  childEnd = {<p>{firstReleasePresale}%</p>}
+                  childEnd = {<p className="text-right">{firstReleasePresale}%</p>}
                 />
                 <RowBetween
                   childStart = 'Vesting For Presale'
-                  childEnd = {<p>{vestingPresalePercent}% each {vestingPresaleTime} minutes</p>}
+                  childEnd = {<p className="text-right">{vestingPresalePercent}% each {vestingPresaleTime} minutes</p>}
                 />
               </> ) : (<> </>)
             } */}
             <RowBetween
               childStart = 'Soft Cap'
-              childEnd = {<p>{softcap} {unit}</p>}
+              childEnd = {<p className="text-right">{softcap} {unit}</p>}
             />
             <RowBetween
               childStart = 'Presale Start Time'
-              childEnd = {<p>{startTime}</p>}
+              childEnd = {<p className="text-right">{startTime}</p>}
             />
             <RowBetween
               childStart = 'Presale End Time'
-              childEnd = {<p>{endTime}</p>}
+              childEnd = {<p className="text-right">{endTime}</p>}
             />
             <RowBetween
               childStart = 'Listing On'
-              childEnd = {<p className='text-yellow-color'>{listing}</p>}
+              childEnd = {<p className='text-yellow-color text-right'>{listing}</p>}
             />
             <RowBetween
               childStart = 'Liquidity Percent'
-              childEnd = {<p>{liquidityPercent}</p>}
+              childEnd = {<p className="text-right">{liquidityPercent}</p>}
             />
             <RowBetween
               childStart = 'Liquidity Lockup Time'
-              childEnd = {<p>{lockTime} minutes after pool ends</p>}
+              childEnd = {<p className="text-right">{lockTime} minutes after pool ends</p>}
             />
             {
               useTeamVesting === true ? (
               <>
                 <RowBetween
                   childStart = 'Total Team Vesting Tokens'
-                  childEnd = {<p>{totalTeamVesting} {tokenSymbol}</p>}
+                  childEnd = {<p className="text-right">{totalTeamVesting} {tokenSymbol}</p>}
                 />
                 <RowBetween
                   childStart = 'First Release After Listing(minutes)'
-                  childEnd = {<p>{firstReleaseListing} minutes</p>}
+                  childEnd = {<p className="text-right">{firstReleaseListing} minutes</p>}
                 />
                 <RowBetween
                   childStart = 'First Release For Team'
-                  childEnd = {<p>{firstReleaseTeam} %</p>}
+                  childEnd = {<p className="text-right">{firstReleaseTeam} %</p>}
                 />
                 <RowBetween
                   childStart = 'Cycle (minutes)'
-                  childEnd = {<p>{cycleTime} minutes</p>}
+                  childEnd = {<p className="text-right">{cycleTime} minutes</p>}
                 />
                 <RowBetween
                   childStart = 'Team Tokens Release Each Cycle'
-                  childEnd = {<p>{teamReleaseEach} %</p>}
+                  childEnd = {<p className="text-right">{teamReleaseEach} %</p>}
                 />
                 {
                   useVesting === true ? (
                     <> 
                       <RowBetween
                         childStart = 'Tokens release each cycle'
-                        childEnd = {<p>{vestingPresalePercent}% each {vestingPresaleTime} minutes</p>}
+                        childEnd = {<p className="text-right">{vestingPresalePercent}% each {vestingPresaleTime} minutes</p>}
                       />
                     </>
                   ) : (<> </>)
@@ -809,7 +811,7 @@ const TotalView = () => {
             style={{marginBottom: '20px'}}
           >
             <CCardBody>
-              <CRow>
+              <CRow className="flex-none">
                 <CCol className='col-md-3'></CCol>
                 <CCol>
                   {/* <CChart
@@ -834,7 +836,7 @@ const TotalView = () => {
           </CCard>
         </CCol>
       </CCol>
-      <CCol xs={4}>
+      <CCol xs={4} className="width-100">
         <CCard
           color='#242525'
           textColor='white'
@@ -858,13 +860,13 @@ const TotalView = () => {
           <CCardBody>
             <RowBetween
               childStart = "Status"
-              childEnd = {<p className="text-yellow-color">{
+              childEnd = {<p className="text-yellow-color text-right">{
                 showState()
               }</p>}  
             />
             <RowBetween
               childStart = "Current Rate"
-              childEnd = {<p className='text-yellow-color'>1 {unit} = {presaleRate / currentState} {tokenSymbol}</p>}
+              childEnd = {<p className='text-yellow-color text-right'>1 {unit} = {presaleRate / currentState} {tokenSymbol}</p>}
             />
           </CCardBody>
         </CCard>

@@ -137,7 +137,7 @@ const LaunchpadList = () => {
                     <CFormInput type="number" size="sm" placeholder="page input" value={currentPage} aria-label="sm input example" onChange={handlePage}/>
                   </CCol>
                 </CRow> */}
-                <CRow>
+                <CRow className="display-block">
                 {
                   tabledata.length === 0 ? 
                   (
@@ -146,6 +146,7 @@ const LaunchpadList = () => {
                   tabledata.map((data) => {
                     return (data.presaletype === true ?
                     <FairCardDetail
+                      list={1}
                       xs={4}
                       id = {data._id}
                       address = {data.presale_addr}
@@ -157,6 +158,7 @@ const LaunchpadList = () => {
                       basicSymbol = {`${unit}`}
                     /> : 
                     <NormalCardDetail 
+                      list={1}
                       xs={4}
                       id = {data._id}
                       address = {data.presale_addr}
@@ -191,6 +193,7 @@ const LaunchpadList = () => {
                   myTableData.map((data) => {
                     return (data.presaletype === true ?
                     <FairCardDetail
+                      list={1}
                       xs={4}
                       id = {data._id}
                       address = {data.presale_addr}
@@ -201,6 +204,7 @@ const LaunchpadList = () => {
                       lockup = {data.lockupTime}
                     /> : 
                     <NormalCardDetail 
+                      list={1}
                       xs={4}
                       id = {data._id}
                       address = {data.presale_addr}

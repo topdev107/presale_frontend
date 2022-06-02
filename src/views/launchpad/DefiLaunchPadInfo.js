@@ -537,7 +537,7 @@ const DefiLaunchPadInfo = () => {
                     <p className="small-text-sz mt-1 text-blue-color">You can enable/disable whitelist anytime</p>
                   </div>
                   <div className='mt-3'>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol className='col-md-6'>
                         <NumberInputComponent
                           title={`SoftCap(${basicSymbol})`}
@@ -559,7 +559,7 @@ const DefiLaunchPadInfo = () => {
                     </CRow>
                   </div>
                   <div className='mt-3'>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol className='col-md-6'>
                         <NumberInputComponent
                           title={`Minimum buy (${basicSymbol})`}
@@ -581,7 +581,7 @@ const DefiLaunchPadInfo = () => {
                     </CRow>
                   </div>
                   <div>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol>
                         <p className='font-bold'>Refund type</p>
                         <div>
@@ -600,7 +600,7 @@ const DefiLaunchPadInfo = () => {
                     </CRow>
                   </div>
                   <div className='mt-3'>
-                    <CRow>
+                    <CRow className="display-block">
                       <CCol>
                         <NumberInputComponent
                           title='Liquidity (%)'
