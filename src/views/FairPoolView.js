@@ -286,6 +286,21 @@ const TotalView = () => {
     }
   }
 
+  async function handleClaimBNB() {
+    try {
+      const web3 = new Web3(provider())
+
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0]
+      const presaleContract = new web3.eth.Contract(abi, presaleAddress)
+      const txResult = await presaleContract.methods.userWithdrawBaseTokens().send({'from': account})
+      
+      console.log('success', txResult)
+    } catch (error) {
+      console.log('error', error)
+    }    
+  }
+
   async function loadWholeData() {
     setWholeLoading(true)
     // const res = await fetch(database_url.concat('/').concat(currentAddr))
@@ -518,9 +533,13 @@ const TotalView = () => {
             (
               <></>
             ) : (
-            <>
-              <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaim}>Claim tokens</CButton>
-            </> 
+              presaleState === 4 || presaleState === 5 ? ( 
+                <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaimBNB}>Claim BNBs</CButton>
+               ) : (
+                <>
+                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaim}>Claim Tokens</CButton>
+                </> 
+              )
             )
           )
         }
@@ -915,7 +934,7 @@ const TotalView = () => {
                 )
               }
               {
-                isCancel ? (
+                presaleState === 4 || presaleState === 5 ? (
                   <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleWithdraw}>
                     Withdraw canceled tokens
                   </CButton>

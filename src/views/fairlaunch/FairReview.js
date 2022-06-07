@@ -34,8 +34,11 @@ import { presaleFactory, fairlaunchFactory } from '../components/ContractAddress
 import { toWei, fromWei } from "web3-utils";
 
 const FairReview = () => {
+  const [currentChain, setCurrentChain] = useState(0)
   const [fairlaunchFactoryAddr, setfairlaunchFactoryAddr] = useState('')
-  useEffect(() => {
+  useEffect(async () => {
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setCurrentChain(parseInt(id, 16))
     fairlaunchFactory()
     .then((result) => {
       setfairlaunchFactoryAddr(result)
@@ -43,6 +46,7 @@ const FairReview = () => {
     })  
   }, [])
   window.ethereum.on('networkChanged', function (networkid) {
+    setCurrentChain(networkid)
     fairlaunchFactory()
     .then((result) => {
       setfairlaunchFactoryAddr(result)
@@ -115,6 +119,8 @@ const FairReview = () => {
       console.log(presaleFactoryContract)
 
       const softCapGwei = web3.utils.toWei(softcap, 'ether');
+      const stressValue = currentChain == 97 || currentChain == 56 ? 10000000000000000 : 
+          currentChain == 25 || currentChain == 338 ? 1e20 : 0
 
       const txResult = await presaleFactoryContract.methods.create(
         tokenAddr,
@@ -123,7 +129,7 @@ const FairReview = () => {
         liquidity,
         moment(startDate).utc().valueOf()/1000,
         moment(endDate).utc().valueOf()/1000
-      ).send({ 'from': account, 'value': 10000000000000000 })
+      ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
 

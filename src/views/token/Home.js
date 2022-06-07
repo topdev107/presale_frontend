@@ -128,6 +128,11 @@ const TokenHome = () => {
     if (currentChain == 25 || currentChain == 338 ) return "CRO"
   }, [currentChain])
 
+  const stressValue = useMemo (() => {
+    if (currentChain == 97 || currentChain == 56) return 1e16
+    if (currentChain == 25 || currentChain == 338 ) return 1e20
+  }, [currentChain])
+
 	const history = useHistory()
 	const dispatch = useDispatch()
 
@@ -258,8 +263,10 @@ const TokenHome = () => {
       const standardTokenFactoryContract = new web3.eth.Contract(abi, standardTokenFactoryAddr)
       console.log("standardTokenFactoryContract starts here.......")
       console.log(standardTokenFactoryContract)
+      console.log(stressValue.toString(16))
 
-      const txResult = await standardTokenFactoryContract.methods.create(tokenName, tokenSymbol, +tokenDecimal, +tokenTotalSupply).send({ 'from': account, 'value': 10000000000000000 })
+      const txResult = await standardTokenFactoryContract.methods.create(tokenName, tokenSymbol, +tokenDecimal, +tokenTotalSupply)
+         .send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
 
@@ -298,7 +305,7 @@ const TokenHome = () => {
         transfeeYield, 
         transfeeLiquidity, 
         charityPercent
-      ).send({ 'from': account, 'value': 10000000000000000 })
+      ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
 
@@ -335,7 +342,7 @@ const TokenHome = () => {
         [rewardToken, testRouterAddr, marketingWallet, dividendsAddr],
         [tokenRewardFee, autoAddLiquidity, marketingFee],
         minimumTokenBalance
-      ).send({ 'from': account, 'value': 10000000000000000 })
+      ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
 
@@ -372,7 +379,7 @@ const TokenHome = () => {
         rewardToken,
         testRouterAddr,
         [liquidityFee*100, buyBackFee*100, reflectionFee*100, marketingFee*100, 10000]
-      ).send({ 'from': account, 'value': 10000000000000000 })
+      ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
 
@@ -745,7 +752,7 @@ const TokenHome = () => {
                   <option value="Baby Token">Baby Token</option>
                   <option value="Buyback Baby Token">Buyback Baby Token</option>
                 </CFormSelect>
-                <div className="small-text-sz mt-1 text-blue-color">Fee: 0.01 {unit}</div>
+                <div className="small-text-sz mt-1 text-blue-color">Fee: {stressValue / 1e18} {unit}</div>
               </div>
             </CRow>
             {

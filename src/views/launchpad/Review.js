@@ -41,14 +41,18 @@ import {
 } from '../../state/CreateLaunchPadState'
 
 const Review = () => {
+  const [currentChain, setCurrentChain] = useState(0)
   const [presaleFactoryAddr, setPresaleFactoryAddr] = useState('')
-  useEffect(() => {
+  useEffect( async () => {
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setCurrentChain(parseInt(id, 16))
     presaleFactory()
     .then((result) => {
       setPresaleFactoryAddr(result)
     })
   }, [])
   window.ethereum.on('networkChanged', function (networkid) {
+    setCurrentChain(networkid)
     presaleFactory()
     .then((result) => {
       setPresaleFactoryAddr(result)
@@ -139,6 +143,9 @@ const Review = () => {
       
       const maxBuyGwei = web3.utils.toWei(maxBuy, 'ether');
 
+      const stressValue = currentChain == 97 || currentChain == 56 ? 10000000000000000 : 
+          currentChain == 25 || currentChain == 338 ? 1e20 : 0
+
       const txResult = await presaleFactoryContract.methods.create(
         tokenAddr,
         [presaleRate, listingRate],
@@ -149,7 +156,7 @@ const Review = () => {
         isWhitelist,
         moment(startDate).utc().valueOf()/1000,
         moment(endDate).utc().valueOf()/1000
-      ).send({ 'from': account, 'value': 10000000000000000 })
+      ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
 

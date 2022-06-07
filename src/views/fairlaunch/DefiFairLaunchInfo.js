@@ -387,12 +387,12 @@ const DefiFairLaunchInfo = () => {
                     desc=''
                   />
                 </div>
-                <div className='mt-3'>
+                {/* <div className='mt-3'>
                   <CFormCheck
                     id="teamCheckbox"
                     label="Using Team Vesting?"
                     onChange={onChangeTeamVesting} />
-                </div>
+                </div> */}
                   {
                     isCheckedTeamVesting ? (
                       <div>

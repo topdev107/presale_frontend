@@ -217,7 +217,13 @@ const Home = () => {
                       </div>
                     )
                   }
-                  <p className="small-text-sz mt-1 text-blue-color">Create pool fee: 0.01 {unit}</p>
+                  <p className="small-text-sz mt-1 text-blue-color">Create pool fee: 
+                    {
+                      currentChain == 97 || currentChain == 56 ?
+                        0.01 :
+                        currentChain == 25 || currentChain == 338 ?
+                         100 : 0
+                    } {unit}</p>
                   {
                     isTokenValid ? (
                       <div>
