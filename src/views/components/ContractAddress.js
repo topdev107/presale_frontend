@@ -9,7 +9,7 @@ const getNetwork = async () => {
 export const standardTokenFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0x258524973B09D4FB5Fd79555eF657E8D9fc96Ee6'
     } else if(networkId == 25) {
         return '0xEc774B639DfE50EA25686a121c750B2Fb1EC8B22'
     } else if(networkId == 97) {
@@ -23,7 +23,7 @@ export const standardTokenFactory = async () => {
 export const liquidityTokenFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0x80A49151B00a746B68a272A738E654A7EA5fdAed'
     } else if(networkId == 25) {
         return '0x48bca8a4b98c821e9d822ddb674e0f78da606da0'
     } else if(networkId == 97) {
@@ -37,7 +37,7 @@ export const liquidityTokenFactory = async () => {
 export const babytokenFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0x6bc870267Fa4F00023d09AFeb6984579CaCDA6cc'
     } else if(networkId == 25) {
         return '0xC1CD46706c88B91E1004a5163A4f88e972ba4e87'
     } else if(networkId == 97) {
@@ -51,7 +51,7 @@ export const babytokenFactory = async () => {
 export const buybackbabyFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0xeeEC2bD24bC663585290B821970b07734cbE674A'
     } else if(networkId == 25) {
         return '0x0A81Ddf4CFEE5D589c0A9Dc38d71f1ba0A9c6d09'
     } else if(networkId == 97) {
@@ -66,7 +66,7 @@ export const buybackbabyFactory = async () => {
 export const presaleFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0xb69F3c157d48A9A736F67848a2313796b576F2eB'
     } else if(networkId == 25) {
         return '0x2DdA17bEbBCb8eF59Df40f2761aB310483A4E223'
     } else if(networkId == 97) {
@@ -80,7 +80,7 @@ export const presaleFactory = async () => {
 export const presaleTestFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0xb69F3c157d48A9A736F67848a2313796b576F2eB'
     } else if(networkId == 25) {
         return '0x2DdA17bEbBCb8eF59Df40f2761aB310483A4E223'
     } else if(networkId == 97) {
@@ -109,7 +109,7 @@ export const presaleTestFactory = async () => {
 export const fairlaunchFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0xFeAEB69DbAdB8c753b6d517537CBBe2a731D9907'
     } else if(networkId == 25) {
         return '0x14B728B79519B5E15329615A0987EF79ad25d651'
     } else if(networkId == 97) {
@@ -153,7 +153,7 @@ export const testFactory = async () => {
 export const dividends = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return ''
+        return '0x91921B69FBB9348b55463Bf4e1A6f33407d83913'
     } else if(networkId == 25) {
         return '0x6c06028575455aebd576f2d983f1ab122f8a0883'
     } else if(networkId == 97) {
