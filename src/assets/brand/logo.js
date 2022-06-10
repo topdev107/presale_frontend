@@ -3,7 +3,7 @@ export const logo = [
   `
   <title>Presale pro</title>
   <g>
-    <image width="200" height="48" href="./assets/presale_logo.png" />
+    <image width="200" height="48" href="./assets/presale_logo_yellow.png" />
   </g>
 `,
 ]
