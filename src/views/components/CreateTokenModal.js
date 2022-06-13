@@ -739,8 +739,8 @@ export const CreateTokenModal = (props) => {
   
   return (
   <>
-      <CButton style={{backgroundColor: '#333', borderColor: '#333', height: '30px', paddingTop: '3px'}} onClick={() => setVisible(!visible)}>Create Token</CButton>
-      <CModal style={{backgroundColor: '#333'}} visible={visible} onClose={() => setVisible(false)}>
+      <CButton variant='outline' style={{ color: '#555555', borderColor: '#333333', height: '30px', paddingTop: '2px'}} onClick={() => setVisible(!visible)}>Create Token</CButton>
+      <CModal style={{backgroundColor: '#f5f8f8'}} visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
             <CModalTitle>Create Token</CModalTitle>
         </CModalHeader>

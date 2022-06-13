@@ -211,12 +211,12 @@ $margin-length: 10px;
 }
 
 .btn-disabled {
-    background-color: #333;
-    border: 0px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 5px 18px;
     font-size: 13px;
-    color: #888;
+    color: rgba(0, 0, 0, 0.3);
     text-align: center;
     display: inline-block;
     opacity: 0.95;
@@ -371,6 +371,12 @@ span {
 
 .card-img, .card-img-top, .card-img-bottom {
     width: 50px;
+}
+
+.btn:hover {
+    background-color: inherit;
+    color: inherit;
+    opacity: 0.5;
 }
 
 @media screen and (max-width: 768px) {
