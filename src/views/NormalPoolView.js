@@ -661,7 +661,7 @@ const TotalView = () => {
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
                 </div>
               </CCol>
-              <CCol className='justify-content-md-end'>
+              <CCol className='justify-content-md'>
                 <div style={{fontSize: '25px'}}>{tokenName}&nbsp;Presale &nbsp;
                   {
                     showOwnerZone === true ? (
@@ -696,7 +696,7 @@ const TotalView = () => {
                   }
                 </div>
               </CCol>
-              <CCol xs={2} className="d-md-flex justify-content-md-end position-right-absolute">
+              <CCol xs={2} className="d-md-flex justify-content-md-end">
                 <div>
                   {/* <CBadge color='light'>Canceled</CBadge> */}
                   {

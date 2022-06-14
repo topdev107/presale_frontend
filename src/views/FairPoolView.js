@@ -659,7 +659,7 @@ const TotalView = () => {
                   }
                 </div>
               </CCol>
-              <CCol xs={2} className="d-md-flex justify-content-md-end position-right-absolute">
+              <CCol xs={2} className="d-md-flex justify-content-md-end">
                 <div>
                   {
                     presaleState === 3 || presaleState === 6 ?
