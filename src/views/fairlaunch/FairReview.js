@@ -361,9 +361,9 @@ const FairReview = () => {
                     </div>
                   </CAlert>
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-yellow" onClick={history.goBack}>Back</button>
+                    <button type="button" className="btn-accent" onClick={history.goBack}>Back</button>
                     {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
-                    <button type="button" className="btn-accent" onClick={handleSubmit} disabled={submitStatus}>
+                    <button type="button" className={submitStatus ? "btn-disabled" : "btn-accent"} onClick={handleSubmit} disabled={submitStatus}>
                       {
                         submitStatus == true ? (
                         <Spinner

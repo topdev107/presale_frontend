@@ -53,29 +53,38 @@ const DefiLaunchPadInfo = () => {
 
   const history = useHistory();
 
-  const [presaleRate, setPresaleRate] = useState(0)
+  const state_rate = useSelector((state) => state.createLaunchPadState.presaleRate)
+
+  const [presaleRate, setPresaleRate] = useState(state_rate)
   const [errMsgPresaleRate, setErrMsgPresaleRate] = useState('')
 
-  const [isWhitelistEnable, setIsWhitelistEnable] = useState(false)
+  const state_white = useSelector((state) => state.createLaunchPadState.isWhitelist)
+  const [isWhitelistEnable, setIsWhitelistEnable] = useState(state_white)
 
-  const [softCap, setSoftCap] = useState(0)
+  const state_softcap = useSelector((state) => state.createLaunchPadState.softcap)
+  const [softCap, setSoftCap] = useState(state_softcap)
   const [errMsgSoftCap, setErrMsgSoftCap] = useState('')
 
-  const [hardCap, setHardCap] = useState(0)
+  const state_hardcap = useSelector((state) => state.createLaunchPadState.hardcap)
+  const [hardCap, setHardCap] = useState(state_hardcap)
   const [errMsgHardCap, setErrMsgHardCap] = useState('')
 
-  const [minBuyBNB, setMinBuyBNB] = useState(0)
+  const state_min = useSelector((state) => state.createLaunchPadState.minBuy)
+  const [minBuyBNB, setMinBuyBNB] = useState(state_min)
   const [errMsgMinBuyBNB, setErrMsgMinBuyBNB] = useState('')
 
-  const [maxBuyBNB, setMaxBuyBNB] = useState(0)
+  const state_max = useSelector((state) => state.createLaunchPadState.maxBuy)
+  const [maxBuyBNB, setMaxBuyBNB] = useState(state_max)
   const [errMsgMaxBuyBNB, setErrMsgMaxBuyBNB] = useState('')
 
   const [refundType, setRefundType] = useState('Burn') // Burn, Refund
  
-  const [liquidity, setLiquidity] = useState(0)
+  const state_liquidity = useSelector((state) => state.createLaunchPadState.liquidity)
+  const [liquidity, setLiquidity] = useState(state_liquidity)
   const [errMsgLiquidity, setErrMsgLiquidity] = useState('')
 
-  const [listingRate, setListingRate] = useState(0)
+  const state_list = useSelector((state) => state.createLaunchPadState.listingRate)
+  const [listingRate, setListingRate] = useState(state_list)
   const [errMsgListingRate, setErrMsgListingRate] = useState('')
   const [descListingRate, setDescListingRate] = useState('')
 
@@ -795,7 +804,7 @@ const DefiLaunchPadInfo = () => {
                   </div>
 
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-accent" onClick={history.goBack}>Back1</button>
+                    <button type="button" className="btn-accent" onClick={history.goBack}>Back</button>
                     {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
                     {
                       isValid === true ? 

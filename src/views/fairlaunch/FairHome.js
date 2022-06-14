@@ -249,7 +249,7 @@ const FairHome = () => {
                             tokenStatus === NO_APPROVED ? (
                               <div className="d-md-flex justify-content-md-center mt-4 position-right">
                                 <div className='loader'></div>
-                                <button type="button" className="btn-accent" disabled={approveState} onClick={() => handleApprove()} >
+                                <button type="button" className={approveState ? "btn-disabled" : "btn-accent"} disabled={approveState} onClick={() => handleApprove()} >
                                   {
                                     approveState == true ? (
                                     <Spinner

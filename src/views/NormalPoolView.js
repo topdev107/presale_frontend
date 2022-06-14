@@ -560,7 +560,7 @@ const TotalView = () => {
                       Buy
                     </button>
                     ) : (
-                      <button type="button" className="btn-yellow" disabled >Buy</button>
+                      <button type="button" className="btn-disabled" disabled >Buy</button>
                     )
                   }
                 </div>

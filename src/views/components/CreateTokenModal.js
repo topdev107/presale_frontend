@@ -1095,7 +1095,7 @@ export const CreateTokenModal = (props) => {
           {
             isCreateValid === true ? 
             <>
-              <button type="button" className='btn-accent' disabled={isCreateLoad} onClick={handleNext} >
+              <button type="button" className={isCreateLoad ? 'btn-disabled' : 'btn-accent'} disabled={isCreateLoad} onClick={handleNext} >
                 {
                   isCreateLoad === true ? (
                   <Spinner
@@ -1111,7 +1111,7 @@ export const CreateTokenModal = (props) => {
                 Create
               </button>
             </> :
-            <button type="button" className='btn-accent' disabled >Create</button>
+            <button type="button" className='btn-disabled' disabled >Create</button>
           }
         </CModalFooter>
       </CModal>

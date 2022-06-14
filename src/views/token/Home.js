@@ -1049,7 +1049,7 @@ const TokenHome = () => {
             <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
               {
                 isCreateValid === true ? 
-                  <button type="button" className="btn-accent" disabled={isCreateLoad} onClick={handleNext}>
+                  <button type="button" className={ isCreateLoad ? "btn-disabled" : "btn-accent" } disabled={isCreateLoad} onClick={handleNext}>
                     {
                       isCreateLoad === true ? (
                         <Spinner
@@ -1064,7 +1064,7 @@ const TokenHome = () => {
                     }
                     Create Token
                   </button> :
-                  <button type="button" className="btn-yellow" disabled>Create Token</button>
+                  <button type="button" className="btn-accent" disabled>Create Token</button>
               }
               </div>
           </CCardBody>

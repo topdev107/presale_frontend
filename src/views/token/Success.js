@@ -63,8 +63,8 @@ const TokenSuccess = () => {
               </CTableBody>
             </CTable>
             <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-              <button type="button" className="btn-yellow" onClick={handleNext}>View transaction</button>
-              <button type="button" className="btn-yellow" onClick={() => { alert("👋 Copied."); }}>
+              <button type="button" className="btn-accent" onClick={handleNext}>View transaction</button>
+              <button type="button" className="btn-accent" onClick={() => { alert("👋 Copied."); }}>
                 Copy address
               </button>
               <button type="button" className="btn-accent" onClick={handleLaunchPad}>Create launchpad</button>
