@@ -238,7 +238,7 @@ const FairHome = () => {
                           childStart={<p>Decimals</p>}
                           childEnd={<p className="text-right">{tokenDecimal}</p>}
                         />
-                        <CAlert color="warning" className="back-gray d-flex align-items-center" dismissible>
+                        <CAlert color="danger" className="back-gray d-flex align-items-center" dismissible>
                           <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
                           <div >
                             Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.

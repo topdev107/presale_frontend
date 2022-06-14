@@ -210,7 +210,7 @@ const AppHeader = () => {
                 <CModalTitle>Choose network</CModalTitle>
               </CModalHeader>
               <CModalBody>
-                <div className='text-white-color'> MAINNET</div>
+                <div className='text-red-color'> MAINNET</div>
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="yellow" onClick={() => changeNetwork(0)}>  
@@ -226,7 +226,7 @@ const AppHeader = () => {
                   </CCol>
                 </CRow>
                 <br/>
-                <div className='text-white-color'>TESTNET</div>
+                <div className='text-red-color'>TESTNET</div>
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="yellow" onClick={() => changeNetwork(2)}>

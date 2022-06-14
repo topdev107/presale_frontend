@@ -141,7 +141,7 @@ const LaunchpadList = () => {
                 {
                   tabledata.length === 0 ? 
                   (
-                    <div className='text-white-color'>There are no launchpad or fairlaunchpad</div>
+                    <div className='text-red-color'>There are no launchpad or fairlaunchpad</div>
                   ) : (
                   tabledata.map((data) => {
                     return (data.presaletype === true ?
@@ -188,7 +188,7 @@ const LaunchpadList = () => {
                 {
                   tabledata.length === 0 ? 
                   (
-                    <div className='text-white-color'>There are no your launchpad or fairlaunchpad</div>
+                    <div className='text-red-color'>There are no your launchpad or fairlaunchpad</div>
                   ) : (
                   myTableData.map((data) => {
                     return (data.presaletype === true ?

@@ -85,7 +85,6 @@ export const FairCardDetail = (props) => {
         <CCard 
           color='#242525'
           textColor='white'
-          className='border-dark'
         >
           <CCardBody>
             <CRow>
@@ -223,7 +222,6 @@ export const NormalCardDetail = (props) => {
         <CCard
           color='#242525'
           textColor='white'
-          className='border-dark'
         >
           <CCardBody>
             <CRow>

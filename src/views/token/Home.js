@@ -737,7 +737,7 @@ const TokenHome = () => {
         <CCard className='mb-4 pb-5'>
           <CCardBody>
             <CRow>
-              <div className="danger small-text-sz mb-0 text-white-color">(*) is required field.</div>
+              <div className="danger small-text-sz mb-0 text-red-color">(*) is required field.</div>
               <CCol>
                 <div className='font-bold text-white-color'>Token Type
                   <sup className="danger">*</sup>

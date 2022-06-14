@@ -21,10 +21,6 @@ const _nav = [
   //   // },
   // },
   {
-    component: CNavTitle,
-    name: 'Launchpads',
-  },
-  {
     component: CNavItem,
     name: 'Create launchpad',
     to: '/launchpad/home',

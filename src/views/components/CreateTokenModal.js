@@ -746,7 +746,7 @@ export const CreateTokenModal = (props) => {
         </CModalHeader>
         <CModalBody>
             <CRow>
-              <div className="danger small-text-sz mb-0 text-white-color">(*) is required field.</div>
+              <div className="danger small-text-sz mb-0 text-red-color">(*) is required field.</div>
               <CCol>
                 <div className='font-bold text-yellow-color'>Token Type
                   <sup className="danger">*</sup>

@@ -615,10 +615,9 @@ const TotalView = () => {
         <CCard
           color='#242525'
           textColor='white'
-          className='border-dark'
         >
           <CCardBody >
-            <CRow className="flex-column">
+            <CRow className="show-style">
               <CCol xs={1}>
                 <div className="clearfix">
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
@@ -635,27 +634,27 @@ const TotalView = () => {
                   }
                 </div>
                 <div style={{marginTop: '7px'}}>
-                  <a href={siteUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faGlobe} /></a>&nbsp;&nbsp;
+                  <a href={siteUrl} className='text-grey-color'><FontAwesomeIcon icon={faGlobe} /></a>&nbsp;&nbsp;
                   {
-                    twitterUrl !== '' ? <><a href={twitterUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faTwitter} /></a>&nbsp;&nbsp;</> : <></>
+                    twitterUrl !== '' ? <><a href={twitterUrl} className='text-grey-color'><FontAwesomeIcon icon={faTwitter} /></a>&nbsp;&nbsp;</> : <></>
                   }
                   {
-                    facebookUrl !== '' ? <><a href={facebookUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faFacebookSquare} /></a>&nbsp;&nbsp;</> : <></>
+                    facebookUrl !== '' ? <><a href={facebookUrl} className='text-grey-color'><FontAwesomeIcon icon={faFacebookSquare} /></a>&nbsp;&nbsp;</> : <></>
                   }
                   {
-                    telegramUrl === '' ? <></> : <><a href={telegramUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faTelegram} /></a>&nbsp;&nbsp;</>
+                    telegramUrl === '' ? <></> : <><a href={telegramUrl} className='text-grey-color'><FontAwesomeIcon icon={faTelegram} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    githubUrl === '' ? <></> : <><a href={githubUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faGithub} /></a>&nbsp;&nbsp;</>
+                    githubUrl === '' ? <></> : <><a href={githubUrl} className='text-grey-color'><FontAwesomeIcon icon={faGithub} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    instagramUrl === '' ? <></> : <><a href={instagramUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faInstagram} /></a>&nbsp;&nbsp;</>
+                    instagramUrl === '' ? <></> : <><a href={instagramUrl} className='text-grey-color'><FontAwesomeIcon icon={faInstagram} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    discordUrl === '' ? <></> : <><a href={discordUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faDiscord} /></a>&nbsp;&nbsp;</>
+                    discordUrl === '' ? <></> : <><a href={discordUrl} className='text-grey-color'><FontAwesomeIcon icon={faDiscord} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    redditUrl === '' ? <></> : <><a href={redditUrl} style={{color: '#fff'}}><FontAwesomeIcon icon={faRedditAlien} /></a></>
+                    redditUrl === '' ? <></> : <><a href={redditUrl} className='text-grey-color'><FontAwesomeIcon icon={faRedditAlien} /></a></>
                   }
                 </div>
               </CCol>
@@ -826,7 +825,6 @@ const TotalView = () => {
           <CCard
             color='#242525'
             textColor='white'
-            className='border-dark'
             style={{marginBottom: '20px'}}
           >
             <CCardBody>
@@ -859,7 +857,6 @@ const TotalView = () => {
         <CCard
           color='#242525'
           textColor='white'
-          className='border-dark'
         >
           <CCardBody>
             <CAlert color="yellow">
@@ -874,7 +871,6 @@ const TotalView = () => {
         <CCard
           color='#242525'
           textColor='white'
-          className='border-dark'
         >
           <CCardBody>
             <RowBetween
@@ -894,8 +890,7 @@ const TotalView = () => {
           showOwnerZone === true ? (
         <CCard 
           color='#242525'
-          textColor='#24252f'
-          className='border-dark'>
+          textColor='#24252f'>
           <CCardHeader style={{color: '#242525'}}>Owner Zone</CCardHeader>
           <CCardBody>
             <CAlert color="dark">

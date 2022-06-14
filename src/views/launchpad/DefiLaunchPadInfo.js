@@ -795,12 +795,12 @@ const DefiLaunchPadInfo = () => {
                   </div>
 
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-yellow" onClick={history.goBack}>Back1</button>
+                    <button type="button" className="btn-accent" onClick={history.goBack}>Back1</button>
                     {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
                     {
                       isValid === true ? 
                       <button type="button" className="btn-accent" onClick={handleNext}>Next</button> :
-                      <button type="button" className="btn-yellow" disabled>Next</button>
+                      <button type="button" className="btn-disabled" disabled>Next</button>
                     }
                     {/* <button type="button" className="btn-accent">Next</button> */}
                   </div>
