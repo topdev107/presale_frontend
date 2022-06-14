@@ -1087,7 +1087,7 @@ export const CreateTokenModal = (props) => {
           {/* <CButton color="secondary" onClick={() => setVisible(false)}>
           Close
           </CButton> */}
-          <button type="button" className='btn-yellow' onClick={() => {
+          <button type="button" className='btn-accent' onClick={() => {
             clearData() 
             setVisible(false)}}>
             Close
@@ -1111,7 +1111,7 @@ export const CreateTokenModal = (props) => {
                 Create
               </button>
             </> :
-            <button type="button" className='btn-yellow' disabled >Create</button>
+            <button type="button" className='btn-accent' disabled >Create</button>
           }
         </CModalFooter>
       </CModal>
