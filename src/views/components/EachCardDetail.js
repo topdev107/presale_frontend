@@ -152,12 +152,12 @@ export const FairCardDetail = (props) => {
                     lanchpadList
                     childStart={<p></p>}
                     childMiddle={<p></p>}
-                    childEnd={<CButton color='yellow' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                    childEnd={<button type="button" className='btn-accent' onClick={handleClick}>View Pool</button>}
                   /> :
                   <RowBetween
                     childStart={<p></p>}
                     childMiddle={<p></p>}
-                    childEnd={<CButton color='yellow' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                    childEnd={<button type="button" className='btn-accent' onClick={handleClick}>View Pool</button>}
                   />
               }
               
@@ -292,12 +292,12 @@ export const NormalCardDetail = (props) => {
                     lanchpadList
                     childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
                     childMiddle={<p></p>}
-                    childEnd={<CButton className="width-100" color='yellow' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                    childEnd={<button type='button' className="width-100 btn-accent" shape="rounded-2" onClick={handleClick}>View Pool</button>}
                   /> :
                   <RowBetween
                     childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
                     childMiddle={<p></p>}
-                    childEnd={<CButton color='yellow' shape="rounded-2" onClick={handleClick}>View Pool</CButton>}
+                    childEnd={<button type="button" className='btn-accent' onClick={handleClick}>View Pool</button>}
                   />
               }
             </CCardText>

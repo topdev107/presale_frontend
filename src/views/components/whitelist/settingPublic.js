@@ -69,7 +69,7 @@ export const SettingPublic = (props) => {
 
   return (
     <>
-    <CModal style={{backgroundColor: '#333'}} visible={props.visible} onClose={() => props.onChangeVisible(false)}>
+    <CModal style={{backgroundColor: '#f5f8f8'}} visible={props.visible} onClose={() => props.onChangeVisible(false)}>
       <CModalHeader>
         <CModalTitle>Change Status</CModalTitle>
       </CModalHeader>
@@ -99,7 +99,6 @@ export const SettingPublic = (props) => {
               <style>
                 {`.date-picker input {
                   width: 100%;
-                  backgroundColor: #000 !important;
                 }`}
               </style>
               Public sale start time
@@ -125,9 +124,9 @@ export const SettingPublic = (props) => {
       <CModalFooter>
         {
           radioPublic === 'PublicSpecific' ? (
-            <CButton color="yellow" onClick={() => handleSetPublic(startDate.getTime())}>Save settings</CButton>
+            <button type="button" className="btn-accent" onClick={() => handleSetPublic(startDate.getTime())}>Save settings</button>
           ) : (
-            <CButton color="yellow" onClick={() => handleSetPublic(0)}>Public now</CButton>
+            <button type="button" className="btn-accent" onClick={() => handleSetPublic(0)}>Public now</button>
           )
         }
       </CModalFooter>

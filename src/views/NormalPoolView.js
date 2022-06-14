@@ -572,10 +572,10 @@ const TotalView = () => {
               <></>
             ) : (
               presaleState === 4 || presaleState === 5 ? ( 
-                <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaimBNB}>Claim BNBs</CButton>
+                <button type="button" className="btn-accent" onClick={handleClaimBNB}>Claim BNBs</button>
                ) : (
                 <>
-                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaim}>Claim Tokens</CButton>
+                  <button type="button" className="btn-accent" onClick={handleClaim}>Claim Tokens</button>
                 </> 
               )
             )
@@ -995,7 +995,7 @@ const TotalView = () => {
                     <div className="d-grid gap-1">
                       <AddUser presaleAddr = {presaleAddress} />
                       <RemoveUser presaleAddr = {presaleAddress} />
-                      <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000', width: '100%'}} onClick={() => setVisible(!publicvisible)}>Setting time to public</CButton>
+                      <button type="button" className = "btn-accent" style={{ width: '100%'}} onClick={() => setVisible(!publicvisible)}>Setting time to public</button>
                       <DisableWhitelist presaleAddr = {presaleAddress} setPublicRadio = {setSaleType} />
                     </div>
                     </>
@@ -1012,12 +1012,12 @@ const TotalView = () => {
             <div className="d-grid gap-2">
               {
                 useVesting ? (
-                <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}}>List of contributors</CButton>
+                <button type="button" className="btn-accent" shape = "rounded-2">List of contributors</button>
                 ): (<></>)
               }
               {
                 presaleState === 3 && isFinalized === true? (
-                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleFinalize}>
+                  <button type="button" className={isFinalizeLoad ? "btn-disabled" : "btn-accent"} disabled={isFinalizeLoad} onClick={handleFinalize}>
                     {
                     isFinalizeLoad == true ? (
                     <Spinner
@@ -1031,19 +1031,19 @@ const TotalView = () => {
                     /> ) : (<></>)
                     }
                     Finalize
-                  </CButton>
+                  </button>
                 ) : (
-                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
+                  <button type="button" className="btn-disabled" disabled onClick={handleFinalize}>Finalize</button>
                 )
               }
               {
                 presaleState === 4 || presaleState === 5 ? (
-                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleWithdraw}>
+                  <button type="button" className={isFinalizeLoad ? "btn-disabled" : "btn-accent"} disabled={isFinalizeLoad} onClick={handleWithdraw}>
                     Withdraw canceled tokens
-                  </CButton>
+                  </button>
                 ) : (
                   isFinalized === true ? (
-                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleCancel}>Cancel Pool</CButton>
+                  <button type="button" className="btn-accent" onClick={handleCancel}>Cancel Pool</button>
                   ) : (<></>)
                 )
               }

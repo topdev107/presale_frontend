@@ -61,8 +61,8 @@ export const AddUser = (props) => {
   }
   return (
     <>
-    <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000', width: '100%'}} onClick={() => setVisible(!visible)}>Add users to whitelist</CButton>
-    <CModal style={{backgroundColor: '#333'}} scrollable visible={visible} onClose={() => setVisible(false)}>
+    <button type="button" className="btn-accent" style={{ width: '100%'}} onClick={() => setVisible(!visible)}>Add users to whitelist</button>
+    <CModal style={{backgroundColor: '#f5f8f8'}} scrollable visible={visible} onClose={() => setVisible(false)}>
       <CModalHeader>
         <CModalTitle>Add users to whitelist</CModalTitle>
       </CModalHeader>
@@ -81,7 +81,7 @@ export const AddUser = (props) => {
         ></CFormTextarea>
       </CModalBody>
       <CModalFooter>
-        <CButton color="yellow" onClick={handleAddUser} >Add Users</CButton>
+        <button type="button" className="btn-accent" onClick={handleAddUser} >Add Users</button>
       </CModalFooter>
     </CModal>
     </>

@@ -29,7 +29,7 @@ export const DisableWhitelist = (props) => {
 
   const handleDisableWhitelist = async () => {
     try {
-      const publicDateInUnixTimestamp = parseInt((new Date).now().getTime() / 1000);
+      const publicDateInUnixTimestamp = parseInt(0);
       console.log(publicDateInUnixTimestamp)
       const web3 = new Web3(provider())
 
@@ -50,7 +50,7 @@ export const DisableWhitelist = (props) => {
 
   return (
     <>
-    <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000', width: '100%'}} onClick={handleDisableWhitelist}>Disable whitelist</CButton>
+    <button type="button" className="btn-accent" style={{ width: '100%'}} onClick={handleDisableWhitelist}>Disable whitelist</button>
     </>
   )
 }

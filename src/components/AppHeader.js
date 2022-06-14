@@ -213,13 +213,13 @@ const AppHeader = () => {
                 <div className='text-red-color'> MAINNET</div>
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton color="yellow" onClick={() => changeNetwork(0)}>  
+                    <CButton color="accent" onClick={() => changeNetwork(0)}>  
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton  color="yellow" onClick={() => changeNetwork(1)}>
+                    <CButton  color="accent" onClick={() => changeNetwork(1)}>
                       <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
@@ -229,13 +229,13 @@ const AppHeader = () => {
                 <div className='text-red-color'>TESTNET</div>
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton color="yellow" onClick={() => changeNetwork(2)}>
+                    <CButton color="accent" onClick={() => changeNetwork(2)}>
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton  color="yellow" onClick={() => changeNetwork(3)}>
+                    <CButton  color="accent" onClick={() => changeNetwork(3)}>
                       <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
