@@ -125,9 +125,9 @@ export const SettingPublic = (props) => {
       <CModalFooter>
         {
           radioPublic === 'PublicSpecific' ? (
-            <CButton color="dark" onClick={() => handleSetPublic(startDate.getTime())}>Save settings</CButton>
+            <CButton color="yellow" onClick={() => handleSetPublic(startDate.getTime())}>Save settings</CButton>
           ) : (
-            <CButton color="dark" onClick={() => handleSetPublic(0)}>Public now</CButton>
+            <CButton color="yellow" onClick={() => handleSetPublic(0)}>Public now</CButton>
           )
         }
       </CModalFooter>

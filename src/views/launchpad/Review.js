@@ -458,15 +458,15 @@ const Review = () => {
                       </>
                     ) : (<></>)
                   }
-                  <CAlert color="warning" className="d-flex align-items-center" dismissible>
-                    <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
-                    <div>
+                  <CAlert color="light" variant='solid' className="d-flex align-items-center">
+                    <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} style={{color: '#ffc107'}}/>
+                    <div style={{color: '#ffc107'}}>
                       For tokens with burns, rebase or other special transfers please ensure that you have a way to whitelist multiple addresses or turn off the special transfer events (By setting fees to 0 for example for the duration of the presale)
                     </div>
                   </CAlert>
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-black" onClick={history.goBack}>Back</button>
-                    {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-black">Back</Link> */}
+                    <button type="button" className="btn-yellow" onClick={history.goBack}>Back</button>
+                    {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
                     <button type="button" className="btn-accent" onClick={handleSubmit} disabled={submitStatus}>
                       {
                         submitStatus == true ? (

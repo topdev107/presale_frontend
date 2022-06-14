@@ -400,12 +400,12 @@ const AddAdditionalInfo = () => {
                     <p className='danger small-text-sz mb-0'>{errMsgDesc}</p>
                   </div>
                   <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-black" onClick={history.goBack}>Back</button>
+                    <button type="button" className="btn-yellow" onClick={history.goBack}>Back</button>
                     {
                       isValid ? (
                         <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
                       ) : (
-                        <button type="button" className="btn-disabled">Next</button>
+                        <button type="button" className="btn-yellow" disabled>Next</button>
                       )
                     }
                   </div>

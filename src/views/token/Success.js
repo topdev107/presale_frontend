@@ -41,7 +41,7 @@ const TokenSuccess = () => {
         <br/><br/>
         <CCard className='mb-4 pb-5'>
           <CCardBody>
-            <CTable bordered hover caption="top" color="warning">
+            <CTable bordered hover caption="top" color="warning" className='token-table'>
               <CTableCaption className='text-yellow-color text_align_center'>Your token was created!</CTableCaption>
               <CTableBody>
                 <CTableRow>
@@ -63,8 +63,8 @@ const TokenSuccess = () => {
               </CTableBody>
             </CTable>
             <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-              <button type="button" className="btn-black" onClick={handleNext}>View transaction</button>
-              <button type="button" className="btn-black" onClick={() => { alert("👋 Copied."); }}>
+              <button type="button" className="btn-yellow" onClick={handleNext}>View transaction</button>
+              <button type="button" className="btn-yellow" onClick={() => { alert("👋 Copied."); }}>
                 Copy address
               </button>
               <button type="button" className="btn-accent" onClick={handleLaunchPad}>Create launchpad</button>

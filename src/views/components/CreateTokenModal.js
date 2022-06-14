@@ -748,7 +748,7 @@ export const CreateTokenModal = (props) => {
             <CRow>
               <div className="danger small-text-sz mb-0 text-white-color">(*) is required field.</div>
               <CCol>
-                <div className='font-bold text-white-color'>Token Type
+                <div className='font-bold text-yellow-color'>Token Type
                   <sup className="danger">*</sup>
                 </div>
               </CCol>
@@ -1087,7 +1087,7 @@ export const CreateTokenModal = (props) => {
           {/* <CButton color="secondary" onClick={() => setVisible(false)}>
           Close
           </CButton> */}
-          <button type="button" className='btn-black' onClick={() => {
+          <button type="button" className='btn-yellow' onClick={() => {
             clearData() 
             setVisible(false)}}>
             Close
@@ -1111,7 +1111,7 @@ export const CreateTokenModal = (props) => {
                 Create
               </button>
             </> :
-            <button type="button" className='btn-black' disabled >Create</button>
+            <button type="button" className='btn-yellow' disabled >Create</button>
           }
         </CModalFooter>
       </CModal>

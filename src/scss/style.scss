@@ -126,14 +126,14 @@ $margin-length: 10px;
 }
 
 .connected_btn {
-    background-color: $body-color;
+    background-color: rgb(221, 221, 221);
     width: 120px;
     height: 36px;
-    border: 2px solid $accent;
+    border: none;
     border-radius: 18px;
     font-size: 15px;
     font-weight: bold;
-    color: #fff;
+    color: rgba(44, 56, 74, 0.95);
     text-align: center;
     cursor: pointer;
     transition-duration: 0.4s;
@@ -143,14 +143,14 @@ $margin-length: 10px;
 }
 
 .connected_btn:hover {
-    background-color: $body-color;
+    background-color: rgb(221, 221, 221);
     width: 120px;
     height: 36px;
-    border: 2px solid $accent_highlight;
+    border: none;
     border-radius: 18px;
     font-size: 15px;
     font-weight: bold;
-    color: #888;
+    color: rgba(44, 56, 74, 0.95);
     text-align: center;
     cursor: pointer;
     transition-duration: 0.4s;
@@ -160,13 +160,13 @@ $margin-length: 10px;
     overflow: hidden;
 }
 
-.btn-black {
-    background-color: #000;
-    border: 1px solid #333;
+.btn-yellow {
+    background-color: #ffc107 !important;
+    border: 1px solid #ffc107;
     border-radius: 4px;
     padding: 5px 18px;
     font-size: 13px;
-    color: #888;
+    color: white;
     text-align: center;
     display: inline-block;
     cursor: pointer;
@@ -315,6 +315,7 @@ span {
     height: 40px;
     padding-left: 10px;
     padding-right: 10px;
+    background-color: #EEEFF0;
 }
 
 .input-highlighted {
@@ -323,6 +324,9 @@ span {
 
 .font-bold {
     font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 1rem;
+    color: #ffc107;
 }
 
 .text-link-accent {
@@ -351,8 +355,8 @@ span {
     background-color: var(--cui-input-bg, #fff);
 }*/
 
-.alert-dark {
-    --cui-alert-color: #fff;
+.alert-yellow {
+    --cui-alert-color: #ffc107;
     --cui-alert-bg: $dark-color;
     --cui-alert-border-color: #caced5;
     --cui-alert-link-color: #262d37;
@@ -377,6 +381,22 @@ span {
     background-color: inherit;
     color: inherit;
     opacity: 0.5;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+div.col, .token-table td, .token-table th {
+    color: #24252f;
+}
+
+.back-gray, .alert-warning {
+    background-color: #EEEFF0;
+}
+
+.alert-dismissible {
+    padding: 1rem 1rem;
 }
 
 @media screen and (max-width: 768px) {

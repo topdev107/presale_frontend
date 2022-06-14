@@ -1064,7 +1064,7 @@ const TokenHome = () => {
                     }
                     Create Token
                   </button> :
-                  <button type="button" className="btn-black" disabled>Create Token</button>
+                  <button type="button" className="btn-yellow" disabled>Create Token</button>
               }
               </div>
           </CCardBody>

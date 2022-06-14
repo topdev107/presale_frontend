@@ -513,7 +513,7 @@ const TotalView = () => {
     }
     return (
       <>
-        <p className="text-align-center text-white-color">{message}</p>
+        <p className="text-align-center">{message}</p>
         {
           presaleState == 1 || presaleState == 2 ? 
           (
@@ -528,7 +528,7 @@ const TotalView = () => {
               <CProgress className="mb-1">
                 <CProgressBar color="warning" value={+progress}/>
               </CProgress>
-              <div style={{display: 'flex'}}>
+              <div style={{display: 'flex', color: '#24252f'}}>
                 <div className='col-md-6 text_align_left'>{currentState} {unit} </div>
                 <div className='col-md-6 text_align_right'>{hardcap} {unit} </div>
               </div>
@@ -560,7 +560,7 @@ const TotalView = () => {
                       Buy
                     </button>
                     ) : (
-                      <button type="button" className="btn-black" disabled >Buy</button>
+                      <button type="button" className="btn-yellow" disabled >Buy</button>
                     )
                   }
                 </div>
@@ -572,10 +572,10 @@ const TotalView = () => {
               <></>
             ) : (
               presaleState === 4 || presaleState === 5 ? ( 
-                <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaimBNB}>Claim BNBs</CButton>
+                <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaimBNB}>Claim BNBs</CButton>
                ) : (
                 <>
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaim}>Claim Tokens</CButton>
+                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleClaim}>Claim Tokens</CButton>
                 </> 
               )
             )
@@ -917,7 +917,7 @@ const TotalView = () => {
           className='border-dark'
         >
           <CCardBody>
-            <CAlert color="dark">
+            <CAlert color="yellow">
               Make sure the website
             </CAlert>
             {
@@ -957,9 +957,9 @@ const TotalView = () => {
           showOwnerZone === true ? (
         <CCard 
           color='#242525'
-          textColor='white'
+          textColor='#242525'
           className='border-dark'>
-          <CCardHeader>Owner Zone</CCardHeader>
+          <CCardHeader style={{color: '#242525'}}>Owner Zone</CCardHeader>
           <CCardBody>
             <CAlert color="dark">
               To make sure there will be no issues during the presale time, please don&apos;t send tokens to wallets before you finalize the presale pool
@@ -999,7 +999,7 @@ const TotalView = () => {
                     <div className="d-grid gap-1">
                       <AddUser presaleAddr = {presaleAddress} />
                       <RemoveUser presaleAddr = {presaleAddress} />
-                      <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000', width: '100%'}} onClick={() => setVisible(!publicvisible)}>Setting time to public</CButton>
+                      <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000', width: '100%'}} onClick={() => setVisible(!publicvisible)}>Setting time to public</CButton>
                       <DisableWhitelist presaleAddr = {presaleAddress} setPublicRadio = {setSaleType} />
                     </div>
                     </>
@@ -1012,16 +1012,16 @@ const TotalView = () => {
             <div style ={{width: '100%', height: '2px', backgroundColor: 'black'}}></div>
             <p></p>
             <p>Pool Action</p>
-            {/* <CButton color="dark" shape="rounded-2" style={{width : '100%'}}>Dark</CButton> */}
+            {/* <CButton color="yellow" shape="rounded-2" style={{width : '100%'}}>yellow</CButton> */}
             <div className="d-grid gap-2">
               {
                 useVesting ? (
-                <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}}>List of contributors</CButton>
+                <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}}>List of contributors</CButton>
                 ): (<></>)
               }
               {
                 presaleState === 3 && isFinalized === true? (
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleFinalize}>
+                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleFinalize}>
                     {
                     isFinalizeLoad == true ? (
                     <Spinner
@@ -1037,17 +1037,17 @@ const TotalView = () => {
                     Finalize
                   </CButton>
                 ) : (
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
+                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled onClick={handleFinalize}>Finalize</CButton>
                 )
               }
               {
                 presaleState === 4 || presaleState === 5 ? (
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleWithdraw}>
+                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} disabled={isFinalizeLoad} onClick={handleWithdraw}>
                     Withdraw canceled tokens
                   </CButton>
                 ) : (
                   isFinalized === true ? (
-                  <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleCancel}>Cancel Pool</CButton>
+                  <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000'}} onClick={handleCancel}>Cancel Pool</CButton>
                   ) : (<></>)
                 )
               }

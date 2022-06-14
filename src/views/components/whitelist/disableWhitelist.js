@@ -50,7 +50,7 @@ export const DisableWhitelist = (props) => {
 
   return (
     <>
-    <CButton color="dark" shape = "rounded-2" style={{backgroundColor: '#000', width: '100%'}} onClick={handleDisableWhitelist}>Disable whitelist</CButton>
+    <CButton color="yellow" shape = "rounded-2" style={{backgroundColor: '#000', width: '100%'}} onClick={handleDisableWhitelist}>Disable whitelist</CButton>
     </>
   )
 }

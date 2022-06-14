@@ -239,7 +239,7 @@ const Home = () => {
                           childStart={<p>Decimals</p>}
                           childEnd={<p className="text-right">{tokenDecimal}</p>}
                         />
-                        {/* <CAlert color="dark" className="d-flex align-items-center" dismissible>
+                        {/* <CAlert color="yellow" className="d-flex align-items-center" dismissible>
                           <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
                           <div>
                             Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.
@@ -252,7 +252,7 @@ const Home = () => {
                                   createLanchpad
                                   childStart={<FontAwesomeIcon icon={faInfoCircle} className='text-accent-color' style={{ marginTop: '10px' }} />}
                                   childMiddle={<p className='text-accent-color' style={{ fontSize: '13px', marginTop: '10px' }}>Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.</p>}
-                                  childEnd={<FontAwesomeIcon icon={faWindowClose} onClick={handleCloseInfo} style={{ color: 'black', marginTop: '10px' }} />}
+                                  childEnd={<FontAwesomeIcon icon={faWindowClose} onClick={handleCloseInfo} style={{ color: '#ffc107', marginTop: '10px' }} />}
                                 />
                               </div>
                             </div>

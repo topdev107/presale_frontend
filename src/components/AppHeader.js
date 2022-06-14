@@ -204,7 +204,7 @@ const AppHeader = () => {
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
         <CHeaderNav className="ms-3" style={{width: '100%', justifyContent: 'flex-end'}}>
-          <CButton color="warning" variant="outline" shape="rounded-pill" style={{color: 'white', fontWeight: 'bold'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton>
+          <CButton color="warning" shape="rounded-pill" style={{border: 'none', color: '#222', fontWeight: 'bold', backgroundColor: '#ddd'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
               <CModalHeader onClose={() => setModalVisible(false)}>
                 <CModalTitle>Choose network</CModalTitle>
@@ -213,13 +213,13 @@ const AppHeader = () => {
                 <div className='text-white-color'> MAINNET</div>
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton color="dark" onClick={() => changeNetwork(0)}>  
+                    <CButton color="yellow" onClick={() => changeNetwork(0)}>  
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton  color="dark" onClick={() => changeNetwork(1)}>
+                    <CButton  color="yellow" onClick={() => changeNetwork(1)}>
                       <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
@@ -229,13 +229,13 @@ const AppHeader = () => {
                 <div className='text-white-color'>TESTNET</div>
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton color="dark" onClick={() => changeNetwork(2)}>
+                    <CButton color="yellow" onClick={() => changeNetwork(2)}>
                       <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton  color="dark" onClick={() => changeNetwork(3)}>
+                    <CButton  color="yellow" onClick={() => changeNetwork(3)}>
                       <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
