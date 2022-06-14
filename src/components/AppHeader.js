@@ -203,7 +203,7 @@ const AppHeader = () => {
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
-        <CHeaderNav className="ms-3" style={{width: '100%', justifyContent: 'flex-end'}}>
+        <CHeaderNav className="ms-3" style={{justifyContent: 'flex-end'}}>
           <CButton color="warning" shape="rounded-pill" style={{border: 'none', color: '#222', fontWeight: 'bold', backgroundColor: '#ddd'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
               <CModalHeader onClose={() => setModalVisible(false)}>
