@@ -29,7 +29,7 @@ const AppSidebar = () => {
             <CSidebarBrand className="my_sidebar_brand my_logo d-none d-md-flex" to="/">
                 {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
                 <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
-                <img className="m-2" src="./assets/presale_logo_yellow.png" alt="logo" width="150" height="40" />
+                <img className="m-2" src="./assets/presale_logo_yellow1.png" alt="logo" width="150" height="40" />
 
                 
             </CSidebarBrand>
