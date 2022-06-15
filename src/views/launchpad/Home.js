@@ -47,7 +47,7 @@ const Home = () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setCurrentChain(parseInt(id, 16))
   }, [])
-  window.ethereum.on('networkChanged', function (networkid) {
+  window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     presaleFactory()
     .then((result) => {
       setPresaleFactoryAddr(result)

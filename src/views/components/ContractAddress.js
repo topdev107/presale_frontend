@@ -1,5 +1,6 @@
 const getNetwork = async () => {
     const provider = window.ethereum
+    if(!provider){ console.log("please install metamask") }
     const chainId = await provider.request({ method: 'eth_chainId' });
     return (
         parseInt(chainId, 16)

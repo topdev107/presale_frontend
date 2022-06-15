@@ -45,7 +45,7 @@ const FairReview = () => {
       console.log(result)
     })  
   }, [])
-  window.ethereum.on('networkChanged', function (networkid) {
+  window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
     fairlaunchFactory()
     .then((result) => {

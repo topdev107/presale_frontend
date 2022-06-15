@@ -131,7 +131,7 @@ const TotalView = () => {
   const [userCurrent, setUserCurrent] = useState(0)
   const [currentChain, setCurrentChain] = useState(0)
 
-  window.ethereum.on('networkChanged', function (networkid) {
+  window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
   })
 

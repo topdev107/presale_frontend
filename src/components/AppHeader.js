@@ -116,6 +116,10 @@ const AppHeader = () => {
 
   const changeNetwork = async (id) => {
     const provider = window.ethereum;
+    if(!provider) {
+      console.log("please install metamask")
+      return
+    }
     const chain = chainInformation[id][0], chainName = chainInformation[id][1],
       rpcURL = chainInformation[id][2], blockExplorer = chainInformation[id][3], native = chainInformation[id][4]
     var currentChain;
@@ -163,11 +167,11 @@ const AppHeader = () => {
     setModalVisible(false)
   }
 
-  window.ethereum.on('accountsChanged', function (accounts) {
+  window.ethereum && window.ethereum.on('accountsChanged', function (accounts) {
     setCurrentAccount(accounts[0])
     dispatch(setMetamask(accounts[0]))
   })
-  window.ethereum.on('networkChanged', function (networkid) {
+  window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     // Time to reload your interface with the new networkId
     // 56 - bsc mainnet
     // 25 - cronos mainnet

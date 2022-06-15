@@ -51,7 +51,7 @@ const Review = () => {
       setPresaleFactoryAddr(result)
     })
   }, [])
-  window.ethereum.on('networkChanged', function (networkid) {
+  window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
     presaleFactory()
     .then((result) => {

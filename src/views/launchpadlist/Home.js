@@ -22,14 +22,14 @@ const LaunchpadList = () => {
   const [tabledata, setTableData] = useState([])
   const [myCurrentPage, setMyCurrentPage] = useState(1)
   const [myTableData, setMyTableData] = useState([])
-  const [currentChain, setCurrentChain] = useState(0)
+  const [currentChain, setCurrentChain] = useState(56)
 
   const [wholeLoading, setWholeLoading] = useState(true)
  
   // const database_url = 'http://127.0.0.1:5000/presale/launchpad'
   const database_url = 'https://presale-backend.vercel.app/presale/launchpad'
 
-  window.ethereum.on('networkChanged', function (networkid) {
+  window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
   })
 
@@ -38,10 +38,10 @@ const LaunchpadList = () => {
     if (currentChain == 25 || currentChain == 338 ) return "CRO"
   }, [currentChain])
 
-  useEffect( async () => {
-    const netId = await window.ethereum.request({ method: 'eth_chainId' })
-    setCurrentChain(parseInt(netId, 16))
-  }, [])
+  // useEffect( async () => {
+  //   const netId = await window.ethereum.request({ method: 'eth_chainId' })
+  //   setCurrentChain(parseInt(netId, 16))
+  // }, [])
 
   const loadData = async () => {
     // const res = await fetch(database_url.concat('/').concat('page'), requestOptions)

@@ -45,7 +45,7 @@ const FairHome = () => {
     setCurrentChain(parseInt(id, 16))
   }, [])
 
-  window.ethereum.on('networkChanged', function (networkid) {
+  window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     fairlaunchFactory()
     .then((result) => {
       setfairlaunchFactoryAddr(result)
