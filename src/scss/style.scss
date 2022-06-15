@@ -108,7 +108,7 @@ $margin-length: 10px;
     border-radius: 18px;
     font-size: 15px;
     font-weight: bold;
-    color: #fff;
+    color: rgba(44, 56, 74, 0.95);
     text-align: center;
     cursor: pointer;
     transition-duration: 0.4s;
@@ -129,7 +129,7 @@ $margin-length: 10px;
 }
 
 .connected_btn {
-    background-color: rgb(221, 221, 221);
+    background-color: $accent;
     width: 120px;
     height: 36px;
     border: none;
@@ -146,7 +146,7 @@ $margin-length: 10px;
 }
 
 .connected_btn:hover {
-    background-color: rgb(221, 221, 221);
+    background-color: $accent;
     width: 120px;
     height: 36px;
     border: none;

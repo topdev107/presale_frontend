@@ -23,7 +23,7 @@ const AppHeader = () => {
   const sidebarShow = useSelector((state) => state.sideBarState.isSidebarShow)
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [networkId, setNetworkId] = useState('')
+  const [networkId, setNetworkId] = useState('BSC MAINNET')
   const chainInformation = [
     [56, 'Binance Smart Chain', 'https://bsc-dataseed.binance.org/', 'https://bscscan.com/', {symbol: 'BNB', decimals: 18}], 
     [25, 'Cronos', 'https://evm.cronos.org', 'https://cronoscan.com/', {symbol: 'CRO', decimals: 18}],
@@ -204,7 +204,8 @@ const AppHeader = () => {
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
         <CHeaderNav className="ms-3" style={{justifyContent: 'flex-end'}}>
-          <CButton color="warning" shape="rounded-pill" style={{border: 'none', color: '#222', fontWeight: 'bold', backgroundColor: '#ddd'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton>
+          {/* <CButton color="warning" shape="rounded-pill" style={{border: 'none', color: '#222', fontWeight: 'bold', backgroundColor: '#ddd'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton> */}
+          <button type="button" className="connect_btn" onClick={() => setModalVisible(!modalVisible)} >{networkId}</button>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
               <CModalHeader onClose={() => setModalVisible(false)}>
                 <CModalTitle>Choose network</CModalTitle>
@@ -214,13 +215,13 @@ const AppHeader = () => {
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="accent" onClick={() => changeNetwork(0)}>  
-                      <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/presale/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="accent" onClick={() => changeNetwork(1)}>
-                      <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/presale//logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
                   </CCol>
@@ -230,13 +231,13 @@ const AppHeader = () => {
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="accent" onClick={() => changeNetwork(2)}>
-                      <CCardImage orientation="top" src="/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/presale/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="accent" onClick={() => changeNetwork(3)}>
-                      <CCardImage orientation="top" src="/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/presale//logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
                   </CCol>
