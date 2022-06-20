@@ -29,7 +29,8 @@ import {
   testRouter,
   dividends,
   testFactory,
-  swapPairs
+  swapPairs,
+  getTokenFees
 } from '../components/ContractAddress'
 import TokenAbi from '../../contracts/tokenAbi'
 import FactoryAbi from '../../contracts/factoryAbi'
@@ -69,6 +70,7 @@ const TokenHome = () => {
   const [testFactoryAddr, settestFactoryAddr] = useState('')
   const [swapPairsAddr, setswapPairsAddr] = useState('')
   const [currentChain, setCurrentChain] = useState(0)
+  const [createfee, setCreatefee] = useState(0)
   const setAddresses = () => {
     standardTokenFactory()
     .then((result) => {
@@ -129,9 +131,8 @@ const TokenHome = () => {
   }, [currentChain])
 
   const stressValue = useMemo (() => {
-    if (currentChain == 97 || currentChain == 56) return 1e16
-    if (currentChain == 25 || currentChain == 338 ) return 1e20
-  }, [currentChain])
+    return createfee * 1e18
+  }, [createfee])
 
 	const history = useHistory()
 	const dispatch = useDispatch()
@@ -202,6 +203,7 @@ const TokenHome = () => {
   const [isCreateValid, setCreateValid] = useState(false)
   const [isCreateLoad, setCreateLoad] = useState(false)
 
+
   // const createStandardToken = async (e) => {
   //   e.preventDefault()
   //   const accounts = web3.eth.requestAccounts()
@@ -252,6 +254,25 @@ const TokenHome = () => {
     setIsCheckedAntiBot(false)
     setCreateValid(false)
   }
+
+  async function getCreateFee(address) {
+    const fee = await getTokenFees(address)
+    setCreatefee(fee)
+  }
+
+  useEffect(() => {
+    let address = ''
+    if(tokenType == 'Standard Token') {
+      address = standardTokenFactoryAddr
+    } else if(tokenType == 'Liquidity Generator Token') {
+      address = liquidityTokenFactoryAddr
+    } else if(tokenType == 'Baby Token') {
+      address = babytokenFactoryAddr
+    } else if(tokenType == 'Buyback Baby Token') {
+      address = buybackbabyFactoryAddr
+    }
+    getCreateFee(address)
+  }, [tokenType, currentChain])
 
   async function createStandardToken() {
     try {
@@ -752,7 +773,7 @@ const TokenHome = () => {
                   <option value="Baby Token">Baby Token</option>
                   <option value="Buyback Baby Token">Buyback Baby Token</option>
                 </CFormSelect>
-                <div className="small-text-sz mt-1 text-blue-color">Fee: {stressValue / 1e18} {unit}</div>
+                <div className="small-text-sz mt-1 text-blue-color">Fee: {createfee} {unit}</div>
               </div>
             </CRow>
             {

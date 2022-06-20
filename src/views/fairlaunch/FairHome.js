@@ -20,7 +20,7 @@ import CIcon from '@coreui/icons-react';
 import { cilList, cilWarning, cilShieldAlt } from '@coreui/icons';
 import { CreateTokenModal } from '../components/CreateTokenModal'
 import TokenAbi from '../../contracts/tokenAbi'
-import { fairlaunchFactory } from '../components/ContractAddress'
+import { fairlaunchFactory, getFinalizeFees, getPresaleFees } from '../components/ContractAddress'
 
 const provider = () => {
   // 1. Try getting newest provider
@@ -35,6 +35,8 @@ const provider = () => {
 const FairHome = () => {
   const [fairlaunchFactoryAddr, setfairlaunchFactoryAddr] = useState('')
   const [currentChain, setCurrentChain] = useState(0)
+  const [createFee, setCreateFee] = useState(0)
+  const [finalizeFee, setFinalizeFee] = useState(0)
   useEffect(async () => {
     fairlaunchFactory()
     .then((result) => {
@@ -44,6 +46,18 @@ const FairHome = () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setCurrentChain(parseInt(id, 16))
   }, [])
+
+  
+  async function getFees() {
+    let fee = await getPresaleFees(fairlaunchFactoryAddr)
+    setCreateFee(fee)
+    fee = await getFinalizeFees()
+    setFinalizeFee(fee)
+  }
+
+  useEffect( () => {
+    getFees()
+  },[fairlaunchFactoryAddr])
 
   window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     fairlaunchFactory()
@@ -216,12 +230,10 @@ const FairHome = () => {
                     )
                   }
                   <p className="small-text-sz mt-1 text-blue-color">
-                    {
-                      currentChain == 97 || currentChain == 56 ?
-                        0.01 :
-                        currentChain == 25 || currentChain == 338 ?
-                         100 : 0
-                    } {unit}
+                    {createFee} {unit}
+                  </p>
+                  <p className="small-text-sz mt-1 text-blue-color">
+                    Finalize fee: {finalizeFee}%
                   </p>
                   {
                     isTokenValid ? (

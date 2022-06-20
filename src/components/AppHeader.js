@@ -209,7 +209,7 @@ const AppHeader = () => {
         </CHeaderBrand>
         <CHeaderNav className="ms-3" style={{justifyContent: 'flex-end'}}>
           {/* <CButton color="warning" shape="rounded-pill" style={{border: 'none', color: '#222', fontWeight: 'bold', backgroundColor: '#ddd'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton> */}
-          <button type="button" className="connect_btn" onClick={() => setModalVisible(!modalVisible)} >{networkId}</button>
+          <button type="button" className="connect_btn" style={{width: 'auto'}} onClick={() => setModalVisible(!modalVisible)} >{networkId}</button>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
               <CModalHeader onClose={() => setModalVisible(false)}>
                 <CModalTitle>Choose network</CModalTitle>

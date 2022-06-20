@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveBasicSymbol, saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals, saveTokenTotalSupply } from '../../state/CreateLaunchPadState'
 import { CreateTokenModal } from '../components/CreateTokenModal'
 import TokenAbi from '../../contracts/tokenAbi'
-import { presaleFactory } from '../components/ContractAddress'
+import { presaleFactory, getFinalizeFees, getPresaleFees } from '../components/ContractAddress'
 
 const provider = () => {
   // 1. Try getting newest provider
@@ -37,6 +37,10 @@ const provider = () => {
 const Home = () => {
   const [presaleFactoryAddr, setPresaleFactoryAddr] = useState('')
   const [currentChain, setCurrentChain] = useState(0)
+  const [createFee, setCreateFee] = useState(0)
+  const [finalizeFee, setFinalizeFee] = useState(0)
+
+
   // const [unit, setUnit] = useState('')
   useEffect( async () => {
     presaleFactory()
@@ -47,6 +51,18 @@ const Home = () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setCurrentChain(parseInt(id, 16))
   }, [])
+
+  async function getFees() {
+    let fee = await getPresaleFees(presaleFactoryAddr)
+    setCreateFee(fee)
+    fee = await getFinalizeFees()
+    setFinalizeFee(fee)
+  }
+
+  useEffect( () => {
+    getFees()
+  },[presaleFactoryAddr])
+
   window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     presaleFactory()
     .then((result) => {
@@ -218,12 +234,11 @@ const Home = () => {
                     )
                   }
                   <p className="small-text-sz mt-1 text-blue-color">Create pool fee: 
-                    {
-                      currentChain == 97 || currentChain == 56 ?
-                        0.01 :
-                        currentChain == 25 || currentChain == 338 ?
-                         100 : 0
-                    } {unit}</p>
+                     {createFee}{unit}</p>
+                  
+                  <p className="small-text-sz mt-1 text-blue-color">
+                    Finalize fee: {finalizeFee}%
+                  </p>
                   {
                     isTokenValid ? (
                       <div>

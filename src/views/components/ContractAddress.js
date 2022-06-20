@@ -1,3 +1,8 @@
+import Web3 from 'web3'
+import abi from '../../contracts/abi'
+import presaleFactoryAbi from '../../contracts/presaleFactoryAbi'
+import profitAbi from '../../contracts/profitAbi'
+
 const getNetwork = async () => {
     const provider = window.ethereum
     if(!provider){ console.log("please install metamask") }
@@ -16,7 +21,7 @@ export const standardTokenFactory = async () => {
     } else if(networkId == 97) {
         return '0xf58dbf251182Fc9235C932108c300F2E4559e000'
     } else if(networkId == 338) {
-        return '0xE0312C46a64ae2aEf860f3903c34240391F64660'
+        return '0x44d41D02B25EE71c0888e449238a3d57550fAb69'
     } else {
         return ''
     }
@@ -30,7 +35,7 @@ export const liquidityTokenFactory = async () => {
     } else if(networkId == 97) {
         return '0x53D460C76a5a142591804B755EBCA7176f6d305A'
     } else if(networkId == 338) {
-        return '0xD73eb570734FA9B565957dB375283A3e5412b616'
+        return '0x3CE96579043dA1ECC23a98a807Fe007117E045a3'
     } else {
         return ''
     }
@@ -44,7 +49,7 @@ export const babytokenFactory = async () => {
     } else if(networkId == 97) {
         return '0xE56Fb796eC546790d7a90Df9d762bC8EF33F7c1b'
     } else if(networkId == 338) {
-        return '0xBA11b6fcB918c3FA32fCD96679EBAB9B09898B28'
+        return '0x7E1EC97439D92A171A1Be7268f06aD691A32051b'
     } else {
         return ''
     }
@@ -58,7 +63,7 @@ export const buybackbabyFactory = async () => {
     } else if(networkId == 97) {
         return '0xfc963E44e72687ED8fAC9E4C467115DCdeCa09ef'
     } else if(networkId == 338) {
-        return '0xcD5d59a494c1571dB7E9761681248E0116e3e7bC'
+        return '0x5182140102FB2d33dBb57287A5Da29EB0a83e261'
     } else {
         return ''
     }
@@ -73,7 +78,7 @@ export const presaleFactory = async () => {
     } else if(networkId == 97) {
         return '0x26caa7aa2044e01be42d7764319d731aa3127214'
     } else if(networkId == 338) {
-        return '0x3494f083b3b03b293898b995c30B2D16597d6C16'
+        return '0xD81ed6F1E0D2FA57F24D38584d6Abe58c21feDac'
     } else {
         return ''
     }
@@ -87,7 +92,7 @@ export const presaleTestFactory = async () => {
     } else if(networkId == 97) {
         return '0x26caa7aa2044e01be42d7764319d731aa3127214'
     } else if(networkId == 338) {
-        return '0x3494f083b3b03b293898b995c30B2D16597d6C16'
+        return '0xD81ed6F1E0D2FA57F24D38584d6Abe58c21feDac'
     } else {
         return ''
     }
@@ -116,7 +121,7 @@ export const fairlaunchFactory = async () => {
     } else if(networkId == 97) {
         return '0x838E9c7B85Fc43723AF8e5A0Dd6CBe3894C1Bc98'
     } else if(networkId == 338) {
-        return '0x59F600B540f04B53aFd59B6630469F531d6C6028'
+        return '0x8eB1406b2D486DD3B54a8e6Aa5091d5d0138545A'
     } else {
         return ''
     }
@@ -160,7 +165,7 @@ export const dividends = async () => {
     } else if(networkId == 97) {
         return '0x6eeb420e175f24820d5097bcf2a68363da544bcc'
     } else if(networkId == 338) {
-        return '0xfd82b8d8aedc8cea008984de27faba76e52d5307'
+        return '0x4Ac8BBae9Cf0A6Dc25A19dc98d6D1923320FC993'
     } else {
         return ''
     }
@@ -209,4 +214,45 @@ export const swapPairs = async () => {                  //WBNB contract address
     } else {
         return ''
     }
+}
+
+const profit = async () => {
+    const networkId = await getNetwork()
+    if(networkId == 56) {
+        return '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
+    } else if(networkId == 25) {
+        return '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23'
+    } else if(networkId == 97) {
+        return '0xae13d989dac2f0debff460ac112a837c89baa7cd'
+    } else if(networkId == 338) {
+        return '0x60964e6A71e507247CA247779572be82cA671AD0'
+    } else {
+        return ''
+    }
+}
+
+export const getTokenFees = async (address) => {
+    if(!address) return 0
+    const web3 = new Web3(window.ethereum)
+    const contract = new web3.eth.Contract(abi, address)
+    const fee = await contract.methods.getFlatFee().call()
+    const a = web3.utils.fromWei(fee, 'ether')
+    return a
+}
+
+export const getFinalizeFees = async () => {
+    const web3 = new Web3(window.ethereum)
+    const address = await profit()
+    const contract = new web3.eth.Contract(profitAbi, address)
+    const fee = await contract.methods.getPercent().call()
+    return fee
+}
+
+export const getPresaleFees = async (address) => {
+    if(!address) return 0
+    const web3 = new Web3(window.ethereum)
+    const contract = new web3.eth.Contract(presaleFactoryAbi, address)
+    const fee = await contract.methods.getFlatFee().call()
+    const a = web3.utils.fromWei(fee, 'ether')
+    return a
 }
