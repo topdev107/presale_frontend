@@ -19,7 +19,7 @@ export const standardTokenFactory = async () => {
     } else if(networkId == 25) {
         return '0xEc774B639DfE50EA25686a121c750B2Fb1EC8B22'
     } else if(networkId == 97) {
-        return '0xf58dbf251182Fc9235C932108c300F2E4559e000'
+        return '0x0717AD82b5D4113789E6015ea1edD5D9911AcddF'
     } else if(networkId == 338) {
         return '0x44d41D02B25EE71c0888e449238a3d57550fAb69'
     } else {
@@ -33,7 +33,7 @@ export const liquidityTokenFactory = async () => {
     } else if(networkId == 25) {
         return '0x48bca8a4b98c821e9d822ddb674e0f78da606da0'
     } else if(networkId == 97) {
-        return '0x53D460C76a5a142591804B755EBCA7176f6d305A'
+        return '0xD462420Df50bE5dC961A415919bE35497Bed3CEc'
     } else if(networkId == 338) {
         return '0x3CE96579043dA1ECC23a98a807Fe007117E045a3'
     } else {
@@ -47,7 +47,7 @@ export const babytokenFactory = async () => {
     } else if(networkId == 25) {
         return '0xC1CD46706c88B91E1004a5163A4f88e972ba4e87'
     } else if(networkId == 97) {
-        return '0xE56Fb796eC546790d7a90Df9d762bC8EF33F7c1b'
+        return '0xE9bdF8dA1d6204ce567e160c45Ff09AECd621f6E'
     } else if(networkId == 338) {
         return '0x7E1EC97439D92A171A1Be7268f06aD691A32051b'
     } else {
@@ -61,7 +61,7 @@ export const buybackbabyFactory = async () => {
     } else if(networkId == 25) {
         return '0x0A81Ddf4CFEE5D589c0A9Dc38d71f1ba0A9c6d09'
     } else if(networkId == 97) {
-        return '0xfc963E44e72687ED8fAC9E4C467115DCdeCa09ef'
+        return '0x115Da8139575C48392468C987f6A309e3E528266'
     } else if(networkId == 338) {
         return '0x5182140102FB2d33dBb57287A5Da29EB0a83e261'
     } else {
@@ -76,7 +76,7 @@ export const presaleFactory = async () => {
     } else if(networkId == 25) {
         return '0x2DdA17bEbBCb8eF59Df40f2761aB310483A4E223'
     } else if(networkId == 97) {
-        return '0x26caa7aa2044e01be42d7764319d731aa3127214'
+        return '0x4b8Ae3289797A61A6f7D927552F1f2d70A55C43E'
     } else if(networkId == 338) {
         return '0xD81ed6F1E0D2FA57F24D38584d6Abe58c21feDac'
     } else {
@@ -90,7 +90,7 @@ export const presaleTestFactory = async () => {
     } else if(networkId == 25) {
         return '0x2DdA17bEbBCb8eF59Df40f2761aB310483A4E223'
     } else if(networkId == 97) {
-        return '0x26caa7aa2044e01be42d7764319d731aa3127214'
+        return '0x4b8Ae3289797A61A6f7D927552F1f2d70A55C43E'
     } else if(networkId == 338) {
         return '0xD81ed6F1E0D2FA57F24D38584d6Abe58c21feDac'
     } else {
@@ -119,7 +119,7 @@ export const fairlaunchFactory = async () => {
     } else if(networkId == 25) {
         return '0x14B728B79519B5E15329615A0987EF79ad25d651'
     } else if(networkId == 97) {
-        return '0x838E9c7B85Fc43723AF8e5A0Dd6CBe3894C1Bc98'
+        return '0x48bE0dDb98a433896e5D90385ecf516CFAb41F50'
     } else if(networkId == 338) {
         return '0x8eB1406b2D486DD3B54a8e6Aa5091d5d0138545A'
     } else {
@@ -223,7 +223,7 @@ const profit = async () => {
     } else if(networkId == 25) {
         return '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23'
     } else if(networkId == 97) {
-        return '0xae13d989dac2f0debff460ac112a837c89baa7cd'
+        return '0x5B78D62AB8340160C5e245F1d5e2635ca2b78001'
     } else if(networkId == 338) {
         return '0x60964e6A71e507247CA247779572be82cA671AD0'
     } else {
