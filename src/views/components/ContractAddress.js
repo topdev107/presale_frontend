@@ -15,9 +15,9 @@ const getNetwork = async () => {
 export const standardTokenFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0x258524973B09D4FB5Fd79555eF657E8D9fc96Ee6'
+        return '0xC9E3EB1E42c8CE324A831E87E3193aFd192BE68A'
     } else if(networkId == 25) {
-        return '0xEc774B639DfE50EA25686a121c750B2Fb1EC8B22'
+        return '0x90186EDcD64188fa28064895d328e302b09D20e7'
     } else if(networkId == 97) {
         return '0x0717AD82b5D4113789E6015ea1edD5D9911AcddF'
     } else if(networkId == 338) {
@@ -29,9 +29,9 @@ export const standardTokenFactory = async () => {
 export const liquidityTokenFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0x80A49151B00a746B68a272A738E654A7EA5fdAed'
+        return '0x6B4F15eC2113D7C572cab1D7922d4e371bcF002F'
     } else if(networkId == 25) {
-        return '0x48bca8a4b98c821e9d822ddb674e0f78da606da0'
+        return '0xa60cb5CF26B6457D135C3564a4104A9405663a14'
     } else if(networkId == 97) {
         return '0xD462420Df50bE5dC961A415919bE35497Bed3CEc'
     } else if(networkId == 338) {
@@ -43,9 +43,9 @@ export const liquidityTokenFactory = async () => {
 export const babytokenFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0x6bc870267Fa4F00023d09AFeb6984579CaCDA6cc'
+        return '0xeBd98C5A23bfc7039E7E15220cD788889aaec88e'
     } else if(networkId == 25) {
-        return '0xC1CD46706c88B91E1004a5163A4f88e972ba4e87'
+        return '0x329039d8d33412f53212A9Ff5A4c71665cF75778'
     } else if(networkId == 97) {
         return '0xE9bdF8dA1d6204ce567e160c45Ff09AECd621f6E'
     } else if(networkId == 338) {
@@ -57,9 +57,9 @@ export const babytokenFactory = async () => {
 export const buybackbabyFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0xeeEC2bD24bC663585290B821970b07734cbE674A'
+        return '0xCB410e1d02120d6A6705bea0AEC3Dd184A79937C'
     } else if(networkId == 25) {
-        return '0x0A81Ddf4CFEE5D589c0A9Dc38d71f1ba0A9c6d09'
+        return '0x15B214e5ebb0Bd4a2c5dCa188c963785403fd1bB'
     } else if(networkId == 97) {
         return '0x115Da8139575C48392468C987f6A309e3E528266'
     } else if(networkId == 338) {
@@ -72,7 +72,7 @@ export const buybackbabyFactory = async () => {
 export const presaleFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0xb69F3c157d48A9A736F67848a2313796b576F2eB'
+        return '0x0201d47E88b89A333Ce5edCf7A9481b897835E50'
     } else if(networkId == 25) {
         return '0x2DdA17bEbBCb8eF59Df40f2761aB310483A4E223'
     } else if(networkId == 97) {
@@ -86,9 +86,9 @@ export const presaleFactory = async () => {
 export const presaleTestFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0xb69F3c157d48A9A736F67848a2313796b576F2eB'
+        return '0x0201d47E88b89A333Ce5edCf7A9481b897835E50'
     } else if(networkId == 25) {
-        return '0x2DdA17bEbBCb8eF59Df40f2761aB310483A4E223'
+        return '0xa06720b106a83ef0F4DC375fDE5B61B220B4fffe'
     } else if(networkId == 97) {
         return '0x4b8Ae3289797A61A6f7D927552F1f2d70A55C43E'
     } else if(networkId == 338) {
@@ -115,9 +115,9 @@ export const presaleTestFactory = async () => {
 export const fairlaunchFactory = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0xFeAEB69DbAdB8c753b6d517537CBBe2a731D9907'
+        return '0xc56682f9f2CA5d87FFf3a9291E2667e44d379914'
     } else if(networkId == 25) {
-        return '0x14B728B79519B5E15329615A0987EF79ad25d651'
+        return '0x941eCa123BDe757c56B17D46772E57EbfD919422'
     } else if(networkId == 97) {
         return '0x48bE0dDb98a433896e5D90385ecf516CFAb41F50'
     } else if(networkId == 338) {
@@ -219,9 +219,9 @@ export const swapPairs = async () => {                  //WBNB contract address
 const profit = async () => {
     const networkId = await getNetwork()
     if(networkId == 56) {
-        return '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
+        return '0x97aA3d65a783EE61B8619086539eb0F9138Fe65c'
     } else if(networkId == 25) {
-        return '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23'
+        return '0x18b65245892A1b50a7b3F5d8B2D6E5CC9Df7bE1F'
     } else if(networkId == 97) {
         return '0x5B78D62AB8340160C5e245F1d5e2635ca2b78001'
     } else if(networkId == 338) {
