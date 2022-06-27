@@ -1,4 +1,7 @@
 import {
+  cilApplications,
+  cilLibrary,
+  cilMoney,
   cilStar
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
@@ -26,7 +29,7 @@ const _nav = [
     to: '/launchpad/home',
     similar: '/launchpad/',
     def: true,
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilApplications} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -34,7 +37,7 @@ const _nav = [
     to: '/fairlaunch/home',
     similar: '/fairlaunch/',
     def: false,
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilApplications} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -42,7 +45,7 @@ const _nav = [
     to: '/createtoken/home',
     similar: '/createtoken/',
     def: false,
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilMoney} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -50,7 +53,7 @@ const _nav = [
     to: '/launchpadlist',
     similar: '/launchview',
     def: false,
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilLibrary} customClassName="nav-icon" />,
   },
   // {
   //   component: CNavItem,
