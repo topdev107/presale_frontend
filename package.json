@@ -1,7 +1,7 @@
 {
-  "name": "presale",
+  "name": "Flash pad",
   "version": "0.1.0",
-  "description": "Presale",
+  "description": "Flash pad",
   "private": true,
   "homepage": ".",
   "scripts": {

@@ -300,9 +300,17 @@ span {
     flex-grow: 1;
 }
 
+.toggle-icon {
+    display: none;
+}
+
 @media only screen and (max-width: 1026px) {
     .hide-less-than-1026 {
         display: none;
+    }
+
+    .toggle-icon {
+        display: block;
     }
 }
 
@@ -411,6 +419,10 @@ div.col, .token-table td, .token-table th {
 @media screen and (max-width: 768px) {
     .dispaly-line-table {
         display: inline-table;
+    }
+
+    .toggle-icon {
+        display: block;
     }
 
     .show-style {

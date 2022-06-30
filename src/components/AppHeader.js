@@ -196,13 +196,13 @@ const AppHeader = () => {
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          style={!sidebarShow ? {color: 'black'} : {color: 'black'}}
+          // style={!sidebarShow ? {color: '#222'} : {color: '#222'}}
           // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
           onClick={() => {
             dispatch(set(!sidebarShow))
           }}
         >
-          <CIcon icon={cilMenu} size="lg" />
+          <CIcon className="toggle-icon" icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           <CIcon icon={logo} height={48} alt="Logo" />
