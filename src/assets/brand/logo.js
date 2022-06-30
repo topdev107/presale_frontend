@@ -1,9 +1,9 @@
 export const logo = [
   '250 50',
   `
-  <title>Presale pro</title>
+  <title>Launchpad of Flash Technologies</title>
   <g>
-    <image width="200" height="48" href="./assets/presale_logo_yellow1.png" />
+    <image width="200" height="48" href="./assets/presale_logo_yellow.png" />
   </g>
 `,
 ]

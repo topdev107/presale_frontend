@@ -219,13 +219,13 @@ const AppHeader = () => {
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="accent" onClick={() => changeNetwork(0)}>  
-                      <CCardImage orientation="top" src="http://flash-pad.com/presale/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="accent" onClick={() => changeNetwork(1)}>
-                      <CCardImage orientation="top" src="http://flash-pad.com/presale//logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
                   </CCol>
@@ -235,13 +235,13 @@ const AppHeader = () => {
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="accent" onClick={() => changeNetwork(2)}>
-                      <CCardImage orientation="top" src="http://flash-pad.com/presale/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="accent" onClick={() => changeNetwork(3)}>
-                      <CCardImage orientation="top" src="http://flash-pad.com/presale//logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="http://flash-pad.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
                   </CCol>
