@@ -196,7 +196,7 @@ const AppHeader = () => {
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          style={!sidebarShow ? {color: 'black'} : {color: '#f5f8f8'}}
+          style={!sidebarShow ? {color: 'black'} : {color: 'black'}}
           // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
           onClick={() => {
             dispatch(set(!sidebarShow))
