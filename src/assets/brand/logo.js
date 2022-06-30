@@ -3,7 +3,7 @@ export const logo = [
   `
   <title>Launchpad of Flash Technologies</title>
   <g>
-    <image width="300" height="67" href="./assets/presale_logo_yellow.png" />
+    <image width="300" height="67" href="./assets/presale_logo_yellow2.png" />
   </g>
 `,
 ]
