@@ -34,6 +34,7 @@ const AppHeader = () => {
 
   const disconnectWalletHandler = () => {
     setCurrentAccount(null)
+    dispatch(setMetamask(''))
   }
   async function loadWallet() {
     try {
