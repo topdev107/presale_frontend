@@ -32,9 +32,9 @@ const AppHeader = () => {
   ]
   const [currentAccount, setCurrentAccount] = useState(null);
 
-  // const disconnectWalletHandler = () => {
-  //   setCurrentAccount(null)
-  // }
+  const disconnectWalletHandler = () => {
+    setCurrentAccount(null)
+  }
   async function loadWallet() {
     try {
       const provider = window.ethereum;
@@ -251,7 +251,7 @@ const AppHeader = () => {
             <AppHeaderDropdown
               currentAccount={currentAccount}
               onConnect={connectWalletHandler}
-  //            onLogout={disconnectWalletHandler}
+              onLogout={disconnectWalletHandler}
             />
         </CHeaderNav>
       </CContainer>
