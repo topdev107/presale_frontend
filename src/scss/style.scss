@@ -90,7 +90,13 @@ $margin-length: 10px;
 
 .my_csidebar {
     background-color: $body-color;
+    position: fixed;
+        top: 115px;
+        bottom: 0;
+        z-index: 1030;
 }
+
+
 
 .my_sidebar_brand {
     // background-color: $body-color;
@@ -311,6 +317,15 @@ span {
 
     .toggle-icon {
         display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .my_csidebar {
+        position: fixed;
+        top: 100px;
+        bottom: 0;
+        z-index: 1030;
     }
 }
 
