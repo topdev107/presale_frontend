@@ -16,7 +16,7 @@ const AppHeaderDropdown = (props) => {
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         {
-          props.currentAccount === null ? (
+          props.currentAccount === null || props.currentAccount === '' || props.currentAccount === undefined ? (
             <button className='connect_btn' onClick={props.onConnect}>Connect</button>
           ) : (
             <button className='connected_btn' >{props.currentAccount}</button>
