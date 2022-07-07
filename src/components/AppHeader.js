@@ -26,10 +26,10 @@ const AppHeader = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [networkId, setNetworkId] = useState('BSC MAINNET')
   const chainInformation = [
-    [56, 'Binance Smart Chain', 'https://bsc-dataseed.binance.org/', 'https://bscscan.com/', {symbol: 'BNB', decimals: 18}], 
-    [25, 'Cronos', 'https://evm.cronos.org', 'https://cronoscan.com/', {symbol: 'CRO', decimals: 18}],
-    [97, 'BSC Testnet', 'https://data-seed-prebsc-1-s1.binance.org:8545/', 'https://testnet.bscscan.com', {symbol: 'tBNB', decimals: 18}], 
-    [338, 'Cronos-testnet', 'https://evm-t3.cronos.org/', 'https://testnet.cronoscan.com/', {symbol: 'tCRO', decimals: 18}]
+    [56, 'Binance Smart Chain', 'https://bsc-dataseed.binance.org/', 'https://bscscan.com/', { symbol: 'BNB', decimals: 18 }],
+    [25, 'Cronos', 'https://evm.cronos.org', 'https://cronoscan.com/', { symbol: 'CRO', decimals: 18 }],
+    [97, 'BSC Testnet', 'https://data-seed-prebsc-1-s1.binance.org:8545/', 'https://testnet.bscscan.com', { symbol: 'tBNB', decimals: 18 }],
+    [338, 'Cronos-testnet', 'https://evm-t3.cronos.org/', 'https://testnet.cronoscan.com/', { symbol: 'tCRO', decimals: 18 }]
   ]
   const [currentAccount, setCurrentAccount] = useState(null);
 
@@ -41,54 +41,54 @@ const AppHeader = () => {
     try {
       const provider = window.ethereum;
       if (!provider) {
-          alert("Metamask is not installed, please install!");
+        alert("Metamask is not installed, please install!");
       }
 
       const chainId = await provider.request({ method: 'eth_chainId' });
       if (chainId === '0x61' ||
-          chainId === '0x38' ||
-          chainId === '0x19' || 
-          chainId === '0x152') {
-          console.log("Bravo!, you are on the correct network");
+        chainId === '0x38' ||
+        chainId === '0x19' ||
+        chainId === '0x152') {
+        console.log("Bravo!, you are on the correct network");
       } else {
-          try {
+        try {
+          await provider.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x61' }],
+          });
+          console.log("You have succefully switched to Binance Test network")
+        } catch (switchError) {
+          // This error code indicates that the chain has not been added to MetaMask.
+          if (switchError.code === 4902) {
+            try {
               await provider.request({
-                  method: 'wallet_switchEthereumChain',
-                  params: [{ chainId: '0x61' }],
-              });
-              console.log("You have succefully switched to Binance Test network")
-          } catch (switchError) {
-              // This error code indicates that the chain has not been added to MetaMask.
-              if (switchError.code === 4902) {
-                  try {
-                      await provider.request({
-                          method: 'wallet_addEthereumChain',
-                          params: [
-                              {
-                                  chainId: '0x61',
-                                  chainName: 'Binance Smart Chain',
-                                  rpcUrls: ['https://bsc-dataseed.binance.org/'],
-                                  blockExplorerUrls: ['https://bscscan.com/'],
-                                  nativeCurrency: {
-                                      symbol: 'BNB',
-                                      decimals: 18,
-                                  }
-                              }
-                          ]
-                      });
-                  } catch (addError) {
-                      console.log(addError);
-                      // alert(addError);
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '0x61',
+                    chainName: 'Binance Smart Chain',
+                    rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                    blockExplorerUrls: ['https://bscscan.com/'],
+                    nativeCurrency: {
+                      symbol: 'BNB',
+                      decimals: 18,
+                    }
                   }
-              }
-              // alert("Failed to switch to the network")
-              return;
+                ]
+              });
+            } catch (addError) {
+              console.log(addError);
+              // alert(addError);
+            }
           }
+          // alert("Failed to switch to the network")
+          return;
+        }
       }
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
       console.log("Found an account! Address: ", accounts[0])
       dispatch(setMetamask(accounts[0]))
-      if (chainId === '0x61'){
+      if (chainId === '0x61') {
         setNetworkId('BSC TESTNET')
       } else if (chainId === '0x38') {
         setNetworkId('BSC MAINNET')
@@ -97,7 +97,7 @@ const AppHeader = () => {
       } else if (chainId === '0x152') {
         setNetworkId('Cronos TESTNET')
       }
-      
+
       setCurrentAccount(accounts[0])
     } catch (error) {
       console.log(error)
@@ -118,53 +118,53 @@ const AppHeader = () => {
 
   const changeNetwork = async (id) => {
     const provider = window.ethereum;
-    if(!provider) {
+    if (!provider) {
       console.log("please install metamask")
       return
     }
     const chain = chainInformation[id][0], chainName = chainInformation[id][1],
       rpcURL = chainInformation[id][2], blockExplorer = chainInformation[id][3], native = chainInformation[id][4]
     var currentChain;
-    if(networkId == 'BSC MAINNET') {
+    if (networkId == 'BSC MAINNET') {
       currentChain = 56
-    } else if(networkId == 'Cronos MAINNET') {
+    } else if (networkId == 'Cronos MAINNET') {
       currentChain = 25
-    } else if(networkId == 'BSC TESTNET') {
+    } else if (networkId == 'BSC TESTNET') {
       currentChain = 97
-    } else if(networkId == 'Cronos TESTNET') {
+    } else if (networkId == 'Cronos TESTNET') {
       currentChain = 338
     }
-    if(currentChain != chain) {
+    if (currentChain != chain) {
       try {
         await provider.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: `0x${chain.toString(16)}` }],
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: `0x${chain.toString(16)}` }],
         });
         console.log(`You have succefully switched to ${networkId} network`)
       } catch (switchError) {
         // This error code indicates that the chain has not been added to MetaMask.
         if (switchError.code === 4902) {
-            try {
-                await provider.request({
-                    method: 'wallet_addEthereumChain',
-                    params: [
-                        {
-                            chainId: `0x${chain.toString(16)}`,
-                            chainName: chainName,
-                            rpcUrls: [rpcURL],
-                            blockExplorerUrls: [blockExplorer],
-                            nativeCurrency: native,
-                        }
-                    ]
-                });
-            } catch (addError) {
-                console.log(addError);
-                // alert(addError);
-            }
+          try {
+            await provider.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: `0x${chain.toString(16)}`,
+                  chainName: chainName,
+                  rpcUrls: [rpcURL],
+                  blockExplorerUrls: [blockExplorer],
+                  nativeCurrency: native,
+                }
+              ]
+            });
+          } catch (addError) {
+            console.log(addError);
+            // alert(addError);
+          }
         }
         // alert("Failed to switch to the network")
         return;
-      } 
+      }
     }
     setModalVisible(false)
   }
@@ -180,13 +180,13 @@ const AppHeader = () => {
     // 97 - bsc testnet
     // 338 - cronos testnet
     console.log(networkid)
-    if(networkid == 56 ) {
+    if (networkid == 56) {
       setNetworkId('BSC MAINNET')
-    } else if(networkid == 25) {
+    } else if (networkid == 25) {
       setNetworkId('Cronos MAINNET')
-    } else if(networkid == 97) {
+    } else if (networkid == 97) {
       setNetworkId('BSC TESTNET')
-    } else if(networkid == 338) {
+    } else if (networkid == 338) {
       setNetworkId('Cronos TESTNET')
     } else {
       setNetworkId('Not support')

@@ -90,7 +90,13 @@ $margin-length: 10px;
 
 .my_csidebar {
     background-color: $body-color;
+    position: fixed;
+    top: 115px;
+    bottom: 0;
+    z-index: 1031;
 }
+
+
 
 .my_sidebar_brand {
     // background-color: $body-color;
@@ -170,7 +176,7 @@ $margin-length: 10px;
 
 .connect_btn {
     background-color: $accent;
-    width: 120px;
+    width: 150px;
     height: 36px;
     border: 1px solid $accent;
     border-radius: 18px;
@@ -184,7 +190,7 @@ $margin-length: 10px;
 
 .connect_btn:hover {
     background-color: $accent_highlight;
-    width: 120px;
+    width: 150px;
     height: 36px;
     border: 1px solid $accent_highlight;
     border-radius: 18px;
@@ -198,7 +204,7 @@ $margin-length: 10px;
 
 .connected_btn {
     background-color: $accent;
-    width: 120px;
+    width: 150px;
     height: 36px;
     border: none;
     border-radius: 18px;
@@ -215,7 +221,7 @@ $margin-length: 10px;
 
 .connected_btn:hover {
     background-color: $accent;
-    width: 120px;
+    width: 150px;
     height: 36px;
     border: none;
     border-radius: 18px;
@@ -380,6 +386,7 @@ span {
     }
 }
 
+
 .warning-outline-box {
     border: 1px solid $warning-dark;
     border-radius: 5px;
@@ -482,6 +489,11 @@ div.col, .token-table td, .token-table th {
     flex-direction: row;
 }
 
+.net_wallet_btn {    
+    display: flex;
+    justify-content: end;
+}
+
 @media screen and (max-width: 768px) {
     .dispaly-line-table {
         display: inline-table;
@@ -543,6 +555,12 @@ div.col, .token-table td, .token-table th {
         right: 40px;
         top: 20px;
         display: block;
+    }
+
+    .net_wallet_btn {    
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
