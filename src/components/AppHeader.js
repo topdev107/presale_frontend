@@ -13,6 +13,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logo } from 'src/assets/brand/logo'
+import { logo_mobile } from 'src/assets/brand/mobile-logo'
 import { useWeb3Context } from 'web3-react'
 import { AppHeaderDropdown } from './header/index'
 import { set } from '../state/SideBarState'
@@ -195,22 +196,33 @@ const AppHeader = () => {
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
-        <CHeaderToggler
-          className="ps-1"
-          // style={!sidebarShow ? {color: '#222'} : {color: '#222'}}
-          // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
-          onClick={() => {
-            dispatch(set(!sidebarShow))
-          }}
-        >
-          <CIcon className="toggle-icon" icon={cilMenu} size="lg" />
-        </CHeaderToggler>
-        <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
-        </CHeaderBrand>
+        <div style={{display: 'flex'}}>
+          <CHeaderToggler
+            className="ps-1"
+            // style={!sidebarShow ? {color: '#222'} : {color: '#222'}}
+            // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+            onClick={() => {
+              dispatch(set(!sidebarShow))
+            }}
+          >
+            <CIcon className="toggle-icon" icon={cilMenu} size="lg" />
+          </CHeaderToggler>
+          <CHeaderBrand className="logo_mobile" to="/" style={{paddingTop: '10px', paddingBottom: '0px'}}>
+            <CIcon icon={logo_mobile} height={40} alt="Logo" />
+          </CHeaderBrand>
+        </div>
         <CHeaderNav className="ms-3" style={{justifyContent: 'flex-end'}}>
           {/* <CButton color="warning" shape="rounded-pill" style={{border: 'none', color: '#222', fontWeight: 'bold', backgroundColor: '#ddd'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton> */}
-          <button type="button" className="connect_btn" style={{width: 'auto'}} onClick={() => setModalVisible(!modalVisible)} >{networkId}</button>
+          <button type="button" className="network_btn_mobile" style={{width: 'auto', paddingTop: '0px'}} onClick={() => setModalVisible(!modalVisible)} >
+            {
+              networkId === 'BSC MAINNET' || networkId === 'BSC TESTNET' ?
+                <img src="http://flash-pad.com/logo_BNB.png" style={{width: '36px'}}/>
+              : networkId === 'Cronos MAINNET' || networkId === 'Cronos TESTNET' ?
+                <img src="http://flash-pad.com/logo_CRON.svg" style={{width: '36px'}}/>
+              : <></>
+            }
+          </button>
+          <button type="button" className="network_btn" style={{width: 'auto'}} onClick={() => setModalVisible(!modalVisible)} >{networkId}</button>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
               <CModalHeader onClose={() => setModalVisible(false)}>
                 <CModalTitle>Choose network</CModalTitle>
