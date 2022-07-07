@@ -207,7 +207,7 @@ const AppHeader = () => {
           >
             <CIcon className="toggle-icon" icon={cilMenu} size="lg" />
           </CHeaderToggler>
-          <CHeaderBrand className="logo_mobile" to="/" style={{paddingTop: '10px', paddingBottom: '0px'}}>
+          <CHeaderBrand className="logo_mobile" to="/" style={{paddingTop: '10px', paddingBottom: '0px', width: '40px'}}>
             <CIcon icon={logo_mobile} height={40} alt="Logo" />
           </CHeaderBrand>
         </div>
