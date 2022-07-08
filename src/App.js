@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import { HashRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Web3Provider, { Connectors } from 'web3-react'
 import store from "./store"
 import { Provider } from 'react-redux'
@@ -30,13 +30,13 @@ class App extends Component {
           connectors={connecters}
           library={'ethers.js' | 'web3.js' | null}>
 
-          <HashRouter>
+          <BrowserRouter>
             <React.Suspense fallback={loading}>
               <Switch>
                 <Route path="/" name="Home" render={(props) => <DefaultLayout {...props} />} />
               </Switch>
             </React.Suspense>
-          </HashRouter>
+          </BrowserRouter>
         </Web3Provider>
       </Provider>
     )
