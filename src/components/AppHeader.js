@@ -216,9 +216,9 @@ const AppHeader = () => {
           <button type="button" className="network_btn_mobile" style={{width: 'auto', paddingTop: '0px'}} onClick={() => setModalVisible(!modalVisible)} >
             {
               networkId === 'BSC MAINNET' || networkId === 'BSC TESTNET' ?
-                <img src="http://flash-pad.com/logo_BNB.png" style={{width: '36px'}}/>
+                <img src="https://flash-pad.com/logo_BNB.png" style={{width: '36px'}}/>
               : networkId === 'Cronos MAINNET' || networkId === 'Cronos TESTNET' ?
-                <img src="http://flash-pad.com/logo_CRON.svg" style={{width: '36px'}}/>
+                <img src="https://flash-pad.com/logo_CRON.svg" style={{width: '36px'}}/>
               : <></>
             }
           </button>
@@ -232,13 +232,13 @@ const AppHeader = () => {
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="accent" onClick={() => changeNetwork(0)}>  
-                      <CCardImage orientation="top" src="http://flash-pad.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="https://flash-pad.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="accent" onClick={() => changeNetwork(1)}>
-                      <CCardImage orientation="top" src="http://flash-pad.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="https://flash-pad.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
                   </CCol>
@@ -248,13 +248,13 @@ const AppHeader = () => {
                 <CRow xs={12} className="display-block">
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton color="accent" onClick={() => changeNetwork(2)}>
-                      <CCardImage orientation="top" src="http://flash-pad.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="https://flash-pad.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="d-grid width-100 mt-3">
                     <CButton  color="accent" onClick={() => changeNetwork(3)}>
-                      <CCardImage orientation="top" src="http://flash-pad.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
+                      <CCardImage orientation="top" src="https://flash-pad.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
                   </CCol>
