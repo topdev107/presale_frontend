@@ -67,12 +67,6 @@ const _nav = [
   // },
   // {
   //   component: CNavItem,
-  //   name: 'Transactions',
-  //   to: '/admin/transactions',
-  //   icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  // },
-  // {
-  //   component: CNavItem,
   //   name: 'Paid Free Coins',
   //   to: '/admin/paidfreecoins',
   //   icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
