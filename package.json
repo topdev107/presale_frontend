@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Presale",
   "private": true,
-  "homepage": "https://flash-pad.com/",
+  "homepage": "https://flash-launch.com/",
   "scripts": {
     "build": "react-scripts build",
     "changelog": "auto-changelog --starting-version 3.0.0 --commit-limit false --hide-credit",
