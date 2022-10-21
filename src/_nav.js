@@ -7,6 +7,11 @@ import {
 import CIcon from '@coreui/icons-react'
 import { CNavItem, CNavTitle } from '@coreui/react'
 import React from 'react'
+import { createFairLaunchIcon } from './assets/brand/create-fair-launch'
+import { createLaunchPadIcon } from './assets/brand/create-lanchpad'
+import { createTokenIcon } from './assets/brand/create-token'
+import { launchPadListIcon } from './assets/brand/launchpad-list'
+
 
 const _nav = [
   // {
@@ -29,7 +34,7 @@ const _nav = [
     to: '/launchpad/home',
     similar: '/launchpad/',
     def: true,
-    icon: <CIcon icon={cilApplications} customClassName="nav-icon" />,
+    icon: <CIcon icon={createLaunchPadIcon} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -37,7 +42,7 @@ const _nav = [
     to: '/fairlaunch/home',
     similar: '/fairlaunch/',
     def: false,
-    icon: <CIcon icon={cilApplications} customClassName="nav-icon" />,
+    icon: <CIcon icon={createFairLaunchIcon} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -45,7 +50,7 @@ const _nav = [
     to: '/createtoken/home',
     similar: '/createtoken/',
     def: false,
-    icon: <CIcon icon={cilMoney} customClassName="nav-icon" />,
+    icon: <CIcon icon={createTokenIcon} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -53,7 +58,7 @@ const _nav = [
     to: '/launchpadlist',
     similar: '/launchview',
     def: false,
-    icon: <CIcon icon={cilLibrary} customClassName="nav-icon" />,
+    icon: <CIcon icon={launchPadListIcon} customClassName="nav-icon" />,
   },
   // {
   //   component: CNavItem,

@@ -459,363 +459,359 @@ const DefiLaunchPadInfo = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026">
-          <CCol className="col-sm-3">
+        <CRow className="hide-less-than-1026 panel">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={1}
               verified
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={2}
               active
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={3}
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={4}
               title='Finish'
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-3">
+        <CRow className="mt-1 p-4 panel">
           <CCol>
-            <CCard className="mb-4 pb-5">
-              <CCardBody>
-                <CRow>
-                  <p className="danger small-text-sz mb-0">(*) is required field.</p>
-                  <NumberInputComponent
-                    title='Presale rate'
-                    value={presaleRate}
-                    onChange={onChangePresaleRate}
-                    errMsg={errMsgPresaleRate}
-                    desc={`If I spend 1 ${basicSymbol} how many tokens will I receive?`}
-                  />
-                  <div>
-                    <p className='font-bold'>Whitelist</p>
-                    {
-                      isWhitelistEnable ? (
-                        <div>
-                          <CFormCheck
-                            inline type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineCheckbox1"
-                            value="disable"
-                            label="Disable"
-                            onChange={onChangeWhitelist} />
-                          <CFormCheck
-                            inline
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineCheckbox2"
-                            value="enable"
-                            label="Enable"
-                            defaultChecked
-                            onChange={onChangeWhitelist} />
-                        </div>
-                      ) : (
-                        <div>
-                          <CFormCheck
-                            inline type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineCheckbox1"
-                            value="disable"
-                            label="Disable"
-                            defaultChecked
-                            onChange={onChangeWhitelist} />
-                          <CFormCheck
-                            inline
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineCheckbox2"
-                            value="enable"
-                            label="Enable"
-                            onChange={onChangeWhitelist} />
-                        </div>
-                      )
-                    }
-                    <p className="small-text-sz mt-1 text-blue-color">You can enable/disable whitelist anytime</p>
-                  </div>
-                  <div className='mt-3'>
-                    <CRow className="display-block">
-                      <CCol className='col-md-6'>
-                        <NumberInputComponent
-                          title={`SoftCap(${basicSymbol})`}
-                          value={softCap}
-                          onChange={onChangeSoftCap}
-                          errMsg={errMsgSoftCap}
-                          desc='Softcap must be &ge; 50% of Hardcap!'
-                        />
-                      </CCol>
-                      <CCol className='col-md-6'>
-                        <NumberInputComponent
-                          title={`HardCap(${basicSymbol})`}
-                          value={hardCap}
-                          onChange={onChangeHardCap}
-                          errMsg={errMsgHardCap}
-                          desc=''
-                        />
-                      </CCol>
-                    </CRow>
-                  </div>
-                  <div className='mt-3'>
-                    <CRow className="display-block">
-                      <CCol className='col-md-6'>
-                        <NumberInputComponent
-                          title={`Minimum buy (${basicSymbol})`}
-                          value={minBuyBNB}
-                          onChange={onChangeMinBuy}
-                          errMsg={errMsgMinBuyBNB}
-                          desc=''
-                        />
-                      </CCol>
-                      <CCol className='col-md-6'>
-                        <NumberInputComponent
-                          title={`Maximum buy (${basicSymbol})`}
-                          value={maxBuyBNB}
-                          onChange={onChangeMaxBuy}
-                          errMsg={errMsgMaxBuyBNB}
-                          desc=''
-                        />
-                      </CCol>
-                    </CRow>
-                  </div>
-                  <div>
-                    <CRow className="display-block">
-                      <CCol>
-                        <p className='font-bold'>Refund type</p>
-                        <div>
-                          <CFormSelect onChange={onChangeRefundType} value={refundType}>
-                            <option value="Burn">Burn</option>
-                            <option value="Refund">Refund</option>
-                          </CFormSelect>
-                        </div>
-                      </CCol>
-                      <CCol>
-                        <p className='font-bold'>Router</p>
-                        <div>
-                          <CFormInput type="text" placeholder="PancakeSwap" value='PancakeSwap' disabled />
-                        </div>
-                      </CCol>
-                    </CRow>
-                  </div>
-                  <div className='mt-3'>
-                    <CRow className="display-block">
-                      <CCol>
-                        <NumberInputComponent
-                          title='Liquidity (%)'
-                          value={liquidity}
-                          onChange={onChangeLiquidity}
-                          errMsg={errMsgLiquidity}
-                          desc=''
-                          needInt
-                        />
-                      </CCol>
-                      <CCol>
-                        <NumberInputComponent
-                          title='Listing rate'
-                          value={listingRate}
-                          onChange={onChangeListingRate}
-                          errMsg={errMsgListingRate}
-                          desc={descListingRate}
-                        />
-                      </CCol>
-                    </CRow>
-                    <p className="small-text-sz mt-1 mb-0 text-blue-color">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
-                    <p className="small-text-sz mt-0 text-blue-color">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
-                  </div>
-                  <div className='mt-3'>
-                    <p className='font-bold'>Select start time and end time (UTC)
-                      <sup className="danger">*</sup>
-                    </p>
-                  </div>
-                  <div>
-                    <DateTimeRangeContainer
-                      ranges={ranges}
-                      start={startDate}
-                      end={endDate}
-                      local={local}
-                      // maxDate={maxDate}
-                      applyCallback={handleDateTimeRangeApply}
-                      rangeCallback={handleRange}
-                      smartMode
-                    >
-                      <FormControl
-                        id="formControlsTextB"
-                        type="text"
-                        label="Text"
-                        placeholder="Enter text"
-                        style={{ cursor: "pointer" }}
-                        // disabled={true}
-                        onChange={handleDateTimeRangeChanged}
-                        value={dateTimeRange}
-                      />
-                    </DateTimeRangeContainer>
-                  </div>
-                  <div className='mt-4'>
+            <CRow>
+              <p className="danger small-text-sz mb-2">(*) is required field.</p>
+              <NumberInputComponent
+                title='Presale rate'
+                value={presaleRate}
+                onChange={onChangePresaleRate}
+                errMsg={errMsgPresaleRate}
+                desc={`If I spend 1 ${basicSymbol} how many tokens will I receive?`}
+              />
+              <div>
+                <p className='text-title mt-4 mb-1 medium-text-sz'>Whitelist</p>
+                {
+                  isWhitelistEnable ? (
+                    <div className='medium-text-sz'>
+                      <CFormCheck
+                        inline type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineCheckbox1"
+                        value="disable"
+                        label="Disable"
+                        onChange={onChangeWhitelist} />
+                      <CFormCheck
+                        inline
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineCheckbox2"
+                        value="enable"
+                        label="Enable"
+                        defaultChecked
+                        onChange={onChangeWhitelist} />
+                    </div>
+                  ) : (
+                    <div className='medium-text-sz'>
+                      <CFormCheck
+                        inline type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineCheckbox1"
+                        value="disable"
+                        label="Disable"
+                        defaultChecked
+                        onChange={onChangeWhitelist} />
+                      <CFormCheck
+                        inline
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineCheckbox2"
+                        value="enable"
+                        label="Enable"
+                        onChange={onChangeWhitelist} />
+                    </div>
+                  )
+                }
+                <p className="small-text-sz">You can enable/disable whitelist anytime</p>
+              </div>
+              <div className='mt-3'>
+                <CRow className="display-block">
+                  <CCol className='col-md-6'>
                     <NumberInputComponent
-                      title='Liquidity lockup (minutes)'
-                      value={lockupMinutes}
-                      onChange={onChangeLockupMinutes}
-                      errMsg={errMsgLockupMinutes}
+                      title={`SoftCap(${basicSymbol})`}
+                      value={softCap}
+                      onChange={onChangeSoftCap}
+                      errMsg={errMsgSoftCap}
+                      desc='Softcap must be &ge; 50% of Hardcap!'
+                    />
+                  </CCol>
+                  <CCol className='col-md-6'>
+                    <NumberInputComponent
+                      title={`HardCap(${basicSymbol})`}
+                      value={hardCap}
+                      onChange={onChangeHardCap}
+                      errMsg={errMsgHardCap}
                       desc=''
                     />
-                  </div>
-                  {/* <div className='mt-3'>
-                    <CFormCheck
-                      id="contributorCheckbox"
-                      label="Using Vesting Contributor?"
-                      onChange={onChangeVestingContributor} />
-                  </div> */}
-                  {
-                    isCheckedVestingContributor ? (
-                      <div>
-                        <CAlert color="yellow">
-                          Vesting Contributor does not support rebase tokens.
-                        </CAlert>
-                        <div className='mt-3'>
-                          <NumberInputComponent
-                            title='First release for presale (percent)'
-                            value={cFirstReleasePercent}
-                            onChange={onChangeCFirstReleasePercent}
-                            errMsg={errMsgCFirstReleasePercent}
-                            desc=''
-                            needInt
-                          />
-                        </div>
-                        <div className='mt-3'>
-                          <CRow>
-                            <CCol>
-                              <NumberInputComponent
-                                title='Vesting period each cycle (minutes)'
-                                value={cVestingPeriod}
-                                onChange={onChangeCVestingPeriod}
-                                errMsg={errMsgCVestingPeriod}
-                                desc=''
-                                needInt
-                              />
-                            </CCol>
-                            <CCol>
-                              <NumberInputComponent
-                                title='Presale token release each cycle (percent)'
-                                value={cEachReleasePercent}
-                                onChange={onChangeCEachReleasePercent}
-                                errMsg={errMsgCEachReleasePercent}
-                                desc=''
-                                needInt
-                              />
-                            </CCol>
-                          </CRow>
-                        </div>
-                      </div>
-                    ) : (
-                      <></>
-                    )
-                  }
-
-                  {/* <div className='mt-3'>
-                    <CFormCheck
-                      id="teamCheckbox"
-                      label="Using Team Vesting?"
-                      onChange={onChangeTeamVesting} />
-                  </div> */}
-
-                  {
-                    isCheckedTeamVesting ? (
-                      <div>
-                        <CAlert color="yellow">
-                          Team Vesting does not support rebase tokens.
-                        </CAlert>
-                        <div className='mt-3'>
-                          <CRow>
-                            <CCol>
-                              <NumberInputComponent
-                                title='Total team vesting tokens'
-                                value={totalTeamVestingTokens}
-                                onChange={onChangeTotalTeamVestingTokens}
-                                errMsg={errMsgTotalTeamVestingTokens}
-                                desc=''
-                                needInt
-                              />
-                            </CCol>
-                            <CCol>
-                              <NumberInputComponent
-                                title='First token release after listing (minutes)'
-                                value={tFirstReleaseTime}
-                                onChange={onChangeTFirstReleaseTime}
-                                errMsg={errMsgtFirstReleaseTime}
-                                desc=''
-                                needInt
-                              />
-                            </CCol>
-                          </CRow>
-                        </div>
-                        <div className='mt-3'>
-                          <NumberInputComponent
-                            title='First token release (percent)'
-                            value={tFirstReleasePercent}
-                            onChange={onChangeTFirstReleasePercent}
-                            errMsg={errMsgTFirstReleasePercent}
-                            desc=''
-                            needInt
-                          />
-                        </div>
-                        <div className='mt-3'>
-                          <CRow>
-                            <CCol>
-                              <NumberInputComponent
-                                title='Vesting period each cycle (minutes)'
-                                value={tVestingPeriod}
-                                onChange={onChangeTVestingPeriod}
-                                errMsg={errMsgTVestingPeriod}
-                                desc=''
-                                needInt
-                              />
-                            </CCol>
-                            <CCol>
-                              <NumberInputComponent
-                                title='Team token release each cycle (percent)'
-                                value={tEachReleasePercent}
-                                onChange={onChangeTEachReleasePercent}
-                                errMsg={errMsgTEachReleasePercent}
-                                desc=''
-                                needInt
-                              />
-                            </CCol>
-                          </CRow>
-                        </div>
-                      </div>
-                    ) : (
-                      <></>
-                    )
-                  }
-
-                  <div className='mt-5'>
-                    <p className='danger' style={{ textAlign: 'center' }}>Need {needToken} {tokenSymbol} to create launchpad.</p>
-                  </div>
-
-                  <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-accent" onClick={history.goBack}>Back</button>
-                    {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
-                    {
-                      isValid === true ? 
-                      <button type="button" className="btn-accent" onClick={handleNext}>Next</button> :
-                      <button type="button" className="btn-disabled" disabled>Next</button>
-                    }
-                    {/* <button type="button" className="btn-accent">Next</button> */}
-                  </div>
+                  </CCol>
                 </CRow>
-              </CCardBody>
-            </CCard>
+              </div>
+              <div className='mt-3'>
+                <CRow className="display-block">
+                  <CCol className='col-md-6'>
+                    <NumberInputComponent
+                      title={`Minimum buy (${basicSymbol})`}
+                      value={minBuyBNB}
+                      onChange={onChangeMinBuy}
+                      errMsg={errMsgMinBuyBNB}
+                      desc=''
+                    />
+                  </CCol>
+                  <CCol className='col-md-6'>
+                    <NumberInputComponent
+                      title={`Maximum buy (${basicSymbol})`}
+                      value={maxBuyBNB}
+                      onChange={onChangeMaxBuy}
+                      errMsg={errMsgMaxBuyBNB}
+                      desc=''
+                    />
+                  </CCol>
+                </CRow>
+              </div>
+              <div className='mt-3'>
+                <CRow className="display-block">
+                  <CCol>
+                    <p className='text-title medium-text-sz mb-2'>Refund type</p>
+                    <div>
+                      <CFormSelect onChange={onChangeRefundType} value={refundType}>
+                        <option value="Burn">Burn</option>
+                        <option value="Refund">Refund</option>
+                      </CFormSelect>
+                    </div>
+                  </CCol>
+                  <CCol>
+                    <p className='text-title medium-text-sz mb-2'>Router</p>
+                    <div>
+                      <CFormInput type="text" placeholder="PancakeSwap" value='PancakeSwap' disabled />
+                    </div>
+                  </CCol>
+                </CRow>
+              </div>
+              <div className='mt-4'>
+                <CRow className="display-block">
+                  <CCol>
+                    <NumberInputComponent
+                      title='Liquidity (%)'
+                      value={liquidity}
+                      onChange={onChangeLiquidity}
+                      errMsg={errMsgLiquidity}
+                      desc=''
+                      needInt
+                    />
+                  </CCol>
+                  <CCol>
+                    <NumberInputComponent
+                      title='Listing rate'
+                      value={listingRate}
+                      onChange={onChangeListingRate}
+                      errMsg={errMsgListingRate}
+                      desc={descListingRate}
+                    />
+                  </CCol>
+                </CRow>
+                <p className="small-text-sz mt-1 mb-0">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
+                <p className="small-text-sz mt-0">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
+              </div>
+              <div className='mt-2'>
+                <p className='text-title medium-text-sz mb-2'>Select start time and end time (UTC)
+                  <sup className="danger">*</sup>
+                </p>
+              </div>
+              <div>
+                <DateTimeRangeContainer
+                  ranges={ranges}
+                  start={startDate}
+                  end={endDate}
+                  local={local}
+                  // maxDate={maxDate}
+                  applyCallback={handleDateTimeRangeApply}
+                  rangeCallback={handleRange}
+                  smartMode
+                >
+                  <FormControl
+                    id="formControlsTextB"
+                    type="text"
+                    label="Text"
+                    placeholder="Enter text"
+                    style={{ cursor: "pointer" }}
+                    // disabled={true}
+                    onChange={handleDateTimeRangeChanged}
+                    value={dateTimeRange}
+                  />
+                </DateTimeRangeContainer>
+              </div>
+              <div className='my-4'>
+                <NumberInputComponent
+                  title='Liquidity lockup (minutes)'
+                  value={lockupMinutes}
+                  onChange={onChangeLockupMinutes}
+                  errMsg={errMsgLockupMinutes}
+                  desc=''
+                />
+              </div>
+              {/* <div className='mt-3'>
+                <CFormCheck
+                  id="contributorCheckbox"
+                  label="Using Vesting Contributor?"
+                  onChange={onChangeVestingContributor} />
+              </div> */}
+              {
+                isCheckedVestingContributor ? (
+                  <div>
+                    <CAlert color="yellow">
+                      Vesting Contributor does not support rebase tokens.
+                    </CAlert>
+                    <div className='mt-3'>
+                      <NumberInputComponent
+                        title='First release for presale (percent)'
+                        value={cFirstReleasePercent}
+                        onChange={onChangeCFirstReleasePercent}
+                        errMsg={errMsgCFirstReleasePercent}
+                        desc=''
+                        needInt
+                      />
+                    </div>
+                    <div className='mt-3'>
+                      <CRow>
+                        <CCol>
+                          <NumberInputComponent
+                            title='Vesting period each cycle (minutes)'
+                            value={cVestingPeriod}
+                            onChange={onChangeCVestingPeriod}
+                            errMsg={errMsgCVestingPeriod}
+                            desc=''
+                            needInt
+                          />
+                        </CCol>
+                        <CCol>
+                          <NumberInputComponent
+                            title='Presale token release each cycle (percent)'
+                            value={cEachReleasePercent}
+                            onChange={onChangeCEachReleasePercent}
+                            errMsg={errMsgCEachReleasePercent}
+                            desc=''
+                            needInt
+                          />
+                        </CCol>
+                      </CRow>
+                    </div>
+                  </div>
+                ) : (
+                  <></>
+                )
+              }
+
+              {/* <div className='mt-3'>
+                <CFormCheck
+                  id="teamCheckbox"
+                  label="Using Team Vesting?"
+                  onChange={onChangeTeamVesting} />
+              </div> */}
+
+              {
+                isCheckedTeamVesting ? (
+                  <div>
+                    <CAlert color="yellow">
+                      Team Vesting does not support rebase tokens.
+                    </CAlert>
+                    <div className='mt-3'>
+                      <CRow>
+                        <CCol>
+                          <NumberInputComponent
+                            title='Total team vesting tokens'
+                            value={totalTeamVestingTokens}
+                            onChange={onChangeTotalTeamVestingTokens}
+                            errMsg={errMsgTotalTeamVestingTokens}
+                            desc=''
+                            needInt
+                          />
+                        </CCol>
+                        <CCol>
+                          <NumberInputComponent
+                            title='First token release after listing (minutes)'
+                            value={tFirstReleaseTime}
+                            onChange={onChangeTFirstReleaseTime}
+                            errMsg={errMsgtFirstReleaseTime}
+                            desc=''
+                            needInt
+                          />
+                        </CCol>
+                      </CRow>
+                    </div>
+                    <div className='mt-3'>
+                      <NumberInputComponent
+                        title='First token release (percent)'
+                        value={tFirstReleasePercent}
+                        onChange={onChangeTFirstReleasePercent}
+                        errMsg={errMsgTFirstReleasePercent}
+                        desc=''
+                        needInt
+                      />
+                    </div>
+                    <div className='mt-3'>
+                      <CRow>
+                        <CCol>
+                          <NumberInputComponent
+                            title='Vesting period each cycle (minutes)'
+                            value={tVestingPeriod}
+                            onChange={onChangeTVestingPeriod}
+                            errMsg={errMsgTVestingPeriod}
+                            desc=''
+                            needInt
+                          />
+                        </CCol>
+                        <CCol>
+                          <NumberInputComponent
+                            title='Team token release each cycle (percent)'
+                            value={tEachReleasePercent}
+                            onChange={onChangeTEachReleasePercent}
+                            errMsg={errMsgTEachReleasePercent}
+                            desc=''
+                            needInt
+                          />
+                        </CCol>
+                      </CRow>
+                    </div>
+                  </div>
+                ) : (
+                  <></>
+                )
+              }
+
+              <div className='mt-3'>
+                <p className='danger' style={{ textAlign: 'center' }}>Need {needToken} {tokenSymbol} to create launchpad.</p>
+              </div>
+
+              <div className="my-3 d-grid gap-3 d-md-flex justify-content-md-center">
+                <button type="button" className="btn btn-outline-primary" onClick={history.goBack}>Previous</button>
+                {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
+                {
+                  isValid === true ? 
+                  <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button> :
+                  <button type="button" className="btn btn-primary" disabled>Next</button>
+                }
+                {/* <button type="button" className="btn-accent">Next</button> */}
+              </div>
+            </CRow>
           </CCol>
         </CRow>
       </CCol>

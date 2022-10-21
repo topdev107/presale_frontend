@@ -1,9 +1,9 @@
 export const logo_mobile = [
-    '50 50',
+    '40 50',
     `
     <title>Launchpad of Flash Technologies</title>
     <g>
-      <image width="50" height="50" href="./assets/flash_logo.png" />
+      <image width="50" height="50" href="/assets/logo.png" />
     </g>
   `,
   ]

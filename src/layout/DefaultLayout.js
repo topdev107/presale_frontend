@@ -3,7 +3,7 @@ import { AppContent, AppHeader, AppSidebar } from '../components/index'
 
 const DefaultLayout = () => {
   return (
-    <div>
+    <div className='dark-theme'>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100">
         <AppHeader />

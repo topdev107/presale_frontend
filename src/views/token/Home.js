@@ -753,343 +753,338 @@ const TokenHome = () => {
 
 	return (
     <CRow>
-      <CCol xs={12}>
-        <br/><br/>
-        <CCard className='mb-4 pb-5'>
-          <CCardBody>
-            <CRow>
-              <div className="danger small-text-sz mb-0 text-red-color">(*) is required field.</div>
-              <CCol>
-                <div className='font-bold text-white-color'>Token Type
-                  <sup className="danger">*</sup>
-                </div>
-              </CCol>
-            </CRow>
-            <CRow>
-              <div>
-                <CFormSelect className="mb-3" onChange={onChangeTokenType}>
-                  <option value="Standard Token">Standard Token</option>
-                  <option value="Liquidity Generator Token">Liquidity Generator Token</option>
-                  <option value="Baby Token">Baby Token</option>
-                  <option value="Buyback Baby Token">Buyback Baby Token</option>
-                </CFormSelect>
-                <div className="small-text-sz mt-1 text-blue-color">Fee: {createfee} {unit}</div>
-              </div>
-            </CRow>
-            {
-              <>
-              <CRow className='mt-3'>
-                <TextInputComponent
-                  title='Name'
-                  value={tokenName}
-                  onChange={onChangeTokenName}
-                  errMsg={errMsgTokenName}
-                  placeholder='Ethereum'
-                  desc='' />
-              </CRow>
-              <CRow className='mt-3'>
-                  <TextInputComponent
-                    title='Symbol'
-                    value={tokenSymbol}
-                    onChange={onChangeTokenSymbol}
-                    errMsg={errMsgTokenSymbol}
-                    placeholder='ETH'
-                    desc='' />
-              </CRow>
-              {
-                tokenType === 'Standard Token' ? (
-                  <CRow className='mt-3'>
-                    <NumberInputComponent
-                      title='Decimals'
-                      value={tokenDecimal}
-                      onChange={onChangeTokenDecimal}
-                      errMsg={errMsgTokenDecimal}
-                      desc=''
-                      needInt />
-                  </CRow>
-                ) : (
-                  <></>
-                )
-              }
+      <CCol xs={12} className='panel p-4'>
+        <CRow>
+          <div className="danger small-text-sz mb-2">(*) is required field.</div>
+          <CCol className='mb-2'>
+            <div className='font-bold text-title medium-text-sz'>Token Type
+              <sup className="danger">*</sup>
+            </div>
+          </CCol>
+        </CRow>
+        <CRow>
+          <div>
+            <CFormSelect onChange={onChangeTokenType}>
+              <option value="Standard Token">Standard Token</option>
+              <option value="Liquidity Generator Token">Liquidity Generator Token</option>
+              <option value="Baby Token">Baby Token</option>
+              <option value="Buyback Baby Token">Buyback Baby Token</option>
+            </CFormSelect>
+            <div className="small-text-sz mt-1">Fee: <span className='text-title p-2'>{createfee} {unit}</span></div>
+          </div>
+        </CRow>
+        {
+          <>
+          <CRow className='mt-3'>
+            <TextInputComponent
+              title='Name'
+              value={tokenName}
+              onChange={onChangeTokenName}
+              errMsg={errMsgTokenName}
+              placeholder='Ex: Ethereum'
+              desc='' />
+          </CRow>
+          <CRow className='mt-3'>
+              <TextInputComponent
+                title='Symbol'
+                value={tokenSymbol}
+                onChange={onChangeTokenSymbol}
+                errMsg={errMsgTokenSymbol}
+                placeholder='Ex: ETH'
+                desc='' />
+          </CRow>
+          {
+            tokenType === 'Standard Token' ? (
               <CRow className='mt-3'>
                 <NumberInputComponent
-                  title='TotalSupply'
-                  value={tokenTotalSupply}
-                  onChange={onChangeTokenTotalSupply}
-                  errMsg={errMsgTokenTotalSupply}
+                  title='Decimals'
+                  value={tokenDecimal}
+                  onChange={onChangeTokenDecimal}
+                  errMsg={errMsgTokenDecimal}
                   desc=''
                   needInt />
               </CRow>
-              {
-                tokenType === 'Liquidity Generator Token' ? (
-                  <>
-                    <CRow className='mt-3'>
-                      <div className='font-bold text-yellow-color'>Router
-                        <sup className="danger">*</sup>
-                      </div>
-                    </CRow>
-                    <CRow>
-                      <div>
-                        <CFormSelect className="mb-3" onChange={onChangeRouter}>
-                          <option value="pancakeswap">Pancakeswap</option>
-                        </CFormSelect>
-                      </div>
-                    </CRow>
-                    <CRow className='mt-3 display-block'>
-                      <CCol className='col-md-6'>
-                        <NumberInputComponent 
-                          title='Transaction fee to generate yield (%)'
-                          value={transfeeYield}
-                          onChange={onChangeTransFeeYield}
-                          errMsg={errMsgTransfeeYield}
-                          desc=''
-                          needInt 
-                        />
-                      </CCol>
-                      <CCol className='col-md-6'>
-                        <NumberInputComponent 
-                          title='Transaction fee to generate liquidity (%)'
-                          value={transfeeLiquidity}
-                          onChange={onChangeTransFeeLiquidity}
-                          errMsg={errMsgTransfeeLiquidity}
-                          desc=''
-                          needInt
-                        />
-                      </CCol>
-                    </CRow>
-                    <CRow className='mt-3'>
-                      <TextInputComponent 
-                        title='Charity/Marketing address'
-                        value={charityAddress}
-                        onChange={onChangeCharityAddress}
-                        errMsg={errMsgCharityAddress}
-                        placeholder='Ex: 0x...'
-                      />
-                    </CRow>
-                    <CRow className='mt-3'>
-                      <NumberInputComponent 
-                        title='Charity/Marketing percent (%)'
-                        value={charityPercent}
-                        onChange={onChangeCharityPercent}
-                        errMsg={errMsgCharityPercent}
-                      />
-                    </CRow>
-
-                  </>
-                ) : (
-                  tokenType === 'Baby Token' ? (
-                  <>
-                  <CRow className='mt-3'>
-                    <div className='font-bold text-yellow-color'>Router
-                      <sup className="danger">*</sup>
-                    </div>
-                  </CRow>
-                  <CRow>
-                    <div>
-                      <CFormSelect className="mb-3" onChange={onChangeRouter}>
-                        <option value="pancakeswap">Pancakeswap</option>
-                      </CFormSelect>
-                    </div>
-                  </CRow>
-                  <CRow className='mt-3'>
-                    <CCol className='col-md-6'>
-                      <TextInputComponent 
-                        title='Reward token'
-                        value={rewardToken}
-                        onChange={onChangeRewardToken}
-                        errMsg={errMsgRewardToken}
-                        placeholder='Ex: 0x...'
-                        desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
-                      />
-                      {
-                        availableToken == true ?
-                        (
-                          <></>
-                        ) : (<div className='danger small-text-sz mb-0'>Address is invalid</div>)
-                      }
-                      {
-                        isTokenValid == true ?
-                        (
-                          <div>
-                            <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenName</div>
-                              <div className='col-md-6 text_align_right  text-yellow-color'>{rewardTokenName}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenSymbol</div>
-                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenSymbol}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenDecimal</div>
-                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenDecimal}</div>
-                            </div>
-                          </div>
-                        ) : (
-                          <></>
-                        )
-                      }
-                    </CCol>
-                    <CCol className='col-md-6'>
-                      <NumberInputComponent 
-                        title= {'Minimum token balance for dividends (max:' + +tokenTotalSupply * 0.001 + ')'}
-                        value={minimumTokenBalance}
-                        onChange={onChangeMinimumTokenBalance}
-                        placeholder='Ex: 10000000000'
-                        errMsg={errMsgMinTokenBalance}
-                        desc='Min hold each wallet must be over $50 to receive rewards.'
-                        needInt
-                      />
-                    </CCol>
-                  </CRow>
-                  <CRow className='mt-3 display-block'>
-                    <CCol className='col-md-6'>
-                      <NumberInputComponent 
-                        title= 'Token reward fee (%)'
-                        value={tokenRewardFee}
-                        onChange={onChangeTokenRewardFee}
-                        errMsg={errMsgTokenRewardFee}
-                        placeholder='0 - 100'
-                      />
-                    </CCol>
-                    <CCol className='col-md-6'>
-                      <NumberInputComponent 
-                        title= 'Auto add liquidity (%)'
-                        value={autoAddLiquidity}
-                        onChange= {onChangeAutoAddLiquidity}
-                        errMsg={errMsgAutoAddLiquidity}
-                        placeholder='0 - 100'
-                      />
-                    </CCol>
-                  </CRow>
-                  <CRow className='mt-3 display-block'>
-                    <CCol className='col-md-6'>
-                      <NumberInputComponent 
-                        title='Marketing fee (%)'
-                        value={marketingFee}
-                        onChange={onChangeMarketingFee}
-                        errMsg={errMsgMarketingFee}
-                        placeholder='0 - 100'
-                        needInt
-                      />
-                    </CCol>
-                    <CCol className='col-md-6'>
-                      <TextInputComponent 
-                        title='Marketing wallet'
-                        value={marketingWallet}
-                        onChange={onChangeMarketingWallet}
-                        errMsg={errMsgMarketingWallet}
-                        placeholder='Ex: 0x...'
-                      />
-                    </CCol>
-                  </CRow>
-
-                  </>) : (
-                    tokenType === 'Buyback Baby Token' ? (
-                    <>
-                    <CRow className='mt-3'>
-                      <div className='font-bold text-yellow-color'>Router
-                        <sup className="danger">*</sup>
-                      </div>
-                    </CRow>
-                    <CRow>
-                      <div>
-                        <CFormSelect className="mb-3" onChange={onChangeRouter}>
-                          <option value="pancakeswap">Pancakeswap</option>
-                        </CFormSelect>
-                      </div>
-                    </CRow>
-                  <CRow className='mt-3'>
-                    <CCol className='col-md-6'>
-                      <TextInputComponent 
-                        title='Reward token'
-                        value={rewardToken}
-                        onChange={onChangeRewardToken}
-                        errMsg={errMsgRewardToken}
-                        placeholder='Ex: 0x...'
-                        desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
-                      />
-                    </CCol>
-                    <CCol className='col-md-6'>
-                      <NumberInputComponent 
-                        title= 'Liquidity Fee (%)'
-                        value={liquidityFee}
-                        onChange={onChangeLiquidityFee}
-                        placeholder='0 - 100'
-                        errMsg={errMsgLiquidityFee}
-                      />
-                    </CCol>
-                  </CRow>
-                  <CRow className='mt-3 display-block'>
-                    <CCol className='col-md-6'>
-                      <NumberInputComponent 
-                        title= 'Buyback Fee (%)'
-                        value={buyBackFee}
-                        onChange={onChangeBuyBackFee}
-                        errMsg={errMsgBuyBackFee}
-                        placeholder='0 - 100'
-                      />
-                    </CCol>
-                    <CCol className='col-md-6'>
-                      <NumberInputComponent 
-                        title= 'Reflection Fee (%)'
-                        value={reflectionFee}
-                        onChange= {onChangeReflectionFee}
-                        errMsg={errMsgReflectionFee}
-                        placeholder='0 - 100'
-                      />
-                    </CCol>
-                  </CRow>
-                  <CRow className='mt-3'>
-                    <NumberInputComponent
-                      title='Marketing fee (%)'
-                      value={marketingFee}
-                      onChange = {onChangeMarketingFee}
-                      errMsg={errMsgMarketingFee}
+            ) : (
+              <></>
+            )
+          }
+          <CRow className='mt-3'>
+            <NumberInputComponent
+              title='TotalSupply'
+              value={tokenTotalSupply}
+              onChange={onChangeTokenTotalSupply}
+              errMsg={errMsgTokenTotalSupply}
+              desc=''
+              needInt />
+          </CRow>
+          {
+            tokenType === 'Liquidity Generator Token' ? (
+              <>
+                <CRow className='mt-3'>
+                  <div className='text-title medium-text-sz mb-2'>Router
+                    <sup className="danger">*</sup>
+                  </div>
+                </CRow>
+                <CRow>
+                  <div>
+                    <CFormSelect className="mb-3" onChange={onChangeRouter}>
+                      <option value="pancakeswap">Pancakeswap</option>
+                    </CFormSelect>
+                  </div>
+                </CRow>
+                <CRow className='mt-3 display-block'>
+                  <CCol className='col-md-6'>
+                    <NumberInputComponent 
+                      title='Transaction fee to generate yield (%)'
+                      value={transfeeYield}
+                      onChange={onChangeTransFeeYield}
+                      errMsg={errMsgTransfeeYield}
+                      desc=''
+                      needInt 
                     />
-                  </CRow>
+                  </CCol>
+                  <CCol className='col-md-6'>
+                    <NumberInputComponent 
+                      title='Transaction fee to generate liquidity (%)'
+                      value={transfeeLiquidity}
+                      onChange={onChangeTransFeeLiquidity}
+                      errMsg={errMsgTransfeeLiquidity}
+                      desc=''
+                      needInt
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className='mt-3'>
+                  <TextInputComponent 
+                    title='Charity/Marketing address'
+                    value={charityAddress}
+                    onChange={onChangeCharityAddress}
+                    errMsg={errMsgCharityAddress}
+                    placeholder='Ex: 0x...'
+                  />
+                </CRow>
+                <CRow className='mt-3'>
+                  <NumberInputComponent 
+                    title='Charity/Marketing percent (%)'
+                    value={charityPercent}
+                    onChange={onChangeCharityPercent}
+                    errMsg={errMsgCharityPercent}
+                  />
+                </CRow>
+
+              </>
+            ) : (
+              tokenType === 'Baby Token' ? (
+              <>
+              <CRow className='mt-3'>
+                <div className='text-title medium-text-sz mb-2'>Router
+                  <sup className="danger">*</sup>
+                </div>
+              </CRow>
+              <CRow>
+                <div>
+                  <CFormSelect className="mb-3" onChange={onChangeRouter}>
+                    <option value="pancakeswap">Pancakeswap</option>
+                  </CFormSelect>
+                </div>
+              </CRow>
+              <CRow className='mt-3'>
+                <CCol className='col-md-6'>
+                  <TextInputComponent 
+                    title='Reward token'
+                    value={rewardToken}
+                    onChange={onChangeRewardToken}
+                    errMsg={errMsgRewardToken}
+                    placeholder='Ex: 0x...'
+                    desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
+                  />
                   {
-                    (+liquidityFee + +buyBackFee + +reflectionFee + +marketingFee) > 25 ? 
+                    availableToken == true ?
                     (
-                      <div className='danger small-text-sz mb-0'>Liquidity Fee + Buyback Fee + Reflection Fee + Marketing Fee must be less than 25%</div>
+                      <></>
+                    ) : (<div className='danger small-text-sz mb-0'>Address is invalid</div>)
+                  }
+                  {
+                    !isTokenValid == true ?
+                    (
+                      <div>
+                        <div style={{display: 'flex'}}>
+                          <div className='col-md-6 text_align_left medium-text-sz'>TokenName</div>
+                          <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenName}</div>
+                        </div>
+                        <div style={{display: 'flex'}}>
+                          <div className='col-md-6 text_align_left medium-text-sz'>TokenSymbol</div>
+                          <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenSymbol}</div>
+                        </div>
+                        <div style={{display: 'flex'}}>
+                          <div className='col-md-6 text_align_left medium-text-sz'>TokenDecimal</div>
+                          <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenDecimal}</div>
+                        </div>
+                      </div>
                     ) : (
                       <></>
                     )
                   }
-                    </>) : (
-                      <></>
-                    )
-                  )
+                </CCol>
+                <CCol className='col-md-6'>
+                  <NumberInputComponent 
+                    title= {'Minimum token balance for dividends (max:' + +tokenTotalSupply * 0.001 + ')'}
+                    value={minimumTokenBalance}
+                    onChange={onChangeMinimumTokenBalance}
+                    placeholder='Ex: 10000000000'
+                    errMsg={errMsgMinTokenBalance}
+                    desc='Min hold each wallet must be over $50 to receive rewards.'
+                    needInt
+                  />
+                </CCol>
+              </CRow>
+              <CRow className='mt-3 display-block'>
+                <CCol className='col-md-6'>
+                  <NumberInputComponent 
+                    title= 'Token reward fee (%)'
+                    value={tokenRewardFee}
+                    onChange={onChangeTokenRewardFee}
+                    errMsg={errMsgTokenRewardFee}
+                    placeholder='0 - 100'
+                  />
+                </CCol>
+                <CCol className='col-md-6'>
+                  <NumberInputComponent 
+                    title= 'Auto add liquidity (%)'
+                    value={autoAddLiquidity}
+                    onChange= {onChangeAutoAddLiquidity}
+                    errMsg={errMsgAutoAddLiquidity}
+                    placeholder='0 - 100'
+                  />
+                </CCol>
+              </CRow>
+              <CRow className='mt-3 display-block'>
+                <CCol className='col-md-6'>
+                  <NumberInputComponent 
+                    title='Marketing fee (%)'
+                    value={marketingFee}
+                    onChange={onChangeMarketingFee}
+                    errMsg={errMsgMarketingFee}
+                    placeholder='0 - 100'
+                    needInt
+                  />
+                </CCol>
+                <CCol className='col-md-6'>
+                  <TextInputComponent 
+                    title='Marketing wallet'
+                    value={marketingWallet}
+                    onChange={onChangeMarketingWallet}
+                    errMsg={errMsgMarketingWallet}
+                    placeholder='Ex: 0x...'
+                  />
+                </CCol>
+              </CRow>
+
+              </>) : (
+                tokenType === 'Buyback Baby Token' ? (
+                <>
+                <CRow className='mt-3'>
+                  <div className='text-title medium-text-sz mb-2'>Router
+                    <sup className="danger">*</sup>
+                  </div>
+                </CRow>
+                <CRow>
+                  <div>
+                    <CFormSelect className="mb-3" onChange={onChangeRouter}>
+                      <option value="pancakeswap">Pancakeswap</option>
+                    </CFormSelect>
+                  </div>
+                </CRow>
+              <CRow className='mt-3'>
+                <CCol className='col-md-6'>
+                  <TextInputComponent 
+                    title='Reward token'
+                    value={rewardToken}
+                    onChange={onChangeRewardToken}
+                    errMsg={errMsgRewardToken}
+                    placeholder='Ex: 0x...'
+                    desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
+                  />
+                </CCol>
+                <CCol className='col-md-6'>
+                  <NumberInputComponent 
+                    title= 'Liquidity Fee (%)'
+                    value={liquidityFee}
+                    onChange={onChangeLiquidityFee}
+                    placeholder='0 - 100'
+                    errMsg={errMsgLiquidityFee}
+                  />
+                </CCol>
+              </CRow>
+              <CRow className='mt-3 display-block'>
+                <CCol className='col-md-6'>
+                  <NumberInputComponent 
+                    title= 'Buyback Fee (%)'
+                    value={buyBackFee}
+                    onChange={onChangeBuyBackFee}
+                    errMsg={errMsgBuyBackFee}
+                    placeholder='0 - 100'
+                  />
+                </CCol>
+                <CCol className='col-md-6'>
+                  <NumberInputComponent 
+                    title= 'Reflection Fee (%)'
+                    value={reflectionFee}
+                    onChange= {onChangeReflectionFee}
+                    errMsg={errMsgReflectionFee}
+                    placeholder='0 - 100'
+                  />
+                </CCol>
+              </CRow>
+              <CRow className='mt-3'>
+                <NumberInputComponent
+                  title='Marketing fee (%)'
+                  value={marketingFee}
+                  onChange = {onChangeMarketingFee}
+                  errMsg={errMsgMarketingFee}
+                />
+              </CRow>
+              {
+                (+liquidityFee + +buyBackFee + +reflectionFee + +marketingFee) > 25 ? 
+                (
+                  <div className='danger small-text-sz mb-0'>Liquidity Fee + Buyback Fee + Reflection Fee + Marketing Fee must be less than 25%</div>
+                ) : (
+                  <></>
                 )
               }
-              {/* <CFormCheck
-                id="useAntiBot"
-                label="Implement Pink Anti-Bot System?"
-                onChange={onChangeAntiBot} /> */}
-              </>
-            }
-            <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-              {
-                isCreateValid === true ? 
-                  <button type="button" className={ isCreateLoad ? "btn-disabled" : "btn-accent" } disabled={isCreateLoad} onClick={handleNext}>
-                    {
-                      isCreateLoad === true ? (
-                        <Spinner
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                          variant="light"
-                          style={{marginRight: '5px', marginTop: '2px'}}
-                        /> ) : (<></>)
-                    }
-                    Create Token
-                  </button> :
-                  <button type="button" className="btn-accent" disabled>Create Token</button>
-              }
-              </div>
-          </CCardBody>
-        </CCard>
+                </>) : (
+                  <></>
+                )
+              )
+            )
+          }
+          {/* <CFormCheck
+            id="useAntiBot"
+            label="Implement Pink Anti-Bot System?"
+            onChange={onChangeAntiBot} /> */}
+          </>
+        }
+        <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
+          {
+            isCreateValid === true ? 
+              <button type="button" className="btn btn-primary" disabled={isCreateLoad} onClick={handleNext}>
+                {
+                  isCreateLoad === true ? (
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                      className='normal'
+                      style={{marginRight: '5px', marginTop: '2px'}}
+                    /> ) : (<></>)
+                }
+                Create Token
+              </button> :
+              <button type="button" className="btn btn-primary" disabled>Create Token</button>
+          }
+        </div>
       </CCol>
     </CRow>
 	);

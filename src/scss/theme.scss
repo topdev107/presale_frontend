@@ -1,0 +1,140 @@
+@at-root .dark-theme {
+  $primary-color: #ffffff;
+  $secondary-color: #BCBBB9;
+  $third-color: #151103;
+  $active-color: #FBBF04;
+
+  $back-color: #1b1b1b;
+  $body-color: #141414;
+
+  --cui-accordion-button-bg: #fbbf04;
+  --cui-accordion-button-active-bg: #fbbf04;
+  --cui-accordion-button-color: #151103;
+  --cui-accordion-button-active-color: #151103;
+
+  background-color: $body-color;
+  color: $secondary-color;
+
+  .header {
+    background: $back-color;
+    box-shadow: none;
+  }
+  .sidebar, .sidebar-brand {
+    background-color: $back-color;
+    box-shadow: none;
+  }
+
+  .sidebar-brand {
+    padding-top: 10px;
+    padding-right: 20px;
+  }
+  
+  .sidebar-brand .title {
+    font-size: 19px;
+    font-weight: 700;
+    color: $primary-color;
+    padding-left: 10px;
+  }
+  .sidebar-nav .nav-link {
+    color: $secondary-color;
+  }
+  
+  .sidebar-nav .nav-link.active {
+    color: $third-color;
+    background-color: $active-color;
+    path {
+      fill: $third-color;
+    }
+  }
+
+  .btn-outline-primary {
+    border-color: $active-color;
+    color: $active-color;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: $active-color;
+    color: $third-color;
+  }
+  .btn-outline-primary:focus {
+    background-color: $active-color;
+    color: $third-color;
+    box-shadow: none;
+  }
+
+  .btn-primary {
+    background-color: $active-color;
+    color: $third-color;
+  }
+
+  .btn-primary:hover {
+    background-color: #ffc929;
+  }
+
+  .panel {
+    background-color: $back-color;
+  }
+
+  .workflow.active {
+    border-top-color: $active-color;
+  }
+
+  .workflow.active,
+  .workflow.verified {
+    .step {
+      color: $active-color;
+    }
+    .title {
+      color: $primary-color;
+    }
+  }
+
+  .text-title {
+    color: $primary-color;
+  }
+
+  .form-control,
+  .form-select {
+    background-color: $body-color;
+    color: rgba(255, 255, 255, .4);
+    font-size: 12px;
+    border-color: #333131;
+  }
+
+  .form-control:focus,
+  .form-select:focus,
+  .accordion-button:focus {
+    box-shadow: none;    
+  }
+
+  .danger {
+    color: $active-color;
+  }
+
+  .normal {
+    color: $third-color;
+  }
+
+  .form-check-input:checked {
+    background-color: $active-color;
+    border-color: $active-color;
+  }
+
+  .alert-yellow {
+    --cui-alert-color: #151103;
+    --cui-alert-bg: #FBBF04;
+    --cui-alert-border-color: none;
+    --cui-alert-link-color: #BCBBB9;
+  }
+
+  .accordion-body {
+    background-color: $body-color;    
+  }
+
+  .table th,
+  .table td{
+    color: $secondary-color !important;
+  }
+
+
+}

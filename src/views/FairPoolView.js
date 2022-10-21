@@ -604,7 +604,7 @@ const TotalView = () => {
       {
         wholeLoading == true ?
         (
-          <CSpinner color="primary" />
+          <CSpinner className="loading danger" />
         ) : 
           tokenName === '' ? (
             <p className='white-color-text' style={{textAlign: 'center'}}>Error: please check the correct network or reload this page</p>

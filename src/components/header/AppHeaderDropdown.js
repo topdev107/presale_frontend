@@ -17,9 +17,9 @@ const AppHeaderDropdown = (props) => {
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         {
           props.currentAccount === null || props.currentAccount === '' || props.currentAccount === undefined ? (
-            <button className='connect_btn' onClick={props.onConnect}>Connect</button>
+            <button className='btn btn-primary' onClick={props.onConnect}>Connect Wallet</button>
           ) : (
-            <button className='connected_btn' >{props.currentAccount}</button>
+            <button className='btn btn-primary' >{props.currentAccount.substring(0, 11) + '...'}</button>
           )
         }
       </CDropdownToggle>

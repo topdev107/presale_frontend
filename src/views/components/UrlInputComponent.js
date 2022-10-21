@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const UrlInputComponent = (props) => {
   return (
     <div>
-      <p className='font-bold'>{props.title}
+      <p className='text-title medium-text-sz mb-2'>{props.title}
         {
           props.required ? (
             <sup className="danger">*</sup>

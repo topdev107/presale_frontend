@@ -5,8 +5,8 @@ import React from 'react';
 
 const NumberInputComponent = (props) => {
   return (
-    <div>
-      <div className='font-bold text-yellow-color'>{props.title}
+    <div className='mb-2'>
+      <div className='text-title mb-2 medium-text-sz'>{props.title}
         { 
           props.notSup ? (
             <></>
@@ -20,12 +20,12 @@ const NumberInputComponent = (props) => {
           props.needInt ? (
             <div>
               <CFormInput type="number" min='0' className='input-highlighted' placeholder="0" value={props.value} onChange={props.onChange} />
-              <div className='danger small-text-sz mb-0'>{props.errMsg}</div>
+              <div className='danger small-text-sz mt-1'>{props.errMsg}</div>
             </div>
           ) : (
             <div>
               <CFormInput type="number" min='0' step='any' className='input-highlighted' placeholder="0" value={props.value} onChange={props.onChange} />
-              <div className='danger small-text-sz mb-0'>{props.errMsg}</div>
+              <div className='danger small-text-sz mt-1'>{props.errMsg}</div>
             </div>
           )
 
@@ -37,7 +37,7 @@ const NumberInputComponent = (props) => {
           )
         )
       }
-      <div className="small-text-sz mt-1 text-blue-color">{props.desc}</div>
+      <div className="small-text-sz">{props.desc}</div>
     </div>
   )
 }

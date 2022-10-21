@@ -1,128 +1,201 @@
 // Here you can add other styles
 
-
-.loadMoreRowsClassname {
-    width      : 180px;
-    padding    : 8px 16px;
-    position   : absolute;
-    bottom     : 8px;
-    right      : 8px;
-    color      : white;
-    line-height: 35px;
-    background : rgb(0 0 0 / 0.6);
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
 }
 
-.t_height_78vh {
-    width : 100%;
-    height: 78vh;
+.mobile-toggle {
+    visibility: hidden;
 }
 
-.t_height_80vh {
-    width : 100%;
-    height: 80vh; 
-    overflow-y: auto;   
+.header {
+  min-height: 5rem;
 }
 
-.overflow_y_auto {
-    overflow-y: auto;
+.btn {
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 30px;
+  min-width: 150px;
 }
 
-.text_align_center {
-    text-align: center;
+.workflow.active {
+  border-top-width: 3px;
+  border-top-style: solid;
+  .description {
+    opacity: 1;
+  }
 }
 
-.text_align_left {
-    text-align: left;
+.workflow .title {
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.text_align_right {
-    text-align: right;
+.workflow .description {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: .6;
 }
 
-.dark_gray_color {
-    color: #27303b;
+.small-text-sz {
+  font-size: 12px;
 }
 
-.no_underline_link:link{
-    text-decoration: none;    
+.medium-text-sz {
+  font-size: 14px;
 }
 
-.no_underline_link:hover{
-    text-decoration: underline;    
+.text-right {
+  text-align: right;
 }
 
-
-.workable-content {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 50px;;
+.form-control,
+.form-select {
+  padding: 10px 16px;
 }
 
-.overflow-scrollable {
-    height: 85%;
-    overflow: auto;
+.alert {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12px;
 }
 
-.rootClassname {
-    display       : flex;
-    flex-direction: column;
-    height        : 100%;
-    gap           : 10px;
+// .tab-content {
+//   background-color: $light-50 !important;
 
-    >.rdg {
-        flex: 1;
-    }
-}
+//   @at-root .dark-theme & {
+//     background-color: rgba(255, 255, 255, .1) !important;
+//   }
+// }
 
-.toolbarClassname {
-    text-align: end;
-}
+// .loadMoreRowsClassname {
+//     width      : 180px;
+//     padding    : 8px 16px;
+//     position   : absolute;
+//     bottom     : 8px;
+//     right      : 8px;
+//     color      : white;
+//     line-height: 35px;
+//     background : rgb(0 0 0 / 0.6);
+// }
 
-.filter-cell {
-    line-height: 35px;
-    padding    : 0;
+// .t_height_78vh {
+//     width : 100%;
+//     height: 78vh;
+// }
 
-    >div {
-        padding: 0 8px;
+// .t_height_80vh {
+//     width : 100%;
+//     height: 80vh; 
+//     overflow-y: auto;   
+// }
 
-        &:first-child {
-            border-bottom: 1px solid var(--border-color);
-        }
-    }
-}
+// .overflow_y_auto {
+//     overflow-y: auto;
+// }
 
-.filterClassname {
-    width    : 100%;
-    padding  : 4px;
-    font-size: 14px;
-}
+// .text_align_center {
+//     text-align: center;
+// }
 
-.survey_answer_tab_pane {
-    padding: 10px 15px;    
-    border: #ccc;
-    border-style: solid;   
-    border-top-width: 0; 
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+// .text_align_left {
+//     text-align: left;
+// }
 
-.width-200 {
-    width: 200px;
-}
+// .text_align_right {
+//     text-align: right;
+// }
 
-.inline-block {
-    display: inline-block;
-}
+// .dark_gray_color {
+//     color: #27303b;
+// }
 
-.inline {
-    display: inline;
-}
+// .no_underline_link:link{
+//     text-decoration: none;    
+// }
 
-.align-right {
-    text-align: right;
-}
+// .no_underline_link:hover{
+//     text-decoration: underline;    
+// }
+
+
+// .workable-content {
+//     position: absolute;
+//     top: 50px;
+//     left: 0;
+//     right: 0;
+//     bottom: 50px;;
+// }
+
+// .overflow-scrollable {
+//     height: 85%;
+//     overflow: auto;
+// }
+
+// .rootClassname {
+//     display       : flex;
+//     flex-direction: column;
+//     height        : 100%;
+//     gap           : 10px;
+
+//     >.rdg {
+//         flex: 1;
+//     }
+// }
+
+// .toolbarClassname {
+//     text-align: end;
+// }
+
+// .filter-cell {
+//     line-height: 35px;
+//     padding    : 0;
+
+//     >div {
+//         padding: 0 8px;
+
+//         &:first-child {
+//             border-bottom: 1px solid var(--border-color);
+//         }
+//     }
+// }
+
+// .filterClassname {
+//     width    : 100%;
+//     padding  : 4px;
+//     font-size: 14px;
+// }
+
+// .survey_answer_tab_pane {
+//     padding: 10px 15px;    
+//     border: #ccc;
+//     border-style: solid;   
+//     border-top-width: 0; 
+//     border-left-width: 1px;
+//     border-right-width: 1px;
+//     border-bottom-width: 1px;
+//     border-bottom-left-radius: 5px;
+//     border-bottom-right-radius: 5px;
+// }
+
+// .width-200 {
+//     width: 200px;
+// }
+
+// .inline-block {
+//     display: inline-block;
+// }
+
+// .inline {
+//     display: inline;
+// }
+
+// .align-right {
+//     text-align: right;
+// }

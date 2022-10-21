@@ -239,178 +239,174 @@ const AddAdditionalInfo = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026">
-          <CCol className="col-sm-3">
+        <CRow className="hide-less-than-1026 panel">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={1}
               verified
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={2}
               verified
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={3}
               active
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={4}
               title='Finish'
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-3">
+        <CRow className="mt-1 p-4 panel">
           <CCol>
-            <CCard className="mb-4 pb-5">
-              <CCardBody>
-                <CRow>
-                  <p className="danger small-text-sz mb-0">(*) is required field.</p>
-                  <div className='mt-3'>
-                    <CRow className="display-block">
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='LogoURL'
-                          value={logoURL}
-                          onChange={onChangeLogoURL}
-                          errMsg={errMsgLogoURL}
-                          icon={faImage}
-                          required
-                          placeholder='Ex:https://...'
-                          desc='URL must end with a supported image extension png, jpg, jpeg or gif. You can upload your image at'
-                          extra={<p className="small-text-sz text-accent-color text-link-accent" onClick={handleImageUploadLink}>https://upload.pinksale.finance/</p>}
-                        />
-                      </CCol>
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='Website'
-                          value={website}
-                          required
-                          placeholder='Ex:https://...'
-                          icon={faGlobe}
-                          onChange={onChangeWebsite}
-                          errMsg={errMsgWebsite}
-                        />
-                      </CCol>
-                    </CRow>
-                  </div>
-
-                  <div className='mt-3'>
-                    <CRow className="display-block">
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='Facebook'
-                          value={facebook}
-                          placeholder='Ex:https://facebook.com/...'
-                          onChange={onChangeFacebook}
-                          errMsg={errMsgFacebook}
-                          icon={faFacebook}
-                        />
-                      </CCol>
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='Twitter'
-                          value={twitter}
-                          icon={faTwitter}
-                          placeholder='Ex:https://twitter.com/...'
-                          onChange={onChangeTwitter}
-                          errMsg={errMsgTwitter}
-                        />
-                      </CCol>
-                    </CRow>
-                  </div>
-
-                  <div className='mt-3'>
-                    <CRow className="display-block">
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='Github'
-                          value={github}
-                          placeholder='Ex:https://github.com/...'
-                          onChange={onChangeGithub}
-                          errMsg={errMsgGithub}
-                          icon={faGithub}
-                        />
-                      </CCol>
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='Telegram'
-                          value={telegram}
-                          placeholder='Ex:https://t.me/...'
-                          icon={faTelegram}
-                          onChange={onChangeTelegram}
-                          errMsg={errMsgTelegram}
-                        />
-                      </CCol>
-                    </CRow>
-                  </div>
-
-                  <div className='mt-3'>
-                    <CRow className="display-block">
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='Instagram'
-                          value={instagram}
-                          placeholder='Ex:https://instagram.com/...'
-                          onChange={onChangeInstagram}
-                          errMsg={errMsgInstagram}
-                          icon={faInstagram}
-                        />
-                      </CCol>
-                      <CCol className='col-md-6'>
-                        <UrlInputComponent
-                          title='Discord'
-                          value={discord}
-                          icon={faDiscord}
-                          placeholder='Ex:https://t.me/...'
-                          onChange={onChangeDiscord}
-                          errMsg={errMsgDiscord}
-                        />
-                      </CCol>
-                    </CRow>
-                  </div>
-
-                  <div className='mt-3'>
+            <CRow>
+              <p className="danger small-text-sz mb-0">(*) is required field.</p>
+              <div className='mt-3'>
+                <CRow className="display-block">
+                  <CCol className='col-md-6'>
                     <UrlInputComponent
-                      title='Reddit'
-                      value={reddit}
-                      placeholder='Ex:https://reddit.com/...'
-                      onChange={onChangeReddit}
-                      errMsg={errMsgReddit}
-                      icon={faReddit}
+                      title='LogoURL'
+                      value={logoURL}
+                      onChange={onChangeLogoURL}
+                      errMsg={errMsgLogoURL}
+                      icon={faImage}
+                      required
+                      placeholder='Ex:https://...'
+                      desc='URL must end with a supported image extension png, jpg, jpeg or gif. You can upload your image at'
+                      extra={<p className="small-text-sz text-accent-color text-link-accent" onClick={handleImageUploadLink}>https://upload.pinksale.finance/</p>}
                     />
-                  </div>
-
-                  <div className="mt-3">
-                    <p className='font-bold'>Description</p>
-                    <CFormTextarea
-                      value={desc}
-                      placeholder='Ex: This is the best project...'
-                      onChange={onChangeDesc}
+                  </CCol>
+                  <CCol className='col-md-6'>
+                    <UrlInputComponent
+                      title='Website'
+                      value={website}
+                      required
+                      placeholder='Ex:https://...'
+                      icon={faGlobe}
+                      onChange={onChangeWebsite}
+                      errMsg={errMsgWebsite}
                     />
-                    <p className='danger small-text-sz mb-0'>{errMsgDesc}</p>
-                  </div>
-                  <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-accent" onClick={history.goBack}>Back</button>
-                    {
-                      isValid ? (
-                        <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
-                      ) : (
-                        <button type="button" className="btn-disabled">Next</button>
-                      )
-                    }
-                  </div>
+                  </CCol>
                 </CRow>
-              </CCardBody>
-            </CCard>
+              </div>
+
+              <div className='mt-3'>
+                <CRow className="display-block">
+                  <CCol className='col-md-6'>
+                    <UrlInputComponent
+                      title='Facebook'
+                      value={facebook}
+                      placeholder='Ex:https://facebook.com/...'
+                      onChange={onChangeFacebook}
+                      errMsg={errMsgFacebook}
+                      icon={faFacebook}
+                    />
+                  </CCol>
+                  <CCol className='col-md-6'>
+                    <UrlInputComponent
+                      title='Twitter'
+                      value={twitter}
+                      icon={faTwitter}
+                      placeholder='Ex:https://twitter.com/...'
+                      onChange={onChangeTwitter}
+                      errMsg={errMsgTwitter}
+                    />
+                  </CCol>
+                </CRow>
+              </div>
+
+              <div className='mt-3'>
+                <CRow className="display-block">
+                  <CCol className='col-md-6'>
+                    <UrlInputComponent
+                      title='Github'
+                      value={github}
+                      placeholder='Ex:https://github.com/...'
+                      onChange={onChangeGithub}
+                      errMsg={errMsgGithub}
+                      icon={faGithub}
+                    />
+                  </CCol>
+                  <CCol className='col-md-6'>
+                    <UrlInputComponent
+                      title='Telegram'
+                      value={telegram}
+                      placeholder='Ex:https://t.me/...'
+                      icon={faTelegram}
+                      onChange={onChangeTelegram}
+                      errMsg={errMsgTelegram}
+                    />
+                  </CCol>
+                </CRow>
+              </div>
+
+              <div className='mt-3'>
+                <CRow className="display-block">
+                  <CCol className='col-md-6'>
+                    <UrlInputComponent
+                      title='Instagram'
+                      value={instagram}
+                      placeholder='Ex:https://instagram.com/...'
+                      onChange={onChangeInstagram}
+                      errMsg={errMsgInstagram}
+                      icon={faInstagram}
+                    />
+                  </CCol>
+                  <CCol className='col-md-6'>
+                    <UrlInputComponent
+                      title='Discord'
+                      value={discord}
+                      icon={faDiscord}
+                      placeholder='Ex:https://t.me/...'
+                      onChange={onChangeDiscord}
+                      errMsg={errMsgDiscord}
+                    />
+                  </CCol>
+                </CRow>
+              </div>
+
+              <div className='mt-3'>
+                <UrlInputComponent
+                  title='Reddit'
+                  value={reddit}
+                  placeholder='Ex:https://reddit.com/...'
+                  onChange={onChangeReddit}
+                  errMsg={errMsgReddit}
+                  icon={faReddit}
+                />
+              </div>
+
+              <div className="mt-3">
+                <p className='text-title medium-text-sz mb-2'>Description</p>
+                <CFormTextarea
+                  value={desc}
+                  placeholder='Ex: This is the best project...'
+                  onChange={onChangeDesc}
+                />
+                <p className='danger small-text-sz mb-0'>{errMsgDesc}</p>
+              </div>
+              <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
+                <button type="button" className="btn btn-outline-primary" onClick={history.goBack}>Privious</button>
+                {
+                  isValid ? (
+                    <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button>
+                  ) : (
+                    <button type="button" className="btn btn-primary">Next</button>
+                  )
+                }
+              </div>
+            </CRow>
           </CCol>
         </CRow>
       </CCol>

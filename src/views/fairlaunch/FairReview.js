@@ -194,29 +194,29 @@ const FairReview = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026">
-          <CCol className="col-sm-3">
+        <CRow className="hide-less-than-1026 panel">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={1}
               verified
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={2}
               verified
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={3}
               verified
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={4}
               active
@@ -224,163 +224,157 @@ const FairReview = () => {
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-3">
+        <CRow className="mt-1 p-4 panel">
           <CCol>
-            <CCard className="mb-4 pb-5">
-              <CCardBody>
-                <div>
-                  <RowBetween
-                    childStart={<p>Total token</p>}
-                    childEnd={<p className='text-accent-color text-right'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Token name</p>}
-                    childEnd={<p className='text-blue-color text-right'>{tokenName}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Token symbol</p>}
-                    childEnd={<p className='text-blue-color text-right'>{tokenSymbol}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Token decimals</p>}
-                    childEnd={<p className='text-blue-color text-right'>{tokenDecimals}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Total selling amount</p>}
-                    childEnd={<p className='text-blue-color text-right'>{total_selling_amount}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Softcap</p>}
-                    childEnd={<p className='text-blue-color text-right'>{softcap}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Liquidity</p>}
-                    childEnd={<p className='text-blue-color text-right'>{liquidity}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Start time</p>}
-                    childEnd={<p className='text-blue-color text-right'>{startDate}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>End time</p>}
-                    childEnd={<p className='text-blue-color text-right'>{endDate}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Liquidity lockup time</p>}
-                    childEnd={<p className='text-blue-color text-right'>{lockTime}</p>}
-                  />
-                  <RowBetween
-                    childStart={<p>Website</p>}
-                    childEnd={<p className='text-blue-color text-right'>{website}</p>}
-                  />
-                  {
-                    facebook ? (
-                      <RowBetween
-                        childStart={<p>Facebook</p>}
-                        childEnd={<p className='text-blue-color text-right'>{facebook}</p>}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  {
-                    twitter ? (
-                      <RowBetween
-                        childStart={<p>Twitter</p>}
-                        childEnd={<p className='text-blue-color text-right'>{twitter}</p>}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  {
-                    github ? (
-                      <RowBetween
-                        childStart={<p>Github</p>}
-                        childEnd={<p className='text-blue-color text-right'>{github}</p>}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  {
-                    telegram ? (
-                      <RowBetween
-                        childStart={<p>Telegram</p>}
-                        childEnd={<p className='text-blue-color text-right'>{telegram}</p>}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  {
-                    instagram ? (
-                      <RowBetween
-                        childStart={<p>Instagram</p>}
-                        childEnd={<p className='text-blue-color text-right'>{instagram}</p>}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  {
-                    discord ? (
-                      <RowBetween
-                        childStart={<p>Discord</p>}
-                        childEnd={<p className='text-blue-color text-right'>{discord}</p>}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  {
-                    reddit ? (
-                      <RowBetween
-                        childStart={<p>Reddit</p>}
-                        childEnd={<p className='text-blue-color text-right'>{reddit}</p>}
-                      />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  {
-                    !usingTeamVesting ?
-                      <RowBetween
-                        childStart={<p>Using Team Vesting?</p>}
-                        childEnd={<p className='text-blue-color text-right'>No</p>}
-                      /> :
-                      <RowBetween
-                        childStart={<p>Using Team Vesting?</p>}
-                        childEnd={<p className='text-blue-color text-right'>Yes</p>}
-                      />
-                  }
-                  <CAlert color="light" variant='solid' className="d-flex align-items-center">
-                    <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} style={{color: 'red'}}/>
-                    <div style={{color: 'red'}}>
-                      For tokens with burns, rebase or other special transfers please ensure that you have a way to whitelist multiple addresses or turn off the special transfer events (By setting fees to 0 for example for the duration of the presale)
-                    </div>
-                  </CAlert>
-                  <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                    <button type="button" className="btn-accent" onClick={history.goBack}>Back</button>
-                    {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
-                    <button type="button" className={submitStatus ? "btn-disabled" : "btn-accent"} onClick={handleSubmit} disabled={submitStatus}>
-                      {
-                        submitStatus == true ? (
-                        <Spinner
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                          variant="light"
-                          style={{marginRight: '5px', marginTop: '2px'}}
-                        /> ) : (<></>)
-                      }
-                      Submit</button>
-                  </div>
-                </div>
-              </CCardBody>
-            </CCard>
+            <RowBetween
+              childStart={<p>Total token</p>}
+              childEnd={<p className='text-title'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
+            />
+            <RowBetween
+              childStart={<p>Token name</p>}
+              childEnd={<p className='text-title'>{tokenName}</p>}
+            />
+            <RowBetween
+              childStart={<p>Token symbol</p>}
+              childEnd={<p className='text-title'>{tokenSymbol}</p>}
+            />
+            <RowBetween
+              childStart={<p>Token decimals</p>}
+              childEnd={<p className='text-title'>{tokenDecimals}</p>}
+            />
+            <RowBetween
+              childStart={<p>Total selling amount</p>}
+              childEnd={<p className='text-title'>{total_selling_amount}</p>}
+            />
+            <RowBetween
+              childStart={<p>Softcap</p>}
+              childEnd={<p className='text-title'>{softcap}</p>}
+            />
+            <RowBetween
+              childStart={<p>Liquidity</p>}
+              childEnd={<p className='text-title'>{liquidity}</p>}
+            />
+            <RowBetween
+              childStart={<p>Start time</p>}
+              childEnd={<p className='text-title'>{startDate}</p>}
+            />
+            <RowBetween
+              childStart={<p>End time</p>}
+              childEnd={<p className='text-title'>{endDate}</p>}
+            />
+            <RowBetween
+              childStart={<p>Liquidity lockup time</p>}
+              childEnd={<p className='text-title'>{lockTime}</p>}
+            />
+            <RowBetween
+              childStart={<p>Website</p>}
+              childEnd={<p className='text-title'>{website}</p>}
+            />
+            {
+              facebook ? (
+                <RowBetween
+                  childStart={<p>Facebook</p>}
+                  childEnd={<p className='text-title'>{facebook}</p>}
+                />
+              ) : (
+                <></>
+              )
+            }
+            {
+              twitter ? (
+                <RowBetween
+                  childStart={<p>Twitter</p>}
+                  childEnd={<p className='text-title'>{twitter}</p>}
+                />
+              ) : (
+                <></>
+              )
+            }
+            {
+              github ? (
+                <RowBetween
+                  childStart={<p>Github</p>}
+                  childEnd={<p className='text-title'>{github}</p>}
+                />
+              ) : (
+                <></>
+              )
+            }
+            {
+              telegram ? (
+                <RowBetween
+                  childStart={<p>Telegram</p>}
+                  childEnd={<p className='text-title'>{telegram}</p>}
+                />
+              ) : (
+                <></>
+              )
+            }
+            {
+              instagram ? (
+                <RowBetween
+                  childStart={<p>Instagram</p>}
+                  childEnd={<p className='text-title'>{instagram}</p>}
+                />
+              ) : (
+                <></>
+              )
+            }
+            {
+              discord ? (
+                <RowBetween
+                  childStart={<p>Discord</p>}
+                  childEnd={<p className='text-title'>{discord}</p>}
+                />
+              ) : (
+                <></>
+              )
+            }
+            {
+              reddit ? (
+                <RowBetween
+                  childStart={<p>Reddit</p>}
+                  childEnd={<p className='text-title'>{reddit}</p>}
+                />
+              ) : (
+                <></>
+              )
+            }
+            {
+              !usingTeamVesting ?
+                <RowBetween
+                  childStart={<p>Using Team Vesting?</p>}
+                  childEnd={<p className='text-title'>No</p>}
+                /> :
+                <RowBetween
+                  childStart={<p>Using Team Vesting?</p>}
+                  childEnd={<p className='text-title'>Yes</p>}
+                />
+            }
+            <CAlert color="yellow" className="d-flex align-items-center">
+              <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
+              <div>
+                For tokens with burns, rebase or other special transfers please ensure that you have a way to whitelist multiple addresses or turn off the special transfer events (By setting fees to 0 for example for the duration of the presale)
+              </div>
+            </CAlert>
+            <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
+              <button type="button" className="btn btn-outline-primary" onClick={history.goBack}>Previous</button>
+              {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
+              <button type="button" className="btn btn-primary" onClick={handleSubmit} disabled={submitStatus}>
+                {
+                  submitStatus == true ? (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    className='normal'
+                    style={{marginRight: '5px', marginTop: '2px'}}
+                  /> ) : (<></>)
+                }
+                Submit</button>
+            </div>
           </CCol>
         </CRow>
       </CCol>

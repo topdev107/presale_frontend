@@ -101,7 +101,7 @@ const LaunchpadList = () => {
       {
         wholeLoading === true ? 
         (
-          <CSpinner color="primary" />
+          <CSpinner className="loading danger" />
         ) : (
       <CCol xs={12}>
         <CCard>

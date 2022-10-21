@@ -175,131 +175,125 @@ const FairHome = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026">
-          <CCol className="col-sm-3">
+        <CRow className="hide-less-than-1026 panel">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={1}
               active
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={2}
               title='DeFi Fairlaunch Info'
               desc='Enter the fairlaunch information that you want to raise, that should be enter all details about your pool' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={3}
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3">
+          <CCol className="col-sm-3 p-0">
             <WorkflowItem
               stemNumber={4}
               title='Finish'
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-3">
-          <CCol>
-            <CCard className="mb-4">
-              <CCardBody>
-                <CRow>
-                  <p className="danger small-text-sz mb-0">(*) is required field.</p>
-                  <CCol>
-                    <p className='font-bold'>Token address
-                      <sup className="danger">*</sup>
-                    </p>
-                  </CCol>
-                  <CCol>
-                    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <CreateTokenModal parent='Fair'/>
-                    </div>
-                  </CCol>
-                  {
-                    isTokenValid ? (
-                      <div>
-                        <CFormInput type="text" id="tokenAddress" placeholder="Ex: Ox..." value={tokenAddress} onChange={onChange} />
+        <CRow className="mt-1 p-4 panel">
+          <div>
+            <CRow>
+              {/* <p className="danger small-text-sz mb-0">(*) is required field.</p> */}
+              <CCol className='pt-2'>
+                <p className='font-bold text-title' style={{fontSize:18}}>Token address
+                  {/* <sup className="danger">*</sup> */}
+                </p>
+              </CCol>
+              <CCol className='mb-4 p-1'>
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <CreateTokenModal parent='Fair'/>
+                </div>
+              </CCol>
+              {
+                isTokenValid ? (
+                  <div>
+                    <CFormInput type="text" id="tokenAddress" placeholder="Ex: 0x3d..." style={{border:0, fontSize:14, padding:8}} value={tokenAddress} onChange={onChange} />
+                  </div>
+                ) : (
+                  <div>
+                    <CFormInput type="text" id="tokenAddress" className='input-highlighted' style={{border:0, fontSize:14, padding:8}} placeholder="Ex: 0x3d..." value={tokenAddress} onChange={onChange} />
+                  </div>
+                )
+              }
+              <div className="col small-text-sz mt-3">
+                Create pool fee: <span className='text-title p-2'>{createFee} {unit}</span>
+              </div>
+              <div className="col small-text-sz mt-3 text-right">
+                Finalize fee: <span className='text-title p-2'>{finalizeFee}%</span>
+              </div>
+              {
+                isTokenValid ? (
+                  <div>
+                    <RowBetween
+                      childStart={<p>Name</p>}
+                      childEnd={<p className='text-blue-color text-right'>{tokenName}</p>}
+                    />
+                    <RowBetween
+                      childStart={<p>Symbol</p>}
+                      childEnd={<p className="text-right">{tokenSymbol}</p>}
+                    />
+                    <RowBetween
+                      childStart={<p>Decimals</p>}
+                      childEnd={<p className="text-right">{tokenDecimal}</p>}
+                    />
+                    <CAlert color="danger" className="back-gray d-flex align-items-center" dismissible>
+                      <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
+                      <div >
+                        Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.
                       </div>
-                    ) : (
-                      <div>
-                        <CFormInput type="text" id="tokenAddress" className='input-highlighted' placeholder="Ex: Ox..." value={tokenAddress} onChange={onChange} />
-                      </div>
-                    )
-                  }
-                  <p className="small-text-sz mt-1 text-blue-color">
-                    {createFee} {unit}
-                  </p>
-                  <p className="small-text-sz mt-1 text-blue-color">
-                    Finalize fee: {finalizeFee}%
-                  </p>
-                  {
-                    isTokenValid ? (
-                      <div>
-                        <RowBetween
-                          childStart={<p>Name</p>}
-                          childEnd={<p className='text-blue-color text-right'>{tokenName}</p>}
-                        />
-                        <RowBetween
-                          childStart={<p>Symbol</p>}
-                          childEnd={<p className="text-right">{tokenSymbol}</p>}
-                        />
-                        <RowBetween
-                          childStart={<p>Decimals</p>}
-                          childEnd={<p className="text-right">{tokenDecimal}</p>}
-                        />
-                        <CAlert color="danger" className="back-gray d-flex align-items-center" dismissible>
-                          <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
-                          <div >
-                            Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.
+                    </CAlert>
+                    {
+                      !isExistPool ? (
+                        tokenStatus === NO_APPROVED ? (
+                          <div className="d-md-flex justify-content-md-center mt-4 position-right">
+                            <div className='loader'></div>
+                            <button type="button" className={approveState ? "btn-disabled" : "btn-accent"} disabled={approveState} onClick={() => handleApprove()} >
+                              {
+                                approveState == true ? (
+                                <Spinner
+                                  as="span"
+                                  animation="border"
+                                  size="sm"
+                                  role="status"
+                                  aria-hidden="true"
+                                  variant="light"
+                                  style={{marginRight: '5px', marginTop: '2px'}}
+                                /> ) : (<></>)
+                              }
+                              Approve
+                            </button>             
                           </div>
-                        </CAlert>
-                        {
-                          !isExistPool ? (
-                            tokenStatus === NO_APPROVED ? (
-                              <div className="d-md-flex justify-content-md-center mt-4 position-right">
-                                <div className='loader'></div>
-                                <button type="button" className={approveState ? "btn-disabled" : "btn-accent"} disabled={approveState} onClick={() => handleApprove()} >
-                                  {
-                                    approveState == true ? (
-                                    <Spinner
-                                      as="span"
-                                      animation="border"
-                                      size="sm"
-                                      role="status"
-                                      aria-hidden="true"
-                                      variant="light"
-                                      style={{marginRight: '5px', marginTop: '2px'}}
-                                    /> ) : (<></>)
-                                  }
-                                  Approve
-                                </button>             
-                              </div>
-                            ) : (
-                              <div className="d-md-flex justify-content-md-center mt-4 position-right">
-                                <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
-                              </div>
-                            )
-                          ) : (
-                            <></>
-                          )
-                        }
-                      </div>
-                    ) : (
-                      <>
-                        <p className="danger small-text-sz mb-0">{validMessage}</p>
-                        <div className="d-grid gap-2 d-md-flex justify-content-md-center">
-                          <button type="button" className="btn-disabled">Next</button>
-                        </div>
-                      </>
-                    )
-                  }
-                </CRow>
-              </CCardBody>
-            </CCard>
-          </CCol>
+                        ) : (
+                          <div className="d-md-flex justify-content-md-center mt-4 position-right">
+                            <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
+                          </div>
+                        )
+                      ) : (
+                        <></>
+                      )
+                    }
+                  </div>
+                ) : (
+                  <div className="d-grid gap-2 d-md-flex justify-content-between align-items-center" style={{marginTop:64, marginBottom:12}}>
+                    <p className="danger small-text-sz mb-0">{validMessage}</p>
+                    <button type="button" className="btn btn-primary disabled">Next</button>
+                  </div>
+                )
+              }
+            </CRow>
+          </div>
         </CRow>
       </CCol>
     </CRow>
