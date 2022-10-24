@@ -22,7 +22,7 @@ const LaunchpadList = () => {
   const [tabledata, setTableData] = useState([])
   const [myCurrentPage, setMyCurrentPage] = useState(1)
   const [myTableData, setMyTableData] = useState([])
-  const [currentChain, setCurrentChain] = useState(0)
+  const [currentChain, setCurrentChain] = useState(97)
 
   const [wholeLoading, setWholeLoading] = useState(true)
  
