@@ -22,7 +22,7 @@ const LaunchpadList = () => {
   const [tabledata, setTableData] = useState([])
   const [myCurrentPage, setMyCurrentPage] = useState(1)
   const [myTableData, setMyTableData] = useState([])
-  const [currentChain, setCurrentChain] = useState(56)
+  const [currentChain, setCurrentChain] = useState(0)
 
   const [wholeLoading, setWholeLoading] = useState(true)
  
@@ -31,6 +31,11 @@ const LaunchpadList = () => {
 
   window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     setCurrentChain(networkid)
+  })
+
+  useEffect(async () => {
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setCurrentChain(parseInt(id, 16))
   })
 
   const unit = useMemo (() => {
