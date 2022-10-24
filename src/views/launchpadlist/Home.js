@@ -33,20 +33,18 @@ const LaunchpadList = () => {
     setCurrentChain(networkid)
   })
 
-  useEffect(async () => {
+  useEffect(() => { handleGetChain() }, [])
+
+  const handleGetChain = async () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
+    console.log('id =====', id)
     setCurrentChain(parseInt(id, 16))
-  })
+  }
 
   const unit = useMemo (() => {
     if (currentChain == 97 || currentChain == 56) return "BNB"
     if (currentChain == 25 || currentChain == 338 ) return "CRO"
   }, [currentChain])
-
-  // useEffect( async () => {
-  //   const netId = await window.ethereum.request({ method: 'eth_chainId' })
-  //   setCurrentChain(parseInt(netId, 16))
-  // }, [])
 
   const loadData = async () => {
     // const res = await fetch(database_url.concat('/').concat('page'), requestOptions)
