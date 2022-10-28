@@ -37,26 +37,26 @@ const TokenSuccess = () => {
   }
 
   return (
-    <CRow>
+    <CRow className='text-title'>
       <CCol xs={12} className='p-4 panel'>
         <CRow className='danger mb-4'>
           Your token was created!
         </CRow>
         <RowBetween
-          childStart={<p>Name</p>}
-          childEnd={<p className='text-title'>{tokenName}</p>}
+          childStart='Name'
+          childEnd={<p className='light-blue m-0'>{tokenName}</p>}
         />
         <RowBetween
-          childStart={<p>Symbol</p>}
-          childEnd={<p className='text-title'>{tokenSymbol}</p>}
+          childStart='Symbol'
+          childEnd={<p className='m-0'>{tokenSymbol}</p>}
         />
         <RowBetween
-          childStart={<p>TotalSupply</p>}
-          childEnd={<p className='text-title'>{tokenTotalSupply}</p>}
+          childStart='TotalSupply'
+          childEnd={<p className='m-0'>{tokenTotalSupply}</p>}
         />
         <RowBetween
-          childStart={<p>Address</p>}
-          childEnd={<p className='text-title'>{tokenAddress}</p>}
+          childStart='Address'
+          childEnd={<p className='danger m-0'>{tokenAddress}</p>}
         />
         {/* <CTable bordered hover caption="top" color="warning" className='token-table'>
           <CTableCaption className='text-yellow-color text_align_center'>Your token was created!</CTableCaption>

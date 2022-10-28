@@ -495,7 +495,7 @@ const DefiLaunchPadInfo = () => {
                 title='Presale rate'
                 value={presaleRate}
                 onChange={onChangePresaleRate}
-                errMsg={errMsgPresaleRate}
+                // errMsg={errMsgPresaleRate}
                 desc={`If I spend 1 ${basicSymbol} how many tokens will I receive?`}
               />
               <div>
@@ -541,7 +541,7 @@ const DefiLaunchPadInfo = () => {
                     </div>
                   )
                 }
-                <p className="small-text-sz">You can enable/disable whitelist anytime</p>
+                <p className="small-text-sz light-blue">You can enable/disable whitelist anytime</p>
               </div>
               <div className='mt-3'>
                 <CRow className="display-block">
@@ -550,7 +550,7 @@ const DefiLaunchPadInfo = () => {
                       title={`SoftCap(${basicSymbol})`}
                       value={softCap}
                       onChange={onChangeSoftCap}
-                      errMsg={errMsgSoftCap}
+                      // errMsg={errMsgSoftCap}
                       desc='Softcap must be &ge; 50% of Hardcap!'
                     />
                   </CCol>
@@ -628,8 +628,8 @@ const DefiLaunchPadInfo = () => {
                     />
                   </CCol>
                 </CRow>
-                <p className="small-text-sz mt-1 mb-0">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
-                <p className="small-text-sz mt-0">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
+                <p className="small-text-sz mt-1 mb-0 light-blue">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
+                <p className="small-text-sz mt-0 light-blue">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
               </div>
               <div className='mt-2'>
                 <p className='text-title medium-text-sz mb-2'>Select start time and end time (UTC)
@@ -798,7 +798,7 @@ const DefiLaunchPadInfo = () => {
               }
 
               <div className='mt-3'>
-                <p className='danger' style={{ textAlign: 'center' }}>Need {needToken} {tokenSymbol} to create launchpad.</p>
+                <p className='light-blue' style={{ textAlign: 'center' }}>Need {needToken} {tokenSymbol} to create launchpad.</p>
               </div>
 
               <div className="my-3 d-grid gap-3 d-md-flex justify-content-md-center">

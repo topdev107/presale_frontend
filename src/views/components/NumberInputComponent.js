@@ -37,7 +37,7 @@ const NumberInputComponent = (props) => {
           )
         )
       }
-      <div className="small-text-sz">{props.desc}</div>
+      <div className="small-text-sz light-blue">{props.desc}</div>
     </div>
   )
 }

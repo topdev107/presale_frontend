@@ -227,54 +227,54 @@ const FairReview = () => {
         <CRow className="mt-1 p-4 panel">
           <CCol>
             <RowBetween
-              childStart={<p>Total token</p>}
-              childEnd={<p className='text-title'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
+              childStart='Total token'
+              childEnd={<p className='danger m-0'>{`${needTokenAmount} ${tokenSymbol}`}</p>}
             />
             <RowBetween
-              childStart={<p>Token name</p>}
-              childEnd={<p className='text-title'>{tokenName}</p>}
+              childStart='Token name'
+              childEnd={<p className='light-blue m-0'>{tokenName}</p>}
             />
             <RowBetween
-              childStart={<p>Token symbol</p>}
-              childEnd={<p className='text-title'>{tokenSymbol}</p>}
+              childStart='Token symbol'
+              childEnd={<p className='light-blue m-0'>{tokenSymbol}</p>}
             />
             <RowBetween
-              childStart={<p>Token decimals</p>}
-              childEnd={<p className='text-title'>{tokenDecimals}</p>}
+              childStart='Token decimals'
+              childEnd={<p className='light-blue m-0'>{tokenDecimals}</p>}
             />
             <RowBetween
-              childStart={<p>Total selling amount</p>}
-              childEnd={<p className='text-title'>{total_selling_amount}</p>}
+              childStart='Total selling amount'
+              childEnd={<p className='light-blue m-0'>{total_selling_amount}</p>}
             />
             <RowBetween
-              childStart={<p>Softcap</p>}
-              childEnd={<p className='text-title'>{softcap}</p>}
+              childStart='Softcap'
+              childEnd={<p className='light-blue m-0'>{softcap}</p>}
             />
             <RowBetween
-              childStart={<p>Liquidity</p>}
-              childEnd={<p className='text-title'>{liquidity}</p>}
+              childStart='Liquidity'
+              childEnd={<p className='light-blue m-0'>{liquidity}</p>}
             />
             <RowBetween
-              childStart={<p>Start time</p>}
-              childEnd={<p className='text-title'>{startDate}</p>}
+              childStart='Start time'
+              childEnd={<p className='light-blue m-0'>{startDate}</p>}
             />
             <RowBetween
-              childStart={<p>End time</p>}
-              childEnd={<p className='text-title'>{endDate}</p>}
+              childStart='End time'
+              childEnd={<p className='light-blue m-0'>{endDate}</p>}
             />
             <RowBetween
-              childStart={<p>Liquidity lockup time</p>}
-              childEnd={<p className='text-title'>{lockTime}</p>}
+              childStart='Liquidity lockup time'
+              childEnd={<p className='light-blue m-0'>{lockTime}</p>}
             />
             <RowBetween
-              childStart={<p>Website</p>}
-              childEnd={<p className='text-title'>{website}</p>}
+              childStart='Website'
+              childEnd={<p className='danger m-0'>{website}</p>}
             />
             {
               facebook ? (
                 <RowBetween
-                  childStart={<p>Facebook</p>}
-                  childEnd={<p className='text-title'>{facebook}</p>}
+                  childStart='Facebook'
+                  childEnd={<p className='danger m-0'>{facebook}</p>}
                 />
               ) : (
                 <></>
@@ -283,8 +283,8 @@ const FairReview = () => {
             {
               twitter ? (
                 <RowBetween
-                  childStart={<p>Twitter</p>}
-                  childEnd={<p className='text-title'>{twitter}</p>}
+                  childStart='Twitter'
+                  childEnd={<p className='danger m-0'>{twitter}</p>}
                 />
               ) : (
                 <></>
@@ -293,8 +293,8 @@ const FairReview = () => {
             {
               github ? (
                 <RowBetween
-                  childStart={<p>Github</p>}
-                  childEnd={<p className='text-title'>{github}</p>}
+                  childStart='Github'
+                  childEnd={<p className='danger m-0'>{github}</p>}
                 />
               ) : (
                 <></>
@@ -303,8 +303,8 @@ const FairReview = () => {
             {
               telegram ? (
                 <RowBetween
-                  childStart={<p>Telegram</p>}
-                  childEnd={<p className='text-title'>{telegram}</p>}
+                  childStart='Telegram'
+                  childEnd={<p className='danger m-0'>{telegram}</p>}
                 />
               ) : (
                 <></>
@@ -313,8 +313,8 @@ const FairReview = () => {
             {
               instagram ? (
                 <RowBetween
-                  childStart={<p>Instagram</p>}
-                  childEnd={<p className='text-title'>{instagram}</p>}
+                  childStart='Instagram'
+                  childEnd={<p className='danger m-0'>{instagram}</p>}
                 />
               ) : (
                 <></>
@@ -323,8 +323,8 @@ const FairReview = () => {
             {
               discord ? (
                 <RowBetween
-                  childStart={<p>Discord</p>}
-                  childEnd={<p className='text-title'>{discord}</p>}
+                  childStart='Discord'
+                  childEnd={<p className='danger m-0'>{discord}</p>}
                 />
               ) : (
                 <></>
@@ -333,8 +333,8 @@ const FairReview = () => {
             {
               reddit ? (
                 <RowBetween
-                  childStart={<p>Reddit</p>}
-                  childEnd={<p className='text-title'>{reddit}</p>}
+                  childStart='Reddit'
+                  childEnd={<p className='danger m-0'>{reddit}</p>}
                 />
               ) : (
                 <></>
@@ -343,16 +343,16 @@ const FairReview = () => {
             {
               !usingTeamVesting ?
                 <RowBetween
-                  childStart={<p>Using Team Vesting?</p>}
-                  childEnd={<p className='text-title'>No</p>}
+                  childStart='Using Team Vesting?'
+                  childEnd={<p className='light-blue m-0'>No</p>}
                 /> :
                 <RowBetween
-                  childStart={<p>Using Team Vesting?</p>}
-                  childEnd={<p className='text-title'>Yes</p>}
+                  childStart='Using Team Vesting?'
+                  childEnd={<p className='light-blue m-0'>Yes</p>}
                 />
             }
-            <CAlert color="yellow" className="d-flex align-items-center">
-              <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
+            <CAlert color="yellow" className="d-flex align-items-center mt-4">
+              <CIcon icon={cilWarning} className="flex-shrink-0 me-4 danger" width={24} height={24} />
               <div>
                 For tokens with burns, rebase or other special transfers please ensure that you have a way to whitelist multiple addresses or turn off the special transfer events (By setting fees to 0 for example for the duration of the presale)
               </div>

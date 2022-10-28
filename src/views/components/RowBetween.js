@@ -4,10 +4,10 @@ import React from 'react'
 
 const RowBetween = (props) => {
   return (
-    <CRow className={props.lanchpadList ? 'mr-0 pr-0 display-block' : 'mr-0 pr-0'} >
+    <CRow className={`${props.noBorder ? '' : 'row-between'} ${props.lanchpadList ? 'mr-0 pr-0 display-block' : 'mr-0 pr-0'}`} >
       {
         !props.lanchpadList && 
-          <CCol className={props.createLanchpad && "flex-0"}>
+          <CCol className={`align-self-center pt-3 pb-2 ${props.createLanchpad && "flex-0"}`}>
             {props.childStart}
           </CCol>
       }
@@ -25,7 +25,7 @@ const RowBetween = (props) => {
           <></>
         )
       }
-      <CCol className={props.createLanchpad && "flex-0"}>
+      <CCol className={`align-self-center pt-3 pb-2 ${props.createLanchpad && "flex-0"}`}>
         <div className="d-md-flex justify-content-md-end">
           {props.childEnd}
         </div>
@@ -33,7 +33,7 @@ const RowBetween = (props) => {
       {
         props.desc ?
         (
-          <div align="end" className="text-label-color small"> {props.desc} </div>
+          <div align="end" className="light-blue small"> {props.desc} </div>
         ) : (
           <></>
         )

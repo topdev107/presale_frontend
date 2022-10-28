@@ -141,7 +141,12 @@ const TotalView = () => {
     },
     legend: {
       orient: 'vertical',
-      x: 'right',
+      right: '10%',
+      top: '40%',
+      textStyle: {
+        fontFamily: 'Inter',
+        color: '#fff'
+      },
       data: ['Unlocked', 'Liquidity', 'Presale']
     },
     itemStyle: {
@@ -152,20 +157,23 @@ const TotalView = () => {
       {
         name: 'Access From',
         type: 'pie',
-        radius: ['80%', '50%'],
-        avoidLabelOverlap: false,
+        // radius: ['80%', '50%'],
+        // avoidLabelOverlap: false,
         label: {
-          show: false,
-          position: 'center'
+          // show: false,
+          // position: 'center'
+          fontSize: '14',
+          color: '#fff'
         },
         emphasis: {
           label: {
             show: true,
-            fontSize: '20',
+            fontSize: '14',
+            color: '#FBBF04'
           }
         },
         labelLine: {
-          show: false
+          // show: false
         },
         data: [
           { value: (presaleRate * liquidityPercent / 100), name: 'Liquidity' },
@@ -475,28 +483,36 @@ const TotalView = () => {
     }
     return (
       <>
-        <p className="text-align-center">{message}</p>
+        <p className="text-center">{message}</p>
         {
           presaleState == 1 || presaleState == 2 ? 
           (
             <>
-            <CRow>
-                <CCol><div className="text-timer">{presaleDay}</div></CCol>
+            <div className='timer'>
+                {/* <CCol><div className="text-timer">{presaleDay}</div></CCol>
                 <CCol><div className="text-timer">{presaleHour}</div></CCol>
                 <CCol><div className="text-timer">{presaleMinute}</div></CCol>
-                <CCol><div className="text-timer">{presaleSecond}</div></CCol>
-              </CRow>
+                <CCol><div className="text-timer">{presaleSecond}</div></CCol> */}
+                <div>{presaleDay}</div>
+                <div>{presaleHour}</div>
+                <div>{presaleMinute}</div>
+                <div>{presaleSecond}</div>
+              </div>
               <br/>
               <CProgress className="mb-1">
                 <CProgressBar color="warning" value={+progress}/>
               </CProgress>
-              <div style={{display: 'flex', color: '#24252f'}}>
+              <CRow className='mb-2'>
+                <CCol className='xs-2 medium-text-sz' style={{fontWeight: 300}}>{currentState} {unit} </CCol>
+                <CCol className='xs-2 medium-text-sz text-right font-300' style={{fontWeight: 300}}>{softcap} {unit} </CCol>
+              </CRow>
+              {/* <div style={{display: 'flex', color: '#24252f'}}>
                 <div className='col-md-6 text_align_left'>{currentState} {unit} </div>
                 <div className='col-md-6 text_align_right'>{softcap} {unit} </div>
-              </div>
+              </div> */}
               <CRow>
                 <NumberInputComponent
-                  title= {'Amount:'}
+                  title= {'Amount'}
                   value={buyAmount}
                   onChange={onChangeAmount}
                   errMsg=''
@@ -506,7 +522,7 @@ const TotalView = () => {
                 <div className='mt-3 d-grid gap-3 d-md-flex'>
                   {
                     (isValidBuy == true) ? (
-                      <button type="button" className="btn-accent" onClick={() => handleBuy(buyAmount)}>
+                      <button type="button" className="btn btn-primary" onClick={() => handleBuy(buyAmount)}>
                         {
                           isBuying === true ?(
                             <Spinner
@@ -515,14 +531,13 @@ const TotalView = () => {
                               size="sm"
                               role="status"
                               aria-hidden="true"
-                              variant="light"
                               style={{marginRight: '5px', marginTop: '2px'}}
                             /> ) : (<></>)
                         }
                         Buy
                       </button>
                     ) : (
-                      <button type="button" className="btn-disabled" disabled >Buy</button>
+                      <button type="button" className="btn btn-primary" disabled >Buy</button>
                     )
                   }
                 </div>
@@ -534,10 +549,10 @@ const TotalView = () => {
               <></>
             ) : (
               presaleState === 4 || presaleState === 5 ? ( 
-                <button type="button" className="btn-accent" onClick={handleClaimBNB}>Claim BNBs</button>
+                <button type="button" className="btn btn-primary" onClick={handleClaimBNB}>Claim BNBs</button>
                ) : (
                 <>
-                  <button type="button" className="btn-accent" onClick={handleClaim}>Claim Tokens</button>
+                  <button type="button" className="btn btn-primary" onClick={handleClaim}>Claim Tokens</button>
                 </> 
               )
             )
@@ -607,14 +622,15 @@ const TotalView = () => {
           <CSpinner className="loading danger" />
         ) : 
           tokenName === '' ? (
-            <p className='white-color-text' style={{textAlign: 'center'}}>Error: please check the correct network or reload this page</p>
+            <></>
+            // <p className='white-color-text' style={{textAlign: 'center'}}>Error: please check the correct network or reload this page</p>
           ) :
         (
           <>
       <CCol xs={8} className="width-100">
         <CCard
-          color='#242525'
           textColor='white'
+          style={{borderRadius: 0}}
         >
           <CCardBody >
             <CRow className="show-style">
@@ -624,94 +640,93 @@ const TotalView = () => {
                 </div>
               </CCol>
               <CCol className='justify-content-md'>
-                <div style={{fontSize: '25px'}}>{tokenName}&nbsp;Fair Launch &nbsp;
+                <div style={{fontSize: '24px'}}>{tokenName}&nbsp;Fair Launch &nbsp;
                   {
                     showOwnerZone === true ? (
-                    <>
+                    <span style={{marginTop: '7px', fontSize:'16px'}}>
                       <FontAwesomeIcon icon={faKey} /> &nbsp;
                       <FontAwesomeIcon icon={faEdit} /> 
-                    </> ) : (<></>)
+                    </span> ) : (<></>)
                   }
                 </div>
-                <div style={{marginTop: '7px'}}>
-                  <a href={siteUrl} className='text-grey-color'><FontAwesomeIcon icon={faGlobe} /></a>&nbsp;&nbsp;
+                <div style={{marginTop: '7px', fontSize: 18}}>
+                  <a href={siteUrl}><FontAwesomeIcon icon={faGlobe} /></a>&nbsp;&nbsp;
                   {
-                    twitterUrl !== '' ? <><a href={twitterUrl} className='text-grey-color'><FontAwesomeIcon icon={faTwitter} /></a>&nbsp;&nbsp;</> : <></>
+                    twitterUrl !== '' ? <><a href={twitterUrl} ><FontAwesomeIcon icon={faTwitter} /></a>&nbsp;&nbsp;</> : <></>
                   }
                   {
-                    facebookUrl !== '' ? <><a href={facebookUrl} className='text-grey-color'><FontAwesomeIcon icon={faFacebookSquare} /></a>&nbsp;&nbsp;</> : <></>
+                    facebookUrl !== '' ? <><a href={facebookUrl} ><FontAwesomeIcon icon={faFacebookSquare} /></a>&nbsp;&nbsp;</> : <></>
                   }
                   {
-                    telegramUrl === '' ? <></> : <><a href={telegramUrl} className='text-grey-color'><FontAwesomeIcon icon={faTelegram} /></a>&nbsp;&nbsp;</>
+                    telegramUrl === '' ? <></> : <><a href={telegramUrl} ><FontAwesomeIcon icon={faTelegram} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    githubUrl === '' ? <></> : <><a href={githubUrl} className='text-grey-color'><FontAwesomeIcon icon={faGithub} /></a>&nbsp;&nbsp;</>
+                    githubUrl === '' ? <></> : <><a href={githubUrl} ><FontAwesomeIcon icon={faGithub} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    instagramUrl === '' ? <></> : <><a href={instagramUrl} className='text-grey-color'><FontAwesomeIcon icon={faInstagram} /></a>&nbsp;&nbsp;</>
+                    instagramUrl === '' ? <></> : <><a href={instagramUrl} ><FontAwesomeIcon icon={faInstagram} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    discordUrl === '' ? <></> : <><a href={discordUrl} className='text-grey-color'><FontAwesomeIcon icon={faDiscord} /></a>&nbsp;&nbsp;</>
+                    discordUrl === '' ? <></> : <><a href={discordUrl} ><FontAwesomeIcon icon={faDiscord} /></a>&nbsp;&nbsp;</>
                   }
                   {
-                    redditUrl === '' ? <></> : <><a href={redditUrl} className='text-grey-color'><FontAwesomeIcon icon={faRedditAlien} /></a></>
+                    redditUrl === '' ? <></> : <><a href={redditUrl} ><FontAwesomeIcon icon={faRedditAlien} /></a></>
                   }
                 </div>
               </CCol>
-              <CCol xs={2} className="d-md-flex justify-content-md-end">
+              <CCol xs={2} className="d-md-flex align-items-center justify-content-md-end">
                 <div>
                   {
                     presaleState === 3 || presaleState === 6 ?
-                    <CBadge color='danger'>Ended</CBadge>
+                    <CBadge>Ended</CBadge>
                     : presaleState === 1 ?
-                    <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
+                    <CBadge>Upcoming</CBadge>
                     : presaleState === 2 ?
-                    <CBadge color='success'>Sale Live</CBadge>
+                    <CBadge>Sale Live</CBadge>
                     : presaleState === 5 ?
-                    <CBadge color='light'>Canceled</CBadge>
+                    <CBadge>Canceled</CBadge>
                     : <></>
                   }
                 </div>
               </CCol>
             </CRow>
             <CRow>
-              <CCol>{description}</CCol>
+              <CCol style={{fontWeight: 300, padding: '24px 24px 24px 80px'}}>{description}</CCol>
             </CRow>
-            <br/><br/>
             <RowBetween
               token
               childStart = 'Presale Address'
-              childEnd = {<p className='text-yellow-color word-break text-right'>{presaleAddress}</p>}
+              childEnd = {<p className='word-break text-right m-0'>{presaleAddress}</p>}
             />
             <RowBetween
               childStart = 'Token Name'
-              childEnd = {<p className="text-right">{tokenName}</p>}
+              childEnd = {<p className="text-right m-0">{tokenName}</p>}
             />
             <RowBetween
               childStart = 'Token Symbol'
-              childEnd = {<p className="text-right">{tokenSymbol}</p>}
+              childEnd = {<p className="text-right m-0">{tokenSymbol}</p>}
             />
             <RowBetween
               childStart = 'Token Decimals'
-              childEnd = {<p className="text-right">{tokenDecimal}</p>}
+              childEnd = {<p className="text-right m-0">{tokenDecimal}</p>}
             />
             <RowBetween
               token
               childStart = 'TokenAddress'
-              childEnd = {<div className='text-yellow-color word-break text-right'>{tokenAddress}</div>}
+              childEnd = {<div className='danger word-break text-right'>{tokenAddress}</div>}
               desc = {`Do not send ${unit} to the token address!`}
             />
             <RowBetween
               childStart = 'Total Supply'
-              childEnd = {<p className="text-right">{tokenSupply} {tokenSymbol}</p>}
+              childEnd = {<p className="text-right m-0">{tokenSupply} {tokenSymbol}</p>}
             />
             <RowBetween
               childStart = 'Tokens For Presale'
-              childEnd = {<p className="text-right">{presaleRate} {tokenSymbol}</p>}
+              childEnd = {<p className="text-right m-0">{presaleRate} {tokenSymbol}</p>}
             />
             <RowBetween
               childStart = 'Tokens For Liquidity'
-              childEnd = {<p className="text-right">{presaleRate * liquidityPercent / 100} {tokenSymbol}</p>}
+              childEnd = {<p className="text-right m-0">{presaleRate * liquidityPercent / 100} {tokenSymbol}</p>}
             />
             {/* {
               useVesting === true ? (
@@ -728,69 +743,69 @@ const TotalView = () => {
             } */}
             <RowBetween
               childStart = 'Soft Cap'
-              childEnd = {<p className="text-right">{softcap} {unit}</p>}
+              childEnd = {<p className="text-right m-0">{softcap} {unit}</p>}
             />
             <RowBetween
               childStart = 'Presale Start Time'
-              childEnd = {<p className="text-right">{startTime}</p>}
+              childEnd = {<p className="text-right m-0">{startTime}</p>}
             />
             <RowBetween
               childStart = 'Presale End Time'
-              childEnd = {<p className="text-right">{endTime}</p>}
+              childEnd = {<p className="text-right m-0">{endTime}</p>}
             />
             <RowBetween
               childStart = 'Listing On'
-              childEnd = {<p className='text-yellow-color text-right'>{listing}</p>}
+              childEnd = {<p className='danger text-right m-0'>{listing}</p>}
             />
             <RowBetween
               childStart = 'Liquidity Percent'
-              childEnd = {<p className="text-right">{liquidityPercent}</p>}
+              childEnd = {<p className="text-right m-0">{liquidityPercent}</p>}
             />
             <RowBetween
               childStart = 'Liquidity Lockup Time'
-              childEnd = {<p className="text-right">{lockTime} minutes after pool ends</p>}
+              childEnd = {<p className="text-right m-0">{lockTime} minutes after pool ends</p>}
             />
             {
               useTeamVesting === true ? (
               <>
                 <RowBetween
                   childStart = 'Total Team Vesting Tokens'
-                  childEnd = {<p className="text-right">{totalTeamVesting} {tokenSymbol}</p>}
+                  childEnd = {<p className=" m-0">{totalTeamVesting} {tokenSymbol}</p>}
                 />
                 <RowBetween
                   childStart = 'First Release After Listing(minutes)'
-                  childEnd = {<p className="text-right">{firstReleaseListing} minutes</p>}
+                  childEnd = {<p className=" m-0">{firstReleaseListing} minutes</p>}
                 />
                 <RowBetween
                   childStart = 'First Release For Team'
-                  childEnd = {<p className="text-right">{firstReleaseTeam} %</p>}
+                  childEnd = {<p className=" m-0">{firstReleaseTeam} %</p>}
                 />
                 <RowBetween
                   childStart = 'Cycle (minutes)'
-                  childEnd = {<p className="text-right">{cycleTime} minutes</p>}
+                  childEnd = {<p className=" m-0">{cycleTime} minutes</p>}
                 />
                 <RowBetween
                   childStart = 'Team Tokens Release Each Cycle'
-                  childEnd = {<p className="text-right">{teamReleaseEach} %</p>}
+                  childEnd = {<p className=" m-0">{teamReleaseEach} %</p>}
                 />
                 {
                   useVesting === true ? (
                     <> 
                       <RowBetween
                         childStart = 'Tokens release each cycle'
-                        childEnd = {<p className="text-right">{vestingPresalePercent}% each {vestingPresaleTime} minutes</p>}
+                        childEnd = {<p className=" m-0">{vestingPresalePercent}% each {vestingPresaleTime} minutes</p>}
                       />
                     </>
                   ) : (<> </>)
                 }
                 <CRow className='mr-0 pr-0' >
                   <CAccordion >
-                    <CAccordionItem itemKey={1} className="text-white-color" style={{border: 'none'}}>
+                    <CAccordionItem itemKey={1} style={{border: 'none'}}>
                       <CAccordionHeader>
                         Team Vesting Info (Estimate from end time)
                       </CAccordionHeader>
-                      <CAccordionBody style={{backgroundColor: '#242525'}}>
-                        <CTable style={{textAlign: 'center', textColor: 'white'}}>
+                      <CAccordionBody>
+                        <CTable style={{textAlign: 'center'}}>
                           <CTableHead>
                             <CTableRow>
                               <CTableHeaderCell scope="col">Unlock #</CTableHeaderCell>
@@ -822,14 +837,15 @@ const TotalView = () => {
         </CCard>
         <CCol>
           <br/>
-          <CCard
-            color='#242525'
+          <CCard            
             textColor='white'
-            style={{marginBottom: '20px'}}
+            style={{marginBottom: '20px', borderRadius: 0}}
           >
             <CCardBody>
-              <CRow className="flex-none">
-                <CCol className='col-md-3'></CCol>
+              <CRow className='mb-4'>
+                <CCol className='row-between' style={{fontSize: 18, paddingBottom:12}}>Token Metrics</CCol>
+              </CRow>
+              <CRow>
                 <CCol>
                   {/* <CChart
                     type="doughnut"
@@ -845,9 +861,8 @@ const TotalView = () => {
                       ],
                     }}
                   /> */}
-                  <ReactEcharts option={chartOption} />
+                  <ReactEcharts option={chartOption} opts={{renderer: 'svg'}} style={{height: 350}}/>
                 </CCol>
-                <CCol className='col-md-3'></CCol>
               </CRow>
             </CCardBody>
           </CCard>
@@ -855,8 +870,8 @@ const TotalView = () => {
       </CCol>
       <CCol xs={4} className="width-100">
         <CCard
-          color='#242525'
           textColor='white'
+          style={{borderRadius: 0}}
         >
           <CCardBody>
             <CAlert color="yellow">
@@ -869,19 +884,19 @@ const TotalView = () => {
         </CCard>
         <br/>
         <CCard
-          color='#242525'
           textColor='white'
+          style={{borderRadius: 0}}
         >
           <CCardBody>
             <RowBetween
               childStart = "Status"
-              childEnd = {<p className="text-yellow-color text-right">{
+              childEnd = {<p className="danger text-right m-0">{
                 showState()
               }</p>}  
             />
             <RowBetween
               childStart = "Current Rate"
-              childEnd = {<p className='text-yellow-color text-right'>1 {unit} = {presaleRate / currentState} {tokenSymbol}</p>}
+              childEnd = {<p className='text-right m-0'>1 {unit} = {presaleRate / currentState} {tokenSymbol}</p>}
             />
           </CCardBody>
         </CCard>
@@ -889,27 +904,27 @@ const TotalView = () => {
         {
           showOwnerZone === true ? (
         <CCard 
-          color='#242525'
-          textColor='#24252f'>
-          <CCardHeader style={{color: '#242525'}}>Owner Zone</CCardHeader>
+          style={{borderRadius: 0}}
+        >
+          <CCardHeader>Owner Zone</CCardHeader>
           <CCardBody>
-            <CAlert color="dark">
+            <CAlert color="yellow">
               To make sure there will be no issues during the presale time, please don&apos;t send tokens to wallets before you finalize the presale pool
             </CAlert>
             <p></p>
-            <div style ={{width: '100%', height: '2px', backgroundColor: 'black'}}></div>
+            <hr/>
             <p></p>
             <p>Pool Action</p>
             {/* <CButton color="yellow" shape="rounded-2" style={{width : '100%'}}>yellow</CButton> */}
             <div className="d-grid gap-2">
               {
                 useVesting ? (
-                <button type="button" className="btn-accent">List of contributors</button>
+                <button type="button" className="btn btn-primary">List of contributors</button>
                 ): (<></>)
               }
               {
                 presaleState === 3 && isFinalized === true? (
-                  <button type="button" className={isFinalized ? "btn-disabled" : "btn-accent"} disabled={isFinalizeLoad} onClick={handleFinalize}>
+                  <button type="button" className='btn btn-primary' disabled={isFinalizeLoad} onClick={handleFinalize}>
                     {
                     isFinalizeLoad == true ? (
                     <Spinner
@@ -918,29 +933,28 @@ const TotalView = () => {
                       size="sm"
                       role="status"
                       aria-hidden="true"
-                      variant="light"
                       style={{marginRight: '5px', marginTop: '2px'}}
                     /> ) : (<></>)
                     }
                     Finalize
                   </button>
                 ) : (
-                  <button type="button" className="btn-disabled" disabled onClick={handleFinalize}>Finalize</button>
+                  <button type="button" className="btn btn-primary" disabled onClick={handleFinalize}>Finalize</button>
                 )
               }
               {
                 presaleState === 4 || presaleState === 5 ? (
-                  <button type="button" className={isFinalizeLoad ? "btn-disabled" : "btn-accent"} disabled={isFinalizeLoad} onClick={handleWithdraw}>
+                  <button type="button" className='btn btn-outline-primary' disabled={isFinalizeLoad} onClick={handleWithdraw}>
                     Withdraw canceled tokens
                   </button>
                 ) : (
                   isFinalized === true ? (
-                  <button type="button" className="btn-accent" onClick={handleCancel}>Cancel Pool</button>
+                  <button type="button" className="btn btn-outline-primary" onClick={handleCancel}>Cancel Pool</button>
                   ) : (<></>)
                 )
               }
             </div>
-            <p className="small-text-sz mt-1 text-blue-color">To Finalize presale, you have to exclude token transfer fee for presale contract.</p>
+            <p className="small-text-sz mt-2 text-blue-color">To Finalize presale, you have to exclude token transfer fee for presale contract.</p>
           </CCardBody>
         </CCard> ) : (<></>)
         }

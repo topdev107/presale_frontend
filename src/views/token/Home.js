@@ -770,7 +770,7 @@ const TokenHome = () => {
               <option value="Baby Token">Baby Token</option>
               <option value="Buyback Baby Token">Buyback Baby Token</option>
             </CFormSelect>
-            <div className="small-text-sz mt-1">Fee: <span className='text-title p-2'>{createfee} {unit}</span></div>
+            <div className="small-text-sz mt-1 light-blue">Fee: <span className='p-2'>{createfee} {unit}</span></div>
           </div>
         </CRow>
         {
@@ -780,7 +780,7 @@ const TokenHome = () => {
               title='Name'
               value={tokenName}
               onChange={onChangeTokenName}
-              errMsg={errMsgTokenName}
+              // errMsg={errMsgTokenName}
               placeholder='Ex: Ethereum'
               desc='' />
           </CRow>
@@ -789,7 +789,7 @@ const TokenHome = () => {
                 title='Symbol'
                 value={tokenSymbol}
                 onChange={onChangeTokenSymbol}
-                errMsg={errMsgTokenSymbol}
+                // errMsg={errMsgTokenSymbol}
                 placeholder='Ex: ETH'
                 desc='' />
           </CRow>
@@ -800,7 +800,7 @@ const TokenHome = () => {
                   title='Decimals'
                   value={tokenDecimal}
                   onChange={onChangeTokenDecimal}
-                  errMsg={errMsgTokenDecimal}
+                  // errMsg={errMsgTokenDecimal}
                   desc=''
                   needInt />
               </CRow>
@@ -813,7 +813,7 @@ const TokenHome = () => {
               title='TotalSupply'
               value={tokenTotalSupply}
               onChange={onChangeTokenTotalSupply}
-              errMsg={errMsgTokenTotalSupply}
+              // errMsg={errMsgTokenTotalSupply}
               desc=''
               needInt />
           </CRow>
@@ -1080,9 +1080,9 @@ const TokenHome = () => {
                       style={{marginRight: '5px', marginTop: '2px'}}
                     /> ) : (<></>)
                 }
-                Create Token
+                + Create Token
               </button> :
-              <button type="button" className="btn btn-primary" disabled>Create Token</button>
+              <button type="button" className="btn btn-primary" disabled>+ Create Token</button>
           }
         </div>
       </CCol>

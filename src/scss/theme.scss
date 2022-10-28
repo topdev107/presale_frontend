@@ -7,10 +7,19 @@
   $back-color: #1b1b1b;
   $body-color: #141414;
 
-  --cui-accordion-button-bg: #fbbf04;
-  --cui-accordion-button-active-bg: #fbbf04;
-  --cui-accordion-button-color: #151103;
-  --cui-accordion-button-active-color: #151103;
+  --cui-accordion-bg: #1b1b1b;
+  --cui-accordion-button-bg: #1b1b1b;
+  --cui-accordion-button-active-bg: #1b1b1b;
+  --cui-accordion-button-color: white;
+  --cui-accordion-button-active-color: white;
+  --cui-accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+  --cui-accordion-button-active-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+  --cui-hr-color: rgba(255, 255, 255, .3);
+  --cui-link-color: white;
+  --cui-link-hover-color: white;
+  --cui-card-border-color: #262626;
+  --cui-card-color: white;
+  --cui-form-check-radio-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='rgb(251, 191, 4)'/></svg>");
 
   background-color: $body-color;
   color: $secondary-color;
@@ -94,6 +103,7 @@
   }
 
   .form-control,
+  .form-control::placeholder,
   .form-select {
     background-color: $body-color;
     color: rgba(255, 255, 255, .4);
@@ -116,25 +126,63 @@
   }
 
   .form-check-input:checked {
-    background-color: $active-color;
+    background-color: transparent;
+    border-color: $active-color;
+  }
+
+  .form-check-input {
+    background-color: transparent;
     border-color: $active-color;
   }
 
   .alert-yellow {
-    --cui-alert-color: #151103;
-    --cui-alert-bg: #FBBF04;
-    --cui-alert-border-color: none;
-    --cui-alert-link-color: #BCBBB9;
+    --cui-alert-color: white;
+    --cui-alert-bg: #141414;
+    --cui-alert-border-color: #262626;
+    --cui-alert-link-color: white;
+  }
+
+  .accordion-button {
+    border-bottom: 1px solid #262626;
   }
 
   .accordion-body {
-    background-color: $body-color;    
+    background-color: $back-color;    
   }
 
   .table th,
   .table td{
-    color: $secondary-color !important;
+    color: $primary-color !important;
+    border-bottom-color: #262626;
   }
 
+  .card {
+    background-color: $back-color;
+  }
 
+  .card .card-header {
+    color: white;
+  }
+
+  .badge {
+    background-color: #26231A;
+    color: #a4a4a4;
+  }
+
+  .progress {
+    background-color: #2d2b2b;
+  }
+
+  .row-between {
+    border-bottom: 1px solid #262626;
+  }
+
+  .light-blue {
+    color: #3298DC;
+  }
+
+  .timer div {
+    background: #141414;
+    border: 1px solid #262626;
+  }
 }

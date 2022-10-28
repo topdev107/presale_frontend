@@ -279,12 +279,12 @@ const AddAdditionalInfo = () => {
                       title='LogoURL'
                       value={logoURL}
                       onChange={onChangeLogoURL}
-                      errMsg={errMsgLogoURL}
+                      // errMsg={errMsgLogoURL}
                       icon={faImage}
                       required
                       placeholder='Ex:https://...'
                       desc='URL must end with a supported image extension png, jpg, jpeg or gif. You can upload your image at'
-                      extra={<p className="small-text-sz text-accent-color text-link-accent" onClick={handleImageUploadLink}>https://upload.pinksale.finance/</p>}
+                      extra={<p className="small-text-sz light-blue" onClick={handleImageUploadLink}>https://upload.pinksale.finance/</p>}
                     />
                   </CCol>
                   <CCol className='col-md-6'>
@@ -295,7 +295,7 @@ const AddAdditionalInfo = () => {
                       placeholder='Ex:https://...'
                       icon={faGlobe}
                       onChange={onChangeWebsite}
-                      errMsg={errMsgWebsite}
+                      // errMsg={errMsgWebsite}
                     />
                   </CCol>
                 </CRow>

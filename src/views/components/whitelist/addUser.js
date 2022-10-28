@@ -61,7 +61,7 @@ export const AddUser = (props) => {
   }
   return (
     <>
-    <button type="button" className="btn-accent" style={{ width: '100%'}} onClick={() => setVisible(!visible)}>Add users to whitelist</button>
+    <button type="button" className="btn btn-primary" style={{ width: '100%'}} onClick={() => setVisible(!visible)}>Add users to whitelist</button>
     <CModal style={{backgroundColor: '#f5f8f8'}} scrollable visible={visible} onClose={() => setVisible(false)}>
       <CModalHeader>
         <CModalTitle>Add users to whitelist</CModalTitle>

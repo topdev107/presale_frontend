@@ -82,82 +82,70 @@ export const FairCardDetail = (props) => {
     
   return (
       <CCol className="col-lg-4" style={{marginBottom: '7px'}}>
-        <CCard 
-          color='#242525'
-          textColor='white'
-        >
+        <CCard className='mb-4'>
           <CCardBody>
             <CRow>
               <CCol>
                 <div>
-                <CCardImage orientation="top" src={props.img} width={50} height={50}/>
+                <CCardImage src={props.img} width={50} height={50}/>
                 </div>
               </CCol>
               <CCol className="d-md-flex justify-content-md-end text-white-color text-right">
                 <div>
                 {
-                  badgestate === 'Ended' ?
-                    <CBadge color='danger'>{badgestate}</CBadge>
-                    : badgestate === 'Upcoming' ?
-                    <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
-                    : badgestate === 'In progress' ?
-                    <CBadge color='success'>Sale Live</CBadge>
-                    : badgestate === 'Canceled' ?
-                      <CBadge color='light'>Canceled</CBadge>
-                    : <></>
+                    badgestate && <CBadge>{badgestate}</CBadge>
                 }
                 </div>
               </CCol>
             </CRow>
             {/* <CCardTitle>{props.tokenName}</CCardTitle> */}
-            <CCardText>
-              <CRow>
+            <CCardText className='medium-text-sz'>
+              <CRow className='py-4'>
                 <CCol>
-                  <p className='font-bold text-white-color'>
+                  <h6 className='text-title my-0'>
                     {props.name}
-                    <p className='font-bold text-grey-color'>Fair Launch</p>
-                  </p>
+                  </h6>
+                  <p className='my-0'>Fair Launch</p>
                 </CCol>
               </CRow>
               <CRow>
                 <CCol>
-                  <p className='font-bold text-white-color'>
-                    Soft Cap:
-                    <p>{props.softCap} {props.basicSymbol}</p>
-                  </p>            
+                  <p className='text-white-color my-0'>Soft Cap:</p>            
+                  <h6 className='danger'>{props.softCap} {props.basicSymbol}</h6>
                 </CCol>
               </CRow>
               <CRow>
                 <CCol>
-                  <div className='font-bold text-white-color'>
+                  <p className='text-title'>
                     Progress ({progress}%)
-                    <CProgress className="mb-3">
-                      <CProgressBar color="warning" value={+progress}/>
-                    </CProgress>
-                    <p>{currentState} {props.basicSymbol} raised</p>
-                  </div>
+                  </p>
+                  <CProgress className="my-2">
+                    <CProgressBar color="warning" value={+progress}/>
+                  </CProgress>
+                  <p className='my-0'>{currentState} {props.basicSymbol} raised</p>
                 </CCol>
               </CRow>
               <RowBetween
-                childStart={<p>Liquidity %:</p>}
-                childEnd={<p className='text-yellow-color'>{props.liquidity}%</p>}
+                childStart={<p className='my-1'>Liquidity %:</p>}
+                childEnd={<p className='my-1'>{props.liquidity}%</p>}
               />
               <RowBetween
                 childStart={<p>Lockup Time:</p>}
-                childEnd={<p className='text-yellow-color'>{props.lockup} minutes</p>}
+                childEnd={<p>{props.lockup} minutes</p>}
               />
+              <hr/>
               {
                 props.list == 1 ?
                   <RowBetween
                     lanchpadList
                     childStart={<p></p>}
                     childMiddle={<p></p>}
-                    childEnd={<button type="button" className='btn-accent' onClick={handleClick}>View Pool</button>}
+                    childEnd={<button type="button" className='btn btn-primary' style={{minWidth: 'auto', padding: '6px 16px', borderRadius: '16px'}} onClick={handleClick}>View Pool</button>}
                   /> :
                   <RowBetween
                     childStart={<p></p>}
                     childMiddle={<p></p>}
-                    childEnd={<button type="button" className='btn-accent' onClick={handleClick}>View Pool</button>}
+                    childEnd={<button type="button" className='btn btn-primary' style={{minWidth: 'auto', padding: '6px 16px', borderRadius: '16px'}} onClick={handleClick}>View Pool</button>}
                   />
               }
               
@@ -219,10 +207,7 @@ export const NormalCardDetail = (props) => {
 
   return (
       <CCol className="col-lg-4" style={{marginBottom: '7px'}}>
-        <CCard
-          color='#242525'
-          textColor='white'
-        >
+        <CCard className='mb-4'>
           <CCardBody>
             <CRow>
               <CCol>
@@ -233,71 +218,66 @@ export const NormalCardDetail = (props) => {
               <CCol className="d-md-flex justify-content-md-end text-white-color text-right">
                 <div>
                 {
-                  badgestate === 'Ended' ?
-                    <CBadge color='danger'>{badgestate}</CBadge>
-                    : badgestate === 'Upcoming' ?
-                    <CBadge color='warning' style={{textColor: 'white'}}>Upcoming</CBadge>
-                    : badgestate === 'In progress' ?
-                    <CBadge color='success'>Sale Live</CBadge>
-                    : badgestate === 'Canceled' ? 
-                      <CBadge color='light'>Canceled</CBadge>
-                    : <></>
+                   badgestate && <CBadge>{badgestate}</CBadge>
                 }
                 </div>
               </CCol>
             </CRow>
             {/* <CCardTitle>TestToken</CCardTitle> */}
-            <CCardText>
-              <CRow>
+            <CCardText className='medium-text-sz'>
+              <CRow className='py-4'>
                 <CCol>
-                  <p className='font-bold text-white-color'>
+                  <h6 className='text-title my-0'>
                     {props.name}
-                    <p>1 {props.basicSymbol} = {props.perrate} {props.symbol}</p>
-                  </p>
+                  </h6>
+                  <p className='my-0'>1 {props.basicSymbol} = {props.perrate} {props.symbol}</p>
                 </CCol>
               </CRow>
               <CRow>
                 <CCol>
-                  <p className='font-bold text-white-color'>
-                    Soft/Hard Cap:
-                    <p className='font-bold text-accent-color'>{props.softCap} {props.basicSymbol} - {props.hardCap} {props.basicSymbol}</p>
-                  </p>
+                  <p className='text-white-color my-0'>Soft/Hard Cap:</p>
+                  <h6 className='danger'>{props.softCap} {props.basicSymbol} - {props.hardCap} {props.basicSymbol}</h6>
                 </CCol>
               </CRow>
               <CRow>
                 <CCol>
-                  <p className='font-bold text-white-color'>
+                  <p className='text-title'>
                     Progress ({progress}%)
-                    <CProgress className="mb-3">
-                      <CProgressBar color="warning" value={+progress}/>
-                    </CProgress>
-                    <CRow>
-                    <CCol className='xs-2 text_align_left'>{props.softCap} {props.basicSymbol} </CCol>
-                    <CCol className='xs-2 text_align_right'>{props.hardCap} {props.basicSymbol} </CCol>
-                    </CRow>
                   </p>
+                  <CProgress className="my-2">
+                    <CProgressBar color="warning" value={+progress}/>
+                  </CProgress>
+                  <CRow>
+                    <CCol className='xs-2' style={{fontWeight: 300}}>{props.softCap} {props.basicSymbol} </CCol>
+                    <CCol className='xs-2 text-right' style={{fontWeight: 300}}>{props.hardCap} {props.basicSymbol} </CCol>
+                  </CRow>
                 </CCol>
               </CRow>
               <RowBetween
-                childStart={<p>Liquidity %:</p>}
-                childEnd={<p className='text-yellow-color'>{props.liquidity}%</p>}
+                noBorder={true}
+                childStart={<p className='my-1'>Liquidity %:</p>}
+                childEnd={<p className='my-1'>{props.liquidity}%</p>}
               />
               <RowBetween
+                noBorder={true}
                 childStart={<p>Lockup Time:</p>}
-                childEnd={<p className='text-yellow-color'>{props.lockup} minutes</p>}
+                childEnd={<p>{props.lockup} minutes</p>}
               />
+              <hr/>
               {
                 props.list == 1 ?
                   <RowBetween
+                    noBorder={true}
                     lanchpadList
                     childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
                     childMiddle={<p></p>}
-                    childEnd={<button type='button' className="width-100 btn-accent" shape="rounded-2" onClick={handleClick}>View Pool</button>}
+                    childEnd={<button type='button' className="btn btn-primary" style={{minWidth: 'auto', padding: '6px 16px', borderRadius: '16px'}} onClick={handleClick}>View</button>}
                   /> :
                   <RowBetween
+                    noBorder={true}
                     childStart={<p>{/*<p>Sales Starts In: {props.remain}</p>*/}</p>}
                     childMiddle={<p></p>}
-                    childEnd={<button type="button" className='btn-accent' onClick={handleClick}>View Pool</button>}
+                    childEnd={<button type="button" className='btn btn-primary' style={{minWidth: 'auto', padding: '6px 16px', borderRadius: '16px'}} onClick={handleClick}>View</button>}
                   />
               }
             </CCardText>

@@ -313,7 +313,7 @@ const DefiFairLaunchInfo = () => {
                 title='Total selling amount'
                 value={total_selling_amount}
                 onChange={onChangeTotalSellingAmount}
-                errMsg={errMsgTotalSellingAmount}
+                // errMsg={errMsgTotalSellingAmount}
               />
             </CRow>
             <div className="mt-3">
@@ -322,7 +322,7 @@ const DefiFairLaunchInfo = () => {
                   title={`SoftCap(${basicSymbol})`}
                   value={softcap}
                   onChange={onChangeSoftCap}
-                  errMsg={errMsgSoftCap}
+                  // errMsg={errMsgSoftCap}
                 />
               </CRow>
             </div>
@@ -344,8 +344,8 @@ const DefiFairLaunchInfo = () => {
                   desc=''
                   needInt
                 />
-                <p className="small-text-sz mt-1 mb-0 text-blue-color">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
-                <p className="small-text-sz mt-0 text-blue-color">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
+                <p className="small-text-sz mt-1 mb-0 light-blue">Enter the percentage of raised funds that should be allocated to Liquidity on (Min 51%, Max 100%)</p>
+                <p className="small-text-sz mt-0 light-blue">If I spend 1 {basicSymbol} on how many tokens will I receive? Usually this amount is lower than presale rate to allow for a higher listing price on</p>
               </CRow>
             </div>
             <div className='mt-2'>
@@ -404,7 +404,7 @@ const DefiFairLaunchInfo = () => {
                             title='Total team vesting tokens'
                             value={total_team_vesting}
                             onChange={onChangeTotalTeamVestingTokens}
-                            errMsg={errMsgTotalTeamVesting}
+                            // errMsg={errMsgTotalTeamVesting}
                             desc=''
                             needInt
                           />
@@ -414,7 +414,7 @@ const DefiFairLaunchInfo = () => {
                             title='First token release after listing (minutes)'
                             value={first_token_release_time}
                             onChange={onChangeTFirstReleaseTime}
-                            errMsg={errMsgFirstTokenReleaseTime}
+                            // errMsg={errMsgFirstTokenReleaseTime}
                             desc=''
                             needInt
                           />
@@ -426,7 +426,7 @@ const DefiFairLaunchInfo = () => {
                         title='First token release (percent)'
                         value={first_release_percent}
                         onChange={onChangeTFirstReleasePercent}
-                        errMsg={errMsgFirstReleasePercent}
+                        // errMsg={errMsgFirstReleasePercent}
                         desc=''
                         needInt
                       />
@@ -438,7 +438,7 @@ const DefiFairLaunchInfo = () => {
                             title='Vesting period each cycle (minutes)'
                             value={vesting_period}
                             onChange={onChangeTVestingPeriod}
-                            errMsg={errMsgVestingPeriod}
+                            // errMsg={errMsgVestingPeriod}
                             desc=''
                             needInt
                           />
@@ -448,7 +448,7 @@ const DefiFairLaunchInfo = () => {
                             title='Team token release each cycle (percent)'
                             value={each_release_percent}
                             onChange={onChangeTEachReleasePercent}
-                            errMsg={errMsgEachReleasePercent}
+                            // errMsg={errMsgEachReleasePercent}
                             desc=''
                             needInt
                           />
@@ -465,7 +465,7 @@ const DefiFairLaunchInfo = () => {
                 <p className='danger' style={{ textAlign: 'center' }}>Not enough balance in your wallet. Need 31.396 FLASH to create launchpad. (Your balance: 0 FLASH)</p>
               </div> */}
               <div className='mt-5'>
-                <p className='danger' style={{ textAlign: 'center' }}>Need {needAmount} {tokenSymbol} to create launchpad.</p>
+                <p className='light-blue' style={{ textAlign: 'center' }}>Need {needAmount} {tokenSymbol} to create launchpad.</p>
               </div>
 
               <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">

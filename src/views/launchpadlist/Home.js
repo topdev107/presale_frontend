@@ -5,7 +5,7 @@ import {
   CAlert,
   CNav, CNavLink, CNavItem, CTabContent, CTabPane,
   CCardImage, CCardTitle, CCardText, CButton, CBadge,
-  CProgressBar, CProgress,
+  CProgressBar, CProgress,  
 } from '@coreui/react'
 import { CSpinner } from '@coreui/react'
 
@@ -104,127 +104,64 @@ const LaunchpadList = () => {
           <CSpinner className="loading danger" />
         ) : (
       <CCol xs={12}>
-        <CCard>
-          <CCardBody>
-            <CNav variant="tabs" role="tablist">
-              <CNavItem >
-                <CNavLink
-                  href="javascript:void(0);"
-                  active={activeKey === 1}
-                  onClick={() => setActiveKey(1)}
-                  className="text-grey-color"
-                >
-                  All Pads
-                </CNavLink>
-              </CNavItem>
-              <CNavItem >
-                <CNavLink
-                  href="javascript:void(0);"
-                  active={activeKey === 2}
-                  onClick={() => setActiveKey(2)}
-                  className="text-grey-color"
-                >
-                  My Pads
-                </CNavLink>
-              </CNavItem>
-            </CNav>
-            <br/>
-            <CTabContent>
-              <CTabPane role="tabpanel" aria-labelledby="all-tab" visible={activeKey === 1}>  
-                {/* <CRow>
-                  <CCol xs={10}></CCol>
-                  <CCol xs={2} >
-                    <CFormInput type="number" size="sm" placeholder="page input" value={currentPage} aria-label="sm input example" onChange={handlePage}/>
-                  </CCol>
-                </CRow> */}
-                <CRow className="display-block">
-                {
-                  tabledata.length === 0 ? 
-                  (
-                    <div className='text-red-color'>There are no launchpad or fairlaunchpad</div>
-                  ) : (
-                  tabledata.map((data) => {
-                    return (data.presaletype === true ?
-                    <FairCardDetail
-                      list={1}
-                      xs={4}
-                      id = {data._id}
-                      address = {data.presale_addr}
-                      img = {data.logoURL}
-                      name = {data.token_name}
-                      softCap = {data.softcap}
-                      liquidity = {data.liquidityPercent}
-                      lockup = {data.lockupTime}
-                      basicSymbol = {`${unit}`}
-                    /> : 
-                    <NormalCardDetail 
-                      list={1}
-                      xs={4}
-                      id = {data._id}
-                      address = {data.presale_addr}
-                      img = {data.logoURL}
-                      name = {data.token_name}
-                      symbol = {data.token_symbol}
-                      perrate = {data.token_presale_rate}
-                      softCap = {data.softcap}
-                      hardCap = {data.hardcap}
-                      liquidity = {data.liquidityPercent}
-                      lockup = {data.lockupTime}
-                      basicSymbol = {`${unit}`}
-                    />)
-                  })
-                  )
-                }
-                </CRow>
-              </CTabPane>
-              <CTabPane role="tabpanel" aria-labelledby="mine-tab" visible={activeKey === 2}>
-                {/* <CRow>
-                <CCol xs={10}></CCol>
-                  <CCol xs={2} >
-                    <CFormInput type="number" size="sm" placeholder="page input" value={myCurrentPage} aria-label="sm input example" onChange={handleMyPage}/>
-                  </CCol>
-                </CRow> */}
-                <CRow>
-                {
-                  tabledata.length === 0 ? 
-                  (
-                    <div className='text-red-color'>There are no your launchpad or fairlaunchpad</div>
-                  ) : (
-                  myTableData.map((data) => {
-                    return (data.presaletype === true ?
-                    <FairCardDetail
-                      list={1}
-                      xs={4}
-                      id = {data._id}
-                      address = {data.presale_addr}
-                      img = {data.logoURL}
-                      name = {data.token_name}
-                      softCap = {data.softcap}
-                      liquidity = {data.liquidityPercent}
-                      lockup = {data.lockupTime}
-                    /> : 
-                    <NormalCardDetail 
-                      list={1}
-                      xs={4}
-                      id = {data._id}
-                      address = {data.presale_addr}
-                      img = {data.logoURL}
-                      name = {data.token_name}
-                      symbol = {data.token_symbol}
-                      perrate = {data.token_presale_rate}
-                      softCap = {data.softcap}
-                      hardCap = {data.hardcap}
-                      liquidity = {data.liquidityPercent}
-                      lockup = {data.lockupTime}
-                    />)
-                  })
-                  )
-                }
-                </CRow>                
-              </CTabPane>
-            </CTabContent>
-          </CCardBody>
-        </CCard>
+        <CRow className='mb-4'>
+          <CCol>
+            <p className='medium-text-sz my-2'>&nbsp;</p>
+            <CFormInput type="text" className='input-highlighted' style={{padding: '6px 16px'}} placeholder="Enter token name or token symbol" />
+          </CCol>
+          <CCol xs={2}>
+            <p className='medium-text-sz my-2'>Filter By</p>
+            <CFormSelect>
+              <option value="All Status">All Status</option>
+            </CFormSelect>
+          </CCol>
+          <CCol xs={2}>
+            <p className='medium-text-sz my-2'>Sort By</p>
+            <CFormSelect>
+              <option value="No Filter">No Filter</option>
+            </CFormSelect>
+          </CCol>
+
+        </CRow>
+        <CRow className="display-block">
+        {
+          tabledata.length === 0 ? 
+          (
+            <div className='danger text-center mt-4'>There are no launchpad or fairlaunchpad</div>
+          ) : (
+          tabledata.map((data) => {
+            return (data.presaletype === true ?
+            <FairCardDetail
+              list={1}
+              xs={4}
+              id = {data._id}
+              address = {data.presale_addr}
+              img = {data.logoURL}
+              name = {data.token_name}
+              softCap = {data.softcap}
+              liquidity = {data.liquidityPercent}
+              lockup = {data.lockupTime}
+              basicSymbol = {`${unit}`}
+            /> : 
+            <NormalCardDetail 
+              list={1}
+              xs={4}
+              id = {data._id}
+              address = {data.presale_addr}
+              img = {data.logoURL}
+              name = {data.token_name}
+              symbol = {data.token_symbol}
+              perrate = {data.token_presale_rate}
+              softCap = {data.softcap}
+              hardCap = {data.hardcap}
+              liquidity = {data.liquidityPercent}
+              lockup = {data.lockupTime}
+              basicSymbol = {`${unit}`}
+            />)
+          })
+          )
+        }
+        </CRow>
       </CCol>
     )}
     </CRow>

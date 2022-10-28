@@ -207,6 +207,7 @@ const Home = () => {
           </CCol>
         </CRow>
         <CRow className="mt-1 p-4 panel">
+          <div>
             <CRow>
               {/* <p className="danger small-text-sz mb-0">(*) is required field.</p> */}
               <CCol className='pt-2'>
@@ -222,7 +223,7 @@ const Home = () => {
               {
                 isTokenValid ? (
                   <div>
-                    <CFormInput type="text" id="tokenAddress" placeholder="Ex: 0x3d..." style={{border:0, fontSize:14, padding:8}} value={tokenAddress} onChange={onChange} />
+                    <CFormInput type="text" id="tokenAddress" placeholder="Ex: 0x3d..." style={{border:0, fontSize:14, padding:20}} value={tokenAddress} onChange={onChange} />
                   </div>
                 ) : (
                   <div>
@@ -231,7 +232,7 @@ const Home = () => {
                 )
               }
               <div className="col small-text-sz mt-3">
-                Create pool fee: <span className='text-title p-2'>{createFee}{unit}</span>
+                Create pool fee: <span className='text-title p-2'>{createFee} {unit}</span>
               </div>
               
               <div className="col small-text-sz mt-3 text-right">
@@ -246,6 +247,7 @@ const Home = () => {
                 </div>
               }
             </CRow>
+          </div>
         </CRow>
         { isTokenValid && 
           <CRow className="mt-1 p-4 panel">

@@ -61,7 +61,7 @@ export const RemoveUser = (props) => {
   }
   return (
     <>
-    <button type="button" className="btn-accent" style={{ width: '100%'}} onClick={() => setVisible(!visible)}>Remove users from whitelist</button>
+    <button type="button" className="btn btn-outline-primary" style={{ width: '100%'}} onClick={() => setVisible(!visible)}>Remove users from whitelist</button>
     <CModal style={{backgroundColor: '#f5f8f8'}} scrollable visible={visible} onClose={() => setVisible(false)}>
       <CModalHeader>
         <CModalTitle>Remove users from whitelist</CModalTitle>

@@ -219,11 +219,11 @@ const FairHome = () => {
               {
                 isTokenValid ? (
                   <div>
-                    <CFormInput type="text" id="tokenAddress" placeholder="Ex: 0x3d..." style={{border:0, fontSize:14, padding:8}} value={tokenAddress} onChange={onChange} />
+                    <CFormInput type="text" id="tokenAddress" placeholder="Ex: 0x3d..." style={{border:0, fontSize:14, padding:20}} value={tokenAddress} onChange={onChange} />
                   </div>
                 ) : (
                   <div>
-                    <CFormInput type="text" id="tokenAddress" className='input-highlighted' style={{border:0, fontSize:14, padding:8}} placeholder="Ex: 0x3d..." value={tokenAddress} onChange={onChange} />
+                    <CFormInput type="text" id="tokenAddress" className='input-highlighted' style={{border:0, fontSize:14, padding:20}} placeholder="Ex: 0x3d..." value={tokenAddress} onChange={onChange} />
                   </div>
                 )
               }
