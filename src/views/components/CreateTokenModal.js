@@ -748,20 +748,20 @@ export const CreateTokenModal = (props) => {
             <CRow>
               <div className="danger small-text-sz mb-0 text-red-color">(*) is required field.</div>
               <CCol>
-                <div className='font-bold text-yellow-color'>Token Type
+                <div className='font-bold mb-2'>Token Type
                   <sup className="danger">*</sup>
                 </div>
               </CCol>
             </CRow>
             <CRow>
               <div>
-                <CFormSelect className="mb-3" onChange={onChangeTokenType}>
+                <CFormSelect className="mb-1" onChange={onChangeTokenType}>
                   <option value="Standard Token">Standard Token</option>
                   <option value="Liquidity Generator Token">Liquidity Generator Token</option>
                   <option value="Baby Token">Baby Token</option>
                   <option value="Buyback Baby Token">Buyback Baby Token</option>
                 </CFormSelect>
-                <div className="small-text-sz mt-1 text-blue-color">Fee: {stressValue / 1e18} {unit}</div>
+                <div className="small-text-sz mt-1 light-blue">Fee: {stressValue / 1e18} {unit}</div>
               </div>
             </CRow>
             {
@@ -771,7 +771,7 @@ export const CreateTokenModal = (props) => {
                   title='Name'
                   value={tokenName}
                   onChange={onChangeTokenName}
-                  errMsg={errMsgTokenName}
+                  // errMsg={errMsgTokenName}
                   placeholder='Ethereum'
                   desc='' />
               </CRow>
@@ -780,7 +780,7 @@ export const CreateTokenModal = (props) => {
                     title='Symbol'
                     value={tokenSymbol}
                     onChange={onChangeTokenSymbol}
-                    errMsg={errMsgTokenSymbol}
+                    // errMsg={errMsgTokenSymbol}
                     placeholder='ETH'
                     desc='' />
               </CRow>
@@ -791,7 +791,7 @@ export const CreateTokenModal = (props) => {
                       title='Decimals'
                       value={tokenDecimal}
                       onChange={onChangeTokenDecimal}
-                      errMsg={errMsgTokenDecimal}
+                      // errMsg={errMsgTokenDecimal}
                       desc=''
                       needInt />
                   </CRow>
@@ -804,7 +804,7 @@ export const CreateTokenModal = (props) => {
                   title='TotalSupply'
                   value={tokenTotalSupply}
                   onChange={onChangeTokenTotalSupply}
-                  errMsg={errMsgTokenTotalSupply}
+                  // errMsg={errMsgTokenTotalSupply}
                   desc=''
                   needInt />
               </CRow>
@@ -880,7 +880,7 @@ export const CreateTokenModal = (props) => {
                     </div>
                   </CRow>
                   <CRow className='mt-3'>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <TextInputComponent 
                         title='Reward token'
                         value={rewardToken}
@@ -900,16 +900,16 @@ export const CreateTokenModal = (props) => {
                         (
                           <div>
                             <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenName</div>
-                              <div className='col-md-6 text_align_right  text-yellow-color'>{rewardTokenName}</div>
+                              <div className='col-md-6 text_align_left danger'>TokenName</div>
+                              <div className='col-md-6 text_align_right  danger'>{rewardTokenName}</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenSymbol</div>
-                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenSymbol}</div>
+                              <div className='col-md-6 text_align_left light-blue'>TokenSymbol</div>
+                              <div className='col-md-6 text_align_right light-blue'>{rewardTokenSymbol}</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenDecimal</div>
-                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenDecimal}</div>
+                              <div className='col-md-6 text_align_left light-blue'>TokenDecimal</div>
+                              <div className='col-md-6 text_align_right light-blue'>{rewardTokenDecimal}</div>
                             </div>
                           </div>
                         ) : (
@@ -917,7 +917,7 @@ export const CreateTokenModal = (props) => {
                         )
                       }
                     </CCol>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <NumberInputComponent 
                         title= {'Minimum token balance for dividends (max:' + +tokenTotalSupply * 0.001 + ')'}
                         value={minimumTokenBalance}
@@ -930,7 +930,7 @@ export const CreateTokenModal = (props) => {
                     </CCol>
                   </CRow>
                   <CRow className='mt-3'>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <NumberInputComponent 
                         title= 'Token reward fee (%)'
                         value={tokenRewardFee}
@@ -939,7 +939,7 @@ export const CreateTokenModal = (props) => {
                         placeholder='0 - 100'
                       />
                     </CCol>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <NumberInputComponent 
                         title= 'Auto add liquidity (%)'
                         value={autoAddLiquidity}
@@ -950,7 +950,7 @@ export const CreateTokenModal = (props) => {
                     </CCol>
                   </CRow>
                   <CRow className='mt-3'>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <NumberInputComponent 
                         title='Marketing fee (%)'
                         value={marketingFee}
@@ -960,7 +960,7 @@ export const CreateTokenModal = (props) => {
                         needInt
                       />
                     </CCol>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <TextInputComponent 
                         title='Marketing wallet'
                         value={marketingWallet}
@@ -987,12 +987,12 @@ export const CreateTokenModal = (props) => {
                       </div>
                     </CRow>
                   <CRow className='mt-3'>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <TextInputComponent 
                         title='Reward token'
                         value={rewardToken}
                         onChange={onChangeRewardToken}
-                        errMsg={errMsgRewardToken}
+                        // errMsg={errMsgRewardToken}
                         placeholder='Ex: 0x...'
                         desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
                       />
@@ -1007,16 +1007,16 @@ export const CreateTokenModal = (props) => {
                         (
                           <div>
                             <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenName</div>
-                              <div className='col-md-6 text_align_right  text-yellow-color'>{rewardTokenName}</div>
+                              <div className='col-md-6 text_align_left danger'>TokenName</div>
+                              <div className='col-md-6 text_align_right danger'>{rewardTokenName}</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenSymbol</div>
-                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenSymbol}</div>
+                              <div className='col-md-6 text_align_left light-blue'>TokenSymbol</div>
+                              <div className='col-md-6 text_align_right light-blue'>{rewardTokenSymbol}</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                              <div className='col-md-6 text_align_left text-yellow-color'>TokenDecimal</div>
-                              <div className='col-md-6 text_align_right text-yellow-color'>{rewardTokenDecimal}</div>
+                              <div className='col-md-6 text_align_left light-blue'>TokenDecimal</div>
+                              <div className='col-md-6 text_align_right light-blue'>{rewardTokenDecimal}</div>
                             </div>
                           </div>
                         ) : (
@@ -1024,7 +1024,7 @@ export const CreateTokenModal = (props) => {
                         )
                       }
                     </CCol>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <NumberInputComponent 
                         title= 'Liquidity Fee (%)'
                         value={liquidityFee}
@@ -1035,7 +1035,7 @@ export const CreateTokenModal = (props) => {
                     </CCol>
                   </CRow>
                   <CRow className='mt-3'>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <NumberInputComponent 
                         title= 'Buyback Fee (%)'
                         value={buyBackFee}
@@ -1044,7 +1044,7 @@ export const CreateTokenModal = (props) => {
                         placeholder='0 - 100'
                       />
                     </CCol>
-                    <CCol className='col-md-6'>
+                    <CCol className='col-12 col-md-6'>
                       <NumberInputComponent 
                         title= 'Reflection Fee (%)'
                         value={reflectionFee}
@@ -1065,7 +1065,7 @@ export const CreateTokenModal = (props) => {
                   {
                     (+liquidityFee + +buyBackFee + +reflectionFee + +marketingFee) > 25 ? 
                     (
-                      <div className='danger small-text-sz mb-0'>Liquidity Fee + Buyback Fee + Reflection Fee + Marketing Fee must be less than 25%</div>
+                      <div className='light-blue small-text-sz mb-0'>Liquidity Fee + Buyback Fee + Reflection Fee + Marketing Fee must be less than 25%</div>
                     ) : (
                       <></>
                     )
@@ -1087,7 +1087,7 @@ export const CreateTokenModal = (props) => {
           {/* <CButton color="secondary" onClick={() => setVisible(false)}>
           Close
           </CButton> */}
-          <button type="button" className='btn-accent' onClick={() => {
+          <button type="button" className='btn btn-outline-primary' onClick={() => {
             clearData() 
             setVisible(false)}}>
             Close
@@ -1095,7 +1095,7 @@ export const CreateTokenModal = (props) => {
           {
             isCreateValid === true ? 
             <>
-              <button type="button" className={isCreateLoad ? 'btn-disabled' : 'btn-accent'} disabled={isCreateLoad} onClick={handleNext} >
+              <button type="button" className='btn btn-primary' disabled={isCreateLoad} onClick={handleNext} >
                 {
                   isCreateLoad === true ? (
                   <Spinner
@@ -1111,7 +1111,7 @@ export const CreateTokenModal = (props) => {
                 Create
               </button>
             </> :
-            <button type="button" className='btn-disabled' disabled >Create</button>
+            <button type="button" className='btn btn-primary' disabled >Create</button>
           }
         </CModalFooter>
       </CModal>

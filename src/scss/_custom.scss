@@ -41,7 +41,8 @@ h6 {
   }
 }
 
-.btn {
+.btn.btn-primary,
+.btn.btn-outline-primary {
   font-size: 14px;
   font-weight: 600;
   border-radius: 10px;

@@ -220,8 +220,10 @@ const AppHeader = () => {
               : <></>
             }
           </button> */}
-          <button type="button" className="btn btn-outline-primary header-button" onClick={() => setModalVisible(!modalVisible)} >
+          <button type="button" className="btn btn-outline-primary header-button d-flex gap-2 align-items-center py-0" onClick={() => setModalVisible(!modalVisible)} >
             <CIcon icon={headerNet} customClassName='d-md-none' width={25}/>
+            <img src={networkId.indexOf('BSC')!=-1 ? 'https://flash-launch.com/logo_BNB.png' : 'https://flash-launch.com/logo_CRON.svg'} className='d-none d-md-block' width={networkId.indexOf('BSC')!=-1 ? 30 : 25}/>
+            {/* <CIcon icon="https://flash-launch.com/logo_BNB.png" customClassName='d-none d-md-block' width={25}/>     */}
             <span className='d-none d-md-block'>{networkId}</span>
           </button>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
@@ -231,14 +233,14 @@ const AppHeader = () => {
               <CModalBody>
                 <div className='text-red-color'> MAINNET</div>
                 <CRow xs={12} className="display-block">
-                  <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton color="accent" onClick={() => changeNetwork(0)}>  
+                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                    <CButton color="outline-primary" onClick={() => changeNetwork(0)}>  
                       <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
-                  <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton  color="accent" onClick={() => changeNetwork(1)}>
+                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                    <CButton  color="outline-primary" onClick={() => changeNetwork(1)}>
                       <CCardImage orientation="top" src="https://flash-launch.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>
@@ -247,14 +249,14 @@ const AppHeader = () => {
                 <br/>
                 <div className='text-red-color'>TESTNET</div>
                 <CRow xs={12} className="display-block">
-                  <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton color="accent" onClick={() => changeNetwork(2)}>
+                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                    <CButton color="outline-primary" onClick={() => changeNetwork(2)}>
                       <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
                       BNB Smart Chain
                     </CButton>
                   </CCol>
-                  <CCol xs={6} className="d-grid width-100 mt-3">
-                    <CButton  color="accent" onClick={() => changeNetwork(3)}>
+                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                    <CButton  color="outline-primary" onClick={() => changeNetwork(3)}>
                       <CCardImage orientation="top" src="https://flash-launch.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
                       Cronos
                     </CButton>

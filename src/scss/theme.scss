@@ -20,6 +20,20 @@
   --cui-card-border-color: #262626;
   --cui-card-color: white;
   --cui-form-check-radio-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='rgb(251, 191, 4)'/></svg>");
+  --cui-modal-content-bg: #1b1b1b;
+  --cui-modal-content-color: white;
+  --cui-modal-header-border-color: #262626;
+  --cui-modal-footer-border-color: #262626;
+  --cui-headings-color: #fbbf04;
+  --cui-btn-close-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
+  --cui-elevation-base-color: black;
+  --cui-dropdown-bg: #1b1b1b;
+  --cui-dropdown-color: white;
+  --cui-dropdown-link-color: white;
+  --cui-dropdown-link-hover-bg: #1b1b1b;
+  --cui-dropdown-link-hover-color: #fbbf04;
+  --cui-dropdown-link-active-bg: #1b1b1b;
+  --cui-dropdown-link-active-color: #fbbf04;
 
   background-color: $body-color;
   color: $secondary-color;

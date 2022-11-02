@@ -23,6 +23,10 @@ const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
 class App extends Component {
 
+  componentDidMount() {
+    document.body.classList.add('dark-theme')
+  }
+
   render() {
     return (
       <Provider store={store}>
