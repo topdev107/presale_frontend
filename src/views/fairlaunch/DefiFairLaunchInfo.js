@@ -277,35 +277,35 @@ const DefiFairLaunchInfo = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026 panel">
-          <CCol className="col-sm-3 p-0">
+        <CRow className="panel">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={1}
               verified
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={2}
               active
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={3}
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={4}
               title='Finish'
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-1 p-4 panel">
+        <CRow className="mt-1 px-2 pt-4 p-md-4 panel">
           <CCol>
             <CRow>
               <p className="danger small-text-sz mb-2">(*) is required field.</p>
@@ -399,7 +399,7 @@ const DefiFairLaunchInfo = () => {
                         Team Vesting doesn&apos;t support rebase tokens.
                       </CAlert>
                       <CRow>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Total team vesting tokens'
                             value={total_team_vesting}
@@ -409,7 +409,7 @@ const DefiFairLaunchInfo = () => {
                             needInt
                           />
                         </CCol>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='First token release after listing (minutes)'
                             value={first_token_release_time}
@@ -433,7 +433,7 @@ const DefiFairLaunchInfo = () => {
                     </div>
                     <div className='mt-3'>
                       <CRow>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Vesting period each cycle (minutes)'
                             value={vesting_period}
@@ -443,7 +443,7 @@ const DefiFairLaunchInfo = () => {
                             needInt
                           />
                         </CCol>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Team token release each cycle (percent)'
                             value={each_release_percent}
@@ -468,14 +468,14 @@ const DefiFairLaunchInfo = () => {
                 <p className='light-blue' style={{ textAlign: 'center' }}>Need {needAmount} {tokenSymbol} to create launchpad.</p>
               </div>
 
-              <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                <button type="button" className="btn btn-outline-primary" onClick={history.goBack}>Privious</button>
+              <div className="my-3 d-grid gap-2 d-md-flex justify-content-md-center">
                 {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
                 {
                   isValid === true ? 
-                  <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button> :
-                  <button type="button" className="btn btn-primary" disabled>Next</button>
+                  <button type="button" className="btn btn-primary order-md-2" onClick={handleNext}>Next</button> :
+                  <button type="button" className="btn btn-primary order-md-2" disabled>Next</button>
                 }
+                <button type="button" className="btn btn-outline-primary order-md-1" onClick={history.goBack}>Privious</button>
                 {/* <button type="button" className="btn-accent">Next</button> */}
               </div>
           </CCol>

@@ -26,7 +26,7 @@ const RowBetween = (props) => {
         )
       }
       <CCol className={`align-self-center pt-3 pb-2 ${props.createLanchpad && "flex-0"}`}>
-        <div className="d-md-flex justify-content-md-end">
+        <div className="d-md-flex justify-content-md-end text-right">
           {props.childEnd}
         </div>
       </CCol>

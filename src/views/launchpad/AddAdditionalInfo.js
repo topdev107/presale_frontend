@@ -240,42 +240,42 @@ const AddAdditionalInfo = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026 panel">
-          <CCol className="col-sm-3 p-0">
+        <CRow className="panel">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={1}
               verified
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={2}
               verified
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={3}
               active
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={4}
               title='Finish'
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-1 p-4 panel">
+        <CRow className="mt-1 px-2 pt-4 p-md-4 panel">
           <CCol>
             <CRow>
               <p className="danger small-text-sz mb-0">(*) is required field.</p>
               <div className='mt-3'>
                 <CRow className="display-block">
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='LogoURL'
                       value={logoURL}
@@ -288,7 +288,7 @@ const AddAdditionalInfo = () => {
                       extra={<p className="small-text-sz light-blue" onClick={handleImageUploadLink}>https://upload.pinksale.finance/</p>}
                     />
                   </CCol>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='Website'
                       value={website}
@@ -304,7 +304,7 @@ const AddAdditionalInfo = () => {
 
               <div className='mt-3'>
                 <CRow className="display-block">
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='Facebook'
                       value={facebook}
@@ -314,7 +314,7 @@ const AddAdditionalInfo = () => {
                       icon={faFacebook}
                     />
                   </CCol>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='Twitter'
                       value={twitter}
@@ -329,7 +329,7 @@ const AddAdditionalInfo = () => {
 
               <div className='mt-3'>
                 <CRow className="display-block">
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='Github'
                       value={github}
@@ -339,7 +339,7 @@ const AddAdditionalInfo = () => {
                       icon={faGithub}
                     />
                   </CCol>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='Telegram'
                       value={telegram}
@@ -354,7 +354,7 @@ const AddAdditionalInfo = () => {
 
               <div className='mt-3'>
                 <CRow className="display-block">
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='Instagram'
                       value={instagram}
@@ -364,7 +364,7 @@ const AddAdditionalInfo = () => {
                       icon={faInstagram}
                     />
                   </CCol>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <UrlInputComponent
                       title='Discord'
                       value={discord}
@@ -397,15 +397,15 @@ const AddAdditionalInfo = () => {
                 />
                 <p className='danger small-text-sz mb-0'>{errMsgDesc}</p>
               </div>
-              <div className="mt-4 d-grid gap-3 d-md-flex justify-content-md-center">
-                <button type="button" className="btn btn-outline-primary" onClick={history.goBack}>Previous</button>
+              <div className="my-4 d-grid gap-2 d-md-flex justify-content-md-center">                
                 {
                   isValid ? (
-                    <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button>
+                    <button type="button" className="btn btn-primary order-md-2" onClick={handleNext}>Next</button>
                   ) : (
-                    <button type="button" className="btn btn-primary" disabled>Next</button>
+                    <button type="button" className="btn btn-primary order-md-2" disabled>Next</button>
                   )
                 }
+                <button type="button" className="btn btn-outline-primary order-md-1" onClick={history.goBack}>Previous</button>
               </div>
             </CRow>
           </CCol>

@@ -226,29 +226,29 @@ const Review = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026 panel">
-          <CCol className="col-sm-3 p-0">
+        <CRow className="panel">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={1}
               verified
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={2}
               verified
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={3}
               verified
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={4}
               active
@@ -256,7 +256,7 @@ const Review = () => {
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-1 p-4 panel text-title">
+        <CRow className="mt-1 px-2 pt-4 p-md-4 panel text-title">
           <CCol>
             <RowBetween
               childStart='Total token'
@@ -461,13 +461,12 @@ const Review = () => {
                 For tokens with burns, rebase or other special transfers please ensure that you have a way to whitelist multiple addresses or turn off the special transfer events (By setting fees to 0 for example for the duration of the presale)
               </div>
             </CAlert>
-            <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
-              <button type="button" className="btn btn-outline-primary" onClick={history.goBack}>Previous</button>
+            <div className="my-3 d-grid gap-3 d-md-flex justify-content-md-center">
               {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
-              <button type="button" className="btn btn-primary" onClick={handleSubmit} disabled={submitStatus}>
+              <button type="button" className="btn btn-primary order-md-2" onClick={handleSubmit} disabled={submitStatus}>
                 {
                   submitStatus == true ? (
-                  <Spinner
+                    <Spinner
                     as="span"
                     animation="border"
                     size="sm"
@@ -475,10 +474,11 @@ const Review = () => {
                     aria-hidden="true"
                     className='normal'
                     style={{marginRight: '5px', marginTop: '2px'}}
-                  /> ) : (<></>)
-                }
+                    /> ) : (<></>)
+                  }
                 Submit</button>
               {/* <button type="button" className="btn-accent">Next</button> */}
+              <button type="button" className="btn btn-outline-primary order-md-1" onClick={history.goBack}>Previous</button>
             </div>
           </CCol>
         </CRow>

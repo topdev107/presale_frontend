@@ -8,7 +8,7 @@ import {
   CDropdownToggle
 } from '@coreui/react'
 import React from 'react'
-
+import { headerCard } from '../../assets/brand/header-card'
 
 const AppHeaderDropdown = (props) => {
 
@@ -17,9 +17,15 @@ const AppHeaderDropdown = (props) => {
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         {
           props.currentAccount === null || props.currentAccount === '' || props.currentAccount === undefined ? (
-            <button className='btn btn-primary' onClick={props.onConnect}>Connect Wallet</button>
+            <button className='btn btn-outline-primary header-button' onClick={props.onConnect}>
+              <CIcon icon={headerCard} customClassName='d-md-none' width={25}/>
+              <span className='d-none d-md-block'>Connect Wallet</span>
+            </button>
           ) : (
-            <button className='btn btn-primary' >{props.currentAccount.substring(0, 11) + '...'}</button>
+            <button className='btn btn-primary header-button' >
+              <CIcon icon={headerCard} customClassName='d-md-none' width={25}/>
+              <span className='d-none d-md-block'>{props.currentAccount.substring(0, 11) + '...'}</span>
+            </button>
           )
         }
       </CDropdownToggle>

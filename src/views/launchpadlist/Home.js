@@ -108,17 +108,17 @@ const LaunchpadList = () => {
         ) : (
       <CCol xs={12}>
         <CRow className='mb-4'>
-          <CCol>
+          <CCol xs={12} md={8}>
             <p className='medium-text-sz my-2'>&nbsp;</p>
             <CFormInput type="text" className='input-highlighted' style={{padding: '6px 16px'}} placeholder="Enter token name or token symbol" />
           </CCol>
-          <CCol xs={2}>
+          <CCol xs={6} md={2}>
             <p className='medium-text-sz my-2'>Filter By</p>
             <CFormSelect>
               <option value="All Status">All Status</option>
             </CFormSelect>
           </CCol>
-          <CCol xs={2}>
+          <CCol xs={6} md={2}>
             <p className='medium-text-sz my-2'>Sort By</p>
             <CFormSelect>
               <option value="No Filter">No Filter</option>
@@ -136,7 +136,7 @@ const LaunchpadList = () => {
             return (data.presaletype === true ?
             <FairCardDetail
               list={1}
-              xs={4}
+              xs={12}
               id = {data._id}
               address = {data.presale_addr}
               img = {data.logoURL}
@@ -148,7 +148,7 @@ const LaunchpadList = () => {
             /> : 
             <NormalCardDetail 
               list={1}
-              xs={4}
+              xs={12}
               id = {data._id}
               address = {data.presale_addr}
               img = {data.logoURL}

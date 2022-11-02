@@ -81,7 +81,7 @@ export const FairCardDetail = (props) => {
   }, [])
     
   return (
-      <CCol className="col-lg-4" style={{marginBottom: '7px'}}>
+      <CCol xs={12} md={4} style={{marginBottom: '7px'}}>
         <CCard className='mb-4'>
           <CCardBody>
             <CRow>
@@ -206,7 +206,7 @@ export const NormalCardDetail = (props) => {
   }, [])
 
   return (
-      <CCol className="col-lg-4" style={{marginBottom: '7px'}}>
+      <CCol xs={12} md={4} style={{marginBottom: '7px'}}>
         <CCard className='mb-4'>
           <CCardBody>
             <CRow>

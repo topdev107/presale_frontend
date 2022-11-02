@@ -16,6 +16,7 @@ import { useWeb3Context } from 'web3-react'
 import { AppHeaderDropdown } from './header/index'
 import { set } from '../state/SideBarState'
 import { setMetamask } from '../state/MetamaskState'
+import { headerNet } from '../assets/brand/header-net'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
@@ -193,10 +194,9 @@ const AppHeader = () => {
 
   return (
     <CHeader position="sticky" className="mb-4">
-      <CContainer fluid>
-        <div className='mobile-toggle'>
+      <CContainer fluid className='justify-content-md-end'>
+        <div className='d-md-none' style={{width: '66%'}}>
           <CHeaderToggler
-            className="ps-1"
             // style={!sidebarShow ? {color: '#222'} : {color: '#222'}}
             // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
             onClick={() => {
@@ -205,11 +205,11 @@ const AppHeader = () => {
           >
             <CIcon className="toggle-icon" icon={cilMenu} size="lg" />
           </CHeaderToggler>
-          <CHeaderBrand className="logo_mobile" to="/" style={{paddingTop: '10px', paddingBottom: '0px', width: '50px'}}>
-            <img src="/assets/logo.png" alt="logo" className='logo' />
+          <CHeaderBrand className="logo_mobile" to="/">
+            <img src="/assets/logo.png" alt="logo" className='logo' style={{width: '70%'}}/>
           </CHeaderBrand>
         </div>
-        <CHeaderNav className="ms-3" style={{justifyContent: 'flex-end'}}>
+        <CHeaderNav className="ms-3">
           {/* <CButton color="warning" shape="rounded-pill" style={{border: 'none', color: '#222', fontWeight: 'bold', backgroundColor: '#ddd'}} onClick={() => setModalVisible(!modalVisible)}>{networkId}</CButton> */}
           {/* <button type="button" className="network_btn_mobile" style={{width: 'auto', paddingTop: '0px'}} onClick={() => setModalVisible(!modalVisible)} >
             {
@@ -220,7 +220,10 @@ const AppHeader = () => {
               : <></>
             }
           </button> */}
-          <button type="button" className="btn btn-outline-primary" style={{width: 'auto'}} onClick={() => setModalVisible(!modalVisible)} >{networkId}</button>
+          <button type="button" className="btn btn-outline-primary header-button" onClick={() => setModalVisible(!modalVisible)} >
+            <CIcon icon={headerNet} customClassName='d-md-none' width={25}/>
+            <span className='d-none d-md-block'>{networkId}</span>
+          </button>
             <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
               <CModalHeader onClose={() => setModalVisible(false)}>
                 <CModalTitle>Choose network</CModalTitle>

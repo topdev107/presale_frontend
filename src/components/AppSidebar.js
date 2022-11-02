@@ -20,9 +20,9 @@ const AppSidebar = () => {
             position="fixed"
             // unfoldable={unfoldable}
             unfoldable={false}
-            visible={true}
+            visible={sidebarShow}
             onVisibleChange={(visible) => {
-                // dispatch({ type: 'set', sidebarShow: visible })
+                dispatch({ type: 'set', sidebarShow: visible })
                 dispatch(set(visible))
             }}
         >
@@ -30,7 +30,6 @@ const AppSidebar = () => {
                 {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
                 <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
                 <img src="/assets/logo.png" alt="logo" className='logo' />
-                <div className='title'>Flashpad</div>                
             </CSidebarBrand>
             <CSidebarNav className="my_csidebarnav">
                 <SimpleBar>

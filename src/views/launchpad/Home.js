@@ -179,34 +179,34 @@ const Home = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <CRow className="hide-less-than-1026 panel">
-          <CCol className="col-sm-3 p-0">
+        <CRow className="panel">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={1}
               active
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={2}
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={3}
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={4}
               title='Finish'
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-1 p-4 panel">
+        <CRow className="mt-1 px-2 pt-4 p-md-4 panel">
           <div>
             <CRow>
               {/* <p className="danger small-text-sz mb-0">(*) is required field.</p> */}
@@ -232,16 +232,16 @@ const Home = () => {
                 )
               }
               <div className="col small-text-sz mt-3">
-                Create pool fee: <span className='text-title p-2'>{createFee} {unit}</span>
+                Create pool fee: <span className='text-title p-md-2'>{createFee} {unit}</span>
               </div>
               
               <div className="col small-text-sz mt-3 text-right">
-                Finalize fee: <span className='text-title p-2'>{finalizeFee}%</span>
+                Finalize fee: <span className='text-title p-md-2'>{finalizeFee}%</span>
               </div>
             </CRow>
             <CRow>
               { !isTokenValid && 
-                <div className="d-grid gap-2 d-md-flex justify-content-between align-items-center" style={{marginTop:64, marginBottom: 12}}>
+                <div className="d-grid gap-4 d-md-flex justify-content-center justify-content-md-between align-items-center" style={{marginTop:64, marginBottom: 12}}>
                   <p className="danger small-text-sz mb-0">{validMessage}</p>
                   <button type="button" className="btn btn-primary disabled">Next</button>
                 </div>

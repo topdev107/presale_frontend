@@ -460,34 +460,34 @@ const DefiLaunchPadInfo = () => {
     <CRow>
       <CCol xs={12}>
         <CRow className="hide-less-than-1026 panel">
-          <CCol className="col-sm-3 p-0">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={1}
               verified
               title='Verify Token'
               desc='Enter the token address and verify' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={2}
               active
               title='DeFi Launchpad Info'
               desc='Enter the launchpad information that you want to raise , that should be enter all details about your presale' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="col-md-3 p-0">
             <WorkflowItem
               stemNumber={3}
               title='Add Additional Info'
               desc='Let people know who you are' />
           </CCol>
-          <CCol className="col-sm-3 p-0">
+          <CCol className="d-none d-md-block col-md-3 p-0">
             <WorkflowItem
               stemNumber={4}
               title='Finish'
               desc='Review your information' />
           </CCol>
         </CRow>
-        <CRow className="mt-1 p-4 panel">
+        <CRow className="mt-1 px-2 pt-4 p-md-4 panel">
           <CCol>
             <CRow>
               <p className="danger small-text-sz mb-2">(*) is required field.</p>
@@ -545,7 +545,7 @@ const DefiLaunchPadInfo = () => {
               </div>
               <div className='mt-3'>
                 <CRow className="display-block">
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent
                       title={`SoftCap(${basicSymbol})`}
                       value={softCap}
@@ -554,7 +554,7 @@ const DefiLaunchPadInfo = () => {
                       desc='Softcap must be &ge; 50% of Hardcap!'
                     />
                   </CCol>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent
                       title={`HardCap(${basicSymbol})`}
                       value={hardCap}
@@ -567,7 +567,7 @@ const DefiLaunchPadInfo = () => {
               </div>
               <div className='mt-3'>
                 <CRow className="display-block">
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent
                       title={`Minimum buy (${basicSymbol})`}
                       value={minBuyBNB}
@@ -576,7 +576,7 @@ const DefiLaunchPadInfo = () => {
                       desc=''
                     />
                   </CCol>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent
                       title={`Maximum buy (${basicSymbol})`}
                       value={maxBuyBNB}
@@ -589,7 +589,7 @@ const DefiLaunchPadInfo = () => {
               </div>
               <div className='mt-3'>
                 <CRow className="display-block">
-                  <CCol>
+                  <CCol className='col-12 col-md-6'>
                     <p className='text-title medium-text-sz mb-2'>Refund type</p>
                     <div>
                       <CFormSelect onChange={onChangeRefundType} value={refundType}>
@@ -598,7 +598,7 @@ const DefiLaunchPadInfo = () => {
                       </CFormSelect>
                     </div>
                   </CCol>
-                  <CCol>
+                  <CCol className='col-12 col-md-6'>
                     <p className='text-title medium-text-sz mb-2'>Router</p>
                     <div>
                       <CFormInput type="text" placeholder="PancakeSwap" value='PancakeSwap' disabled />
@@ -608,7 +608,7 @@ const DefiLaunchPadInfo = () => {
               </div>
               <div className='mt-4'>
                 <CRow className="display-block">
-                  <CCol>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent
                       title='Liquidity (%)'
                       value={liquidity}
@@ -618,7 +618,7 @@ const DefiLaunchPadInfo = () => {
                       needInt
                     />
                   </CCol>
-                  <CCol>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent
                       title='Listing rate'
                       value={listingRate}
@@ -692,7 +692,7 @@ const DefiLaunchPadInfo = () => {
                     </div>
                     <div className='mt-3'>
                       <CRow>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Vesting period each cycle (minutes)'
                             value={cVestingPeriod}
@@ -702,7 +702,7 @@ const DefiLaunchPadInfo = () => {
                             needInt
                           />
                         </CCol>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Presale token release each cycle (percent)'
                             value={cEachReleasePercent}
@@ -735,7 +735,7 @@ const DefiLaunchPadInfo = () => {
                     </CAlert>
                     <div className='mt-3'>
                       <CRow>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Total team vesting tokens'
                             value={totalTeamVestingTokens}
@@ -745,7 +745,7 @@ const DefiLaunchPadInfo = () => {
                             needInt
                           />
                         </CCol>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='First token release after listing (minutes)'
                             value={tFirstReleaseTime}
@@ -769,7 +769,7 @@ const DefiLaunchPadInfo = () => {
                     </div>
                     <div className='mt-3'>
                       <CRow>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Vesting period each cycle (minutes)'
                             value={tVestingPeriod}
@@ -779,7 +779,7 @@ const DefiLaunchPadInfo = () => {
                             needInt
                           />
                         </CCol>
-                        <CCol>
+                        <CCol className='col-12 col-md-6'>
                           <NumberInputComponent
                             title='Team token release each cycle (percent)'
                             value={tEachReleasePercent}
@@ -801,15 +801,15 @@ const DefiLaunchPadInfo = () => {
                 <p className='light-blue' style={{ textAlign: 'center' }}>Need {needToken} {tokenSymbol} to create launchpad.</p>
               </div>
 
-              <div className="my-3 d-grid gap-3 d-md-flex justify-content-md-center">
-                <button type="button" className="btn btn-outline-primary" onClick={history.goBack}>Previous</button>
+              <div className="my-4 d-grid gap-2 d-md-flex justify-content-md-center">
                 {/* <Link to="/" style={{ textDecoration: 'none' }} className="btn-yellow">Back</Link> */}
                 {
                   isValid === true ? 
-                  <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button> :
-                  <button type="button" className="btn btn-primary" disabled>Next</button>
+                  <button type="button" className="btn btn-primary order-md-2" onClick={handleNext}>Next</button> :
+                  <button type="button" className="btn btn-primary order-md-2" disabled>Next</button>
                 }
                 {/* <button type="button" className="btn-accent">Next</button> */}
+                <button type="button" className="btn btn-outline-primary order-md-1" onClick={history.goBack}>Previous</button>
               </div>
             </CRow>
           </CCol>

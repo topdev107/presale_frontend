@@ -753,7 +753,7 @@ const TokenHome = () => {
 
 	return (
     <CRow>
-      <CCol xs={12} className='panel p-4'>
+      <CCol xs={12} className='panel px-3 pt-4 p-md-4'>
         <CRow>
           <div className="danger small-text-sz mb-2">(*) is required field.</div>
           <CCol className='mb-2'>
@@ -833,7 +833,7 @@ const TokenHome = () => {
                   </div>
                 </CRow>
                 <CRow className='mt-3 display-block'>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent 
                       title='Transaction fee to generate yield (%)'
                       value={transfeeYield}
@@ -843,7 +843,7 @@ const TokenHome = () => {
                       needInt 
                     />
                   </CCol>
-                  <CCol className='col-md-6'>
+                  <CCol className='col-12 col-md-6'>
                     <NumberInputComponent 
                       title='Transaction fee to generate liquidity (%)'
                       value={transfeeLiquidity}
@@ -889,7 +889,7 @@ const TokenHome = () => {
                 </div>
               </CRow>
               <CRow className='mt-3'>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <TextInputComponent 
                     title='Reward token'
                     value={rewardToken}
@@ -926,7 +926,7 @@ const TokenHome = () => {
                     )
                   }
                 </CCol>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <NumberInputComponent 
                     title= {'Minimum token balance for dividends (max:' + +tokenTotalSupply * 0.001 + ')'}
                     value={minimumTokenBalance}
@@ -939,7 +939,7 @@ const TokenHome = () => {
                 </CCol>
               </CRow>
               <CRow className='mt-3 display-block'>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <NumberInputComponent 
                     title= 'Token reward fee (%)'
                     value={tokenRewardFee}
@@ -948,7 +948,7 @@ const TokenHome = () => {
                     placeholder='0 - 100'
                   />
                 </CCol>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <NumberInputComponent 
                     title= 'Auto add liquidity (%)'
                     value={autoAddLiquidity}
@@ -959,7 +959,7 @@ const TokenHome = () => {
                 </CCol>
               </CRow>
               <CRow className='mt-3 display-block'>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <NumberInputComponent 
                     title='Marketing fee (%)'
                     value={marketingFee}
@@ -969,7 +969,7 @@ const TokenHome = () => {
                     needInt
                   />
                 </CCol>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <TextInputComponent 
                     title='Marketing wallet'
                     value={marketingWallet}
@@ -996,7 +996,7 @@ const TokenHome = () => {
                   </div>
                 </CRow>
               <CRow className='mt-3'>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <TextInputComponent 
                     title='Reward token'
                     value={rewardToken}
@@ -1006,7 +1006,7 @@ const TokenHome = () => {
                     desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
                   />
                 </CCol>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <NumberInputComponent 
                     title= 'Liquidity Fee (%)'
                     value={liquidityFee}
@@ -1017,7 +1017,7 @@ const TokenHome = () => {
                 </CCol>
               </CRow>
               <CRow className='mt-3 display-block'>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <NumberInputComponent 
                     title= 'Buyback Fee (%)'
                     value={buyBackFee}
@@ -1026,7 +1026,7 @@ const TokenHome = () => {
                     placeholder='0 - 100'
                   />
                 </CCol>
-                <CCol className='col-md-6'>
+                <CCol className='col-12 col-md-6'>
                   <NumberInputComponent 
                     title= 'Reflection Fee (%)'
                     value={reflectionFee}
@@ -1064,7 +1064,7 @@ const TokenHome = () => {
             onChange={onChangeAntiBot} /> */}
           </>
         }
-        <div className="mt-3 d-grid gap-3 d-md-flex justify-content-md-center">
+        <div className="my-3 d-grid gap-3 d-md-flex justify-content-md-center">
           {
             isCreateValid === true ? 
               <button type="button" className="btn btn-primary" disabled={isCreateLoad} onClick={handleNext}>

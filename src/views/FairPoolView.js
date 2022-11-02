@@ -627,20 +627,20 @@ const TotalView = () => {
           ) :
         (
           <>
-      <CCol xs={8} className="width-100">
+      <CCol xs={12} md={8} className="width-100">
         <CCard
           textColor='white'
           style={{borderRadius: 0}}
         >
           <CCardBody >
             <CRow className="show-style">
-              <CCol xs={1}>
+              <CCol xs={2} md={1}>
                 <div className="clearfix">
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
                 </div>
               </CCol>
-              <CCol className='justify-content-md'>
-                <div style={{fontSize: '24px'}}>{tokenName}&nbsp;Fair Launch &nbsp;
+              <CCol xs={6} md={9} className='justify-content-md'>
+                <div className='pool-title'>{tokenName}&nbsp;Fair Launch &nbsp;
                   {
                     showOwnerZone === true ? (
                     <span style={{marginTop: '7px', fontSize:'16px'}}>
@@ -674,7 +674,7 @@ const TotalView = () => {
                   }
                 </div>
               </CCol>
-              <CCol xs={2} className="d-md-flex align-items-center justify-content-md-end">
+              <CCol xs={3} md={2} className="d-md-flex align-items-center justify-content-md-end">
                 <div>
                   {
                     presaleState === 3 || presaleState === 6 ?
@@ -868,7 +868,7 @@ const TotalView = () => {
           </CCard>
         </CCol>
       </CCol>
-      <CCol xs={4} className="width-100">
+      <CCol xs={12} md={4} className="width-100">
         <CCard
           textColor='white'
           style={{borderRadius: 0}}

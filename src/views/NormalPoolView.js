@@ -660,21 +660,21 @@ const TotalView = () => {
             // <p className='white-color-text' style={{textAlign: 'center'}}>Error: please check the correct network or reload this page</p>
           ) : (
           <>
-      <CCol xs={8} className="width-100">
+      <CCol xs={12} md={8} className="width-100">
         <CCard
           textColor='white'
           style={{borderRadius: 0}}
         >
-          <CCardBody >
+          <CCardBody className='p-2'>
             <CRow className="show-style">
-              <CCol xs={1}>
+              <CCol xs={2} md={1}>
                 <div className="clearfix mt-2"> 
                   <CImage align="start" rounded src={logoUrl} width={50} height={50} />
                 </div>
               </CCol>
-              <CCol className='justify-content-md'>
+              <CCol xs={6} md={9} className='justify-content-md'>
                 <div>
-                  <span style={{fontSize: '24px'}}>{tokenName}&nbsp;Presale &nbsp;</span>
+                  <span className='pool-title'>{tokenName}&nbsp;Presale &nbsp;</span>
                   {
                     showOwnerZone === true ? (
                     <span style={{marginTop: '7px', fontSize:'16px'}}>
@@ -708,7 +708,7 @@ const TotalView = () => {
                   }
                 </div>
               </CCol>
-              <CCol xs={2} className="d-md-flex align-items-center justify-content-md-end">
+              <CCol xs={3} md={2} className="d-md-flex align-items-center justify-content-md-end">
                 <div>
                   {/* <CBadge color='light'>Canceled</CBadge> */}
                   {
@@ -921,7 +921,7 @@ const TotalView = () => {
           </CCard>
         </CCol>
       </CCol>
-      <CCol xs={4} className="width-100">
+      <CCol xs={12} md={4} className="width-100">
         <CCard
           textColor='white'
           style={{borderRadius: 0}}
