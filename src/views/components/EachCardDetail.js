@@ -70,7 +70,7 @@ export const FairCardDetail = (props) => {
     if(presaleState == 1) {
       setBadgeState('Upcoming')
     } else if(presaleState == 2) {
-      setBadgeState('In progress')
+      setBadgeState('Inprogress')
     } else if(presaleState == 3 || presaleState == 6) {
       setBadgeState('Ended')
     } else if(presaleState == 4) {
@@ -81,7 +81,9 @@ export const FairCardDetail = (props) => {
   }, [])
     
   return (
-      <CCol xs={12} md={4} style={{marginBottom: '7px'}}>
+    <>
+      { (!props.filter || props.filter?.indexOf(badgestate) != -1) && 
+        <CCol xs={12} md={4} style={{marginBottom: '7px'}}>
         <CCard className='mb-4'>
           <CCardBody>
             <CRow>
@@ -153,7 +155,9 @@ export const FairCardDetail = (props) => {
             </CCardText>
           </CCardBody>
         </CCard>
-      </CCol>
+        </CCol>
+      }
+    </>
   )
 }
 
@@ -195,7 +199,7 @@ export const NormalCardDetail = (props) => {
     if(+presaleState == 1) {
       setBadgeState('Upcoming')
     } else if(+presaleState == 2) {
-      setBadgeState('In progress')
+      setBadgeState('Inprogress')
     } else if(+presaleState == 3 || +presaleState == 6) {
       setBadgeState('Ended')
     } else if(+presaleState == 4) {
@@ -204,8 +208,10 @@ export const NormalCardDetail = (props) => {
       setBadgeState('Canceled')
     }
   }, [])
-
   return (
+    <>
+    {
+      (!props.filter || props.filter.indexOf(badgestate) != -1) &&
       <CCol xs={12} md={4} style={{marginBottom: '7px'}}>
         <CCard className='mb-4'>
           <CCardBody>
@@ -284,5 +290,7 @@ export const NormalCardDetail = (props) => {
           </CCardBody>
         </CCard>
       </CCol>
+    }
+    </>
   )
 }

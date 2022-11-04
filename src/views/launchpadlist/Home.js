@@ -99,6 +99,19 @@ const LaunchpadList = () => {
     setWholeLoading(false)
   },[myCurrentPage, pageCount, currentChain])
 
+  const [txtSearch, setTxtSearch] = useState('');
+  const [filter, setFilter] = useState('');
+  const [sorter, setSorter] = useState('');
+
+  const sortPad = (a, b) => {
+    if ( !sorter ) return false;
+    if ( sorter == 'HardCap' ) return a.hardcap - b.hardcap
+    if ( sorter == 'SoftCap' ) return a.softcap - b.softcap
+    if ( sorter == 'LP' ) return a.liquidityPercent - b.liquidityPercent
+    if ( sorter == 'Starttime' ) return new Date(a.starttime).getTime() - new Date(b.starttime).getTime()
+    if ( sorter == 'Endtime' ) return new Date(a.endtime).getTime() - new Date(b.endtime).getTime()
+  }
+
   return (
     <CRow>
       {
@@ -110,18 +123,30 @@ const LaunchpadList = () => {
         <CRow className='mb-4'>
           <CCol xs={12} md={8}>
             <p className='medium-text-sz my-2'>&nbsp;</p>
-            <CFormInput type="text" className='input-highlighted' style={{padding: '6px 16px'}} placeholder="Enter token name or token symbol" />
+            <CFormInput type="text" className='input-highlighted' style={{padding: '6px 16px'}} placeholder="Enter token name or token symbol" 
+              value={txtSearch} onChange={(e)=>setTxtSearch(e.target.value)}
+            />
           </CCol>
           <CCol xs={6} md={2}>
             <p className='medium-text-sz my-2'>Filter By</p>
-            <CFormSelect>
-              <option value="All Status">All Status</option>
+            <CFormSelect onChange={(e)=>setFilter(e.target.value)}>
+              <option value="">All Status</option>
+              <option value="Upcoming">Upcoming</option>
+              <option value="Inprogress">Inprogress</option>
+              <option value="Ended">Ended</option>
+              <option value="Failed">Failed</option>
+              <option value="Canceled">Canceled</option>
             </CFormSelect>
           </CCol>
           <CCol xs={6} md={2}>
             <p className='medium-text-sz my-2'>Sort By</p>
-            <CFormSelect>
-              <option value="No Filter">No Filter</option>
+            <CFormSelect onChange={(e)=>setSorter(e.target.value)}>
+              <option value="">No Filter</option>
+              <option value="HardCap">Hard Cap</option>
+              <option value="SoftCap">Soft Cap</option>
+              <option value="LP">LP Percent</option>
+              <option value="Starttime">Start time</option>
+              <option value="Endtime">End time</option>
             </CFormSelect>
           </CCol>
 
@@ -132,7 +157,11 @@ const LaunchpadList = () => {
           (
             <div className='danger text-center mt-4'>There are no launchpad or fairlaunchpad</div>
           ) : (
-          tabledata.map((data) => {
+          tabledata.filter(data=>
+            !txtSearch || (data.token_name.toLowerCase().indexOf(txtSearch) != -1 || data.token_symbol.toLowerCase().indexOf(txtSearch) != -1)
+          )
+          .sort((a,b)=>sortPad(a,b))
+          .map((data) => {
             return (data.presaletype === true ?
             <FairCardDetail
               list={1}
@@ -144,6 +173,7 @@ const LaunchpadList = () => {
               softCap = {data.softcap}
               liquidity = {data.liquidityPercent}
               lockup = {data.lockupTime}
+              filter={filter}
               basicSymbol = {`${unit}`}
             /> : 
             <NormalCardDetail 
@@ -159,6 +189,7 @@ const LaunchpadList = () => {
               hardCap = {data.hardcap}
               liquidity = {data.liquidityPercent}
               lockup = {data.lockupTime}
+              filter={filter}
               basicSymbol = {`${unit}`}
             />)
           })
