@@ -124,7 +124,7 @@ const LaunchpadList = () => {
           <CCol xs={12} md={8}>
             <p className='medium-text-sz my-2'>&nbsp;</p>
             <CFormInput type="text" className='input-highlighted' style={{padding: '6px 16px'}} placeholder="Enter token name or token symbol" 
-              value={txtSearch} onChange={(e)=>setTxtSearch(e.target.value)}
+              value={txtSearch} onChange={(e)=>setTxtSearch(e.target.value.toLowerCase())}
             />
           </CCol>
           <CCol xs={6} md={2}>
