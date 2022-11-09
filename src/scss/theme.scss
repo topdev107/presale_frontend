@@ -1,3 +1,225 @@
+@at-root .light-theme {
+  $primary-color: #000;
+  $secondary-color: #333;
+  $third-color: #151103;
+  $active-color: #FBBF04;
+  
+  $back-color: #faf9fa;
+  $body-color: #fff;
+  
+  --cui-accordion-bg: #faf9fa;
+  --cui-accordion-button-bg: #faf9fa;
+  --cui-accordion-button-active-bg: #faf9fa;
+  --cui-accordion-button-color: black;
+  --cui-accordion-button-active-color: black;
+  --cui-accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='black'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+  --cui-accordion-button-active-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='black'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+  --cui-hr-color: rgba(255, 255, 255, .3);
+  --cui-link-color: black;
+  --cui-link-hover-color: black;
+  --cui-card-border-color: #d3d3d3;
+  --cui-card-color: #333;
+  --cui-form-check-radio-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='rgb(251, 191, 4)'/></svg>");
+  --cui-modal-content-bg: #faf9fa;
+  --cui-modal-content-color: black;
+  --cui-modal-header-border-color: #d3d3d3;
+  --cui-modal-footer-border-color: #d3d3d3;
+  --cui-headings-color: #fbbf04;
+  --cui-btn-close-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='black'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
+  --cui-elevation-base-color: black;
+  --cui-dropdown-bg: #faf9fa;
+  --cui-dropdown-color: black;
+  --cui-dropdown-link-color: black;
+  --cui-dropdown-link-hover-bg: #faf9fa;
+  --cui-dropdown-link-hover-color: #fbbf04;
+  --cui-dropdown-link-active-bg: #faf9fa;
+  --cui-dropdown-link-active-color: #fbbf04;
+  --cui-btn-bg: #e3e3e3;
+
+  background-color: $body-color;
+  color: $secondary-color;
+  
+  .header {
+    background: $back-color;
+    box-shadow: none;
+  }
+  
+  .header-toggler {
+    color: $active-color;
+    border: 1px solid #d3d3d3;
+  }
+  
+  .sidebar, .sidebar-brand {
+    background-color: $back-color;
+    box-shadow: none;
+  }
+  
+  .sidebar-brand .title {
+    color: $primary-color;
+  }
+  .sidebar-nav .nav-link {
+    color: $secondary-color;
+  }
+  
+  .sidebar-nav .nav-link.active {
+    color: $third-color;
+    background-color: $active-color;
+    path {
+      fill: $third-color;
+    }
+  }
+  
+  .btn-outline-primary {
+    border-color: transparent;
+    color: $third-color;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: $active-color;
+    color: $third-color;
+  }
+  .btn-outline-primary:focus {
+    background-color: $active-color;
+    color: $third-color;
+    box-shadow: none;
+  }
+  
+  .btn-primary {
+    background-color: $active-color;
+    color: $third-color;
+  }
+  
+  .btn-primary:hover {
+    background-color: #ffc929;
+  }
+  
+  @media (max-width: 768px) {
+    .btn.header-button {
+      background-color: transparent;
+      border-color: #d3d3d3 !important;
+    }
+  }
+  
+  .panel {
+    background-color: $back-color;
+  }
+  
+  .workflow.active {
+    border-top-color: $active-color;
+  }
+  
+  .workflow.active,
+  .workflow.verified {
+    .step {
+      color: $active-color;
+    }
+    .title {
+      color: $primary-color;
+    }
+  }
+  
+  .text-title {
+    color: $primary-color;
+  }
+  
+  .form-control,
+  .form-control::placeholder,
+  .form-select {
+    background-color: $body-color;
+    color: $secondary-color;
+    font-size: 12px;
+    border-color: #d3d3d3;
+  }
+  
+  .form-control:focus,
+  .form-select:focus,
+  .accordion-button:focus {
+    box-shadow: none;    
+  }
+  
+  .danger {
+    color: $active-color;
+  }
+  
+  .normal {
+    color: $third-color;
+  }
+  
+  .form-check-input:checked {
+    background-color: transparent;
+    border-color: $active-color;
+  }
+  
+  .form-check-input {
+    background-color: transparent;
+    border-color: $active-color;
+  }
+  
+  .alert-yellow {
+    --cui-alert-color: black;
+    --cui-alert-bg: $body-color;
+    --cui-alert-border-color: #d3d3d3;
+    --cui-alert-link-color: black;
+  }
+  
+  .accordion-button {
+    border-bottom: 1px solid #d3d3d3;
+  }
+  
+  .accordion-body {
+    background-color: $back-color;    
+  }
+  
+  .table th,
+  .table td{
+    color: $primary-color !important;
+    border-bottom-color: #d3d3d3;
+  }
+  
+  .card {
+    background-color: $back-color;
+  }
+  
+  .card .card-header {
+    color: black;
+  }
+  
+  .badge {
+    background-color: #e3e3e3;
+    color: $secondary-color;
+  }
+  
+  .progress {
+    background-color: #e3e3e3;
+  }
+  
+  .row-between {
+    border-bottom: 1px solid #d3d3d3;
+  }
+  
+  .light-blue {
+    color: #3298DC;
+  }
+  
+  .timer div {
+    background: $body-color;
+    border: 1px solid #d3d3d3;
+  }
+
+  .theme-switcher div {  
+    border-color: #d3d3d3;
+    fill: black;
+  }
+
+  .theme-switcher .active,
+  .theme-switcher div:hover {
+    fill: #000;
+    background-color: $active-color;
+    border-color: $active-color;
+  }
+
+}
+
 @at-root .dark-theme {
   $primary-color: #ffffff;
   $secondary-color: #BCBBB9;
@@ -204,4 +426,17 @@
     background: #141414;
     border: 1px solid #262626;
   }
+
+  .theme-switcher div {  
+    border-color: #333;
+    fill: white;
+  }
+
+  .theme-switcher .active,
+  .theme-switcher div:hover {
+    fill: #000;
+    background-color: $active-color;
+    border-color: $active-color;
+  }
+
 }

@@ -21,6 +21,7 @@ import { headerNet } from '../assets/brand/header-net'
 const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sideBarState.isSidebarShow)
+  const currentTheme = useSelector((state) => state.themeState.mode);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [networkId, setNetworkId] = useState('BSC MAINNET')
@@ -206,7 +207,7 @@ const AppHeader = () => {
             <CIcon className="toggle-icon" icon={cilMenu} size="lg" />
           </CHeaderToggler>
           <CHeaderBrand className="logo_mobile" to="/">
-            <img src="/assets/logo.png" alt="logo" className='logo' style={{width: '70%'}}/>
+            <img src={`/assets/logo-${currentTheme}.png`} alt="logo" className='logo' style={{width: '70%'}}/>
           </CHeaderBrand>
         </div>
         <CHeaderNav className="ms-3">
@@ -232,7 +233,7 @@ const AppHeader = () => {
               </CModalHeader>
               <CModalBody>
                 <div className='text-red-color'> MAINNET</div>
-                <CRow xs={12} className="display-block">
+                <CRow className="display-block">
                   <CCol xs={12} md={6} className="d-grid width-100 mt-3">
                     <CButton color="outline-primary" onClick={() => changeNetwork(0)}>  
                       <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
@@ -248,7 +249,7 @@ const AppHeader = () => {
                 </CRow>
                 <br/>
                 <div className='text-red-color'>TESTNET</div>
-                <CRow xs={12} className="display-block">
+                <CRow className="display-block">
                   <CCol xs={12} md={6} className="d-grid width-100 mt-3">
                     <CButton color="outline-primary" onClick={() => changeNetwork(2)}>
                       <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;

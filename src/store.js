@@ -5,6 +5,7 @@ import createLaunchPadStateReducer from './state/CreateLaunchPadState'
 import createFairLaunchStateReducer from './state/CreateFairLaunchState'
 import createTokenStateReducer from './state/CreateTokenState'
 import metamaskReducer from './state/MetamaskState'
+import themeReducer from './state/ThemeState'
 
 export default configureStore ({
   reducer: {
@@ -13,6 +14,7 @@ export default configureStore ({
     createFairLaunchState: createFairLaunchStateReducer,
     createTokenState: createTokenStateReducer,
     metamaskState: metamaskReducer,
+    themeState: themeReducer
   },
 })
 

@@ -7,12 +7,14 @@ import 'simplebar/dist/simplebar.min.css'
 import navigation from '../_nav'
 import { AppSidebarNav } from './AppSidebarNav'
 import { set } from '../state/SideBarState'
+import ThemeSwitcher from './ThemeSwitcher'
 
 
 const AppSidebar = () => {
     const dispatch = useDispatch()
     // const unfoldable = useSelector((state) => state.sidebarUnfoldable)
     const sidebarShow = useSelector((state) => state.sideBarState.isSidebarShow)    
+    const currentTheme = useSelector((state) => state.themeState.mode);
 
     return (
         <CSidebar
@@ -29,13 +31,14 @@ const AppSidebar = () => {
             <CSidebarBrand className="my_sidebar_brand my_logo d-none d-md-flex" to="/">
                 {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
                 <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
-                <img src="/assets/logo.png" alt="logo" className='logo' />
+                <img src={`/assets/logo-${currentTheme}.png`} alt="logo" className='logo' />
             </CSidebarBrand>
             <CSidebarNav className="my_csidebarnav">
                 <SimpleBar>
                     <AppSidebarNav items={navigation} />
                 </SimpleBar>
             </CSidebarNav>
+            <ThemeSwitcher />
         </CSidebar>
     )
 }

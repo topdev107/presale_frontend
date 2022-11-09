@@ -101,7 +101,7 @@ export const FairCardDetail = (props) => {
               </CCol>
             </CRow>
             {/* <CCardTitle>{props.tokenName}</CCardTitle> */}
-            <CCardText className='medium-text-sz'>
+            <div className='medium-text-sz'>
               <CRow className='py-4'>
                 <CCol>
                   <h6 className='text-title my-0'>
@@ -128,10 +128,12 @@ export const FairCardDetail = (props) => {
                 </CCol>
               </CRow>
               <RowBetween
+                noBorder={true}
                 childStart={<p className='my-1'>Liquidity %:</p>}
                 childEnd={<p className='my-1'>{props.liquidity}%</p>}
               />
               <RowBetween
+                noBorder={true}
                 childStart={<p>Lockup Time:</p>}
                 childEnd={<p>{props.lockup} minutes</p>}
               />
@@ -139,12 +141,14 @@ export const FairCardDetail = (props) => {
               {
                 props.list == 1 ?
                   <RowBetween
+                    noBorder={true}
                     lanchpadList
                     childStart={<p></p>}
                     childMiddle={<p></p>}
                     childEnd={<button type="button" className='btn btn-primary' style={{minWidth: 'auto', padding: '6px 16px', borderRadius: '16px'}} onClick={handleClick}>View Pool</button>}
                   /> :
                   <RowBetween
+                    noBorder={true}
                     childStart={<p></p>}
                     childMiddle={<p></p>}
                     childEnd={<button type="button" className='btn btn-primary' style={{minWidth: 'auto', padding: '6px 16px', borderRadius: '16px'}} onClick={handleClick}>View Pool</button>}
@@ -152,7 +156,7 @@ export const FairCardDetail = (props) => {
               }
               
               
-            </CCardText>
+            </div>
           </CCardBody>
         </CCard>
         </CCol>
@@ -218,7 +222,7 @@ export const NormalCardDetail = (props) => {
             <CRow>
               <CCol>
                 <div>
-                <CCardImage align="start" rounded src={props.img} width={50} height={50} />
+                <CCardImage align="start" rounded="true" src={props.img} width={50} height={50} />
                 </div>
               </CCol>
               <CCol className="d-md-flex justify-content-md-end text-white-color text-right">
@@ -230,7 +234,7 @@ export const NormalCardDetail = (props) => {
               </CCol>
             </CRow>
             {/* <CCardTitle>TestToken</CCardTitle> */}
-            <CCardText className='medium-text-sz'>
+            <div className='medium-text-sz'>
               <CRow className='py-4'>
                 <CCol>
                   <h6 className='text-title my-0'>
@@ -286,7 +290,7 @@ export const NormalCardDetail = (props) => {
                     childEnd={<button type="button" className='btn btn-primary' style={{minWidth: 'auto', padding: '6px 16px', borderRadius: '16px'}} onClick={handleClick}>View</button>}
                   />
               }
-            </CCardText>
+            </div>
           </CCardBody>
         </CCard>
       </CCol>

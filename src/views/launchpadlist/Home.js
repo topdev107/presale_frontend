@@ -161,9 +161,10 @@ const LaunchpadList = () => {
             !txtSearch || (data.token_name.toLowerCase().indexOf(txtSearch) != -1 || data.token_symbol.toLowerCase().indexOf(txtSearch) != -1)
           )
           .sort((a,b)=>sortPad(a,b))
-          .map((data) => {
+          .map((data, index) => {
             return (data.presaletype === true ?
             <FairCardDetail
+              key={index}
               list={1}
               xs={12}
               id = {data._id}
@@ -177,6 +178,7 @@ const LaunchpadList = () => {
               basicSymbol = {`${unit}`}
             /> : 
             <NormalCardDetail 
+              key={index}
               list={1}
               xs={12}
               id = {data._id}

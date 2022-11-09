@@ -47,6 +47,8 @@ import Web3 from 'web3';
 import abi from '../contracts/presaleAbi'
 
 const TotalView = () => {
+  const currentTheme = useSelector((state) => state.themeState.mode);
+  
   const [buyAmount, setBuyAmount] = useState(0)
   const [saleType, setSaleType] = useState('Public')
   const [whitelistcap, setWhitelistCap] = useState('Whitelist')
@@ -151,7 +153,7 @@ const TotalView = () => {
       top: '40%',
       textStyle: {
         fontFamily: 'Inter',
-        color: '#fff'
+        color: currentTheme == 'light' ? '#000' : '#fff'
       },
       data: ['Unlocked', 'Liquidity', 'Presale']
     },
@@ -165,7 +167,7 @@ const TotalView = () => {
           // show: false,
           // position: 'center',
           fontSize: '14',
-          color: '#fff'
+          color: currentTheme == 'light' ? '#000' : '#fff'
         },
         labelLine: {
           // show: false,
@@ -649,7 +651,7 @@ const TotalView = () => {
   }, [presaleTime])
 
   return (
-    <CRow xs={12} className="display-block">
+    <CRow className="display-block">
       {
         wholeLoading == true ?
         (
@@ -665,7 +667,7 @@ const TotalView = () => {
           textColor='white'
           style={{borderRadius: 0}}
         >
-          <CCardBody className='p-2'>
+          <CCardBody className='p-4'>
             <CRow className="show-style">
               <CCol xs={2} md={1}>
                 <div className="clearfix mt-2"> 
