@@ -33,7 +33,7 @@ const RowBetween = (props) => {
       {
         props.desc ?
         (
-          <div align="end" className="light-blue small"> {props.desc} </div>
+          <div className="light-blue small"> {props.desc} </div>
         ) : (
           <></>
         )
