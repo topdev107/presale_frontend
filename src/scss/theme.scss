@@ -34,7 +34,7 @@
   --cui-dropdown-link-hover-color: #fbbf04;
   --cui-dropdown-link-active-bg: #faf9fa;
   --cui-dropdown-link-active-color: #fbbf04;
-  --cui-btn-bg: #e3e3e3;
+  --cui-btn-bg: #e3e3e3 ;
 
   background-color: $body-color;
   color: $secondary-color;
@@ -70,6 +70,7 @@
   }
   
   .btn-outline-primary {
+    background-color: #e3e3e3;
     border-color: transparent;
     color: $third-color;
   }
