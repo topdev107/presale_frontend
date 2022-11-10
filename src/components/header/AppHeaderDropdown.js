@@ -33,12 +33,13 @@ const AppHeaderDropdown = (props) => {
         props.currentAccount === null ? (
           <></>
         ) : (
-          <CDropdownMenu className="pt-0" placement="bottom-end">            
-            <CDropdownItem href="#" onClick={props.onLogout}>
-              <CIcon icon={cilLockLocked} className="me-2" />
-              Logout
-            </CDropdownItem>
-          </CDropdownMenu>
+          // <CDropdownMenu className="pt-0" placement="bottom-end">            
+          //   <CDropdownItem href="#" onClick={props.onLogout}>
+          //     <CIcon icon={cilLockLocked} className="me-2" />
+          //     Logout
+          //   </CDropdownItem>
+          // </CDropdownMenu>
+          <></>
         )
       }
     </CDropdown>
