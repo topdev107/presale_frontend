@@ -58,7 +58,6 @@ import {
   saveRefelctionFee,
   saveLiquidityFee,
 } from '../../state/CreateTokenState'
-import { isLocalStorageAvailable } from 'web3modal';
 
 const TokenHome = () => {
 

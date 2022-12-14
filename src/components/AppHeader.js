@@ -19,6 +19,7 @@ import { setMetamask } from '../state/MetamaskState'
 import { headerNet } from '../assets/brand/header-net'
 
 const AppHeader = () => {
+
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sideBarState.isSidebarShow)
   const currentTheme = useSelector((state) => state.themeState.mode);
@@ -39,19 +40,23 @@ const AppHeader = () => {
     localStorage.setItem('isConnect', 'false');
   }
   async function loadWallet() {
-    try {
+    console.log('connect wallet...')
+    try {      
       const provider = window.ethereum;
+      console.log('provider: ', provider);
       if (!provider) {
         alert("Metamask is not installed, please install!");
       }
 
       const chainId = await provider.request({ method: 'eth_chainId' });
+      console.log('chainId: ', chainId);
       if (chainId === '0x61' ||
         chainId === '0x38' ||
         chainId === '0x19' ||
         chainId === '0x152') {
         console.log("Bravo!, you are on the correct network");
       } else {
+        console.log('wrong network')
         try {
           await provider.request({
             method: 'wallet_switchEthereumChain',
