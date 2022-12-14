@@ -21,7 +21,7 @@ import babyAbi from '../../contracts/babytokenFactoryAbi'
 import buybackAbi from '../../contracts/buybackbabyFactoryAbi'
 import Spinner from 'react-bootstrap/Spinner'
 import testToken from '../../contracts/testAbi'
-import { 
+import {
   standardTokenFactory,
   liquidityTokenFactory,
   babytokenFactory,
@@ -35,7 +35,7 @@ import {
 import TokenAbi from '../../contracts/tokenAbi'
 import FactoryAbi from '../../contracts/factoryAbi'
 import { HashRouter, Route, Switch, Link, useHistory } from 'react-router-dom'
-import { 
+import {
   saveTokenAddress,
   saveTokenType,
   saveTokenName,
@@ -58,6 +58,7 @@ import {
   saveRefelctionFee,
   saveLiquidityFee,
 } from '../../state/CreateTokenState'
+import { isLocalStorageAvailable } from 'web3modal';
 
 const TokenHome = () => {
 
@@ -73,47 +74,47 @@ const TokenHome = () => {
   const [createfee, setCreatefee] = useState(0)
   const setAddresses = () => {
     standardTokenFactory()
-    .then((result) => {
-      setstandardTokenFactoryAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        setstandardTokenFactoryAddr(result)
+        console.log(result)
+      })
     liquidityTokenFactory()
-    .then((result) => {
-      setliquidityTokenFactoryAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        setliquidityTokenFactoryAddr(result)
+        console.log(result)
+      })
     babytokenFactory()
-    .then((result) => {
-      setbabytokenFactoryAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        setbabytokenFactoryAddr(result)
+        console.log(result)
+      })
     buybackbabyFactory()
-    .then((result) => {
-      setbuybackbabyFactoryAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        setbuybackbabyFactoryAddr(result)
+        console.log(result)
+      })
     dividends()
-    .then((result) => {
-      setdividendsAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        setdividendsAddr(result)
+        console.log(result)
+      })
     testRouter()
-    .then((result) => {
-      settestRouterAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        settestRouterAddr(result)
+        console.log(result)
+      })
     testFactory()
-    .then((result) => {
-      settestFactoryAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        settestFactoryAddr(result)
+        console.log(result)
+      })
     swapPairs()
-    .then((result) => {
-      setswapPairsAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        setswapPairsAddr(result)
+        console.log(result)
+      })
   }
-  
+
   useEffect(async () => {
     setAddresses()
     const id = await window.ethereum.request({ method: 'eth_chainId' })
@@ -125,23 +126,23 @@ const TokenHome = () => {
     clearData()
   })
 
-  const unit = useMemo (() => {
+  const unit = useMemo(() => {
     if (currentChain == 97 || currentChain == 56) return "BNB"
-    if (currentChain == 25 || currentChain == 338 ) return "CRO"
+    if (currentChain == 25 || currentChain == 338) return "CRO"
   }, [currentChain])
 
-  const stressValue = useMemo (() => {
+  const stressValue = useMemo(() => {
     return createfee * 1e18
   }, [createfee])
 
-	const history = useHistory()
-	const dispatch = useDispatch()
+  const history = useHistory()
+  const dispatch = useDispatch()
 
   const [isTokenValid, setIsTokenValid] = useState(false)
 
-	const [tokenType, setTokenType] = useState('Standard Token')
+  const [tokenType, setTokenType] = useState('Standard Token')
   const [router, setRouter] = useState('Pancakeswap')
-	const [tokenName, setTokenName] = useState('')
+  const [tokenName, setTokenName] = useState('')
   const [errMsgTokenName, setErrMsgTokenName] = useState('')
 
   const [tokenSymbol, setTokenSymbol] = useState('')
@@ -173,10 +174,10 @@ const TokenHome = () => {
 
   const [minimumTokenBalance, setMinimumTokenBalance] = useState(0)
   const [errMsgMinTokenBalance, setErrMsgMinTokenBalance] = useState('')
-  
+
   const [tokenRewardFee, setTokenRewardFee] = useState(0)
   const [errMsgTokenRewardFee, setErrMsgTokenRewardFee] = useState('')
-  
+
   const [autoAddLiquidity, setAutoAddLiquidity] = useState(0)
   const [errMsgAutoAddLiquidity, setErrMsgAutoLiquidity] = useState('')
 
@@ -188,7 +189,7 @@ const TokenHome = () => {
 
   const [buyBackFee, setBuyBackFee] = useState(0)
   const [errMsgBuyBackFee, setErrMsgBuyBackFee] = useState('')
-  
+
   const [reflectionFee, setReflectionFee] = useState(0)
   const [errMsgReflectionFee, setErrMsgReflectionFee] = useState('')
 
@@ -198,7 +199,7 @@ const TokenHome = () => {
   const [rewardTokenName, setRewardTokenName] = useState('')
   const [rewardTokenSymbol, setRewardTokenSymbol] = useState('')
   const [rewardTokenDecimal, setRewardTokenDecimal] = useState(0)
-  
+
   const [availableToken, setAvailableToken] = useState(false)
   const [isCreateValid, setCreateValid] = useState(false)
   const [isCreateLoad, setCreateLoad] = useState(false)
@@ -262,13 +263,13 @@ const TokenHome = () => {
 
   useEffect(() => {
     let address = ''
-    if(tokenType == 'Standard Token') {
+    if (tokenType == 'Standard Token') {
       address = standardTokenFactoryAddr
-    } else if(tokenType == 'Liquidity Generator Token') {
+    } else if (tokenType == 'Liquidity Generator Token') {
       address = liquidityTokenFactoryAddr
-    } else if(tokenType == 'Baby Token') {
+    } else if (tokenType == 'Baby Token') {
       address = babytokenFactoryAddr
-    } else if(tokenType == 'Buyback Baby Token') {
+    } else if (tokenType == 'Buyback Baby Token') {
       address = buybackbabyFactoryAddr
     }
     getCreateFee(address)
@@ -287,20 +288,20 @@ const TokenHome = () => {
       console.log(stressValue.toString(16))
 
       const txResult = await standardTokenFactoryContract.methods.create(tokenName, tokenSymbol, +tokenDecimal, +tokenTotalSupply)
-         .send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
+        .send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
 
       const address = txResult.events.OwnershipTransferred[0].address
 
       console.log(address)
-      
+
       dispatch(saveTokenName(tokenName))
       dispatch(saveTokenSymbol(tokenSymbol))
       dispatch(saveTokenTotalSupply(tokenTotalSupply))
       dispatch(saveTokenAddress(address))
       history.push("/createToken/success")
-      
+
     } catch (error) {
       console.log(error)
     }
@@ -318,13 +319,13 @@ const TokenHome = () => {
       console.log(liquidityFactoryContract)
 
       const txResult = await liquidityFactoryContract.methods.create(
-        tokenName, 
-        tokenSymbol, 
-        +tokenTotalSupply, 
-        testRouterAddr, 
-        charityAddress, 
-        transfeeYield, 
-        transfeeLiquidity, 
+        tokenName,
+        tokenSymbol,
+        +tokenTotalSupply,
+        testRouterAddr,
+        charityAddress,
+        transfeeYield,
+        transfeeLiquidity,
         charityPercent
       ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
@@ -333,13 +334,13 @@ const TokenHome = () => {
       const address = txResult.events.OwnershipTransferred[0].address
 
       console.log(address)
-      
+
       dispatch(saveTokenName(tokenName))
       dispatch(saveTokenSymbol(tokenSymbol))
       dispatch(saveTokenTotalSupply(tokenTotalSupply))
       dispatch(saveTokenAddress(address))
       history.push("/createToken/success")
-      
+
     } catch (error) {
       console.log(error)
     }
@@ -357,8 +358,8 @@ const TokenHome = () => {
       console.log(standardTokenFactoryContract)
 
       const txResult = await standardTokenFactoryContract.methods.create(
-        tokenName, 
-        tokenSymbol, 
+        tokenName,
+        tokenSymbol,
         +tokenTotalSupply,
         [rewardToken, testRouterAddr, marketingWallet, dividendsAddr],
         [tokenRewardFee, autoAddLiquidity, marketingFee],
@@ -370,13 +371,13 @@ const TokenHome = () => {
       const address = txResult.events.OwnershipTransferred[0].address
 
       console.log(address)
-      
+
       dispatch(saveTokenName(tokenName))
       dispatch(saveTokenSymbol(tokenSymbol))
       dispatch(saveTokenTotalSupply(tokenTotalSupply))
       dispatch(saveTokenAddress(address))
       history.push("/createToken/success")
-      
+
     } catch (error) {
       console.log(error)
     }
@@ -394,12 +395,12 @@ const TokenHome = () => {
       console.log(standardTokenFactoryContract)
 
       const txResult = await standardTokenFactoryContract.methods.create(
-        tokenName, 
-        tokenSymbol, 
+        tokenName,
+        tokenSymbol,
         +tokenTotalSupply,
         rewardToken,
         testRouterAddr,
-        [liquidityFee*100, buyBackFee*100, reflectionFee*100, marketingFee*100, 10000]
+        [liquidityFee * 100, buyBackFee * 100, reflectionFee * 100, marketingFee * 100, 10000]
       ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
 
       console.log(txResult)
@@ -407,42 +408,46 @@ const TokenHome = () => {
       const address = txResult.events[1].address
 
       console.log(address)
-      
+
       dispatch(saveTokenName(tokenName))
       dispatch(saveTokenSymbol(tokenSymbol))
       dispatch(saveTokenTotalSupply(tokenTotalSupply))
       dispatch(saveTokenAddress(address))
       history.push("/createToken/success")
-      
+
     } catch (error) {
       console.log(error)
     }
   }
 
-	const handleNext = async () => {
-    setCreateLoad(true)
-    if(tokenType == 'Standard Token') {
-      await createStandardToken()
-    } else if(tokenType == 'Liquidity Generator Token') {
-      await createLiquidityToken()
-    } else if(tokenType == 'Baby Token') {
-      await createBabyToken()
-    } else if(tokenType == 'Buyback Baby Token') {
-      await createBuybackBabyToken()
+  const handleNext = async () => {
+    if (localStorage.getItem('isConnect') === 'true') {
+      setCreateLoad(true)
+      if (tokenType == 'Standard Token') {
+        await createStandardToken()
+      } else if (tokenType == 'Liquidity Generator Token') {
+        await createLiquidityToken()
+      } else if (tokenType == 'Baby Token') {
+        await createBabyToken()
+      } else if (tokenType == 'Buyback Baby Token') {
+        await createBuybackBabyToken()
+      }
+      setCreateLoad(false)
+    } else {
+      alert('Please connect wallet');
     }
-    setCreateLoad(false)
-	}
+  }
 
   async function getData(address) {
     const web3 = new Web3(provider())
     const TokenContract = new web3.eth.Contract(TokenAbi, address)
-    await TokenContract.methods.decimals().call().then(function(result) {
+    await TokenContract.methods.decimals().call().then(function (result) {
       setRewardTokenDecimal(result)
     })
-    await TokenContract.methods.name().call().then(function(result) {
+    await TokenContract.methods.name().call().then(function (result) {
       setRewardTokenName(result)
-    })    
-    await TokenContract.methods.symbol().call().then(function(result) {
+    })
+    await TokenContract.methods.symbol().call().then(function (result) {
       setRewardTokenSymbol(result)
     })
   }
@@ -450,8 +455,8 @@ const TokenHome = () => {
   async function isAvailable(address) {
     const web3 = new Web3(provider())
     const TokenContract = new web3.eth.Contract(FactoryAbi, testFactoryAddr)
-    await TokenContract.methods.getPair(address, swapPairsAddr).call().then(function(result) {
-      if(result == '0x0000000000000000000000000000000000000000'){
+    await TokenContract.methods.getPair(address, swapPairsAddr).call().then(function (result) {
+      if (result == '0x0000000000000000000000000000000000000000') {
         setAvailableToken(false)
       } else {
         setAvailableToken(true)
@@ -460,46 +465,46 @@ const TokenHome = () => {
   }
 
   useEffect(() => {
-    if(tokenType == 'Standard Token') {
+    if (tokenType == 'Standard Token') {
       errMsgTokenName === '' &&
-      errMsgTokenSymbol === '' &&
-      errMsgTokenDecimal === '' &&
-      errMsgTokenTotalSupply === '' ?
-      setCreateValid(true) : setCreateValid(false)
-     } else if(tokenType == 'Liquidity Generator Token') {
+        errMsgTokenSymbol === '' &&
+        errMsgTokenDecimal === '' &&
+        errMsgTokenTotalSupply === '' ?
+        setCreateValid(true) : setCreateValid(false)
+    } else if (tokenType == 'Liquidity Generator Token') {
       errMsgTokenName === '' &&
-      errMsgTokenSymbol === '' &&
-      errMsgTokenTotalSupply === '' &&
-      errMsgTransfeeYield === '' &&
-      errMsgTransfeeLiquidity === '' &&
-      errMsgCharityAddress === '' &&
-      errMsgCharityPercent === '' ?
-      setCreateValid(true) : setCreateValid(false)
-     } else if(tokenType == 'Baby Token') {
+        errMsgTokenSymbol === '' &&
+        errMsgTokenTotalSupply === '' &&
+        errMsgTransfeeYield === '' &&
+        errMsgTransfeeLiquidity === '' &&
+        errMsgCharityAddress === '' &&
+        errMsgCharityPercent === '' ?
+        setCreateValid(true) : setCreateValid(false)
+    } else if (tokenType == 'Baby Token') {
       errMsgTokenName === '' &&
-      errMsgTokenSymbol === '' &&
-      errMsgTokenTotalSupply === '' &&
-      errMsgRewardToken === '' &&
-      errMsgMinTokenBalance === '' &&
-      errMsgTokenRewardFee === '' &&
-      errMsgAutoAddLiquidity === '' &&
-      errMsgMarketingFee === '' &&
-      errMsgMarketingWallet === '' &&
-      availableToken == true
-      ?
-      setCreateValid(true) : setCreateValid(false)
-     } else if(tokenType == 'Buyback Baby Token') {
+        errMsgTokenSymbol === '' &&
+        errMsgTokenTotalSupply === '' &&
+        errMsgRewardToken === '' &&
+        errMsgMinTokenBalance === '' &&
+        errMsgTokenRewardFee === '' &&
+        errMsgAutoAddLiquidity === '' &&
+        errMsgMarketingFee === '' &&
+        errMsgMarketingWallet === '' &&
+        availableToken == true
+        ?
+        setCreateValid(true) : setCreateValid(false)
+    } else if (tokenType == 'Buyback Baby Token') {
       errMsgTokenName === '' &&
-      errMsgTokenSymbol === '' &&
-      errMsgTokenTotalSupply === '' &&
-      errMsgRewardToken === '' &&
-      errMsgLiquidityFee === '' &&
-      errMsgBuyBackFee === '' &&
-      errMsgReflectionFee === '' &&
-      errMsgMarketingFee === '' &&
-      availableToken == true ?
-      setCreateValid(true) : setCreateValid(false)
-     }
+        errMsgTokenSymbol === '' &&
+        errMsgTokenTotalSupply === '' &&
+        errMsgRewardToken === '' &&
+        errMsgLiquidityFee === '' &&
+        errMsgBuyBackFee === '' &&
+        errMsgReflectionFee === '' &&
+        errMsgMarketingFee === '' &&
+        availableToken == true ?
+        setCreateValid(true) : setCreateValid(false)
+    }
   }, [
     errMsgTokenName,
     errMsgTokenSymbol,
@@ -627,131 +632,131 @@ const TokenHome = () => {
     }
 
     checkTokenValidation(rewardToken)
-  },[rewardToken, ])
+  }, [rewardToken,])
 
   useEffect(() => {
-    if(tokenName == '') {
+    if (tokenName == '') {
       setErrMsgTokenName('tokenName is a required field')
     } else {
       setErrMsgTokenName('')
     }
 
-    if(tokenSymbol == '') {
+    if (tokenSymbol == '') {
       setErrMsgTokenSymbol('tokenSymbol is a required field')
     } else {
       setErrMsgTokenSymbol('')
     }
 
-    if(+tokenDecimal == 0) {
+    if (+tokenDecimal == 0) {
       setErrMsgTokenDecimal('Invalid decimals');
     } else {
       setErrMsgTokenDecimal('')
     }
 
-    if(+tokenTotalSupply == 0) {
+    if (+tokenTotalSupply == 0) {
       setErrMsgTokenTotalSupply('totalSupply is a required field');
     } else {
       setErrMsgTokenTotalSupply('')
     }
 
-    if(+transfeeYield > 25) {
+    if (+transfeeYield > 25) {
       setErrMsgTransfeeYield('taxFeeBps must be less than or equal to 25')
-    } else if(+transfeeYield <= 0) {
+    } else if (+transfeeYield <= 0) {
       setErrMsgTransfeeYield('taxFeeBps must be greater than or equal to 0.01')
     } else {
       setErrMsgTransfeeYield('')
     }
 
-    if(+transfeeLiquidity > 25) {
+    if (+transfeeLiquidity > 25) {
       setErrMsgTransfeeLiquidity('liquidityFeeBps must be less than or equal to 25')
-    } else if(+transfeeLiquidity <= 0) {
+    } else if (+transfeeLiquidity <= 0) {
       setErrMsgTransfeeLiquidity('liquidityFeeBps must be greater than or equal to 0.01')
     } else {
       setErrMsgTransfeeLiquidity('')
     }
 
-    if(+charityPercent > 25) {
+    if (+charityPercent > 25) {
       setErrMsgCharityPercent('charityBps must be less than or equal to 25')
-    } else if(+charityPercent <= 0) {
+    } else if (+charityPercent <= 0) {
       setErrMsgCharityPercent('charityBps must be greater than or equal to 1')
     } else {
       setErrMsgCharityPercent('')
     }
 
-    if(+minimumTokenBalance > +tokenTotalSupply * 0.001) {
+    if (+minimumTokenBalance > +tokenTotalSupply * 0.001) {
       setErrMsgMinTokenBalance('Minimum token balance for dividends must be less than or equal 0.1% total supply')
-    } else if(+minimumTokenBalance === 0) {
+    } else if (+minimumTokenBalance === 0) {
       setErrMsgMinTokenBalance('minimumTokenBalanceForDividends must be greater than or equal to 1')
     } else {
       setErrMsgMinTokenBalance('')
     }
 
-    if(+tokenRewardFee > 100) {
+    if (+tokenRewardFee > 100) {
       setErrMsgTokenRewardFee('tokenRewardsFee must be less than or equal to 100')
-    } else if(+tokenRewardFee <= 0) {
+    } else if (+tokenRewardFee <= 0) {
       setErrMsgTokenRewardFee('tokenRewardsFee must be greater than or equal to 0.01')
     } else {
       setErrMsgTokenRewardFee('')
     }
 
-    if(+autoAddLiquidity > 100) {
+    if (+autoAddLiquidity > 100) {
       setErrMsgAutoLiquidity('liquidityFee must be less than or equal to 100')
-    } else if(+autoAddLiquidity <= 0) {
+    } else if (+autoAddLiquidity <= 0) {
       setErrMsgAutoLiquidity('liquidityFee must be greater than or equal to 0.01')
     } else {
       setErrMsgAutoLiquidity('')
     }
 
-    if(+marketingFee > 100) {
+    if (+marketingFee > 100) {
       setErrMsgMarketingFee('marketingFee must be less than or equal to 100')
-    } else if(+marketingFee <=0) {
+    } else if (+marketingFee <= 0) {
       setErrMsgMarketingFee('marketingFee must be greater than or equal to 0.01')
     } else {
       setErrMsgMarketingFee('')
     }
 
-    if(+liquidityFee > 100) {
+    if (+liquidityFee > 100) {
       setErrMsgLiquidityFee('liquidityFee must be less than or equal to 100')
-    } else if(+marketingFee <= 0) {
+    } else if (+marketingFee <= 0) {
       setErrMsgLiquidityFee('liquidityFee must be greater than or equal to 0.01')
     } else {
       setErrMsgLiquidityFee('')
     }
 
-    if(+buyBackFee > 100) {
+    if (+buyBackFee > 100) {
       setErrMsgBuyBackFee('buybackFee must be less than or equal to 100')
-    } else if(+buyBackFee <= 0) {
+    } else if (+buyBackFee <= 0) {
       setErrMsgBuyBackFee('buybackFee must be greater than or equal to 0.01')
     } else {
       setErrMsgBuyBackFee('')
     }
 
-    if(+reflectionFee > 100) {
+    if (+reflectionFee > 100) {
       setErrMsgReflectionFee('reflectionFee must be less than or equal to 100')
-    } else if(+reflectionFee < 0) {
+    } else if (+reflectionFee < 0) {
       setErrMsgReflectionFee('reflectionFee must be greater than or equal to 0.01')
     } else {
       setErrMsgReflectionFee('')
     }
   },
-  [
-    tokenName,
-    tokenSymbol,
-    tokenDecimal,
-    tokenTotalSupply,
-    transfeeYield,
-    transfeeLiquidity,
-    charityPercent,
-    minimumTokenBalance,
-    tokenRewardFee,
-    autoAddLiquidity,
-    marketingFee,
-    liquidityFee,
-    buyBackFee,
-    reflectionFee,
-  ])
+    [
+      tokenName,
+      tokenSymbol,
+      tokenDecimal,
+      tokenTotalSupply,
+      transfeeYield,
+      transfeeLiquidity,
+      charityPercent,
+      minimumTokenBalance,
+      tokenRewardFee,
+      autoAddLiquidity,
+      marketingFee,
+      liquidityFee,
+      buyBackFee,
+      reflectionFee,
+    ])
 
-	return (
+  return (
     <CRow>
       <CCol xs={12} className='panel px-3 pt-4 p-md-4'>
         <CRow>
@@ -775,16 +780,16 @@ const TokenHome = () => {
         </CRow>
         {
           <>
-          <CRow className='mt-3'>
-            <TextInputComponent
-              title='Name'
-              value={tokenName}
-              onChange={onChangeTokenName}
-              // errMsg={errMsgTokenName}
-              placeholder='Ex: Ethereum'
-              desc='' />
-          </CRow>
-          <CRow className='mt-3'>
+            <CRow className='mt-3'>
+              <TextInputComponent
+                title='Name'
+                value={tokenName}
+                onChange={onChangeTokenName}
+                // errMsg={errMsgTokenName}
+                placeholder='Ex: Ethereum'
+                desc='' />
+            </CRow>
+            <CRow className='mt-3'>
               <TextInputComponent
                 title='Symbol'
                 value={tokenSymbol}
@@ -792,273 +797,273 @@ const TokenHome = () => {
                 // errMsg={errMsgTokenSymbol}
                 placeholder='Ex: ETH'
                 desc='' />
-          </CRow>
-          {
-            tokenType === 'Standard Token' ? (
-              <CRow className='mt-3'>
-                <NumberInputComponent
-                  title='Decimals'
-                  value={tokenDecimal}
-                  onChange={onChangeTokenDecimal}
-                  // errMsg={errMsgTokenDecimal}
-                  desc=''
-                  needInt />
-              </CRow>
-            ) : (
-              <></>
-            )
-          }
-          <CRow className='mt-3'>
-            <NumberInputComponent
-              title='TotalSupply'
-              value={tokenTotalSupply}
-              onChange={onChangeTokenTotalSupply}
-              // errMsg={errMsgTokenTotalSupply}
-              desc=''
-              needInt />
-          </CRow>
-          {
-            tokenType === 'Liquidity Generator Token' ? (
-              <>
+            </CRow>
+            {
+              tokenType === 'Standard Token' ? (
                 <CRow className='mt-3'>
-                  <div className='text-title medium-text-sz mb-2'>Router
-                    <sup className="danger">*</sup>
-                  </div>
+                  <NumberInputComponent
+                    title='Decimals'
+                    value={tokenDecimal}
+                    onChange={onChangeTokenDecimal}
+                    // errMsg={errMsgTokenDecimal}
+                    desc=''
+                    needInt />
                 </CRow>
-                <CRow>
-                  <div>
-                    <CFormSelect className="mb-3" onChange={onChangeRouter}>
-                      <option value="pancakeswap">Pancakeswap</option>
-                    </CFormSelect>
-                  </div>
-                </CRow>
-                <CRow className='mt-3 display-block'>
-                  <CCol className='col-12 col-md-6'>
-                    <NumberInputComponent 
-                      title='Transaction fee to generate yield (%)'
-                      value={transfeeYield}
-                      onChange={onChangeTransFeeYield}
-                      errMsg={errMsgTransfeeYield}
-                      desc=''
-                      needInt 
-                    />
-                  </CCol>
-                  <CCol className='col-12 col-md-6'>
-                    <NumberInputComponent 
-                      title='Transaction fee to generate liquidity (%)'
-                      value={transfeeLiquidity}
-                      onChange={onChangeTransFeeLiquidity}
-                      errMsg={errMsgTransfeeLiquidity}
-                      desc=''
-                      needInt
-                    />
-                  </CCol>
-                </CRow>
-                <CRow className='mt-3'>
-                  <TextInputComponent 
-                    title='Charity/Marketing address'
-                    value={charityAddress}
-                    onChange={onChangeCharityAddress}
-                    errMsg={errMsgCharityAddress}
-                    placeholder='Ex: 0x...'
-                  />
-                </CRow>
-                <CRow className='mt-3'>
-                  <NumberInputComponent 
-                    title='Charity/Marketing percent (%)'
-                    value={charityPercent}
-                    onChange={onChangeCharityPercent}
-                    errMsg={errMsgCharityPercent}
-                  />
-                </CRow>
-
-              </>
-            ) : (
-              tokenType === 'Baby Token' ? (
-              <>
-              <CRow className='mt-3'>
-                <div className='text-title medium-text-sz mb-2'>Router
-                  <sup className="danger">*</sup>
-                </div>
-              </CRow>
-              <CRow>
-                <div>
-                  <CFormSelect className="mb-3" onChange={onChangeRouter}>
-                    <option value="pancakeswap">Pancakeswap</option>
-                  </CFormSelect>
-                </div>
-              </CRow>
-              <CRow className='mt-3'>
-                <CCol className='col-12 col-md-6'>
-                  <TextInputComponent 
-                    title='Reward token'
-                    value={rewardToken}
-                    onChange={onChangeRewardToken}
-                    errMsg={errMsgRewardToken}
-                    placeholder='Ex: 0x...'
-                    desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
-                  />
-                  {
-                    availableToken == true ?
-                    (
-                      <></>
-                    ) : (<div className='danger small-text-sz mb-0'>Address is invalid</div>)
-                  }
-                  {
-                    !isTokenValid == true ?
-                    (
-                      <div>
-                        <div style={{display: 'flex'}}>
-                          <div className='col-md-6 text_align_left medium-text-sz'>TokenName</div>
-                          <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenName}</div>
-                        </div>
-                        <div style={{display: 'flex'}}>
-                          <div className='col-md-6 text_align_left medium-text-sz'>TokenSymbol</div>
-                          <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenSymbol}</div>
-                        </div>
-                        <div style={{display: 'flex'}}>
-                          <div className='col-md-6 text_align_left medium-text-sz'>TokenDecimal</div>
-                          <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenDecimal}</div>
-                        </div>
-                      </div>
-                    ) : (
-                      <></>
-                    )
-                  }
-                </CCol>
-                <CCol className='col-12 col-md-6'>
-                  <NumberInputComponent 
-                    title= {'Minimum token balance for dividends (max:' + +tokenTotalSupply * 0.001 + ')'}
-                    value={minimumTokenBalance}
-                    onChange={onChangeMinimumTokenBalance}
-                    placeholder='Ex: 10000000000'
-                    errMsg={errMsgMinTokenBalance}
-                    desc='Min hold each wallet must be over $50 to receive rewards.'
-                    needInt
-                  />
-                </CCol>
-              </CRow>
-              <CRow className='mt-3 display-block'>
-                <CCol className='col-12 col-md-6'>
-                  <NumberInputComponent 
-                    title= 'Token reward fee (%)'
-                    value={tokenRewardFee}
-                    onChange={onChangeTokenRewardFee}
-                    errMsg={errMsgTokenRewardFee}
-                    placeholder='0 - 100'
-                  />
-                </CCol>
-                <CCol className='col-12 col-md-6'>
-                  <NumberInputComponent 
-                    title= 'Auto add liquidity (%)'
-                    value={autoAddLiquidity}
-                    onChange= {onChangeAutoAddLiquidity}
-                    errMsg={errMsgAutoAddLiquidity}
-                    placeholder='0 - 100'
-                  />
-                </CCol>
-              </CRow>
-              <CRow className='mt-3 display-block'>
-                <CCol className='col-12 col-md-6'>
-                  <NumberInputComponent 
-                    title='Marketing fee (%)'
-                    value={marketingFee}
-                    onChange={onChangeMarketingFee}
-                    errMsg={errMsgMarketingFee}
-                    placeholder='0 - 100'
-                    needInt
-                  />
-                </CCol>
-                <CCol className='col-12 col-md-6'>
-                  <TextInputComponent 
-                    title='Marketing wallet'
-                    value={marketingWallet}
-                    onChange={onChangeMarketingWallet}
-                    errMsg={errMsgMarketingWallet}
-                    placeholder='Ex: 0x...'
-                  />
-                </CCol>
-              </CRow>
-
-              </>) : (
-                tokenType === 'Buyback Baby Token' ? (
+              ) : (
+                <></>
+              )
+            }
+            <CRow className='mt-3'>
+              <NumberInputComponent
+                title='TotalSupply'
+                value={tokenTotalSupply}
+                onChange={onChangeTokenTotalSupply}
+                // errMsg={errMsgTokenTotalSupply}
+                desc=''
+                needInt />
+            </CRow>
+            {
+              tokenType === 'Liquidity Generator Token' ? (
                 <>
-                <CRow className='mt-3'>
-                  <div className='text-title medium-text-sz mb-2'>Router
-                    <sup className="danger">*</sup>
-                  </div>
-                </CRow>
-                <CRow>
-                  <div>
-                    <CFormSelect className="mb-3" onChange={onChangeRouter}>
-                      <option value="pancakeswap">Pancakeswap</option>
-                    </CFormSelect>
-                  </div>
-                </CRow>
-              <CRow className='mt-3'>
-                <CCol className='col-12 col-md-6'>
-                  <TextInputComponent 
-                    title='Reward token'
-                    value={rewardToken}
-                    onChange={onChangeRewardToken}
-                    errMsg={errMsgRewardToken}
-                    placeholder='Ex: 0x...'
-                    desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
-                  />
-                </CCol>
-                <CCol className='col-12 col-md-6'>
-                  <NumberInputComponent 
-                    title= 'Liquidity Fee (%)'
-                    value={liquidityFee}
-                    onChange={onChangeLiquidityFee}
-                    placeholder='0 - 100'
-                    errMsg={errMsgLiquidityFee}
-                  />
-                </CCol>
-              </CRow>
-              <CRow className='mt-3 display-block'>
-                <CCol className='col-12 col-md-6'>
-                  <NumberInputComponent 
-                    title= 'Buyback Fee (%)'
-                    value={buyBackFee}
-                    onChange={onChangeBuyBackFee}
-                    errMsg={errMsgBuyBackFee}
-                    placeholder='0 - 100'
-                  />
-                </CCol>
-                <CCol className='col-12 col-md-6'>
-                  <NumberInputComponent 
-                    title= 'Reflection Fee (%)'
-                    value={reflectionFee}
-                    onChange= {onChangeReflectionFee}
-                    errMsg={errMsgReflectionFee}
-                    placeholder='0 - 100'
-                  />
-                </CCol>
-              </CRow>
-              <CRow className='mt-3'>
-                <NumberInputComponent
-                  title='Marketing fee (%)'
-                  value={marketingFee}
-                  onChange = {onChangeMarketingFee}
-                  errMsg={errMsgMarketingFee}
-                />
-              </CRow>
-              {
-                (+liquidityFee + +buyBackFee + +reflectionFee + +marketingFee) > 25 ? 
-                (
-                  <div className='danger small-text-sz mb-0'>Liquidity Fee + Buyback Fee + Reflection Fee + Marketing Fee must be less than 25%</div>
-                ) : (
-                  <></>
-                )
-              }
-                </>) : (
-                  <></>
+                  <CRow className='mt-3'>
+                    <div className='text-title medium-text-sz mb-2'>Router
+                      <sup className="danger">*</sup>
+                    </div>
+                  </CRow>
+                  <CRow>
+                    <div>
+                      <CFormSelect className="mb-3" onChange={onChangeRouter}>
+                        <option value="pancakeswap">Pancakeswap</option>
+                      </CFormSelect>
+                    </div>
+                  </CRow>
+                  <CRow className='mt-3 display-block'>
+                    <CCol className='col-12 col-md-6'>
+                      <NumberInputComponent
+                        title='Transaction fee to generate yield (%)'
+                        value={transfeeYield}
+                        onChange={onChangeTransFeeYield}
+                        errMsg={errMsgTransfeeYield}
+                        desc=''
+                        needInt
+                      />
+                    </CCol>
+                    <CCol className='col-12 col-md-6'>
+                      <NumberInputComponent
+                        title='Transaction fee to generate liquidity (%)'
+                        value={transfeeLiquidity}
+                        onChange={onChangeTransFeeLiquidity}
+                        errMsg={errMsgTransfeeLiquidity}
+                        desc=''
+                        needInt
+                      />
+                    </CCol>
+                  </CRow>
+                  <CRow className='mt-3'>
+                    <TextInputComponent
+                      title='Charity/Marketing address'
+                      value={charityAddress}
+                      onChange={onChangeCharityAddress}
+                      errMsg={errMsgCharityAddress}
+                      placeholder='Ex: 0x...'
+                    />
+                  </CRow>
+                  <CRow className='mt-3'>
+                    <NumberInputComponent
+                      title='Charity/Marketing percent (%)'
+                      value={charityPercent}
+                      onChange={onChangeCharityPercent}
+                      errMsg={errMsgCharityPercent}
+                    />
+                  </CRow>
+
+                </>
+              ) : (
+                tokenType === 'Baby Token' ? (
+                  <>
+                    <CRow className='mt-3'>
+                      <div className='text-title medium-text-sz mb-2'>Router
+                        <sup className="danger">*</sup>
+                      </div>
+                    </CRow>
+                    <CRow>
+                      <div>
+                        <CFormSelect className="mb-3" onChange={onChangeRouter}>
+                          <option value="pancakeswap">Pancakeswap</option>
+                        </CFormSelect>
+                      </div>
+                    </CRow>
+                    <CRow className='mt-3'>
+                      <CCol className='col-12 col-md-6'>
+                        <TextInputComponent
+                          title='Reward token'
+                          value={rewardToken}
+                          onChange={onChangeRewardToken}
+                          errMsg={errMsgRewardToken}
+                          placeholder='Ex: 0x...'
+                          desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
+                        />
+                        {
+                          availableToken == true ?
+                            (
+                              <></>
+                            ) : (<div className='danger small-text-sz mb-0'>Address is invalid</div>)
+                        }
+                        {
+                          !isTokenValid == true ?
+                            (
+                              <div>
+                                <div style={{ display: 'flex' }}>
+                                  <div className='col-md-6 text_align_left medium-text-sz'>TokenName</div>
+                                  <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenName}</div>
+                                </div>
+                                <div style={{ display: 'flex' }}>
+                                  <div className='col-md-6 text_align_left medium-text-sz'>TokenSymbol</div>
+                                  <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenSymbol}</div>
+                                </div>
+                                <div style={{ display: 'flex' }}>
+                                  <div className='col-md-6 text_align_left medium-text-sz'>TokenDecimal</div>
+                                  <div className='col-md-6 text_align_right text-title medium-text-sz'>{rewardTokenDecimal}</div>
+                                </div>
+                              </div>
+                            ) : (
+                              <></>
+                            )
+                        }
+                      </CCol>
+                      <CCol className='col-12 col-md-6'>
+                        <NumberInputComponent
+                          title={'Minimum token balance for dividends (max:' + +tokenTotalSupply * 0.001 + ')'}
+                          value={minimumTokenBalance}
+                          onChange={onChangeMinimumTokenBalance}
+                          placeholder='Ex: 10000000000'
+                          errMsg={errMsgMinTokenBalance}
+                          desc='Min hold each wallet must be over $50 to receive rewards.'
+                          needInt
+                        />
+                      </CCol>
+                    </CRow>
+                    <CRow className='mt-3 display-block'>
+                      <CCol className='col-12 col-md-6'>
+                        <NumberInputComponent
+                          title='Token reward fee (%)'
+                          value={tokenRewardFee}
+                          onChange={onChangeTokenRewardFee}
+                          errMsg={errMsgTokenRewardFee}
+                          placeholder='0 - 100'
+                        />
+                      </CCol>
+                      <CCol className='col-12 col-md-6'>
+                        <NumberInputComponent
+                          title='Auto add liquidity (%)'
+                          value={autoAddLiquidity}
+                          onChange={onChangeAutoAddLiquidity}
+                          errMsg={errMsgAutoAddLiquidity}
+                          placeholder='0 - 100'
+                        />
+                      </CCol>
+                    </CRow>
+                    <CRow className='mt-3 display-block'>
+                      <CCol className='col-12 col-md-6'>
+                        <NumberInputComponent
+                          title='Marketing fee (%)'
+                          value={marketingFee}
+                          onChange={onChangeMarketingFee}
+                          errMsg={errMsgMarketingFee}
+                          placeholder='0 - 100'
+                          needInt
+                        />
+                      </CCol>
+                      <CCol className='col-12 col-md-6'>
+                        <TextInputComponent
+                          title='Marketing wallet'
+                          value={marketingWallet}
+                          onChange={onChangeMarketingWallet}
+                          errMsg={errMsgMarketingWallet}
+                          placeholder='Ex: 0x...'
+                        />
+                      </CCol>
+                    </CRow>
+
+                  </>) : (
+                  tokenType === 'Buyback Baby Token' ? (
+                    <>
+                      <CRow className='mt-3'>
+                        <div className='text-title medium-text-sz mb-2'>Router
+                          <sup className="danger">*</sup>
+                        </div>
+                      </CRow>
+                      <CRow>
+                        <div>
+                          <CFormSelect className="mb-3" onChange={onChangeRouter}>
+                            <option value="pancakeswap">Pancakeswap</option>
+                          </CFormSelect>
+                        </div>
+                      </CRow>
+                      <CRow className='mt-3'>
+                        <CCol className='col-12 col-md-6'>
+                          <TextInputComponent
+                            title='Reward token'
+                            value={rewardToken}
+                            onChange={onChangeRewardToken}
+                            errMsg={errMsgRewardToken}
+                            placeholder='Ex: 0x...'
+                            desc='If you want to reward DOGE, please enter 0xba2ae424d960c26247dd6c32edc70b295c744c43.'
+                          />
+                        </CCol>
+                        <CCol className='col-12 col-md-6'>
+                          <NumberInputComponent
+                            title='Liquidity Fee (%)'
+                            value={liquidityFee}
+                            onChange={onChangeLiquidityFee}
+                            placeholder='0 - 100'
+                            errMsg={errMsgLiquidityFee}
+                          />
+                        </CCol>
+                      </CRow>
+                      <CRow className='mt-3 display-block'>
+                        <CCol className='col-12 col-md-6'>
+                          <NumberInputComponent
+                            title='Buyback Fee (%)'
+                            value={buyBackFee}
+                            onChange={onChangeBuyBackFee}
+                            errMsg={errMsgBuyBackFee}
+                            placeholder='0 - 100'
+                          />
+                        </CCol>
+                        <CCol className='col-12 col-md-6'>
+                          <NumberInputComponent
+                            title='Reflection Fee (%)'
+                            value={reflectionFee}
+                            onChange={onChangeReflectionFee}
+                            errMsg={errMsgReflectionFee}
+                            placeholder='0 - 100'
+                          />
+                        </CCol>
+                      </CRow>
+                      <CRow className='mt-3'>
+                        <NumberInputComponent
+                          title='Marketing fee (%)'
+                          value={marketingFee}
+                          onChange={onChangeMarketingFee}
+                          errMsg={errMsgMarketingFee}
+                        />
+                      </CRow>
+                      {
+                        (+liquidityFee + +buyBackFee + +reflectionFee + +marketingFee) > 25 ?
+                          (
+                            <div className='danger small-text-sz mb-0'>Liquidity Fee + Buyback Fee + Reflection Fee + Marketing Fee must be less than 25%</div>
+                          ) : (
+                            <></>
+                          )
+                      }
+                    </>) : (
+                    <></>
+                  )
                 )
               )
-            )
-          }
-          {/* <CFormCheck
+            }
+            {/* <CFormCheck
             id="useAntiBot"
             label="Implement Pink Anti-Bot System?"
             onChange={onChangeAntiBot} /> */}
@@ -1066,7 +1071,7 @@ const TokenHome = () => {
         }
         <div className="my-3 d-grid gap-3 d-md-flex justify-content-md-center">
           {
-            isCreateValid === true ? 
+            isCreateValid === true ?
               <button type="button" className="btn btn-primary" disabled={isCreateLoad} onClick={handleNext}>
                 {
                   isCreateLoad === true ? (
@@ -1077,8 +1082,8 @@ const TokenHome = () => {
                       role="status"
                       aria-hidden="true"
                       className='normal'
-                      style={{marginRight: '5px', marginTop: '2px'}}
-                    /> ) : (<></>)
+                      style={{ marginRight: '5px', marginTop: '2px' }}
+                    />) : (<></>)
                 }
                 + Create Token
               </button> :
@@ -1087,7 +1092,7 @@ const TokenHome = () => {
         </div>
       </CCol>
     </CRow>
-	);
+  );
 
 }
 
