@@ -15,7 +15,7 @@ import Web3 from 'web3';
 import RowBetween from '../components/RowBetween';
 import WorkflowItem from "../components/WorkflowItem";
 import { useDispatch, useSelector } from 'react-redux'
-import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals,saveTokenTotalSupply, saveBasicSymbol } from '../../state/CreateFairLaunchState'
+import { saveTokenAddr, saveTokenName, saveTokenSymbol, saveTokenDecimals, saveTokenTotalSupply, saveBasicSymbol } from '../../state/CreateFairLaunchState'
 import CIcon from '@coreui/icons-react';
 import { cilList, cilWarning, cilShieldAlt } from '@coreui/icons';
 import { CreateTokenModal } from '../components/CreateTokenModal'
@@ -39,15 +39,15 @@ const FairHome = () => {
   const [finalizeFee, setFinalizeFee] = useState(0)
   useEffect(async () => {
     fairlaunchFactory()
-    .then((result) => {
-      setfairlaunchFactoryAddr(result)
-      console.log(result)
-    })  
+      .then((result) => {
+        setfairlaunchFactoryAddr(result)
+        console.log(result)
+      })
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setCurrentChain(parseInt(id, 16))
   }, [])
 
-  
+
   async function getFees() {
     let fee = await getPresaleFees(fairlaunchFactoryAddr)
     setCreateFee(fee)
@@ -55,22 +55,22 @@ const FairHome = () => {
     setFinalizeFee(fee)
   }
 
-  useEffect( () => {
+  useEffect(() => {
     getFees()
-  },[fairlaunchFactoryAddr])
+  }, [fairlaunchFactoryAddr])
 
   window.ethereum && window.ethereum.on('networkChanged', function (networkid) {
     fairlaunchFactory()
-    .then((result) => {
-      setfairlaunchFactoryAddr(result)
-      console.log(result)
-    })
+      .then((result) => {
+        setfairlaunchFactoryAddr(result)
+        console.log(result)
+      })
     setCurrentChain(networkid)
   })
 
-  const unit = useMemo (() => {
+  const unit = useMemo(() => {
     if (currentChain == 97 || currentChain == 56) return "BNB"
-    if (currentChain == 25 || currentChain == 338 ) return "CRO"
+    if (currentChain == 25 || currentChain == 338) return "CRO"
   }, [currentChain])
 
   const history = useHistory();
@@ -100,22 +100,22 @@ const FairHome = () => {
   }, [tokenAddr])
 
   const onChange = (event) => {
-    setTokenAddress(event.currentTarget.value);    
+    setTokenAddress(event.currentTarget.value);
   }
   async function getData(address) {
     const web3 = new Web3(provider())
     const TokenContract = new web3.eth.Contract(TokenAbi, address)
     setTokenContract(TokenContract)
-    await TokenContract.methods.decimals().call().then(function(result) {
+    await TokenContract.methods.decimals().call().then(function (result) {
       setTokenDecimal(result)
     })
-    await TokenContract.methods.name().call().then(function(result) {
+    await TokenContract.methods.name().call().then(function (result) {
       setTokenName(result)
-    })    
-    await TokenContract.methods.symbol().call().then(function(result) {
+    })
+    await TokenContract.methods.symbol().call().then(function (result) {
       setTokenSymbol(result)
     })
-    await TokenContract.methods.totalSupply().call().then(function(result) {
+    await TokenContract.methods.totalSupply().call().then(function (result) {
       setTotalSupply(result)
     })
   }
@@ -155,7 +155,7 @@ const FairHome = () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
     await tokenContract.methods.approve(fairlaunchFactoryAddr, tokenTotalSupply).send({ 'from': account })
-      .then(function(result) {
+      .then(function (result) {
         console.log(result)
       })
     setTokenStatus(APPROVED)
@@ -207,23 +207,23 @@ const FairHome = () => {
             <CRow>
               {/* <p className="danger small-text-sz mb-0">(*) is required field.</p> */}
               <CCol className='pt-2'>
-                <p className='font-bold text-title' style={{fontSize:18}}>Token address
+                <p className='font-bold text-title' style={{ fontSize: 18 }}>Token address
                   {/* <sup className="danger">*</sup> */}
                 </p>
               </CCol>
               <CCol className='mb-4 p-1'>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <CreateTokenModal parent='Fair'/>
+                  <CreateTokenModal parent='Fair' />
                 </div>
               </CCol>
               {
                 isTokenValid ? (
                   <div>
-                    <CFormInput type="text" id="tokenAddress" placeholder="Ex: 0x3d..." style={{border:0, fontSize:14, padding:20}} value={tokenAddress} onChange={onChange} />
+                    <CFormInput type="text" id="tokenAddress" placeholder="Ex: 0x3d..." style={{ border: 0, fontSize: 14, padding: 20 }} value={tokenAddress} onChange={onChange} />
                   </div>
                 ) : (
                   <div>
-                    <CFormInput type="text" id="tokenAddress" className='input-highlighted' style={{border:0, fontSize:14, padding:20}} placeholder="Ex: 0x3d..." value={tokenAddress} onChange={onChange} />
+                    <CFormInput type="text" id="tokenAddress" className='input-highlighted' style={{ border: 0, fontSize: 14, padding: 20 }} placeholder="Ex: 0x3d..." value={tokenAddress} onChange={onChange} />
                   </div>
                 )
               }
@@ -248,32 +248,33 @@ const FairHome = () => {
                       childStart={<p>Decimals</p>}
                       childEnd={<p className="text-right">{tokenDecimal}</p>}
                     />
-                    <CAlert color="danger" className="back-gray d-flex align-items-center" dismissible>
+                    {/* <CAlert color="danger" className="back-gray d-flex align-items-center" dismissible>
                       <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
                       <div >
                         Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.
                       </div>
-                    </CAlert>
+                    </CAlert> */}
                     {
                       !isExistPool ? (
                         tokenStatus === NO_APPROVED ? (
                           <div className="d-md-flex justify-content-md-center mt-4 position-right">
                             <div className='loader'></div>
-                            <button type="button" className={approveState ? "btn-disabled" : "btn-accent"} disabled={approveState} onClick={() => handleApprove()} >
+                            {/* <button type="button" className={approveState ? "btn-disabled" : "btn-accent"} disabled={approveState} onClick={() => handleApprove()} > */}
+                            <button type="button" className={`btn btn-outline-primary ${approveState ? "disabled" : "btn-accent"}`} style={{ width: 150 }} disabled={approveState} onClick={() => handleApprove()} >
                               {
                                 approveState == true ? (
-                                <Spinner
-                                  as="span"
-                                  animation="border"
-                                  size="sm"
-                                  role="status"
-                                  aria-hidden="true"
-                                  variant="light"
-                                  style={{marginRight: '5px', marginTop: '2px'}}
-                                /> ) : (<></>)
+                                  <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                    variant="light"
+                                    style={{ marginRight: '5px', marginTop: '2px' }}
+                                  />) : (<></>)
                               }
                               Approve
-                            </button>             
+                            </button>
                           </div>
                         ) : (
                           <div className="d-md-flex justify-content-md-center mt-4 position-right">
@@ -286,13 +287,28 @@ const FairHome = () => {
                     }
                   </div>
                 ) : (
-                  <div className="d-grid gap-4 d-md-flex justify-content-center justify-content-md-between align-items-center" style={{marginTop:64, marginBottom:12}}>
+                  <div className="d-grid gap-4 d-md-flex justify-content-center justify-content-md-between align-items-center" style={{ marginTop: 64, marginBottom: 12 }}>
                     <p className="danger small-text-sz mb-0">{validMessage}</p>
                     <button type="button" className="btn btn-primary disabled">Next</button>
                   </div>
                 )
               }
             </CRow>
+            {
+              isTokenValid ? (
+                <CRow className='mt-3'>
+                  <CCol>
+                    <p className='danger small-text-sz text-center'>
+                      <FontAwesomeIcon icon={faInfoCircle} className='danger mx-2' />
+                      Make sure the token has <q>Exclude transfer fee</q> function if it has transfer fees.
+                    </p>
+                  </CCol>
+                </CRow>
+              ) : (
+                <></>
+              )
+            }
+
           </div>
         </CRow>
       </CCol>
