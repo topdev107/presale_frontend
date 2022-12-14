@@ -33,9 +33,10 @@ const AppHeader = () => {
   ]
   const [currentAccount, setCurrentAccount] = useState(null);
 
-  const disconnectWalletHandler = () => {
+  const disconnectWalletHandler = async () => {
     setCurrentAccount(null)
     dispatch(setMetamask(''))
+    localStorage.setItem('isConnect', 'false');
   }
   async function loadWallet() {
     try {
@@ -86,6 +87,7 @@ const AppHeader = () => {
         }
       }
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+      localStorage.setItem('isConnect', 'true');
       console.log("Found an account! Address: ", accounts[0])
       dispatch(setMetamask(accounts[0]))
       if (chainId === '0x61') {
@@ -196,7 +198,7 @@ const AppHeader = () => {
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid className='justify-content-md-end'>
-        <div className='d-md-none' style={{width: '66%'}}>
+        <div className='d-md-none' style={{ width: '66%' }}>
           <CHeaderToggler
             // style={!sidebarShow ? {color: '#222'} : {color: '#222'}}
             // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
@@ -207,7 +209,7 @@ const AppHeader = () => {
             <CIcon className="toggle-icon" icon={cilMenu} size="lg" />
           </CHeaderToggler>
           <CHeaderBrand className="logo_mobile" to="/">
-            <img src={`/assets/logo-${currentTheme}.png`} alt="logo" className='logo' style={{width: '70%'}}/>
+            <img src={`/assets/logo-${currentTheme}.png`} alt="logo" className='logo' style={{ width: '70%' }} />
           </CHeaderBrand>
         </div>
         <CHeaderNav className="ms-3">
@@ -222,54 +224,55 @@ const AppHeader = () => {
             }
           </button> */}
           <button type="button" className="btn btn-outline-primary header-button d-flex gap-2 align-items-center py-0" onClick={() => setModalVisible(!modalVisible)} >
-            <CIcon icon={headerNet} customClassName='d-md-none' width={25}/>
-            <img src={networkId.indexOf('BSC')!=-1 ? 'https://flash-launch.com/logo_BNB.png' : 'https://flash-launch.com/logo_CRON.svg'} className='d-none d-md-block' width={networkId.indexOf('BSC')!=-1 ? 30 : 25}/>
+            <CIcon icon={headerNet} customClassName='d-md-none' width={25} />
+            <img src={networkId.indexOf('BSC') != -1 ? 'https://flash-launch.com/logo_BNB.png' : 'https://flash-launch.com/logo_CRON.svg'} className='d-none d-md-block' width={networkId.indexOf('BSC') != -1 ? 30 : 25} />
             {/* <CIcon icon="https://flash-launch.com/logo_BNB.png" customClassName='d-none d-md-block' width={25}/>     */}
             <span className='d-none d-md-block'>{networkId}</span>
           </button>
-            <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
-              <CModalHeader onClose={() => setModalVisible(false)}>
-                <CModalTitle>Choose network</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-                <div className='text-red-color'> MAINNET</div>
-                <CRow className="display-block">
-                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
-                    <CButton color="outline-primary" onClick={() => changeNetwork(0)}>  
-                      <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
-                      BNB Smart Chain
-                    </CButton>
-                  </CCol>
-                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
-                    <CButton  color="outline-primary" onClick={() => changeNetwork(1)}>
-                      <CCardImage orientation="top" src="https://flash-launch.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
-                      Cronos
-                    </CButton>
-                  </CCol>
-                </CRow>
-                <br/>
-                <div className='text-red-color'>TESTNET</div>
-                <CRow className="display-block">
-                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
-                    <CButton color="outline-primary" onClick={() => changeNetwork(2)}>
-                      <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{width: '40px', height: '40px'}}/>&nbsp;
-                      BNB Smart Chain
-                    </CButton>
-                  </CCol>
-                  <CCol xs={12} md={6} className="d-grid width-100 mt-3">
-                    <CButton  color="outline-primary" onClick={() => changeNetwork(3)}>
-                      <CCardImage orientation="top" src="https://flash-launch.com/logo_CRON.svg" style={{width: '40px', height: '40px'}}/>&nbsp;
-                      Cronos
-                    </CButton>
-                  </CCol>
-                </CRow>
-              </CModalBody>
-            </CModal>
-            <AppHeaderDropdown
-              currentAccount={currentAccount}
-              onConnect={connectWalletHandler}
-              onLogout={disconnectWalletHandler}
-            />
+
+          <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
+            <CModalHeader onClose={() => setModalVisible(false)}>
+              <CModalTitle>Choose network</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              <div className='text-red-color'> MAINNET</div>
+              <CRow className="display-block">
+                <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                  <CButton color="outline-primary" onClick={() => changeNetwork(0)}>
+                    <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{ width: '40px', height: '40px' }} />&nbsp;
+                    BNB Smart Chain
+                  </CButton>
+                </CCol>
+                <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                  <CButton color="outline-primary" onClick={() => changeNetwork(1)}>
+                    <CCardImage orientation="top" src="https://flash-launch.com/logo_CRON.svg" style={{ width: '40px', height: '40px' }} />&nbsp;
+                    Cronos
+                  </CButton>
+                </CCol>
+              </CRow>
+              <br />
+              <div className='text-red-color'>TESTNET</div>
+              <CRow className="display-block">
+                <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                  <CButton color="outline-primary" onClick={() => changeNetwork(2)}>
+                    <CCardImage orientation="top" src="https://flash-launch.com/logo_BNB.png" style={{ width: '40px', height: '40px' }} />&nbsp;
+                    BNB Smart Chain
+                  </CButton>
+                </CCol>
+                <CCol xs={12} md={6} className="d-grid width-100 mt-3">
+                  <CButton color="outline-primary" onClick={() => changeNetwork(3)}>
+                    <CCardImage orientation="top" src="https://flash-launch.com/logo_CRON.svg" style={{ width: '40px', height: '40px' }} />&nbsp;
+                    Cronos
+                  </CButton>
+                </CCol>
+              </CRow>
+            </CModalBody>
+          </CModal>
+          <AppHeaderDropdown
+            currentAccount={currentAccount}
+            onConnect={connectWalletHandler}
+            onLogout={disconnectWalletHandler}
+          />
         </CHeaderNav>
       </CContainer>
     </CHeader>

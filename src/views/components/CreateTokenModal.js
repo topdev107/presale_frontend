@@ -42,6 +42,7 @@ import FactoryAbi from '../../contracts/factoryAbi'
 import {saveTokenAddr as saveTokenAddr1} from '../../state/CreateLaunchPadState'
 import {saveTokenAddr as saveTokenAddr2} from '../../state/CreateFairLaunchState'
 import { Spinner } from 'react-bootstrap';
+import { Alert } from '@coreui/coreui';
 
 export const CreateTokenModal = (props) => {
   const [standardTokenFactoryAddr, setstandardTokenFactoryAddr] = useState('')
@@ -405,6 +406,15 @@ export const CreateTokenModal = (props) => {
     }
   }
 
+  const handleClickCreateToken = async () => {
+    const isConnect = localStorage.getItem('isConnect');
+    if (isConnect === 'true') {
+      setVisible(!visible);
+    } else {
+      alert('Please connect wallet');
+    }
+  }
+
 	const handleNext = async () => {
     setCreateLoad(true)
     if(tokenType == 'Standard Token') {
@@ -739,7 +749,8 @@ export const CreateTokenModal = (props) => {
   
   return (
   <>
-      <CButton variant='outline' onClick={() => setVisible(!visible)}>+ Create Token</CButton>
+      {/* <CButton variant='outline' onClick={() => setVisible(!visible)}>+ Create Token</CButton> */}
+      <CButton variant='outline' onClick={handleClickCreateToken}>+ Create Token</CButton>
       <CModal style={{backgroundColor: '#f5f8f8'}} visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
             <CModalTitle>Create Token</CModalTitle>
