@@ -278,7 +278,7 @@ const FairHome = () => {
                           </div>
                         ) : (
                           <div className="d-md-flex justify-content-md-center mt-4 position-right">
-                            <button type="button" className="btn-accent" onClick={handleNext}>Next</button>
+                            <button type="button" className="btn btn-primary btn-accent" onClick={handleNext}>Next</button>
                           </div>
                         )
                       ) : (
