@@ -34,7 +34,7 @@ class App extends Component {
           connectors={connecters}
           library={'ethers.js' | 'web3.js' | null}>
 
-          <BrowserRouter>
+          <BrowserRouter basename="/">
             <React.Suspense fallback={loading}>
               <Switch>
                 <Route path="/" name="Home" render={(props) => <DefaultLayout {...props} />} />
