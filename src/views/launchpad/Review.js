@@ -157,6 +157,12 @@ const Review = () => {
         moment(startDate).utc().valueOf()/1000,
         moment(endDate).utc().valueOf()/1000
       ).send({ 'from': account, 'value': `0x${stressValue.toString(16)}` })
+        // .then(result => {
+        //   console.log('token create result: ', result);
+        // })
+        // .catch(e => {
+        //   console.log('create token exception: ', e);
+        // })
 
       console.log(txResult)
 
@@ -167,6 +173,7 @@ const Review = () => {
       
     } catch (error) {
       console.log(error)
+      setSubmitStatus(false)
     }
   }
 

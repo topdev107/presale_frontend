@@ -157,9 +157,13 @@ const FairHome = () => {
     await tokenContract.methods.approve(fairlaunchFactoryAddr, tokenTotalSupply).send({ 'from': account })
       .then(function (result) {
         console.log(result)
+        setTokenStatus(APPROVED)
+        setApproveState(false)
       })
-    setTokenStatus(APPROVED)
-    setApproveState(false)
+      .catch(e => {
+        setApproveState(false)
+      })
+    
   }
 
   const handleNext = () => {

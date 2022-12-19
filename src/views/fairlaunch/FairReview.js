@@ -140,6 +140,7 @@ const FairReview = () => {
       
     } catch (error) {
       console.log(error)
+      setSubmitStatus(false)
     }
   }
 
