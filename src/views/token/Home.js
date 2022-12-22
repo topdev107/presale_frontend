@@ -58,6 +58,7 @@ import {
   saveRefelctionFee,
   saveLiquidityFee,
 } from '../../state/CreateTokenState'
+import { delZero } from 'src/utils';
 
 const TokenHome = () => {
 
@@ -162,7 +163,7 @@ const TokenHome = () => {
   const [charityAddress, setCharityAddress] = useState('')
   const [errMsgCharityAddress, setErrMsgCharityAddress] = useState('')
 
-  const [charityPercent, setCharityPercent] = useState(0)
+  const [charityPercent, setCharityPercent] = useState(1)
   const [errMsgCharityPercent, setErrMsgCharityPercent] = useState('')
 
   const [rewardToken, setRewardToken] = useState('')
@@ -237,7 +238,7 @@ const TokenHome = () => {
     setTransFeeYield(1)
     setTransFeeLiquidity(1)
     setCharityAddress('')
-    setCharityPercent(0)
+    setCharityPercent(1)
     setRewardToken('')
     setLiquidityFee(0)
     setMinimumTokenBalance(0)
@@ -539,11 +540,11 @@ const TokenHome = () => {
   }
 
   const onChangeTokenDecimal = (e) => {
-    setTokenDecimal((v) => (e.target.validity.valid ? e.target.value : v));
+    setTokenDecimal(delZero(e.target.value));
   }
 
   const onChangeTokenTotalSupply = (e) => {
-    setTokenTotalSupply((v) => (e.target.validity.valid ? e.target.value : v));
+    setTokenTotalSupply(delZero(e.target.value));
   }
 
   const onChangeAntiBot = (e) => {
@@ -555,11 +556,11 @@ const TokenHome = () => {
   }
 
   const onChangeTransFeeYield = (e) => {
-    setTransFeeYield((v) => (e.target.validity.valid ? e.target.value : v))
+    setTransFeeYield(delZero(e.target.value));
   }
 
   const onChangeTransFeeLiquidity = (e) => {
-    setTransFeeLiquidity((v) => (e.target.validity.valid ? e.target.value : v))
+    setTransFeeLiquidity(delZero(e.target.value))
   }
 
   const onChangeCharityAddress = (e) => {
@@ -567,7 +568,7 @@ const TokenHome = () => {
   }
 
   const onChangeCharityPercent = (e) => {
-    setCharityPercent((v) => (e.target.validity.valid ? e.target.value : v))
+    setCharityPercent(delZero(e.target.value))
   }
 
   const onChangeRewardToken = (e) => {
@@ -575,19 +576,19 @@ const TokenHome = () => {
   }
 
   const onChangeMinimumTokenBalance = (e) => {
-    setMinimumTokenBalance((v) => (e.target.validity.valid ? e.target.value : v))
+    setMinimumTokenBalance(delZero(e.target.value))
   }
 
   const onChangeTokenRewardFee = (e) => {
-    setTokenRewardFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setTokenRewardFee(delZero(e.target.value))
   }
 
   const onChangeAutoAddLiquidity = (e) => {
-    setAutoAddLiquidity((v) => (e.target.validity.valid ? e.target.value : v))
+    setAutoAddLiquidity(delZero(e.target.value))
   }
 
   const onChangeMarketingFee = (e) => {
-    setMarketingFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setMarketingFee(delZero(e.target.value))
   }
 
   const onChangeMarketingWallet = (e) => {
@@ -595,16 +596,16 @@ const TokenHome = () => {
   }
 
   const onChangeLiquidityFee = (e) => {
-    setLiquidityFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setLiquidityFee(delZero(e.target.value))
   }
 
   const onChangeBuyBackFee = (e) => {
-    setBuyBackFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setBuyBackFee(delZero(e.target.value))
 
   }
 
   const onChangeReflectionFee = (e) => {
-    setReflectionFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setReflectionFee(delZero(e.target.value))
   }
 
   useEffect(() => {

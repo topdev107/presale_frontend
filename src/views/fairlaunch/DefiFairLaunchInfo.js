@@ -32,6 +32,7 @@ import {
   saveNeedTokenAmount,
   saveUsingTeamVesting,
 } from '../../state/CreateFairLaunchState'
+import { delZero } from 'src/utils';
 
 const DefiFairLaunchInfo = () => {
 
@@ -78,15 +79,15 @@ const DefiFairLaunchInfo = () => {
   const [isValid, setIsValid] = useState(false)
 
   const onChangeTotalSellingAmount = (e) => {  
-    setTotalSellingAmount((v) => (e.target.validity.valid ? e.target.value : v))
+    setTotalSellingAmount(delZero(e.target.value))
   }
 
   const onChangeSoftCap = (e) => {
-    setSoftCap((v) => (e.target.validity.valid ? e.target.value : v))
+    setSoftCap(delZero(e.target.value))
   }
 
   const onChangeLiquidity = (e) => {
-    setLiquidity((v) => (e.target.validity.valid ? e.target.value : v))
+    setLiquidity(delZero(e.target.value))
   }
 
   // DateTimeRangePicker Part
@@ -129,11 +130,11 @@ const DefiFairLaunchInfo = () => {
   }
 
   const onChangeLockupMinutes = (e) => {
-    setLockupMinutes((v) => (e.target.validity.valid ? e.target.value : v))
+    setLockupMinutes(delZero(e.target.value))
   }
 
   const onChangeTotalTeamVestingTokens = (e) => {
-    setTotalTeamVestingTokens((v) => (e.target.validity.valid ? e.target.value : v))
+    setTotalTeamVestingTokens(delZero(e.target.value))
   }
 
   const onChangeTFirstReleaseTime = (e) => {
@@ -141,7 +142,7 @@ const DefiFairLaunchInfo = () => {
   }
 
   const onChangeTFirstReleasePercent = (e) => {
-    setTFirstReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
+    setTFirstReleasePercent(delZero(e.target.value))
   }
 
   const onChangeTVestingPeriod = (e) => {
@@ -149,7 +150,7 @@ const DefiFairLaunchInfo = () => {
   }
 
   const onChangeTEachReleasePercent = (e) => {
-    setTEachReleasePercent((v) => (e.target.validity.valid ? e.target.value : v)) 
+    setTEachReleasePercent(delZero(e.target.value)) 
   }
 
   const onChangeTeamVesting = (e) => {

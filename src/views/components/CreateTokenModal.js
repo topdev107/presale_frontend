@@ -43,6 +43,7 @@ import {saveTokenAddr as saveTokenAddr1} from '../../state/CreateLaunchPadState'
 import {saveTokenAddr as saveTokenAddr2} from '../../state/CreateFairLaunchState'
 import { Spinner } from 'react-bootstrap';
 import { Alert } from '@coreui/coreui';
+import { delZero } from 'src/utils';
 
 export const CreateTokenModal = (props) => {
   const [standardTokenFactoryAddr, setstandardTokenFactoryAddr] = useState('')
@@ -132,7 +133,7 @@ export const CreateTokenModal = (props) => {
   const [tokenSymbol, setTokenSymbol] = useState('')
   const [errMsgTokenSymbol, setErrMsgTokenSymbol] = useState('')
 
-  const [tokenDecimal, setTokenDecimal] = useState(0)
+  const [tokenDecimal, setTokenDecimal] = useState("0")
   const [errMsgTokenDecimal, setErrMsgTokenDecimal] = useState('')
 
   const [tokenTotalSupply, setTokenTotalSupply] = useState(0)
@@ -147,7 +148,7 @@ export const CreateTokenModal = (props) => {
   const [charityAddress, setCharityAddress] = useState('')
   const [errMsgCharityAddress, setErrMsgCharityAddress] = useState('')
 
-  const [charityPercent, setCharityPercent] = useState(0)
+  const [charityPercent, setCharityPercent] = useState(1)
   const [errMsgCharityPercent, setErrMsgCharityPercent] = useState('')
 
   const [rewardToken, setRewardToken] = useState('')
@@ -208,7 +209,7 @@ export const CreateTokenModal = (props) => {
     setTransFeeYield(1)
     setTransFeeLiquidity(1)
     setCharityAddress('')
-    setCharityPercent(0)
+    setCharityPercent(1)
     setRewardToken('')
     setLiquidityFee(0)
     setMinimumTokenBalance(0)
@@ -469,11 +470,11 @@ export const CreateTokenModal = (props) => {
   }
 
   const onChangeTokenDecimal = (e) => {
-    setTokenDecimal((v) => (e.target.validity.valid ? e.target.value : v));
+    setTokenDecimal(delZero(e.target.value));
   }
 
   const onChangeTokenTotalSupply = (e) => {
-    setTokenTotalSupply((v) => (e.target.validity.valid ? e.target.value : v));
+    setTokenTotalSupply(delZero(e.target.value));
   }
 
   const onChangeAntiBot = (e) => {
@@ -497,7 +498,7 @@ export const CreateTokenModal = (props) => {
   }
 
   const onChangeCharityPercent = (e) => {
-    setCharityPercent((v) => (e.target.validity.valid ? e.target.value : v))
+    setCharityPercent(delZero(e.target.value))
   }
 
   const onChangeRewardToken = (e) => {
@@ -505,19 +506,19 @@ export const CreateTokenModal = (props) => {
   }
 
   const onChangeMinimumTokenBalance = (e) => {
-    setMinimumTokenBalance((v) => (e.target.validity.valid ? e.target.value : v))
+    setMinimumTokenBalance(delZero(e.target.value))
   }
 
   const onChangeTokenRewardFee = (e) => {
-    setTokenRewardFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setTokenRewardFee(delZero(e.target.value))
   }
 
   const onChangeAutoAddLiquidity = (e) => {
-    setAutoAddLiquidity((v) => (e.target.validity.valid ? e.target.value : v))
+    setAutoAddLiquidity(delZero(e.target.value))
   }
 
   const onChangeMarketingFee = (e) => {
-    setMarketingFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setMarketingFee(delZero(e.target.value))
   }
 
   const onChangeMarketingWallet = (e) => {
@@ -525,16 +526,16 @@ export const CreateTokenModal = (props) => {
   }
 
   const onChangeLiquidityFee = (e) => {
-    setLiquidityFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setLiquidityFee(delZero(e.target.value))
   }
 
   const onChangeBuyBackFee = (e) => {
-    setBuyBackFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setBuyBackFee(delZero(e.target.value))
 
   }
 
   const onChangeReflectionFee = (e) => {
-    setReflectionFee((v) => (e.target.validity.valid ? e.target.value : v))
+    setReflectionFee(delZero(e.target.value))
   }
 
   useEffect(() => {
@@ -606,7 +607,7 @@ export const CreateTokenModal = (props) => {
 
     if(+charityPercent > 25) {
       setErrMsgCharityPercent('charityBps must be less than or equal to 25')
-    } else if(+charityPercent <= 0) {
+    } else if(+charityPercent < 1) {
       setErrMsgCharityPercent('charityBps must be greater than or equal to 1')
     } else {
       setErrMsgCharityPercent('')

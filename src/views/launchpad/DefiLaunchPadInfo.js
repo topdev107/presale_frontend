@@ -42,6 +42,7 @@ import {
   saveCVest,
   saveTVest
 } from '../../state/CreateLaunchPadState'
+import { delZero } from 'src/utils';
 
 const DefiLaunchPadInfo = () => {
 
@@ -129,24 +130,24 @@ const DefiLaunchPadInfo = () => {
   const [isValid, setIsValid] = useState(false)
 
   const onChangePresaleRate = (e) => {
-    setPresaleRate((v) => (e.target.validity.valid ? e.target.value : v))
+    setPresaleRate(delZero(e.target.value))
   }
 
   const onChangeSoftCap = (e) => {
-    setSoftCap(e.target.value)
+    setSoftCap(delZero(e.target.value))
     // setSoftCap((v) => (e.target.validity.valid ? e.target.value : v))
   }
 
   const onChangeHardCap = (e) => {
-    setHardCap((v) => (e.target.validity.valid ? e.target.value : v))
+    setHardCap(delZero(e.target.value))
   }
 
   const onChangeMinBuy = (e) => {
-    setMinBuyBNB((v) => (e.target.validity.valid ? e.target.value : v))
+    setMinBuyBNB(delZero(e.target.value))
   }
 
   const onChangeMaxBuy = (e) => {
-    setMaxBuyBNB((v) => (e.target.validity.valid ? e.target.value : v))
+    setMaxBuyBNB(delZero(e.target.value))
   } 
 
   const onChangeRefundType = (e) => {
@@ -154,11 +155,11 @@ const DefiLaunchPadInfo = () => {
   }
 
   const onChangeLiquidity = (e) => {
-    setLiquidity((v) => (e.target.validity.valid ? e.target.value : v))
+    setLiquidity(delZero(e.target.value))
   }
 
   const onChangeListingRate = (e) => {
-    setListingRate((v) => (e.target.validity.valid ? e.target.value : v))
+    setListingRate(delZero(e.target.value))
   }
 
   const onChangeWhitelist = (val) => {
@@ -228,7 +229,7 @@ const DefiLaunchPadInfo = () => {
   }
 
   const onChangeLockupMinutes = (e) => {
-    setLockupMinutes((v) => (e.target.validity.valid ? e.target.value : v))
+    setLockupMinutes(delZero(e.target.value))
   }
 
   const onChangeVestingContributor = (e) => {
@@ -236,7 +237,7 @@ const DefiLaunchPadInfo = () => {
   }
 
   const onChangeCFirstReleasePercent = (e) => {
-    setCFirstReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
+    setCFirstReleasePercent(delZero(e.target.value))
   }
 
   const onChangeCVestingPeriod = (e) => {
@@ -244,7 +245,7 @@ const DefiLaunchPadInfo = () => {
   }
 
   const onChangeCEachReleasePercent = (e) => {
-    setCEachReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
+    setCEachReleasePercent(delZero(e.target.value))
   }
 
   const onChangeTeamVesting = (e) => {
@@ -260,7 +261,7 @@ const DefiLaunchPadInfo = () => {
   }
 
   const onChangeTFirstReleasePercent = (e) => {
-    setTFirstReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
+    setTFirstReleasePercent(delZero(e.target.value))
   }
 
   const onChangeTVestingPeriod = (e) => {
@@ -268,7 +269,7 @@ const DefiLaunchPadInfo = () => {
   }
 
   const onChangeTEachReleasePercent = (e) => {
-    setTEachReleasePercent((v) => (e.target.validity.valid ? e.target.value : v))
+    setTEachReleasePercent(delZero(e.target.value))
   }
 
   const handleNext = () => {

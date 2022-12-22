@@ -15,7 +15,7 @@ const NumberInputComponent = (props) => {
           )
         }
       </div>
-      {
+      {/* {
         props.errMsg !== '' ? (
           props.needInt ? (
             <div>
@@ -35,6 +35,31 @@ const NumberInputComponent = (props) => {
           ) : (
             <CFormInput type="number" autoFocus min='0' step='any' placeholder="0" value={props.value} onChange={props.onChange} />
           )
+        )
+      } */}
+      {
+        props.needInt ? (
+          <>
+            <CFormInput type="number" autoFocus min='0' placeholder="0" value={props.value} onChange={props.onChange} />
+            {
+              props.errMsg !== '' ? (
+                <div className='danger small-text-sz mt-1'>{props.errMsg}</div>
+              ) : (
+                <></>
+              )
+            }
+          </>
+        ) : (
+          <>
+            <CFormInput type="number" autoFocus min='0' step='any' placeholder="0" value={props.value} onChange={props.onChange} />
+            {
+              props.errMsg !== '' ? (
+                <div className='danger small-text-sz mt-1'>{props.errMsg}</div>
+              ) : (
+                <></>
+              )
+            }
+          </>          
         )
       }
       <div className="small-text-sz light-blue">{props.desc}</div>
