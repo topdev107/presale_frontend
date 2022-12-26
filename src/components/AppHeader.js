@@ -11,12 +11,17 @@ import {
   CRow, CCol,
 } from '@coreui/react'
 import React, { useEffect, useState } from 'react'
+import Web3Modal from 'web3modal'
+import {
+  providerOptions
+} from './config'
 import { useDispatch, useSelector } from 'react-redux'
 import { useWeb3Context } from 'web3-react'
 import { AppHeaderDropdown } from './header/index'
 import { set } from '../state/SideBarState'
 import { setMetamask } from '../state/MetamaskState'
 import { headerNet } from '../assets/brand/header-net'
+import { ethers } from 'ethers'
 
 const AppHeader = () => {
 
@@ -34,6 +39,10 @@ const AppHeader = () => {
   ]
   const [currentAccount, setCurrentAccount] = useState(null);
 
+  const web3Modal = new Web3Modal({
+    providerOptions
+  })
+
   const disconnectWalletHandler = async () => {
     setCurrentAccount(null)
     dispatch(setMetamask(''))
@@ -41,8 +50,10 @@ const AppHeader = () => {
   }
   async function loadWallet() {
     console.log('connect wallet...')
-    try {      
-      const provider = window.ethereum;
+    try {
+      const provider = await web3Modal.connect()   
+      //const provider = window.ethereum;
+      
       console.log('provider: ', provider);
       if (!provider) {
         alert("Metamask is not installed, please install!");
@@ -111,9 +122,10 @@ const AppHeader = () => {
     }
   }
 
-  useEffect(() => {
-    loadWallet();
-  }, [])
+  // useEffect(() => {
+  //   console.log('network id: ', networkId)
+  //   loadWallet();
+  // }, [networkId])
 
   const connectWalletHandler = async () => {
     try {
@@ -125,6 +137,7 @@ const AppHeader = () => {
 
   const changeNetwork = async (id) => {
     const provider = window.ethereum;
+    //const provider = await web3Modal.connect()
     if (!provider) {
       console.log("please install metamask")
       return
